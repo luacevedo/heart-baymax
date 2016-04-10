@@ -1,10 +1,12 @@
-package com.example.luacevedo.heartbaymax;
+package com.example.luacevedo.heartbaymax.ui.fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.luacevedo.heartbaymax.R;
 
 /**
  * A placeholder fragment containing a simple view.
