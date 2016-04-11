@@ -1,8 +1,19 @@
 package com.example.luacevedo.heartbaymax.model.conditions;
 
-import com.example.luacevedo.heartbaymax.api.model.Condition;
+import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
 
 public abstract class BaseCondition {
 
-    private Condition condition;
+    protected String attributeRoot;
+
+    public String getAttributeRoot() {
+        return attributeRoot;
+    }
+
+    public void setAttributeRoot(String attributeRoot) {
+        this.attributeRoot = attributeRoot;
+    }
+
+    public abstract boolean validate(BasePatientAttribute attribute);
+
 }
