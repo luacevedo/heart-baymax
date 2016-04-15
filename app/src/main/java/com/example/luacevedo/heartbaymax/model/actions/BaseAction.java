@@ -1,6 +1,6 @@
 package com.example.luacevedo.heartbaymax.model.actions;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
 
 public abstract class BaseAction {
 
@@ -14,6 +14,6 @@ public abstract class BaseAction {
         this.attributeRoot = attributeRoot;
     }
 
-    public abstract void execute(BasePatientAttribute attribute);
+    public abstract void execute(PatientAttribute attribute);
 
 }

@@ -1,6 +1,6 @@
 package com.example.luacevedo.heartbaymax.model.actions;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
 import com.example.luacevedo.heartbaymax.model.patient.attributes.IntegerPatientAttribute;
 
 public class AddNumberAction extends BaseAction {
@@ -16,7 +16,7 @@ public class AddNumberAction extends BaseAction {
     }
 
     @Override
-    public void execute(BasePatientAttribute attribute) {
+    public void execute(PatientAttribute attribute) {
         if (attribute instanceof IntegerPatientAttribute) {
             IntegerPatientAttribute intAttribute = (IntegerPatientAttribute) attribute;
             intAttribute.setValue(intAttribute.getValue() + value);

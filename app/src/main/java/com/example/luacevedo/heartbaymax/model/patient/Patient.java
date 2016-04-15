@@ -1,22 +1,21 @@
 package com.example.luacevedo.heartbaymax.model.patient;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Patient {
 
     private String name;
     private int age;
     private String gender;
-    private HashMap<String, BasePatientAttribute> attributesMap;
+    private HashMap<String, PatientAttribute> attributesMap;
 
-    public HashMap<String, BasePatientAttribute> getAttributesMap() {
+    public HashMap<String, PatientAttribute> getAttributesMap() {
         return attributesMap;
     }
 
-    public void setAttributesMap(HashMap<String, BasePatientAttribute> attributesMap) {
+    public void setAttributesMap(HashMap<String, PatientAttribute> attributesMap) {
         this.attributesMap = attributesMap;
     }
 

@@ -2,7 +2,7 @@ package com.example.luacevedo.heartbaymax.model.patient.attributes;
 
 import com.example.luacevedo.heartbaymax.api.model.Attribute;
 
-public class IntegerPatientAttribute extends BasePatientAttribute {
+public class IntegerPatientAttribute extends PatientAttribute {
 
     private int value;
 

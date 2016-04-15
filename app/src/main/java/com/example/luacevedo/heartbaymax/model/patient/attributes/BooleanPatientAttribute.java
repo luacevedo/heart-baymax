@@ -2,7 +2,7 @@ package com.example.luacevedo.heartbaymax.model.patient.attributes;
 
 import com.example.luacevedo.heartbaymax.api.model.Attribute;
 
-public class BooleanPatientAttribute extends BasePatientAttribute {
+public class BooleanPatientAttribute extends PatientAttribute {
 
     private boolean value;
 

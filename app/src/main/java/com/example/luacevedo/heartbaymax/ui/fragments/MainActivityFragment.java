@@ -18,7 +18,7 @@ import com.example.luacevedo.heartbaymax.model.conditions.BaseCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.GreaterThanCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.LessThanCondition;
 import com.example.luacevedo.heartbaymax.model.patient.Patient;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
 import com.example.luacevedo.heartbaymax.model.patient.attributes.BooleanPatientAttribute;
 import com.example.luacevedo.heartbaymax.model.patient.attributes.IntegerPatientAttribute;
 import com.example.luacevedo.heartbaymax.model.patient.attributes.ListPatientAttribute;
@@ -58,7 +58,7 @@ public class MainActivityFragment extends Fragment {
             Log.e("LULI", "Por cada condicion:");
             boolean conditionsFulfilled = true;
             for (BaseCondition condition : rule.getParsedConditions()) {
-                BasePatientAttribute attributeToCheck = patient.getAttributesMap().get(condition.getAttributeRoot());
+                PatientAttribute attributeToCheck = patient.getAttributesMap().get(condition.getAttributeRoot());
                 Log.e("LULI", "Attribute: " + attributeToCheck.getAttribute().getRoot());
                 if (attributeToCheck.getAttribute().isInput()) {
                     Log.e("LULI", "Es input, lo tengo que pedir antes de validar");
@@ -82,7 +82,7 @@ public class MainActivityFragment extends Fragment {
             if (conditionsFulfilled) {
                 Log.e("LULI", "SI conditionsFulfilled... ejecuto las acciones");
                 for (BaseAction action : rule.getParsedActions()) {
-                    BasePatientAttribute attributeToExecuteAction = patient.getAttributesMap().get(action.getAttributeRoot());
+                    PatientAttribute attributeToExecuteAction = patient.getAttributesMap().get(action.getAttributeRoot());
                     action.execute(attributeToExecuteAction);
                 }
             } else {
@@ -94,7 +94,7 @@ public class MainActivityFragment extends Fragment {
 
         Log.e("LULI", "EL Pacienteeeee: ");
         for(String key : patient.getAttributesMap().keySet()) {
-            BasePatientAttribute att = patient.getAttributesMap().get(key);
+            PatientAttribute att = patient.getAttributesMap().get(key);
             if(att instanceof BooleanPatientAttribute) {
                 Log.e("LULI", key + " = " + ((BooleanPatientAttribute) att).getValue());
             } else if(att instanceof IntegerPatientAttribute) {
@@ -117,10 +117,10 @@ public class MainActivityFragment extends Fragment {
         patient.setAttributesMap(getMockedAttributesMap());
     }
 
-    private HashMap<String, BasePatientAttribute> getMockedAttributesMap() {
-        HashMap<String, BasePatientAttribute> map = new HashMap<>();
+    private HashMap<String, PatientAttribute> getMockedAttributesMap() {
+        HashMap<String, PatientAttribute> map = new HashMap<>();
         Attribute edemaPulm = new Attribute(1L, "SintomasEsenciales.EdemaPulmonar", "boolean", true);
-        BooleanPatientAttribute edemaPulmonar = new BooleanPatientAttribute(edemaPulm);
+        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(edemaPulm);
         map.put(edemaPulm.getRoot(), edemaPulmonar);
 
         Attribute valSE = new Attribute(2L, "EstadoFisicoInicial.ValoracionSintomasEsenciales", "integer", false);

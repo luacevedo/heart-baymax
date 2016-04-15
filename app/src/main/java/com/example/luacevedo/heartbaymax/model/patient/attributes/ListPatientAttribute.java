@@ -5,7 +5,7 @@ import com.example.luacevedo.heartbaymax.api.model.Attribute;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListPatientAttribute extends BasePatientAttribute{
+public class ListPatientAttribute extends PatientAttribute {
 
     private List<String> value;
 

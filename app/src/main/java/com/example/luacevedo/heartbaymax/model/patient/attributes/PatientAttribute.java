@@ -2,10 +2,11 @@ package com.example.luacevedo.heartbaymax.model.patient.attributes;
 
 import com.example.luacevedo.heartbaymax.api.model.Attribute;
 
-public abstract class BasePatientAttribute {
+public class PatientAttribute<T> {
     private Attribute attribute;
+    private T value;
 
-    public BasePatientAttribute(Attribute attribute) {
+    public PatientAttribute(Attribute attribute) {
         this.attribute = attribute;
     }
 
@@ -17,4 +18,11 @@ public abstract class BasePatientAttribute {
         this.attribute = attribute;
     }
 
+    public T getValue() {
+        return value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
+    }
 }
