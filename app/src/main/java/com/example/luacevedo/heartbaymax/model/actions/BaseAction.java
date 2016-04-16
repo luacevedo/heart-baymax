@@ -14,6 +14,6 @@ public abstract class BaseAction {
         this.attributeRoot = attributeRoot;
     }
 
-    public abstract void execute(PatientAttribute attribute);
+    public abstract <T> void execute(PatientAttribute<T> intAttribute);
 
 }

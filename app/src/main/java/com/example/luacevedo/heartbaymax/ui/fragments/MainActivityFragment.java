@@ -18,10 +18,10 @@ import com.example.luacevedo.heartbaymax.model.conditions.BaseCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.GreaterThanCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.LessThanCondition;
 import com.example.luacevedo.heartbaymax.model.patient.Patient;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
 import com.example.luacevedo.heartbaymax.model.patient.attributes.BooleanPatientAttribute;
 import com.example.luacevedo.heartbaymax.model.patient.attributes.IntegerPatientAttribute;
 import com.example.luacevedo.heartbaymax.model.patient.attributes.ListPatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
 import com.example.luacevedo.heartbaymax.model.patient.attributes.StringPatientAttribute;
 
 import java.util.ArrayList;
@@ -63,9 +63,7 @@ public class MainActivityFragment extends Fragment {
                 if (attributeToCheck.getAttribute().isInput()) {
                     Log.e("LULI", "Es input, lo tengo que pedir antes de validar");
                     Log.e("LULI", "Mockeo la respuesta");
-                    if(attributeToCheck instanceof BooleanPatientAttribute) {
-                        ((BooleanPatientAttribute) attributeToCheck).setValue(true);
-                    }
+                    attributeToCheck.setValue(true);
                 } else {
                     Log.e("LULI", "No es input, ya lo valido");
                 }
@@ -93,17 +91,9 @@ public class MainActivityFragment extends Fragment {
         }
 
         Log.e("LULI", "EL Pacienteeeee: ");
-        for(String key : patient.getAttributesMap().keySet()) {
+        for (String key : patient.getAttributesMap().keySet()) {
             PatientAttribute att = patient.getAttributesMap().get(key);
-            if(att instanceof BooleanPatientAttribute) {
-                Log.e("LULI", key + " = " + ((BooleanPatientAttribute) att).getValue());
-            } else if(att instanceof IntegerPatientAttribute) {
-                Log.e("LULI", key + " = " + ((IntegerPatientAttribute) att).getValue());
-            } else if(att instanceof ListPatientAttribute) {
-                Log.e("LULI", key + " = " + ((ListPatientAttribute) att).getValue());
-            } else if(att instanceof StringPatientAttribute) {
-                Log.e("LULI", key + " = " + ((StringPatientAttribute) att).getValue());
-            }
+            Log.e("LULI", key + " = " + att.getValue());
 
         }
 
@@ -124,15 +114,15 @@ public class MainActivityFragment extends Fragment {
         map.put(edemaPulm.getRoot(), edemaPulmonar);
 
         Attribute valSE = new Attribute(2L, "EstadoFisicoInicial.ValoracionSintomasEsenciales", "integer", false);
-        IntegerPatientAttribute valoracionSE = new IntegerPatientAttribute(valSE);
+        PatientAttribute<Integer> valoracionSE = new PatientAttribute<>(valSE);
         map.put(valSE.getRoot(), valoracionSE);
 
         Attribute sintomasEsenc = new Attribute(3L, "EstadoFisicoInicial.SintomasEsenciales", "list", false);
-        ListPatientAttribute sintomasEsenciales = new ListPatientAttribute(sintomasEsenc);
+        PatientAttribute<List<String>> sintomasEsenciales = new PatientAttribute<>(sintomasEsenc);
         map.put(sintomasEsenc.getRoot(), sintomasEsenciales);
 
         Attribute tipoSint = new Attribute(4L, "DiagnósticoPreliminar.TipoDeSintomas", "string", false);
-        StringPatientAttribute tipoDeSintomas = new StringPatientAttribute(tipoSint);
+        PatientAttribute<String> tipoDeSintomas = new PatientAttribute<>(tipoSint);
         map.put(tipoSint.getRoot(), tipoDeSintomas);
 
         return map;

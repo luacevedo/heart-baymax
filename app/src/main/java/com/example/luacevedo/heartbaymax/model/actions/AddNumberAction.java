@@ -1,11 +1,10 @@
 package com.example.luacevedo.heartbaymax.model.actions;
 
 import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.IntegerPatientAttribute;
 
 public class AddNumberAction extends BaseAction {
 
-    private int value; // el valor que se va a agregar al attributo que se mande en execute
+    private Integer value; // el valor que se va a agregar al attributo que se mande en execute
 
     public int getValue() {
         return value;
@@ -16,10 +15,15 @@ public class AddNumberAction extends BaseAction {
     }
 
     @Override
-    public void execute(PatientAttribute attribute) {
-        if (attribute instanceof IntegerPatientAttribute) {
-            IntegerPatientAttribute intAttribute = (IntegerPatientAttribute) attribute;
-            intAttribute.setValue(intAttribute.getValue() + value);
+    public <Integer> void execute(PatientAttribute<Integer> intAttribute) {
+        int currentValue;
+        if (intAttribute.getValue() == null) {
+            currentValue = 0;
+        } else {
+            currentValue = java.lang.Integer.parseInt(intAttribute.getValue().toString());
         }
+        java.lang.Integer newValueInt = currentValue + value;
+        Integer newValueInteger = (Integer) newValueInt;
+        intAttribute.setValue(newValueInteger);
     }
 }
