@@ -54,50 +54,48 @@ public class MainActivityFragment extends Fragment {
         Log.e("LULI", "ejecuto las reglas");
         for (Rule rule : rules) {
             Log.e("LULI", "Rule " + rule.getId());
-
-            Log.e("LULI", "Por cada condicion:");
-            boolean conditionsFulfilled = true;
-            for (BaseCondition condition : rule.getParsedConditions()) {
-                PatientAttribute attributeToCheck = patient.getAttributesMap().get(condition.getAttributeRoot());
-                Log.e("LULI", "Attribute: " + attributeToCheck.getAttribute().getRoot());
-                if (attributeToCheck.getAttribute().isInput()) {
-                    Log.e("LULI", "Es input, lo tengo que pedir antes de validar");
-                    Log.e("LULI", "Mockeo la respuesta");
-                    attributeToCheck.setValue(true);
-                } else {
-                    Log.e("LULI", "No es input, ya lo valido");
-                }
-                if (!condition.validate(attributeToCheck)) {
-                    Log.e("LULI", "no cumplio con la condicion el attributo... NO reviso mas condiciones y NO se ejecutan las actiones");
-                    conditionsFulfilled = false;
-                    break;
-                } else {
-                    Log.e("LULI", "SI se cumplio con la condicion el attributo... sigo con el resto de las condiciones ");
-
-                }
-            }
-
+            boolean conditionsFulfilled = checkConditions(rule);
             if (conditionsFulfilled) {
-                Log.e("LULI", "SI conditionsFulfilled... ejecuto las acciones");
-                for (BaseAction action : rule.getParsedActions()) {
-                    PatientAttribute attributeToExecuteAction = patient.getAttributesMap().get(action.getAttributeRoot());
-                    action.execute(attributeToExecuteAction);
-                }
-            } else {
-                Log.e("LULI", "NO conditionsFulfilled... ");
-
+                executeActions(rule);
             }
-
         }
+        printPatient();
+    }
 
+    private void executeActions(Rule rule) {
+        Log.e("LULI", "SI conditionsFulfilled... ejecuto las acciones");
+        for (BaseAction action : rule.getParsedActions()) {
+            PatientAttribute attributeToExecuteAction = patient.getAttributesMap().get(action.getAttributeRoot());
+            action.execute(attributeToExecuteAction);
+        }
+    }
+
+    private void printPatient() {
         Log.e("LULI", "EL Pacienteeeee: ");
         for (String key : patient.getAttributesMap().keySet()) {
             PatientAttribute att = patient.getAttributesMap().get(key);
             Log.e("LULI", key + " = " + att.getValue());
-
         }
+    }
 
-
+    private boolean checkConditions(Rule rule) {
+        boolean conditionsFulfilled = true;
+        for (BaseCondition condition : rule.getParsedConditions()) {
+            Log.e("LULI", "Por cada condicion:");
+            PatientAttribute attributeToCheck = patient.getAttributesMap().get(condition.getAttributeRoot());
+            Log.e("LULI", "Attribute: " + attributeToCheck.getAttribute().getRoot());
+            if (attributeToCheck.getAttribute().isInput()) {
+                Log.e("LULI", "Es input, lo tengo que pedir antes de validar");
+                Log.e("LULI", "Mockeo la respuesta");
+                attributeToCheck.setValue(true);
+            }
+            if (!condition.validate(attributeToCheck)) {
+                Log.e("LULI", "no cumplio con la condicion el attributo... NO reviso mas condiciones y NO se ejecutan las actiones");
+                conditionsFulfilled = false;
+                break;
+            }
+        }
+        return conditionsFulfilled;
     }
 
     private void prepareMockInfo() {
