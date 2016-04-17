@@ -1,7 +1,5 @@
 package com.example.luacevedo.heartbaymax.model.patient;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
-
 import java.util.HashMap;
 
 public class Patient {

@@ -1,6 +1,6 @@
 package com.example.luacevedo.heartbaymax.model.actions;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 public abstract class BaseAction {
 

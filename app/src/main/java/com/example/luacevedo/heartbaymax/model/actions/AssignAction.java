@@ -1,22 +1,22 @@
 package com.example.luacevedo.heartbaymax.model.actions;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 public class AssignAction extends BaseAction {
 
-    private String value; // el valor que se va a asignar al attributo que se mande en execute
+    private String valueToAssign;
 
     public String getValue() {
-        return value;
+        return valueToAssign;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setValueToAssign(String value) {
+        this.valueToAssign = value;
     }
 
     @Override
     public <String> void execute(PatientAttribute<String> stringAttribute) {
-        stringAttribute.setValue((String) value);
+        stringAttribute.setValue((String) valueToAssign);
     }
 }
 

@@ -18,11 +18,7 @@ import com.example.luacevedo.heartbaymax.model.conditions.BaseCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.GreaterThanCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.LessThanCondition;
 import com.example.luacevedo.heartbaymax.model.patient.Patient;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BooleanPatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.IntegerPatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.ListPatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.StringPatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -138,7 +134,7 @@ public class MainActivityFragment extends Fragment {
         List<BaseAction> actions1 = new ArrayList<>();
         AddNumberAction addNumberAction1 = new AddNumberAction();
         addNumberAction1.setAttributeRoot("EstadoFisicoInicial.ValoracionSintomasEsenciales");
-        addNumberAction1.setValue(3);
+        addNumberAction1.setValueToAdd(3);
         actions1.add(addNumberAction1);
 
         rule.setParsedConditions(conditions1);
@@ -160,7 +156,7 @@ public class MainActivityFragment extends Fragment {
         List<BaseAction> actions1 = new ArrayList<>();
         AssignAction assignAction1 = new AssignAction();
         assignAction1.setAttributeRoot("DiagnósticoPreliminar.TipoDeSintomas");
-        assignAction1.setValue("No presenta");
+        assignAction1.setValueToAssign("No presenta");
         actions1.add(assignAction1);
 
         rule.setParsedConditions(conditions1);
@@ -182,7 +178,7 @@ public class MainActivityFragment extends Fragment {
         List<BaseAction> actions1 = new ArrayList<>();
         AssignAction assignAction1 = new AssignAction();
         assignAction1.setAttributeRoot("DiagnósticoPreliminar.TipoDeSintomas");
-        assignAction1.setValue("SIIII prensenta");
+        assignAction1.setValueToAssign("SIIII prensenta");
         actions1.add(assignAction1);
 
         rule.setParsedConditions(conditions1);

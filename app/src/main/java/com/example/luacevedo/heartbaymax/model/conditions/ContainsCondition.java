@@ -1,8 +1,6 @@
 package com.example.luacevedo.heartbaymax.model.conditions;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.PatientAttribute;
-
-import java.util.List;
+import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 public class ContainsCondition extends BaseCondition {
 

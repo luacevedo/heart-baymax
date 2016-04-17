@@ -1,4 +1,4 @@
-package com.example.luacevedo.heartbaymax.model.patient.attributes;
+package com.example.luacevedo.heartbaymax.model.patient;
 
 import com.example.luacevedo.heartbaymax.api.model.Attribute;
 
