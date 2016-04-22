@@ -1,21 +1,17 @@
 package com.example.luacevedo.heartbaymax.model.conditions;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.IntegerPatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public class GreaterThanCondition extends BaseCondition {
+public class GreaterThanCondition extends BaseCondition<Integer> {
 
     private int min;
 
-    public void setMin(int min) {
+    public void setMin(Integer min) {
         this.min = min;
     }
 
     @Override
-    public boolean validate(BasePatientAttribute attribute) {
-        if (attribute instanceof IntegerPatientAttribute) {
-            return ((IntegerPatientAttribute) attribute).getValue() > min;
-        }
-        return false;
+    public boolean validate(PatientAttribute<Integer> attribute) {
+        return attribute.getValue() > min;
     }
 }

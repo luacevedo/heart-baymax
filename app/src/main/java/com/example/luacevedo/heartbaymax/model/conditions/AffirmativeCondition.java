@@ -1,14 +1,11 @@
 package com.example.luacevedo.heartbaymax.model.conditions;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BooleanPatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public class AffirmativeCondition extends BaseCondition {
+public class AffirmativeCondition extends BaseCondition<Boolean> {
+
     @Override
-    public boolean validate(BasePatientAttribute attribute) {
-        if (attribute instanceof BooleanPatientAttribute) {
-            return ((BooleanPatientAttribute) attribute).getValue();
-        }
-        return false;
+    public boolean validate(PatientAttribute<Boolean> attribute) {
+        return attribute.getValue();
     }
 }

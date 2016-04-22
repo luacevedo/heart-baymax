@@ -1,9 +1,8 @@
 package com.example.luacevedo.heartbaymax.model.conditions;
 
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.IntegerPatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public class LessThanCondition extends BaseCondition {
+public class LessThanCondition extends BaseCondition<Integer> {
 
     private int max;
 
@@ -12,10 +11,7 @@ public class LessThanCondition extends BaseCondition {
     }
 
     @Override
-    public boolean validate(BasePatientAttribute attribute) {
-        if (attribute instanceof IntegerPatientAttribute) {
-            return ((IntegerPatientAttribute) attribute).getValue() < max;
-        }
-        return false;
+    public boolean validate(PatientAttribute<Integer> attribute) {
+        return attribute.getValue() < max;
     }
 }

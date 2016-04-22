@@ -18,11 +18,7 @@ import com.example.luacevedo.heartbaymax.model.conditions.BaseCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.GreaterThanCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.LessThanCondition;
 import com.example.luacevedo.heartbaymax.model.patient.Patient;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BasePatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.BooleanPatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.IntegerPatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.ListPatientAttribute;
-import com.example.luacevedo.heartbaymax.model.patient.attributes.StringPatientAttribute;
+import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,60 +50,48 @@ public class MainActivityFragment extends Fragment {
         Log.e("LULI", "ejecuto las reglas");
         for (Rule rule : rules) {
             Log.e("LULI", "Rule " + rule.getId());
-
-            Log.e("LULI", "Por cada condicion:");
-            boolean conditionsFulfilled = true;
-            for (BaseCondition condition : rule.getParsedConditions()) {
-                BasePatientAttribute attributeToCheck = patient.getAttributesMap().get(condition.getAttributeRoot());
-                Log.e("LULI", "Attribute: " + attributeToCheck.getAttribute().getRoot());
-                if (attributeToCheck.getAttribute().isInput()) {
-                    Log.e("LULI", "Es input, lo tengo que pedir antes de validar");
-                    Log.e("LULI", "Mockeo la respuesta");
-                    if(attributeToCheck instanceof BooleanPatientAttribute) {
-                        ((BooleanPatientAttribute) attributeToCheck).setValue(true);
-                    }
-                } else {
-                    Log.e("LULI", "No es input, ya lo valido");
-                }
-                if (!condition.validate(attributeToCheck)) {
-                    Log.e("LULI", "no cumplio con la condicion el attributo... NO reviso mas condiciones y NO se ejecutan las actiones");
-                    conditionsFulfilled = false;
-                    break;
-                } else {
-                    Log.e("LULI", "SI se cumplio con la condicion el attributo... sigo con el resto de las condiciones ");
-
-                }
-            }
-
+            boolean conditionsFulfilled = checkConditions(rule);
             if (conditionsFulfilled) {
-                Log.e("LULI", "SI conditionsFulfilled... ejecuto las acciones");
-                for (BaseAction action : rule.getParsedActions()) {
-                    BasePatientAttribute attributeToExecuteAction = patient.getAttributesMap().get(action.getAttributeRoot());
-                    action.execute(attributeToExecuteAction);
-                }
-            } else {
-                Log.e("LULI", "NO conditionsFulfilled... ");
-
+                executeActions(rule);
             }
-
         }
+        printPatient();
+    }
 
+    private void executeActions(Rule rule) {
+        Log.e("LULI", "SI conditionsFulfilled... ejecuto las acciones");
+        for (BaseAction action : rule.getParsedActions()) {
+            PatientAttribute attributeToExecuteAction = patient.getAttributesMap().get(action.getAttributeRoot());
+            action.execute(attributeToExecuteAction);
+        }
+    }
+
+    private void printPatient() {
         Log.e("LULI", "EL Pacienteeeee: ");
-        for(String key : patient.getAttributesMap().keySet()) {
-            BasePatientAttribute att = patient.getAttributesMap().get(key);
-            if(att instanceof BooleanPatientAttribute) {
-                Log.e("LULI", key + " = " + ((BooleanPatientAttribute) att).getValue());
-            } else if(att instanceof IntegerPatientAttribute) {
-                Log.e("LULI", key + " = " + ((IntegerPatientAttribute) att).getValue());
-            } else if(att instanceof ListPatientAttribute) {
-                Log.e("LULI", key + " = " + ((ListPatientAttribute) att).getValue());
-            } else if(att instanceof StringPatientAttribute) {
-                Log.e("LULI", key + " = " + ((StringPatientAttribute) att).getValue());
-            }
-
+        for (String key : patient.getAttributesMap().keySet()) {
+            PatientAttribute att = patient.getAttributesMap().get(key);
+            Log.e("LULI", key + " = " + att.getValue());
         }
+    }
 
-
+    private boolean checkConditions(Rule rule) {
+        boolean conditionsFulfilled = true;
+        for (BaseCondition condition : rule.getParsedConditions()) {
+            Log.e("LULI", "Por cada condicion:");
+            PatientAttribute attributeToCheck = patient.getAttributesMap().get(condition.getAttributeRoot());
+            Log.e("LULI", "Attribute: " + attributeToCheck.getAttribute().getRoot());
+            if (attributeToCheck.getAttribute().isInput()) {
+                Log.e("LULI", "Es input, lo tengo que pedir antes de validar");
+                Log.e("LULI", "Mockeo la respuesta");
+                attributeToCheck.setValue(true);
+            }
+            if (!condition.validate(attributeToCheck)) {
+                Log.e("LULI", "no cumplio con la condicion el attributo... NO reviso mas condiciones y NO se ejecutan las actiones");
+                conditionsFulfilled = false;
+                break;
+            }
+        }
+        return conditionsFulfilled;
     }
 
     private void prepareMockInfo() {
@@ -117,22 +101,22 @@ public class MainActivityFragment extends Fragment {
         patient.setAttributesMap(getMockedAttributesMap());
     }
 
-    private HashMap<String, BasePatientAttribute> getMockedAttributesMap() {
-        HashMap<String, BasePatientAttribute> map = new HashMap<>();
+    private HashMap<String, PatientAttribute> getMockedAttributesMap() {
+        HashMap<String, PatientAttribute> map = new HashMap<>();
         Attribute edemaPulm = new Attribute(1L, "SintomasEsenciales.EdemaPulmonar", "boolean", true);
-        BooleanPatientAttribute edemaPulmonar = new BooleanPatientAttribute(edemaPulm);
+        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(edemaPulm);
         map.put(edemaPulm.getRoot(), edemaPulmonar);
 
         Attribute valSE = new Attribute(2L, "EstadoFisicoInicial.ValoracionSintomasEsenciales", "integer", false);
-        IntegerPatientAttribute valoracionSE = new IntegerPatientAttribute(valSE);
+        PatientAttribute<Integer> valoracionSE = new PatientAttribute<>(valSE);
         map.put(valSE.getRoot(), valoracionSE);
 
         Attribute sintomasEsenc = new Attribute(3L, "EstadoFisicoInicial.SintomasEsenciales", "list", false);
-        ListPatientAttribute sintomasEsenciales = new ListPatientAttribute(sintomasEsenc);
+        PatientAttribute<List<String>> sintomasEsenciales = new PatientAttribute<>(sintomasEsenc);
         map.put(sintomasEsenc.getRoot(), sintomasEsenciales);
 
         Attribute tipoSint = new Attribute(4L, "DiagnósticoPreliminar.TipoDeSintomas", "string", false);
-        StringPatientAttribute tipoDeSintomas = new StringPatientAttribute(tipoSint);
+        PatientAttribute<String> tipoDeSintomas = new PatientAttribute<>(tipoSint);
         map.put(tipoSint.getRoot(), tipoDeSintomas);
 
         return map;
@@ -150,7 +134,7 @@ public class MainActivityFragment extends Fragment {
         List<BaseAction> actions1 = new ArrayList<>();
         AddNumberAction addNumberAction1 = new AddNumberAction();
         addNumberAction1.setAttributeRoot("EstadoFisicoInicial.ValoracionSintomasEsenciales");
-        addNumberAction1.setValue(3);
+        addNumberAction1.setValueToAdd(3);
         actions1.add(addNumberAction1);
 
         rule.setParsedConditions(conditions1);
@@ -172,7 +156,7 @@ public class MainActivityFragment extends Fragment {
         List<BaseAction> actions1 = new ArrayList<>();
         AssignAction assignAction1 = new AssignAction();
         assignAction1.setAttributeRoot("DiagnósticoPreliminar.TipoDeSintomas");
-        assignAction1.setValue("No presenta");
+        assignAction1.setValueToAssign("No presenta");
         actions1.add(assignAction1);
 
         rule.setParsedConditions(conditions1);
@@ -194,7 +178,7 @@ public class MainActivityFragment extends Fragment {
         List<BaseAction> actions1 = new ArrayList<>();
         AssignAction assignAction1 = new AssignAction();
         assignAction1.setAttributeRoot("DiagnósticoPreliminar.TipoDeSintomas");
-        assignAction1.setValue("SIIII prensenta");
+        assignAction1.setValueToAssign("SIIII prensenta");
         actions1.add(assignAction1);
 
         rule.setParsedConditions(conditions1);
