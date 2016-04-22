@@ -3,6 +3,7 @@ package com.example.luacevedo.heartbaymax.api.model;
 import com.example.luacevedo.heartbaymax.model.actions.BaseAction;
 import com.example.luacevedo.heartbaymax.model.conditions.BaseCondition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Rule {
@@ -10,7 +11,7 @@ public class Rule {
     private Long id;
     private List<Condition> conditions;
     private List<Action> actions;
-    private List<Long> rulesToExclude;
+    private List<Long> rulesToExclude = new ArrayList<>();
 
     private List<BaseCondition> parsedConditions;
     private List<BaseAction> parsedActions;
@@ -63,4 +64,19 @@ public class Rule {
         this.parsedActions = parsedActions;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Rule rule = (Rule) o;
+
+        return id.equals(rule.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

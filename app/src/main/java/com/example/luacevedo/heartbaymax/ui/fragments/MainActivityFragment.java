@@ -8,24 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.luacevedo.heartbaymax.R;
-import com.example.luacevedo.heartbaymax.api.model.Attribute;
 import com.example.luacevedo.heartbaymax.api.model.MockInfo;
 import com.example.luacevedo.heartbaymax.api.model.Rule;
-import com.example.luacevedo.heartbaymax.model.actions.AddNumberAction;
-import com.example.luacevedo.heartbaymax.model.actions.AddToListAction;
-import com.example.luacevedo.heartbaymax.model.actions.AssignAction;
 import com.example.luacevedo.heartbaymax.model.actions.BaseAction;
-import com.example.luacevedo.heartbaymax.model.conditions.AffirmativeCondition;
 import com.example.luacevedo.heartbaymax.model.conditions.BaseCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.ContainsCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.GreaterThanCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.LessThanCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.NotContainsCondition;
 import com.example.luacevedo.heartbaymax.model.patient.Patient;
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainActivityFragment extends Fragment {
@@ -49,16 +38,27 @@ public class MainActivityFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.e("LULI", "creo los datos");
-
+        int i = 0;
         Log.e("LULI", "ejecuto las reglas");
-        for (Rule rule : rules) {
-            Log.e("LULI", "Rule " + rule.getId());
-            boolean conditionsFulfilled = checkConditions(rule);
+        while (i < rules.size()) {
+            Log.e("LULI", "Rule " + rules.get(i).getId());
+            boolean conditionsFulfilled = checkConditions(rules.get(i));
             if (conditionsFulfilled) {
-                executeActions(rule);
+                executeActions(rules.get(i));
+                excludeRules(rules.get(i).getRulesToExclude());
             }
+            i++;
         }
         printPatient();
+    }
+
+    private void excludeRules(List<Long> rulesToExclude) {
+        for (Long id : rulesToExclude) {
+            Log.e("LULI", "Excluyo regla " + id);
+            Rule r = new Rule();
+            r.setId(id);
+            rules.remove(r);
+        }
     }
 
     private void executeActions(Rule rule) {

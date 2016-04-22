@@ -1,5 +1,7 @@
 package com.example.luacevedo.heartbaymax.api.model;
 
+import android.util.Log;
+
 import com.example.luacevedo.heartbaymax.model.actions.AddNumberAction;
 import com.example.luacevedo.heartbaymax.model.actions.AddToListAction;
 import com.example.luacevedo.heartbaymax.model.actions.AssignAction;
@@ -29,7 +31,7 @@ public class MockInfo {
         HashMap<String, PatientAttribute> map = new HashMap<>();
 
         Attribute edemaPulm = new Attribute(1L, "SintomasEsenciales.EdemaPulmonar", "boolean");
-        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(edemaPulm, true);
+        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(edemaPulm, false);
         map.put(edemaPulm.getRoot(), edemaPulmonar);
 
         Attribute disn = new Attribute(2L, "SintomasEsenciales.Disnea", "boolean");
@@ -37,7 +39,7 @@ public class MockInfo {
         map.put(disn.getRoot(), disnea);
 
         Attribute ortpn = new Attribute(3L, "SintomasEsenciales.Ortopnea", "boolean");
-        PatientAttribute<Boolean> ortopnea = new PatientAttribute<>(ortpn, true);
+        PatientAttribute<Boolean> ortopnea = new PatientAttribute<>(ortpn, false);
         map.put(ortpn.getRoot(), ortopnea);
 
         Attribute valSE = new Attribute(2L, "EstadoFisicoInicial.ValoracionSintomasEsenciales", "integer");
@@ -139,6 +141,14 @@ public class MockInfo {
 
         rule.setParsedConditions(conditions);
         rule.setParsedActions(actions);
+
+        List<Long> rulesToExclude = new ArrayList<>();
+        rulesToExclude.add(5L);
+        rulesToExclude.add(6L);
+        rulesToExclude.add(7L);
+        rulesToExclude.add(8L);
+        rule.setRulesToExclude(rulesToExclude);
+
         rules.add(rule);
     }
 
@@ -159,6 +169,13 @@ public class MockInfo {
 
         rule.setParsedConditions(conditions);
         rule.setParsedActions(actions1);
+
+        List<Long> rulesToExclude = new ArrayList<>();
+        rulesToExclude.add(6L);
+        rulesToExclude.add(7L);
+        rulesToExclude.add(8L);
+        rule.setRulesToExclude(rulesToExclude);
+
         rules.add(rule);
     }
 
@@ -181,6 +198,12 @@ public class MockInfo {
 
         rule.setParsedConditions(conditions);
         rule.setParsedActions(actions1);
+
+        List<Long> rulesToExclude = new ArrayList<>();
+        rulesToExclude.add(7L);
+        rulesToExclude.add(8L);
+        rule.setRulesToExclude(rulesToExclude);
+
         rules.add(rule);
     }
 
@@ -203,6 +226,11 @@ public class MockInfo {
 
         rule.setParsedConditions(conditions);
         rule.setParsedActions(actions1);
+
+        List<Long> rulesToExclude = new ArrayList<>();
+        rulesToExclude.add(8L);
+        rule.setRulesToExclude(rulesToExclude);
+
         rules.add(rule);
     }
 
