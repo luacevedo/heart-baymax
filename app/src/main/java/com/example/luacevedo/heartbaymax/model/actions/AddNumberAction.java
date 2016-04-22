@@ -10,6 +10,11 @@ public class AddNumberAction extends BaseAction<Integer> {
         return valueToAdd;
     }
 
+    public AddNumberAction(String attributeRoot, Integer valueToAdd) {
+        this.attributeRoot = attributeRoot;
+        this.valueToAdd = valueToAdd;
+    }
+
     public void setValueToAdd(int value) {
         this.valueToAdd = value;
     }

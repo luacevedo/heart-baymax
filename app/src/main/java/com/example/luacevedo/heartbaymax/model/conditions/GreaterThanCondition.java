@@ -6,6 +6,11 @@ public class GreaterThanCondition extends BaseCondition<Integer> {
 
     private int min;
 
+    public GreaterThanCondition(String attributeRoot, int min) {
+        this.attributeRoot = attributeRoot;
+        this.min = min;
+    }
+
     public void setMin(Integer min) {
         this.min = min;
     }

@@ -5,13 +5,11 @@ public class Attribute {
     private long id;
     private String root;
     private String type;
-    private boolean isInput;
 
-    public Attribute(long id, String root, String type, boolean isInput) {
+    public Attribute(long id, String root, String type) {
         this.id = id;
         this.root = root;
         this.type = type;
-        this.isInput = isInput;
     }
 
     public long getId() {
@@ -36,13 +34,5 @@ public class Attribute {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public boolean isInput() {
-        return isInput;
-    }
-
-    public void setIsInput(boolean isInput) {
-        this.isInput = isInput;
     }
 }

@@ -6,6 +6,11 @@ public class AssignAction extends BaseAction<String> {
 
     private String valueToAssign;
 
+    public AssignAction(String attributeRoot, String valueToAssign) {
+        this.attributeRoot = attributeRoot;
+        this.valueToAssign = valueToAssign;
+    }
+
     public String getValue() {
         return valueToAssign;
     }

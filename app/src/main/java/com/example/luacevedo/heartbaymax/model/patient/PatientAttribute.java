@@ -10,6 +10,11 @@ public class PatientAttribute<T> {
         this.attribute = attribute;
     }
 
+    public PatientAttribute(Attribute attribute, T value) {
+        this.attribute = attribute;
+        this.value = value;
+    }
+
     public Attribute getAttribute() {
         return attribute;
     }
