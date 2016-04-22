@@ -2,7 +2,7 @@ package com.example.luacevedo.heartbaymax.model.actions;
 
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public abstract class BaseAction {
+public abstract class BaseAction<T> {
 
     protected String attributeRoot;
 
@@ -14,6 +14,6 @@ public abstract class BaseAction {
         this.attributeRoot = attributeRoot;
     }
 
-    public abstract <T> void execute(PatientAttribute<T> intAttribute);
+    public abstract void execute(PatientAttribute<T> attribute);
 
 }

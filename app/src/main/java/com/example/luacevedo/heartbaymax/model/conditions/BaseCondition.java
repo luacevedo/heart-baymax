@@ -2,7 +2,7 @@ package com.example.luacevedo.heartbaymax.model.conditions;
 
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public abstract class BaseCondition {
+public abstract class BaseCondition<T> {
 
     protected String attributeRoot;
 
@@ -14,7 +14,7 @@ public abstract class BaseCondition {
         this.attributeRoot = attributeRoot;
     }
 
-    public abstract <T> Boolean validate(PatientAttribute<T> attribute);
+    public abstract boolean validate(PatientAttribute<T> attribute);
 
 
 }

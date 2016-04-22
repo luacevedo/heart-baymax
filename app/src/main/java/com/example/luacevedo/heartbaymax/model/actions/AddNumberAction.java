@@ -2,7 +2,7 @@ package com.example.luacevedo.heartbaymax.model.actions;
 
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public class AddNumberAction extends BaseAction {
+public class AddNumberAction extends BaseAction<Integer> {
 
     private Integer valueToAdd;
 
@@ -15,15 +15,13 @@ public class AddNumberAction extends BaseAction {
     }
 
     @Override
-    public <Integer> void execute(PatientAttribute<Integer> intAttribute) {
+    public void execute(PatientAttribute<Integer> intAttribute) {
         int currentValue;
         if (intAttribute.getValue() == null) {
             currentValue = 0;
         } else {
-            currentValue = java.lang.Integer.parseInt(intAttribute.getValue().toString());
+            currentValue = intAttribute.getValue();
         }
-        java.lang.Integer newValueInt = currentValue + valueToAdd;
-        Integer newValueInteger = (Integer) newValueInt;
-        intAttribute.setValue(newValueInteger);
+        intAttribute.setValue(currentValue + valueToAdd);
     }
 }

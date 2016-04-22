@@ -2,7 +2,7 @@ package com.example.luacevedo.heartbaymax.model.actions;
 
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public class AssignAction extends BaseAction {
+public class AssignAction extends BaseAction<String> {
 
     private String valueToAssign;
 
@@ -15,8 +15,8 @@ public class AssignAction extends BaseAction {
     }
 
     @Override
-    public <String> void execute(PatientAttribute<String> stringAttribute) {
-        stringAttribute.setValue((String) valueToAssign);
+    public void execute(PatientAttribute<String> attribute) {
+        attribute.setValue(valueToAssign);
     }
 }
 

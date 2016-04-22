@@ -2,12 +2,14 @@ package com.example.luacevedo.heartbaymax.model.conditions;
 
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public class ContainsCondition extends BaseCondition {
+import java.util.List;
 
-    private String value; //el valor que se valida que contenga
+public class ContainsCondition extends BaseCondition<List<String>> {
+
+    private String value;
 
     @Override
-    public <String> Boolean validate(PatientAttribute<String> attribute) {
+    public boolean validate(PatientAttribute<List<String>> attribute) {
         return attribute.getValue().toString().contains(value);
     }
 }
