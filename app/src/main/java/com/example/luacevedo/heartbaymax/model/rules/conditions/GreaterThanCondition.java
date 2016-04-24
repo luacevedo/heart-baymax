@@ -1,4 +1,4 @@
-package com.example.luacevedo.heartbaymax.model.conditions;
+package com.example.luacevedo.heartbaymax.model.rules.conditions;
 
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
