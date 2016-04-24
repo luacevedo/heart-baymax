@@ -30,27 +30,27 @@ public class MockInfo {
     private static HashMap<String, PatientAttribute> getMockedAttributesMap() {
         HashMap<String, PatientAttribute> map = new HashMap<>();
 
-        Attribute edemaPulm = new Attribute(1L, "SintomasEsenciales.EdemaPulmonar", "boolean");
-        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(edemaPulm, false);
+        Attribute edemaPulm = new Attribute(1L, "EssentialSymptoms.PulmonaryEdema", "boolean");
+        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(edemaPulm, true);
         map.put(edemaPulm.getRoot(), edemaPulmonar);
 
-        Attribute disn = new Attribute(2L, "SintomasEsenciales.Disnea", "boolean");
-        PatientAttribute<Boolean> disnea = new PatientAttribute<>(disn, true);
+        Attribute disn = new Attribute(2L, "EssentialSymptoms.Dyspnoea", "boolean");
+        PatientAttribute<Boolean> disnea = new PatientAttribute<>(disn, false);
         map.put(disn.getRoot(), disnea);
 
-        Attribute ortpn = new Attribute(3L, "SintomasEsenciales.Ortopnea", "boolean");
+        Attribute ortpn = new Attribute(3L, "EssentialSymptoms.Orthopnoea", "boolean");
         PatientAttribute<Boolean> ortopnea = new PatientAttribute<>(ortpn, false);
         map.put(ortpn.getRoot(), ortopnea);
 
-        Attribute valSE = new Attribute(2L, "EstadoFisicoInicial.ValoracionSintomasEsenciales", "integer");
+        Attribute valSE = new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "integer");
         PatientAttribute<Integer> valoracionSE = new PatientAttribute<>(valSE, 0);
         map.put(valSE.getRoot(), valoracionSE);
 
-        Attribute sintomasEsenc = new Attribute(3L, "EstadoFisicoInicial.SintomasEsenciales", "list");
+        Attribute sintomasEsenc = new Attribute(3L, "InitialPhysicalState.EssentialSymptoms", "list");
         PatientAttribute<List<String>> sintomasEsenciales = new PatientAttribute<List<String>>(sintomasEsenc, new ArrayList<String>());
         map.put(sintomasEsenc.getRoot(), sintomasEsenciales);
 
-        Attribute tipoSint = new Attribute(4L, "DiagnósticoPreliminar.TipoDeSintomas", "string");
+        Attribute tipoSint = new Attribute(4L, "PreliminaryDiagnosis.SymptomsType", "string");
         PatientAttribute<String> tipoDeSintomas = new PatientAttribute<>(tipoSint);
         map.put(tipoSint.getRoot(), tipoDeSintomas);
 
@@ -74,14 +74,14 @@ public class MockInfo {
         Rule rule = new Rule();
         rule.setId(1L);
         List<BaseCondition> conditions1 = new ArrayList<>();
-        AffirmativeCondition affCondition1 = new AffirmativeCondition("SintomasEsenciales.EdemaPulmonar");
+            AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
         conditions1.add(affCondition1);
         rule.setParsedConditions(conditions1);
 
         List<BaseAction> actions = new ArrayList<>();
         AddNumberAction addNumberAction1 = new AddNumberAction("EstadoFisicoInicial.ValoracionSintomasEsenciales", 3);
         actions.add(addNumberAction1);
-        AddToListAction addToListAction = new AddToListAction("EstadoFisicoInicial.SintomasEsenciales", "EdemaPulmonar");
+        AddToListAction addToListAction = new AddToListAction("EstadoFisicoInicial.SintomasEsenciales", "PulmonaryEdema");
         actions.add(addToListAction);
         rule.setParsedActions(actions);
 

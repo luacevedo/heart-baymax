@@ -4,13 +4,13 @@ import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 public class AddNumberAction extends BaseAction<Integer> {
 
-    private Integer valueToAdd;
+    private int valueToAdd;
 
     public int getValue() {
         return valueToAdd;
     }
 
-    public AddNumberAction(String attributeRoot, Integer valueToAdd) {
+    public AddNumberAction(String attributeRoot, int valueToAdd) {
         this.attributeRoot = attributeRoot;
         this.valueToAdd = valueToAdd;
     }
