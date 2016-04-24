@@ -1,17 +1,15 @@
 package com.example.luacevedo.heartbaymax.api.model;
 
-import android.util.Log;
-
-import com.example.luacevedo.heartbaymax.model.actions.AddNumberAction;
-import com.example.luacevedo.heartbaymax.model.actions.AddToListAction;
-import com.example.luacevedo.heartbaymax.model.actions.AssignAction;
-import com.example.luacevedo.heartbaymax.model.actions.BaseAction;
-import com.example.luacevedo.heartbaymax.model.conditions.AffirmativeCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.BaseCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.ContainsCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.GreaterThanCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.LessThanCondition;
-import com.example.luacevedo.heartbaymax.model.conditions.NotContainsCondition;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AddNumberAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AddToListAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AssignAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.BaseAction;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.AffirmativeCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.BaseCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.ContainsCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.GreaterThanCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.LessThanCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.NotContainsCondition;
 import com.example.luacevedo.heartbaymax.model.patient.Patient;
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
