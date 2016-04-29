@@ -1,8 +1,13 @@
 package com.example.luacevedo.heartbaymax.helpers;
 
 import com.example.luacevedo.heartbaymax.api.model.Attribute;
+import com.example.luacevedo.heartbaymax.api.model.Rule;
 import com.example.luacevedo.heartbaymax.model.patient.Patient;
 import com.example.luacevedo.heartbaymax.model.patient.PatientAttribute;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AddNumberAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AddToListAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AssignAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.BaseAction;
 import com.example.luacevedo.heartbaymax.model.rules.conditions.AffirmativeCondition;
 import com.example.luacevedo.heartbaymax.model.rules.conditions.BaseCondition;
 import com.example.luacevedo.heartbaymax.model.rules.conditions.ContainsCondition;
@@ -17,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -86,6 +92,53 @@ public class RulesHelperTest {
         conditionsNotToFulFill.add(lessThanCondition);
 
         assertFalse(RulesHelper.checkConditions(conditionsNotToFulFill, patient));
+    }
+
+    @Test()
+    public void testExecuteActions() {
+        List<BaseAction> actions = new ArrayList<>();
+        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        actions.add(addNumberAction);
+        AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "Orthopnea");
+        actions.add(addToListAction);
+        AssignAction assignAction = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Urgent");
+        actions.add(assignAction);
+
+        RulesHelper.executeActions(actions, patient);
+
+        assertEquals(patient.getAttributesMap().get("InitialPhysicalState.EssentialSymptomsAssessment").getValue(), 8);
+        List<String> expectedList = new ArrayList<>();
+        expectedList.add("PulmonaryEdema");
+        expectedList.add("Orthopnea");
+        assertEquals(patient.getAttributesMap().get("InitialPhysicalState.EssentialSymptoms").getValue(), expectedList);
+        assertEquals(patient.getAttributesMap().get("PreliminaryDiagnosis.SymptomsType").getValue(), "Urgent");
+
+    }
+
+    @Test
+    public void testExecuteRules(){
+        List<Rule> rules = new ArrayList<>();
+        List<BaseCondition> conditions = new ArrayList<>();
+        AffirmativeCondition affCondition = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
+        conditions.add(affCondition);
+
+        List<BaseAction> actions = new ArrayList<>();
+        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        actions.add(addNumberAction);
+
+        Rule rule = new Rule();
+        rule.setParsedConditions(conditions);
+        rule.setParsedActions(actions);
+        rules.add(rule);
+        rules.add(rule);
+        rules.add(rule);
+
+        RulesHelper.executeRules(rules, patient);
+
+        assertEquals(patient.getAttributesMap().get("InitialPhysicalState.EssentialSymptomsAssessment").getValue(), 14);
+
+        assertTrue(RulesHelper.checkConditions(conditions, patient));
+
     }
 
 }
