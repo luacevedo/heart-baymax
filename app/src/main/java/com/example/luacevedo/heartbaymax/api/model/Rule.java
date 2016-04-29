@@ -1,7 +1,16 @@
 package com.example.luacevedo.heartbaymax.api.model;
 
-import com.example.luacevedo.heartbaymax.model.actions.BaseAction;
-import com.example.luacevedo.heartbaymax.model.conditions.BaseCondition;
+import com.example.luacevedo.heartbaymax.Constants;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AddNumberAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AddToListAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.AssignAction;
+import com.example.luacevedo.heartbaymax.model.rules.actions.BaseAction;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.AffirmativeCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.BaseCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.ContainsCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.GreaterThanCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.LessThanCondition;
+import com.example.luacevedo.heartbaymax.model.rules.conditions.NotContainsCondition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +22,8 @@ public class Rule {
     private List<Action> actions;
     private List<Long> rulesToExclude = new ArrayList<>();
 
-    private List<BaseCondition> parsedConditions;
-    private List<BaseAction> parsedActions;
+    private List<BaseCondition> parsedConditions = new ArrayList<>();
+    private List<BaseAction> parsedActions = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -49,6 +58,9 @@ public class Rule {
     }
 
     public List<BaseCondition> getParsedConditions() {
+        if (parsedConditions.isEmpty()) {
+            populateTransientConditions();
+        }
         return parsedConditions;
     }
 
@@ -57,6 +69,9 @@ public class Rule {
     }
 
     public List<BaseAction> getParsedActions() {
+        if (parsedActions.isEmpty()) {
+            populateTransientActions();
+        }
         return parsedActions;
     }
 
@@ -79,4 +94,51 @@ public class Rule {
     public int hashCode() {
         return id.hashCode();
     }
+
+    public void populateTransientConditions() {
+        for (Condition condition : conditions) {
+            BaseCondition<?> parsedCondition = null;
+            switch (condition.getType()) {
+                case Constants.Rule.Condition.AFFIRMATIVE:
+                    parsedCondition = new AffirmativeCondition(condition.getAttribute());
+                    break;
+                case Constants.Rule.Condition.GREATER_THAN:
+                    parsedCondition = new GreaterThanCondition(condition.getAttribute(), Integer.parseInt(condition.getValue()));
+                    break;
+                case Constants.Rule.Condition.LESS_THAN:
+                    parsedCondition = new LessThanCondition(condition.getAttribute(), Integer.parseInt(condition.getValue()));
+                    break;
+                case Constants.Rule.Condition.CONTAINS:
+                    parsedCondition = new ContainsCondition(condition.getAttribute(), condition.getValue());
+                    break;
+                case Constants.Rule.Condition.NOT_CONTAINS:
+                    parsedCondition = new NotContainsCondition(condition.getAttribute(), condition.getValue());
+                    break;
+            }
+            if (parsedCondition != null) {
+                parsedConditions.add(parsedCondition);
+            }
+        }
+    }
+
+    public void populateTransientActions() {
+        for (Action action : actions) {
+            BaseAction<?> parsedAction = null;
+            switch (action.getAFunction()) {
+                case Constants.Rule.Action.ADD_NUMBER:
+                    parsedAction = new AddNumberAction(action.getAttribute(), Integer.parseInt(action.getValue()));
+                    break;
+                case Constants.Rule.Action.ADD_TO_LIST:
+                    parsedAction = new AddToListAction(action.getAttribute(), action.getValue());
+                    break;
+                case Constants.Rule.Action.ASSIGN:
+                    parsedAction = new AssignAction(action.getAttribute(), action.getValue());
+                    break;
+            }
+            if (parsedAction != null) {
+                parsedActions.add(parsedAction);
+            }
+        }
+    }
+
 }

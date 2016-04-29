@@ -2,22 +2,22 @@ package com.example.luacevedo.heartbaymax.api.model;
 
 public class Action {
 
-    private String aFunction; // funcion que determina que tipo de BaseAction creo
+    private String function; // funcion que determina que tipo de BaseAction creo
     private String attribute;
     private String value;
 
-    public Action(String aFunction, String attribute, String value) {
-        this.aFunction = aFunction;
+    public Action(String function, String attribute, String value) {
+        this.function = function;
         this.attribute = attribute;
         this.value = value;
     }
 
     public String getAFunction() {
-        return aFunction;
+        return function;
     }
 
-    public void setAFunction(String aFunction) {
-        this.aFunction = aFunction;
+    public void setFunction(String function) {
+        this.function = function;
     }
 
     public String getAttribute() {
