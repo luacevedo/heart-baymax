@@ -1,5 +1,6 @@
 package com.example.luacevedo.heartbaymax.api.model;
 
+import com.example.luacevedo.heartbaymax.Constants;
 import com.example.luacevedo.heartbaymax.model.rules.actions.AddNumberAction;
 import com.example.luacevedo.heartbaymax.model.rules.actions.AddToListAction;
 import com.example.luacevedo.heartbaymax.model.rules.actions.AssignAction;
@@ -98,19 +99,19 @@ public class Rule {
         for (Condition condition : conditions) {
             BaseCondition<?> parsedCondition = null;
             switch (condition.getType()) {
-                case "affirmative":
+                case Constants.Rule.Condition.AFFIRMATIVE:
                     parsedCondition = new AffirmativeCondition(condition.getAttribute());
                     break;
-                case "greaterThan":
+                case Constants.Rule.Condition.GREATER_THAN:
                     parsedCondition = new GreaterThanCondition(condition.getAttribute(), Integer.parseInt(condition.getValue()));
                     break;
-                case "lessThan":
+                case Constants.Rule.Condition.LESS_THAN:
                     parsedCondition = new LessThanCondition(condition.getAttribute(), Integer.parseInt(condition.getValue()));
                     break;
-                case "contains":
+                case Constants.Rule.Condition.CONTAINS:
                     parsedCondition = new ContainsCondition(condition.getAttribute(), condition.getValue());
                     break;
-                case "notContains":
+                case Constants.Rule.Condition.NOT_CONTAINS:
                     parsedCondition = new NotContainsCondition(condition.getAttribute(), condition.getValue());
                     break;
             }
@@ -124,13 +125,13 @@ public class Rule {
         for (Action action : actions) {
             BaseAction<?> parsedAction = null;
             switch (action.getAFunction()) {
-                case "addNumber":
+                case Constants.Rule.Action.ADD_NUMBER:
                     parsedAction = new AddNumberAction(action.getAttribute(), Integer.parseInt(action.getValue()));
                     break;
-                case "addToList":
+                case Constants.Rule.Action.ADD_TO_LIST:
                     parsedAction = new AddToListAction(action.getAttribute(), action.getValue());
                     break;
-                case "assign":
+                case Constants.Rule.Action.ASSIGN:
                     parsedAction = new AssignAction(action.getAttribute(), action.getValue());
                     break;
             }
