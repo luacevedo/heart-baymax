@@ -8,8 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.luacevedo.heartbaymax.HeartBaymaxApplication;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
+import com.luacevedo.heartbaymax.api.baseapi.CallId;
+import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
+import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.MockInfo;
 import com.luacevedo.heartbaymax.api.model.Rule;
 import com.luacevedo.heartbaymax.helpers.RulesHelper;
@@ -25,7 +29,7 @@ import retrofit.client.Response;
 
 public class MainActivityFragment extends Fragment {
 
-    private HeartBaymaxApi heartBaymaxApi;
+    private HeartBaymaxApi heartBaymaxApi = HeartBaymaxApplication.getApplication().getHeartBaymaxApi();
 
     public MainActivityFragment() {
     }
@@ -45,8 +49,8 @@ public class MainActivityFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Log.e("LULI", "creo los datos");
-        heartBaymaxApi = new HeartBaymaxApi();
-        heartBaymaxApi.getRules(generateRulesCallback());
+        CallId rulesCallId = new CallId(CallOrigin.HOME, CallType.RULES);
+        heartBaymaxApi.getRules(rulesCallId, generateRulesCallback());
     }
 
     @NonNull

@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.luacevedo.heartbaymax.R;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
