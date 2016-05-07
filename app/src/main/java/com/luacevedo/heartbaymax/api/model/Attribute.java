@@ -4,12 +4,12 @@ public class Attribute {
 
     private long id;
     private String root;
-    private String type;
+    private String dataType;
 
-    public Attribute(long id, String root, String type) {
+    public Attribute(long id, String root, String dataType) {
         this.id = id;
         this.root = root;
-        this.type = type;
+        this.dataType = dataType;
     }
 
     public long getId() {
@@ -28,11 +28,11 @@ public class Attribute {
         this.root = root;
     }
 
-    public String getType() {
-        return type;
+    public String getDataType() {
+        return dataType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 }
