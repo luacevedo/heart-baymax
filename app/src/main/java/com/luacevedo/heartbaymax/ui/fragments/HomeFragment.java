@@ -2,20 +2,19 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.luacevedo.heartbaymax.HeartBaymaxApplication;
 import com.luacevedo.heartbaymax.R;
-import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
 import com.luacevedo.heartbaymax.api.baseapi.CallId;
 import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
 import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.MockInfo;
 import com.luacevedo.heartbaymax.api.model.Rule;
+import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.helpers.RulesHelper;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
@@ -27,24 +26,28 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class MainActivityFragment extends Fragment {
+public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
-    private HeartBaymaxApi heartBaymaxApi = HeartBaymaxApplication.getApplication().getHeartBaymaxApi();
+    private TextView btnNewPatient;
 
-    public MainActivityFragment() {
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
+        return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        btnNewPatient = (TextView) view.findViewById(R.id.new_patient_btn);
+        btnNewPatient.setOnClickListener(this);
         return view;
 
     }
 
     List<Rule> ruleList = new ArrayList<>();
     Patient patient = MockInfo.createPatient();
-    
+
     @Override
     public void onStart() {
         super.onStart();
@@ -82,4 +85,10 @@ public class MainActivityFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.new_patient_btn) {
+            startActivity(IntentFactory.getNewPatientActivityIntent());
+        }
+    }
 }

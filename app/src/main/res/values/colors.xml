@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF0101</color>
-    <color name="colorPrimaryDark">#B70303</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="action_bar_primary">#FF0101</color>
+    <color name="action_bar_primary_dark">#B70303</color>
+    <color name="accent">#FF4081</color>
+    <color name="white">#FFFFFFFF</color>
 </resources>

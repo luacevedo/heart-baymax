@@ -3,4 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="big_finger_size">60dp</dimen>
+    <dimen name="medium_padding">8dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
+    <dimen name="default_corner_radius">5dp</dimen>
+    <dimen name="material_text_title">20sp</dimen>
+    <dimen name="small_padding">4dp</dimen>
 </resources>

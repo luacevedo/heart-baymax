@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ui.fragments.HomeFragment">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name" />
+
+    <TextView
+        android:id="@+id/new_patient_btn"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/title"
+        android:layout_height="@dimen/big_finger_size"
+        android:layout_marginLeft="@dimen/medium_padding"
+        android:layout_marginRight="@dimen/medium_padding"
+        android:layout_marginTop="@dimen/large_padding"
+        android:background="@drawable/material_publish_floating_button"
+        android:clickable="true"
+        android:drawablePadding="@dimen/large_padding"
+        android:ellipsize="end"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingLeft="@dimen/large_padding"
+        android:paddingRight="@dimen/large_padding"
+        android:singleLine="true"
+        android:text="@string/new_patient"
+        android:textColor="@color/white"
+        android:textSize="@dimen/material_text_title"/>
+
+</RelativeLayout>
