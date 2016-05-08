@@ -27,4 +27,9 @@ public class Constants {
         public static final long ONE_MINUTE = 60;
         public static final long TEN_MINUTES = ONE_MINUTE * 10;
     }
+
+    public class BundleKey {
+        public static final String STEP_INPUT_ATTRIBUTES = "stepInputAttributes";
+    }
+
 }

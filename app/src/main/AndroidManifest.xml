@@ -26,7 +26,11 @@
         <activity
             android:name=".ui.activities.NewPatientActivity"
             android:label="@string/title_activity_new_patient"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.activities.PreliminaryDiagnosisActivity"
+            android:label="@string/title_activity_new_patient"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

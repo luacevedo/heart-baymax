@@ -88,7 +88,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.new_patient_btn) {
-            startActivity(IntentFactory.getNewPatientActivityIntent());
+            startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent());
         }
     }
 }

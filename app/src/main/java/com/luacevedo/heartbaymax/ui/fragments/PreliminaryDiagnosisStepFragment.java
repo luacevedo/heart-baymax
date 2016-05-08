@@ -1,7 +1,5 @@
 package com.luacevedo.heartbaymax.ui.fragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,24 +7,32 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.model.InputAttribute;
-import com.luacevedo.heartbaymax.api.model.MockInfo;
+import com.luacevedo.heartbaymax.helpers.BundleHelper;
 import com.luacevedo.heartbaymax.ui.activities.NewPatientActivity;
 
 import java.util.List;
 
-public class NewPatientActivityFragment extends BaseFragment {
+public class PreliminaryDiagnosisStepFragment extends BaseFragment {
 
     private LinearLayout formLayout;
     private ScrollView scrollview;
-    private List<InputAttribute> inputAttributes;
+    private List<InputAttribute> stepInputAttributes;
     private NewPatientActivity newPatientActivity;
+
+    public PreliminaryDiagnosisStepFragment newInstance(Bundle args) {
+        PreliminaryDiagnosisStepFragment fragment = new PreliminaryDiagnosisStepFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         newPatientActivity = (NewPatientActivity) getActivity();
+        stepInputAttributes = BundleHelper.fromBundle(savedInstanceState, Constants.BundleKey.STEP_INPUT_ATTRIBUTES);
     }
 
     @Override
