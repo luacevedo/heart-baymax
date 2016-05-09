@@ -7,7 +7,7 @@ import com.luacevedo.heartbaymax.api.baseapi.BaseApiCall;
 import com.luacevedo.heartbaymax.api.baseapi.CachePolicy;
 import com.luacevedo.heartbaymax.api.baseapi.CallId;
 import com.luacevedo.heartbaymax.api.contract.HeartBaymaxApiContract;
-import com.luacevedo.heartbaymax.api.model.Rule;
+import com.luacevedo.heartbaymax.api.model.rules.Rule;
 
 import java.util.List;
 

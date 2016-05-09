@@ -1,23 +1,23 @@
-package com.luacevedo.heartbaymax.api.model;
+package com.luacevedo.heartbaymax.api.model.rules;
 
-public class Action {
+public class Condition {
 
-    private String function; // funcion que determina que tipo de BaseAction creo
+    private String type; //tipo que determina que tipo de condicion creo
     private String attribute;
     private String value;
 
-    public Action(String function, String attribute, String value) {
-        this.function = function;
+    public Condition(String type, String attribute, String value) {
+        this.type = type;
         this.attribute = attribute;
         this.value = value;
     }
 
-    public String getAFunction() {
-        return function;
+    public String getType() {
+        return type;
     }
 
-    public void setFunction(String function) {
-        this.function = function;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getAttribute() {

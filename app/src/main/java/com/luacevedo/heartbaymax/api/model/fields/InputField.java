@@ -1,6 +1,6 @@
-package com.luacevedo.heartbaymax.api.model;
+package com.luacevedo.heartbaymax.api.model.fields;
 
-public class InputAttribute {
+public class InputField {
 
     private long id;
     private String labelMessage;
@@ -8,7 +8,7 @@ public class InputAttribute {
     private String dataType;
     private String fieldType;
 
-    public InputAttribute(long id, String labelMessage, String rootToAffect, String dataType, String fieldType) {
+    public InputField(long id, String labelMessage, String rootToAffect, String dataType, String fieldType) {
         this.id = id;
         this.labelMessage = labelMessage;
         this.rootToAffect = rootToAffect;

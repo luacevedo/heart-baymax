@@ -13,7 +13,7 @@ import com.luacevedo.heartbaymax.api.baseapi.CallId;
 import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
 import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.MockInfo;
-import com.luacevedo.heartbaymax.api.model.Rule;
+import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.helpers.RulesHelper;
 import com.luacevedo.heartbaymax.model.patient.Patient;

@@ -1,4 +1,4 @@
-package com.luacevedo.heartbaymax.api.model;
+package com.luacevedo.heartbaymax.api.model.patients;
 
 public class Attribute {
 

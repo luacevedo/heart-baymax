@@ -1,6 +1,6 @@
 package com.luacevedo.heartbaymax.api.contract;
 
-import com.luacevedo.heartbaymax.api.model.Rule;
+import com.luacevedo.heartbaymax.api.model.rules.Rule;
 
 import java.util.List;
 

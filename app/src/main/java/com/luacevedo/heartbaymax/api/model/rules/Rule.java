@@ -1,4 +1,4 @@
-package com.luacevedo.heartbaymax.api.model;
+package com.luacevedo.heartbaymax.api.model.rules;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.model.rules.actions.AddNumberAction;

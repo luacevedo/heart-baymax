@@ -1,17 +1,11 @@
 package com.luacevedo.heartbaymax.api.model;
 
+import com.luacevedo.heartbaymax.api.model.fields.InputField;
+import com.luacevedo.heartbaymax.api.model.fields.PreliminaryDiagnosisFields;
+import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
+import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
-import com.luacevedo.heartbaymax.model.rules.actions.AddNumberAction;
-import com.luacevedo.heartbaymax.model.rules.actions.AddToListAction;
-import com.luacevedo.heartbaymax.model.rules.actions.AssignAction;
-import com.luacevedo.heartbaymax.model.rules.actions.BaseAction;
-import com.luacevedo.heartbaymax.model.rules.conditions.AffirmativeCondition;
-import com.luacevedo.heartbaymax.model.rules.conditions.BaseCondition;
-import com.luacevedo.heartbaymax.model.rules.conditions.ContainsCondition;
-import com.luacevedo.heartbaymax.model.rules.conditions.GreaterThanCondition;
-import com.luacevedo.heartbaymax.model.rules.conditions.LessThanCondition;
-import com.luacevedo.heartbaymax.model.rules.conditions.NotContainsCondition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,19 +49,29 @@ public class MockInfo {
         return map;
     }
 
-    public static List<InputAttribute> getInputAttributes() {
-        List<InputAttribute> inputAttributes = new ArrayList<>();
+    public static PreliminaryDiagnosisFields getPreliminaryDiagnosisFields() {
+        StepInputFields stepInputFields = new StepInputFields();
+        stepInputFields.setStep(1);
+        List<InputField> inputFields = new ArrayList<>();
 
-        InputAttribute pulmonaryEdema = new InputAttribute(1, "Edema pulmonar?", "EssentialSymptoms.PulmonaryEdema", "select", "combobox");
-        inputAttributes.add(pulmonaryEdema);
+        InputField pulmonaryEdema = new InputField(1, "Edema pulmonar?", "EssentialSymptoms.PulmonaryEdema", "select", "combobox");
+        inputFields.add(pulmonaryEdema);
 
-        InputAttribute dyspnoea = new InputAttribute(1, "Disnea?", "EssentialSymptoms.Dyspnoea", "select", "combobox");
-        inputAttributes.add(dyspnoea);
+        InputField dyspnoea = new InputField(1, "Disnea?", "EssentialSymptoms.Dyspnoea", "select", "combobox");
+        inputFields.add(dyspnoea);
 
-        InputAttribute orthopnoea = new InputAttribute(1, "Edema pulmonar?", "EssentialSymptoms.Orthopnoea", "select", "combobox");
-        inputAttributes.add(orthopnoea);
+        InputField orthopnoea = new InputField(1, "Edema pulmonar?", "EssentialSymptoms.Orthopnoea", "select", "combobox");
+        inputFields.add(orthopnoea);
+        stepInputFields.setInputFields(inputFields);
 
-        return inputAttributes;
+        List<StepInputFields> list = new ArrayList<>();
+        list.add(stepInputFields);
+
+        PreliminaryDiagnosisFields preliminaryDiagnosisFields = new PreliminaryDiagnosisFields();
+
+        preliminaryDiagnosisFields.setStepInputFields(list);
+
+        return preliminaryDiagnosisFields;
     }
 
 }

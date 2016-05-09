@@ -9,7 +9,7 @@ import android.widget.ScrollView;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
-import com.luacevedo.heartbaymax.api.model.InputAttribute;
+import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
 import com.luacevedo.heartbaymax.ui.activities.NewPatientActivity;
 
@@ -19,7 +19,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment {
 
     private LinearLayout formLayout;
     private ScrollView scrollview;
-    private List<InputAttribute> stepInputAttributes;
+    private List<InputField> stepInputFields;
     private NewPatientActivity newPatientActivity;
 
     public PreliminaryDiagnosisStepFragment newInstance(Bundle args) {
@@ -32,7 +32,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         newPatientActivity = (NewPatientActivity) getActivity();
-        stepInputAttributes = BundleHelper.fromBundle(savedInstanceState, Constants.BundleKey.STEP_INPUT_ATTRIBUTES);
+        stepInputFields = BundleHelper.fromBundle(savedInstanceState, Constants.BundleKey.STEP_INPUT_ATTRIBUTES);
     }
 
     @Override
