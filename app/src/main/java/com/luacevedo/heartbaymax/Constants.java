@@ -7,7 +7,7 @@ public class Constants {
     public static String CACHE = "Cache";
 
     public static class Rule {
-        
+
         public static class Condition {
             public static final String AFFIRMATIVE = "affirmative";
             public static final String GREATER_THAN = "greaterThan";
@@ -32,4 +32,12 @@ public class Constants {
         public static final String STEP_INPUT_ATTRIBUTES = "stepInputAttributes";
     }
 
+    public static class Attribute {
+        public static class Type {
+            public static final String BOOLEAN = "boolean";
+            public static final String INTEGER = "integer";
+            public static final String LIST = "list";
+            public static final String STRING = "string";
+        }
+    }
 }

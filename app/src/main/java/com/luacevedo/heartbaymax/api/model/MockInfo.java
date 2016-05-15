@@ -1,7 +1,6 @@
 package com.luacevedo.heartbaymax.api.model;
 
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
-import com.luacevedo.heartbaymax.api.model.fields.PreliminaryDiagnosisFields;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.model.patient.Patient;
@@ -15,7 +14,7 @@ public class MockInfo {
 
     public static Patient createPatient(){
         Patient patient = new Patient();
-        patient.setAttributesMap(getMockedAttributesMap());
+//        patient.setAttributesMap(getMockedAttributesMap());
         return patient;
     }
 
@@ -49,7 +48,7 @@ public class MockInfo {
         return map;
     }
 
-    public static PreliminaryDiagnosisFields getPreliminaryDiagnosisFields() {
+    public static List<StepInputFields> getPreliminaryDiagnosisFields() {
         StepInputFields stepInputFields = new StepInputFields();
         stepInputFields.setStep(1);
         List<InputField> inputFields = new ArrayList<>();
@@ -67,11 +66,7 @@ public class MockInfo {
         List<StepInputFields> list = new ArrayList<>();
         list.add(stepInputFields);
 
-        PreliminaryDiagnosisFields preliminaryDiagnosisFields = new PreliminaryDiagnosisFields();
-
-        preliminaryDiagnosisFields.setStepInputFields(list);
-
-        return preliminaryDiagnosisFields;
+        return list;
     }
 
 }

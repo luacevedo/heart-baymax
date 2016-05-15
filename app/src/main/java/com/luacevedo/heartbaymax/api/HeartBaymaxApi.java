@@ -7,6 +7,8 @@ import com.luacevedo.heartbaymax.api.baseapi.BaseApiCall;
 import com.luacevedo.heartbaymax.api.baseapi.CachePolicy;
 import com.luacevedo.heartbaymax.api.baseapi.CallId;
 import com.luacevedo.heartbaymax.api.contract.HeartBaymaxApiContract;
+import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
+import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.api.model.rules.Rule;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class HeartBaymaxApi extends BaseApi<HeartBaymaxApiContract> {
     }
 
     public void getRules(CallId callId, Callback<List<Rule>> callback) {
-        CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK;
+        CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE;
         cachePolicy.setCacheKey("rules");
         cachePolicy.setCacheTTL(Constants.Time.TEN_MINUTES);
 
@@ -31,6 +33,32 @@ public class HeartBaymaxApi extends BaseApi<HeartBaymaxApiContract> {
 
         if (apiCall != null && apiCall.requiresNetworkCall()) {
             getService().getRules(apiCall);
+        }
+    }
+
+    public void getStepPatientInputFields(CallId callId, Callback<List<StepInputFields>> callback) {
+        CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE;
+        cachePolicy.setCacheKey("stepInputFields");
+        cachePolicy.setCacheTTL(Constants.Time.TEN_MINUTES);
+
+        BaseApiCall<List<StepInputFields>> apiCall = registerCall(callId, cachePolicy, callback, new TypeToken<List<StepInputFields>>() {
+        }.getType());
+
+        if (apiCall != null && apiCall.requiresNetworkCall()) {
+            getService().getStepPatientInputFields(apiCall);
+        }
+    }
+
+    public void getPatientAttributes(CallId callId, Callback<List<Attribute>> callback) {
+        CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE;
+        cachePolicy.setCacheKey("patientAttributes");
+        cachePolicy.setCacheTTL(Constants.Time.TEN_MINUTES);
+
+        BaseApiCall<List<Attribute>> apiCall = registerCall(callId, cachePolicy, callback, new TypeToken<List<Attribute>>() {
+        }.getType());
+
+        if (apiCall != null && apiCall.requiresNetworkCall()) {
+            getService().getPatientAttributes(apiCall);
         }
     }
 

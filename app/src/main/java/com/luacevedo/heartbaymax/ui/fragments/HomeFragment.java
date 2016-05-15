@@ -13,6 +13,7 @@ import com.luacevedo.heartbaymax.api.baseapi.CallId;
 import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
 import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.MockInfo;
+import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.helpers.RulesHelper;
@@ -51,30 +52,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        Log.e("LULI", "creo los datos");
-        CallId rulesCallId = new CallId(CallOrigin.HOME, CallType.RULES);
-        heartBaymaxApi.getRules(rulesCallId, generateRulesCallback());
-    }
-
-    @NonNull
-    private Callback<List<Rule>> generateRulesCallback() {
-        return new Callback<List<Rule>>() {
-            @Override
-            public void success(List<Rule> rules, Response response) {
-                Log.e("LULI", "SUCCESS DE RETROFIT =)");
-                ruleList = rules;
-
-                RulesHelper.executeRules(ruleList, patient);
-                printPatient();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("LULI", "FAILURE DE RETROFIT =(");
-                Log.e("LULI", error.toString());
-
-            }
-        };
     }
 
     private void printPatient() {
@@ -88,7 +65,44 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.new_patient_btn) {
-            startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent());
+//            startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent());
+            CallId attributesCallId = new CallId(CallOrigin.HOME, CallType.ATTRIBUTES);
+            heartBaymaxApi.getPatientAttributes(attributesCallId, generatePatientAttributesCallback());
         }
+    }
+
+    private Callback<List<Attribute>> generatePatientAttributesCallback() {
+        return new Callback<List<Attribute>>() {
+            @Override
+            public void success(List<Attribute> attributes, Response response) {
+                patient.setAttributesMap(attributes);
+                CallId rulesCallId = new CallId(CallOrigin.HOME, CallType.RULES);
+                heartBaymaxApi.getRules(rulesCallId, generateRulesCallback());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("LULI", error.toString());
+
+            }
+        };
+    }
+
+    @NonNull
+    private Callback<List<Rule>> generateRulesCallback() {
+        return new Callback<List<Rule>>() {
+            @Override
+            public void success(List<Rule> rules, Response response) {
+                ruleList = rules;
+                RulesHelper.executeRules(ruleList, patient);
+                printPatient();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("LULI", error.toString());
+
+            }
+        };
     }
 }
