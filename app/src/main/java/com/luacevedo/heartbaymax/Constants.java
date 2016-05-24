@@ -46,6 +46,7 @@ public class Constants {
     public static class InputField {
         public static class FieldType {
             public static final String COMBOBOX = "combobox";
+            public static final String TEXT = "text";
         }
     }
 }

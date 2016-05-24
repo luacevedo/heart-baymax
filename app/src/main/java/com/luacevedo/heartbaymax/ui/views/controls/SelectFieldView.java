@@ -21,22 +21,13 @@ public class SelectFieldView extends InputFieldView { //implements ICustomField 
     private Value selectedAttributeValue = null;
     private boolean firstSelect = true;
 
-    public SelectFieldView(Context context) {
+    public SelectFieldView(Context context, InputField inputField) {
         super(context);
+        this.inputField = inputField;
         initialize();
     }
 
-//    public SelectFieldView(Context context, String hint, InputField inputField) {
-//        this(context, null);
-//        this.inputField = inputField;
-//        if (!TextUtils.isEmpty(inputField.getTextValue())) {
-//            edtText.setText(inputField.getTextValue());
-//        }
-//        setHint(hint);
-//        setError(inputField.getError());
-//        edtText.addTextChangedListener(this);
-//    }
-
+    @Override
     public void initialize() {
         inflate(getContext(), R.layout.view_select_field, this);
         setOrientation(LinearLayout.VERTICAL);

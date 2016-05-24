@@ -24,6 +24,7 @@ public class TextFieldView extends InputFieldView {
         initialize();
     }
 
+    @Override
     public void initialize() {
         inflate(getContext(), R.layout.view_text_field, this);
         setOrientation(LinearLayout.VERTICAL);

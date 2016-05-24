@@ -23,6 +23,10 @@ public abstract class InputFieldView extends LinearLayout {
 
     }
 
+    public void initialize() {
+
+    }
+
     public void setFocusReceivedListener(OnFocusReceivedListener focusReceivedListener) {
         this.focusReceivedListener = focusReceivedListener;
     }
