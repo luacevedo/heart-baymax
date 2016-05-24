@@ -3,11 +3,12 @@ package com.luacevedo.heartbaymax.model.patient;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Patient {
+public class Patient implements Serializable {
 
     private String name;
     private int age;

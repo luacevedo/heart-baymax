@@ -47,4 +47,8 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.3.0'
     compile 'com.couchbase.lite:couchbase-lite-android:1.2.0'
     compile 'com.android.support:support-v4:23.2.1'
+
+    //Material Design Controls
+    compile 'com.github.ganfra:material-spinner:1.1.1'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

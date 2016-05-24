@@ -1,12 +1,18 @@
 package com.luacevedo.heartbaymax.api.model.fields;
 
-public class InputField {
+import java.io.Serializable;
+import java.util.List;
+
+public class InputField implements Serializable {
 
     private long id;
     private String labelMessage;
     private String rootToAffect;
     private String dataType;
     private String fieldType;
+    private Value value;
+    private List<Value> values;
+    private String error;
 
     public InputField(long id, String labelMessage, String rootToAffect, String dataType, String fieldType) {
         this.id = id;
@@ -54,5 +60,39 @@ public class InputField {
 
     public void setFieldType(String fieldType) {
         this.fieldType = fieldType;
+    }
+
+    public String getKeyValue() {
+        if (value != null) {
+            return value.getKey() != null ? value.getKey() : value.getValue();
+        }
+        return null;
+    }
+
+    public String getTextValue() {
+        if (value != null) {
+            return value.getValue();
+        }
+        return null;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public Value getValue() {
+        return value;
+    }
+
+    public void setValue(Value value) {
+        this.value = value;
+    }
+
+    public List<Value> getValues() {
+        return values;
     }
 }

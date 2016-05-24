@@ -1,6 +1,9 @@
 package com.luacevedo.heartbaymax;
 
 import android.app.Application;
+import android.content.Context;
+import android.os.IBinder;
+import android.view.inputmethod.InputMethodManager;
 
 import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
 import com.luacevedo.heartbaymax.db.CachingDbHelper;
@@ -29,5 +32,10 @@ public class HeartBaymaxApplication extends Application {
 
     public HeartBaymaxApi getHeartBaymaxApi() {
         return heartBaymaxApi;
+    }
+
+    public static void hideKeyboard(IBinder token) {
+        InputMethodManager imm = (InputMethodManager) application.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(token, 0);
     }
 }

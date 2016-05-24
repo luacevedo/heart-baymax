@@ -29,7 +29,9 @@ public class Constants {
     }
 
     public class BundleKey {
+        public static final String INPUT_FIELDS = "inputFields";
         public static final String STEP_INPUT_ATTRIBUTES = "stepInputAttributes";
+        public static final String PATIENT = "patient";
     }
 
     public static class Attribute {
@@ -38,6 +40,12 @@ public class Constants {
             public static final String INTEGER = "integer";
             public static final String LIST = "list";
             public static final String STRING = "string";
+        }
+    }
+
+    public static class InputField {
+        public static class FieldType {
+            public static final String COMBOBOX = "combobox";
         }
     }
 }
