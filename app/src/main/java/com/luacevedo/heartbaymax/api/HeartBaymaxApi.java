@@ -36,7 +36,7 @@ public class HeartBaymaxApi extends BaseApi<HeartBaymaxApiContract> {
         }
     }
 
-    public void getStepPatientInputFields(CallId callId, Callback<List<StepInputFields>> callback) {
+    public void getPatientStepInputFields(CallId callId, Callback<List<StepInputFields>> callback) {
         CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE;
         cachePolicy.setCacheKey("stepInputFields");
         cachePolicy.setCacheTTL(Constants.Time.TEN_MINUTES);

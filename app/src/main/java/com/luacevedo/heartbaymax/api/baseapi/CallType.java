@@ -2,5 +2,5 @@ package com.luacevedo.heartbaymax.api.baseapi;
 
 public enum CallType {
     RULES,
-    ATTRIBUTES
+    INPUT_FIELDS, ATTRIBUTES
 }

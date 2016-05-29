@@ -14,7 +14,7 @@ public class MockInfo {
 
     public static Patient createPatient(){
         Patient patient = new Patient();
-//        patient.setAttributesMap(getMockedAttributesMap());
+        patient.setAttributesMap(getMockedAttributesMap());
         return patient;
     }
 
@@ -56,10 +56,10 @@ public class MockInfo {
         InputField pulmonaryEdema = new InputField(1, "Edema pulmonar?", "EssentialSymptoms.PulmonaryEdema", "select", "combobox");
         inputFields.add(pulmonaryEdema);
 
-        InputField dyspnoea = new InputField(1, "Disnea?", "EssentialSymptoms.Dyspnoea", "select", "combobox");
+        InputField dyspnoea = new InputField(2, "Disnea?", "EssentialSymptoms.Dyspnoea", "select", "combobox");
         inputFields.add(dyspnoea);
 
-        InputField orthopnoea = new InputField(1, "Edema pulmonar?", "EssentialSymptoms.Orthopnoea", "select", "combobox");
+        InputField orthopnoea = new InputField(3, "Edema pulmonar?", "EssentialSymptoms.Orthopnoea", "select", "combobox");
         inputFields.add(orthopnoea);
         stepInputFields.setInputFields(inputFields);
 

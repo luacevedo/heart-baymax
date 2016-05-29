@@ -1,6 +1,7 @@
 package com.luacevedo.heartbaymax.ui.views.controls;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.luacevedo.heartbaymax.interfaces.OnFocusReceivedListener;

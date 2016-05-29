@@ -65,27 +65,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.new_patient_btn) {
-//            startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent());
-            CallId attributesCallId = new CallId(CallOrigin.HOME, CallType.ATTRIBUTES);
-            heartBaymaxApi.getPatientAttributes(attributesCallId, generatePatientAttributesCallback());
+            startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
         }
-    }
-
-    private Callback<List<Attribute>> generatePatientAttributesCallback() {
-        return new Callback<List<Attribute>>() {
-            @Override
-            public void success(List<Attribute> attributes, Response response) {
-                patient.setAttributesMap(attributes);
-                CallId rulesCallId = new CallId(CallOrigin.HOME, CallType.RULES);
-                heartBaymaxApi.getRules(rulesCallId, generateRulesCallback());
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("LULI", error.toString());
-
-            }
-        };
     }
 
     @NonNull

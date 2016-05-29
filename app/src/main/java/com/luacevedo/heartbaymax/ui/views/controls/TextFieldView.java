@@ -28,7 +28,7 @@ public class TextFieldView extends InputFieldView {
     public void initialize() {
         inflate(getContext(), R.layout.view_text_field, this);
         setOrientation(LinearLayout.VERTICAL);
-        editText = (MaterialEditText) findViewById(R.id.posting_attribute_text_edit);
+        editText = (MaterialEditText) findViewById(R.id.text_field_edit_text);
         editText.setHint(inputField.getLabelMessage());
         editText.setFloatingLabel(MaterialEditText.FLOATING_LABEL_NORMAL);
         editText.setFloatingLabelAnimating(true);

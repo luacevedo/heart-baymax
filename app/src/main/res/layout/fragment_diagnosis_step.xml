@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -15,9 +15,8 @@
             android:id="@+id/diagnosis_form_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical" />
 
-        </LinearLayout>
     </ScrollView>
 
     <TextView
@@ -32,15 +31,4 @@
         android:textColor="@color/white"
         android:textSize="@dimen/material_text_title" />
 
-    <TextView
-        android:id="@+id/diagnosis_finish_step"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/diagnosis_step_scroll"
-        android:background="@drawable/material_publish_floating_button"
-        android:gravity="center"
-        android:padding="@dimen/large_padding"
-        android:text="finish"
-        android:textColor="@color/white"
-        android:textSize="@dimen/material_text_title" />
-</RelativeLayout>
+</LinearLayout>

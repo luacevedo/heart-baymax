@@ -15,7 +15,7 @@ import java.util.List;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
-public class SelectFieldView extends InputFieldView { //implements ICustomField {
+public class SelectFieldView extends InputFieldView {
     private InputField inputField;
     private MaterialSpinner spinner;
     private Value selectedAttributeValue = null;
@@ -24,7 +24,6 @@ public class SelectFieldView extends InputFieldView { //implements ICustomField 
     public SelectFieldView(Context context, InputField inputField) {
         super(context);
         this.inputField = inputField;
-        initialize();
     }
 
     @Override
@@ -34,6 +33,7 @@ public class SelectFieldView extends InputFieldView { //implements ICustomField 
         spinner = (MaterialSpinner) findViewById(R.id.select_field_option_spinner);
         spinner.setHint(inputField.getLabelMessage());
         setListeners();
+        refreshAdapter();
     }
 
     @Override
@@ -70,7 +70,6 @@ public class SelectFieldView extends InputFieldView { //implements ICustomField 
                 selectedAttributeValue = null;
             }
         }
-        setListeners();
     }
 
     private void clearListener() {
@@ -105,11 +104,11 @@ public class SelectFieldView extends InputFieldView { //implements ICustomField 
                         Value fieldValue = inputField.getValues().get(position);
                         selectedAttributeValue = fieldValue;
 //                        setAttributeValueReference(inputField.getId(), selectedAttributeValue);
-                        onValueChangedListener.valueReferenceChanged(inputField, fieldValue);
+                        onValueChangedListener.valueSelectChanged(inputField, fieldValue);
                     } else {
                         selectedAttributeValue = null;
 //                        setAttributeValueReference(inputField.getId(), null);
-                        onValueChangedListener.valueReferenceChanged(inputField, null);
+                        onValueChangedListener.valueSelectChanged(inputField, null);
                     }
                 }
             }
@@ -119,7 +118,7 @@ public class SelectFieldView extends InputFieldView { //implements ICustomField 
                 if (onValueChangedListener != null) {
                     selectedAttributeValue = null;
 //                    setAttributeValueReference(attribute.getId(), null);
-                    onValueChangedListener.valueReferenceChanged(inputField, null);
+                    onValueChangedListener.valueSelectChanged(inputField, null);
                 }
             }
         };

@@ -48,5 +48,16 @@ public class Constants {
             public static final String COMBOBOX = "combobox";
             public static final String TEXT = "text";
         }
+
+        public static class DataType {
+            public static final String BOOLEAN = "boolean";
+            public static final String STRING = "string";
+            public static final String INTEGER = "integer";
+        }
+
+        public class Value {
+            public static final String TRUE = "1";
+            public static final String FALSE = "0";
+        }
     }
 }
