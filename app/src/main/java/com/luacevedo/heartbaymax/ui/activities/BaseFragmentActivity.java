@@ -16,7 +16,7 @@ import com.luacevedo.heartbaymax.R;
 public class BaseFragmentActivity extends AppCompatActivity {
 
     public enum Direction {
-        RIGHT;
+        RIGHT, LEFT;
     }
 
     @Override
@@ -66,8 +66,12 @@ public class BaseFragmentActivity extends AppCompatActivity {
         }
     }
 
-    public void slideNextFragment(Fragment fragment) {
+    public void slideNextFragmentFromRight(Fragment fragment) {
         setFragment(fragment, Direction.RIGHT);
+    }
+
+    public void slideNextFragmentFromLeft(Fragment fragment) {
+        setFragment(fragment, Direction.LEFT);
     }
 
     private void setFragment(Fragment fragment, Direction direction) {
@@ -90,6 +94,9 @@ public class BaseFragmentActivity extends AppCompatActivity {
             case RIGHT:
                 transaction.setCustomAnimations(R.anim.animation_appears_from_right, R.anim.animation_disappears_to_left,
                         R.anim.animation_appears_from_left, R.anim.animation_disappears_to_right);
+                break;
+            case LEFT:
+                transaction.setCustomAnimations(R.anim.animation_appears_from_left, R.anim.animation_disappear, 0, 0);
                 break;
             default:
                 break;

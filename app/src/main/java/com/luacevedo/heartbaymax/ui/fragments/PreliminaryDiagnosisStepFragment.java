@@ -28,7 +28,6 @@ import java.util.Map;
 public class PreliminaryDiagnosisStepFragment extends BaseFragment implements View.OnClickListener {
 
     private TextView nextBtn;
-    private TextView finishBtn;
     private List<InputField> stepInputFields;
     private PreliminaryDiagnosisActivity preliminaryDiagnosisActivity;
     private Map<Long, InputFieldView> inputFieldsControlsById = new HashMap<>();
@@ -72,6 +71,26 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
         formContent = (LinearLayout) view.findViewById(R.id.diagnosis_form_container);
         nextBtn = (TextView) view.findViewById(R.id.diagnosis_next_step);
         nextBtn.setText(isLastStep ? ResourcesHelper.getString(R.string.finish_step) : ResourcesHelper.getString(R.string.next_step));
+        nextBtn.setOnClickListener(this);
+        setNextButtonStatus();
+    }
+
+    private void setNextButtonStatus() {
+        if (nextBtn != null) {
+//            if (activity.isEdit()) {
+//                txtPost.setEnabled(wasItemEdited() && activity.getStepStatus().isValid() && NetworkUtilities.isOnline());
+//            } else {
+//                txtPost.setEnabled(activity.getStepStatus().isValid() && NetworkUtilities.isOnline());
+//            }
+        }
+    }
+
+    private boolean isStepFinished() {
+        boolean isFinised = true;
+//        for(InputFieldView in : inputFieldsControlsById.values()) {
+//            isFinised += in.isSelected();
+//        }
+        return isFinised;
     }
 
     public void createStepControls() {
@@ -121,7 +140,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
             if (isLastStep) {
                 preliminaryDiagnosisActivity.finishDiagnosis();
             } else {
-                preliminaryDiagnosisActivity.nextStep();
+                preliminaryDiagnosisActivity.getNextStep();
             }
         }
     }
@@ -150,4 +169,5 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
             }
         };
     }
+
 }

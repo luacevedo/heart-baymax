@@ -33,7 +33,6 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     //    private List<PreliminaryDiagnosisStepFragment> fragmentsStack = new ArrayList<>();
     private int currentStep = 0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,9 +121,27 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     }
 
-    public void nextStep() {
+    public void getNextStep() {
+        currentStep++;
         PreliminaryDiagnosisStepFragment fragment;
         fragment = PreliminaryDiagnosisStepFragment.newInstance(preliminaryDiagnosisFields.get(currentStep).getInputFields(), isLastStep());
-        slideNextFragment(fragment);
+        slideNextFragmentFromRight(fragment);
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        if (currentStep == 0) {
+            finish();
+        } else {
+            getBackStep();
+        }
+    }
+
+    private void getBackStep() {
+        currentStep--;
+        PreliminaryDiagnosisStepFragment fragment;
+        fragment = PreliminaryDiagnosisStepFragment.newInstance(preliminaryDiagnosisFields.get(currentStep).getInputFields(), isLastStep());
+        slideNextFragmentFromLeft(fragment);
     }
 }

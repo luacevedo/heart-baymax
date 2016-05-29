@@ -27,6 +27,7 @@
         android:background="@drawable/material_publish_floating_button"
         android:gravity="center"
         android:padding="@dimen/large_padding"
+        android:clickable="true"
         android:text="next"
         android:textColor="@color/white"
         android:textSize="@dimen/material_text_title" />

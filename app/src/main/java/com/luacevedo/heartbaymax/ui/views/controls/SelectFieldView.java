@@ -1,6 +1,7 @@
 package com.luacevedo.heartbaymax.ui.views.controls;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -98,6 +99,7 @@ public class SelectFieldView extends InputFieldView {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+                Log.e("LULI", "onItemSelected");
                 if (onValueChangedListener != null) {
                     if (position > -1) {
                         clearError();
@@ -115,6 +117,7 @@ public class SelectFieldView extends InputFieldView {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                Log.e("LULI", "onNothingSelected");
                 if (onValueChangedListener != null) {
                     selectedAttributeValue = null;
 //                    setAttributeValueReference(attribute.getId(), null);

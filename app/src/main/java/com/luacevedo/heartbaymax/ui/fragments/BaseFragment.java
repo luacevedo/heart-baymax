@@ -26,6 +26,8 @@ public class BaseFragment extends Fragment {
     }
 
     protected void slideNextFragment(Fragment fragment) {
-        navigationActivity.slideNextFragment(fragment);
+        navigationActivity.slideNextFragmentFromRight(fragment);
     }
+
+
 }
