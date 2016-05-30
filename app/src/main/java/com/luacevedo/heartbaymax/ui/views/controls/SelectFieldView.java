@@ -33,7 +33,6 @@ public class SelectFieldView extends InputFieldView {
         setOrientation(LinearLayout.VERTICAL);
         spinner = (MaterialSpinner) findViewById(R.id.select_field_option_spinner);
         spinner.setHint(inputField.getLabelMessage());
-        setListeners();
         refreshAdapter();
     }
 
@@ -71,6 +70,7 @@ public class SelectFieldView extends InputFieldView {
                 selectedAttributeValue = null;
             }
         }
+        setListeners();
     }
 
     private void clearListener() {
@@ -96,7 +96,6 @@ public class SelectFieldView extends InputFieldView {
 
     private AdapterView.OnItemSelectedListener getOnItemSelectedListener() {
         return new AdapterView.OnItemSelectedListener() {
-
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
                 Log.e("LULI", "onItemSelected");
@@ -105,11 +104,9 @@ public class SelectFieldView extends InputFieldView {
                         clearError();
                         Value fieldValue = inputField.getValues().get(position);
                         selectedAttributeValue = fieldValue;
-//                        setAttributeValueReference(inputField.getId(), selectedAttributeValue);
                         onValueChangedListener.valueSelectChanged(inputField, fieldValue);
                     } else {
                         selectedAttributeValue = null;
-//                        setAttributeValueReference(inputField.getId(), null);
                         onValueChangedListener.valueSelectChanged(inputField, null);
                     }
                 }
@@ -120,7 +117,6 @@ public class SelectFieldView extends InputFieldView {
                 Log.e("LULI", "onNothingSelected");
                 if (onValueChangedListener != null) {
                     selectedAttributeValue = null;
-//                    setAttributeValueReference(attribute.getId(), null);
                     onValueChangedListener.valueSelectChanged(inputField, null);
                 }
             }

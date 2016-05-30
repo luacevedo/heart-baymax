@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
 import com.luacevedo.heartbaymax.R;
@@ -21,6 +22,7 @@ import com.luacevedo.heartbaymax.ui.views.controls.InputFieldView;
 import com.luacevedo.heartbaymax.ui.views.controls.SelectFieldView;
 import com.luacevedo.heartbaymax.ui.views.controls.TextFieldView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +36,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
     private OnInputFieldValueChangedListener onInputFieldValueChangedListener = getOnInputFieldValueChangedListener();
 
     private boolean isLastStep;
+    private boolean isRotating = false;
     private LinearLayout formContent;
 
     public static PreliminaryDiagnosisStepFragment newInstance(List<InputField> stepInputFields, boolean isLastStep) {
@@ -48,14 +51,16 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
         super.onCreate(savedInstanceState);
         preliminaryDiagnosisActivity = (PreliminaryDiagnosisActivity) getActivity();
         if (savedInstanceState != null) {
-            stepInputFields = BundleHelper.fromBundle(savedInstanceState, Constants.BundleKey.STEP_INPUT_ATTRIBUTES);
+            stepInputFields = BundleHelper.fromBundleJson(savedInstanceState, Constants.BundleKey.STEP_INPUT_ATTRIBUTES, new TypeToken<List<InputField>>() {
+            }.getType(), new ArrayList<InputField>());
         }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        BundleHelper.putJsonBundle(outState, Constants.BundleKey.STEP_INPUT_ATTRIBUTES, stepInputFields);
+        BundleHelper.putJsonBundle(outState, Constants.BundleKey.STEP_INPUT_ATTRIBUTES, stepInputFields, new TypeToken<List<InputField>>() {
+        }.getType());
     }
 
     @Override

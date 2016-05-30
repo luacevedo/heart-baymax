@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/diagnosis_step_scroll"
-        android:background="@drawable/material_publish_floating_button"
+        android:background="@drawable/material_custom_button"
         android:gravity="center"
         android:padding="@dimen/large_padding"
         android:clickable="true"

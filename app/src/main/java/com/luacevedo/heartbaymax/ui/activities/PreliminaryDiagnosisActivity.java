@@ -103,6 +103,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
                 patientAttribute.setValue(value.getKey() == Constants.InputField.Value.TRUE);
             }
         }
+        inputField.setValue(value);
     }
 
     public void setInputFieldTextValue(InputField inputField, String value) {
@@ -114,6 +115,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
                 patientAttribute.setValue(value);
             }
         }
+        inputField.setValue(new Value(value));
 
     }
 

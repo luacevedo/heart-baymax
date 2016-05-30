@@ -7,6 +7,10 @@ public class Value {
     public Value() {
     }
 
+    public Value(String value) {
+        this.value = value;
+    }
+
     public Value(String key, String value) {
         this.key = key;
         this.value = value;
