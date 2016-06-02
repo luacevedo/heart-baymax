@@ -146,4 +146,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         fragment = PreliminaryDiagnosisStepFragment.newInstance(preliminaryDiagnosisFields.get(currentStep).getInputFields(), isLastStep());
         slideNextFragmentFromLeft(fragment);
     }
+
+
+
 }

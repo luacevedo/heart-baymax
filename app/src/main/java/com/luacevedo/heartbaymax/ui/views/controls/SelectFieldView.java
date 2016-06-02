@@ -25,6 +25,7 @@ public class SelectFieldView extends InputFieldView {
     public SelectFieldView(Context context, InputField inputField) {
         super(context);
         this.inputField = inputField;
+        selectedAttributeValue = inputField.getValue();
     }
 
     @Override
@@ -98,7 +99,6 @@ public class SelectFieldView extends InputFieldView {
         return new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                Log.e("LULI", "onItemSelected");
                 if (onValueChangedListener != null) {
                     if (position > -1) {
                         clearError();
@@ -114,7 +114,6 @@ public class SelectFieldView extends InputFieldView {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Log.e("LULI", "onNothingSelected");
                 if (onValueChangedListener != null) {
                     selectedAttributeValue = null;
                     onValueChangedListener.valueSelectChanged(inputField, null);

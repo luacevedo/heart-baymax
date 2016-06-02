@@ -82,20 +82,17 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
 
     private void setNextButtonStatus() {
         if (nextBtn != null) {
-//            if (activity.isEdit()) {
-//                txtPost.setEnabled(wasItemEdited() && activity.getStepStatus().isValid() && NetworkUtilities.isOnline());
-//            } else {
-//                txtPost.setEnabled(activity.getStepStatus().isValid() && NetworkUtilities.isOnline());
-//            }
+//            nextBtn.setEnabled(isStepFinished());
+            nextBtn.setVisibility(isStepFinished() ? View.VISIBLE : View.GONE);
         }
     }
 
     private boolean isStepFinished() {
-        boolean isFinised = true;
-//        for(InputFieldView in : inputFieldsControlsById.values()) {
-//            isFinised += in.isSelected();
-//        }
-        return isFinised;
+        boolean isFinished = true;
+        for (InputField inputField : stepInputFields) {
+            isFinished &= inputField.getValue() != null;
+        }
+        return isFinished;
     }
 
     public void createStepControls() {
@@ -156,6 +153,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
             public void valueSelectChanged(InputField inputField, Value attributeValue) {
                 if (preliminaryDiagnosisActivity != null) {
                     preliminaryDiagnosisActivity.setInputFieldSelectValue(inputField, attributeValue);
+                    setNextButtonStatus();
                 }
             }
 
@@ -163,6 +161,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
             public void valueTextChanged(InputField inputField, String attributeValueText) {
                 if (!TextUtils.isEmpty(attributeValueText) && preliminaryDiagnosisActivity != null) {
                     preliminaryDiagnosisActivity.setInputFieldTextValue(inputField, attributeValueText);
+                    setNextButtonStatus();
                 }
             }
 
