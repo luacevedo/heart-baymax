@@ -22,6 +22,7 @@
     <TextView
         android:id="@+id/diagnosis_next_step"
         android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
         android:layout_height="wrap_content"
         android:layout_below="@id/diagnosis_step_scroll"
         android:background="@drawable/material_custom_button"

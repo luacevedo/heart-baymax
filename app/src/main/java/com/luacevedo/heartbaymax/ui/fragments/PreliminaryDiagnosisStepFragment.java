@@ -1,5 +1,7 @@
 package com.luacevedo.heartbaymax.ui.fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -29,6 +31,9 @@ import java.util.Map;
 
 public class PreliminaryDiagnosisStepFragment extends BaseFragment implements View.OnClickListener {
 
+    private static final float NEXT_BUTTON_SHOW_ALPHA = 1.0f;
+    private static final float NEXT_BUTTON_HIDE_ALPHA = 0.0f;
+    private static final int NEXT_BUTTON_ANIMATION_DURATION = 70;
     private TextView nextBtn;
     private List<InputField> stepInputFields;
     private PreliminaryDiagnosisActivity preliminaryDiagnosisActivity;
@@ -77,13 +82,26 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
         nextBtn = (TextView) view.findViewById(R.id.diagnosis_next_step);
         nextBtn.setText(isLastStep ? ResourcesHelper.getString(R.string.finish_step) : ResourcesHelper.getString(R.string.next_step));
         nextBtn.setOnClickListener(this);
-        setNextButtonStatus();
+        nextBtn.setVisibility(isStepFinished() ? View.VISIBLE : View.GONE);
     }
 
     private void setNextButtonStatus() {
         if (nextBtn != null) {
-//            nextBtn.setEnabled(isStepFinished());
-            nextBtn.setVisibility(isStepFinished() ? View.VISIBLE : View.GONE);
+            if (isStepFinished()) {
+                nextBtn.setVisibility(View.VISIBLE);
+                nextBtn.animate().alpha(NEXT_BUTTON_SHOW_ALPHA).setDuration(NEXT_BUTTON_ANIMATION_DURATION);
+            } else {
+                nextBtn.animate().alpha(NEXT_BUTTON_HIDE_ALPHA).setDuration(NEXT_BUTTON_ANIMATION_DURATION)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                super.onAnimationEnd(animation);
+                                if (!isStepFinished()) {
+                                    nextBtn.setVisibility(View.GONE);
+                                }
+                            }
+                        });
+            }
         }
     }
 
