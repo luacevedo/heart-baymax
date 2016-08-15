@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.view.inputmethod.InputMethodManager;
 
 import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
-import com.luacevedo.heartbaymax.db.CachingDbHelper;
+import com.luacevedo.heartbaymax.db.cache.CachingDbHelper;
 
 public class HeartBaymaxApplication extends Application {
 

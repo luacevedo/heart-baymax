@@ -14,12 +14,13 @@ public class InputField implements Serializable {
     private List<Value> values;
     private String error;
 
-    public InputField(long id, String labelMessage, String rootToAffect, String dataType, String fieldType) {
+    public InputField(long id, String labelMessage, String rootToAffect, String dataType, String fieldType, List<Value> values) {
         this.id = id;
         this.labelMessage = labelMessage;
         this.rootToAffect = rootToAffect;
         this.dataType = dataType;
         this.fieldType = fieldType;
+        this.values = values;
     }
 
     public long getId() {

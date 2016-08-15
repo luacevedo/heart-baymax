@@ -26,6 +26,9 @@ public class Constants {
     public class Time {
         public static final long ONE_MINUTE = 60;
         public static final long TEN_MINUTES = ONE_MINUTE * 10;
+        public static final long ONE_HOUR = ONE_MINUTE * 60;
+        public static final long ONE_DAY = ONE_HOUR * 24;
+        public static final long ONE_WEEK = ONE_DAY * 7;
     }
 
     public class BundleKey {

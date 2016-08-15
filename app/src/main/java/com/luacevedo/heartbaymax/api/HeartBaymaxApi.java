@@ -26,7 +26,7 @@ public class HeartBaymaxApi extends BaseApi<HeartBaymaxApiContract> {
     public void getRules(CallId callId, Callback<List<Rule>> callback) {
         CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE;
         cachePolicy.setCacheKey("rules");
-        cachePolicy.setCacheTTL(Constants.Time.TEN_MINUTES);
+        cachePolicy.setCacheTTL(Constants.Time.ONE_WEEK);
 
         BaseApiCall<List<Rule>> apiCall = registerCall(callId, cachePolicy, callback, new TypeToken<List<Rule>>() {
         }.getType());
@@ -39,7 +39,7 @@ public class HeartBaymaxApi extends BaseApi<HeartBaymaxApiContract> {
     public void getPatientStepInputFields(CallId callId, Callback<List<StepInputFields>> callback) {
         CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE;
         cachePolicy.setCacheKey("stepInputFields");
-        cachePolicy.setCacheTTL(Constants.Time.TEN_MINUTES);
+        cachePolicy.setCacheTTL(Constants.Time.ONE_WEEK);
 
         BaseApiCall<List<StepInputFields>> apiCall = registerCall(callId, cachePolicy, callback, new TypeToken<List<StepInputFields>>() {
         }.getType());
@@ -52,7 +52,7 @@ public class HeartBaymaxApi extends BaseApi<HeartBaymaxApiContract> {
     public void getPatientAttributes(CallId callId, Callback<List<Attribute>> callback) {
         CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE;
         cachePolicy.setCacheKey("patientAttributes");
-        cachePolicy.setCacheTTL(Constants.Time.TEN_MINUTES);
+        cachePolicy.setCacheTTL(Constants.Time.ONE_WEEK);
 
         BaseApiCall<List<Attribute>> apiCall = registerCall(callId, cachePolicy, callback, new TypeToken<List<Attribute>>() {
         }.getType());

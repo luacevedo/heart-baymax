@@ -1,4 +1,4 @@
-package com.luacevedo.heartbaymax.db;
+package com.luacevedo.heartbaymax.db.internal;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,15 +12,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.luacevedo.heartbaymax.Constants;
+import com.luacevedo.heartbaymax.db.ExcludedFromDBSerialization;
 
 import java.lang.reflect.Type;
 
-public abstract class DbHelperTemplate {
+public abstract class InternalDbTemplate {
     protected String tableName;
     protected String columnKey;
     protected String columnData;
-    protected String columnDate;
-    protected boolean autoPurge;
 
     private SQLiteDatabase db = null;
     private final Gson gson = newGSONInstance();
@@ -47,21 +46,16 @@ public abstract class DbHelperTemplate {
         return gsonBuilder.create();
     }
 
-    public DbHelperTemplate(Context context, String dbName, int dbVersion,
-                            String tableName, String columnKey, String columnData, String columnDate, boolean autoPurge) {
+    public InternalDbTemplate(Context context, String dbName, int dbVersion,
+                             String tableName, String columnKey, String columnData) {
 
         this.tableName = tableName;
         this.columnKey = columnKey;
         this.columnData = columnData;
-        this.columnDate = columnDate;
-        this.autoPurge = autoPurge;
 
         SQLiteOpenHelper helper = new DatabaseHelper(context, dbName, dbVersion);
         this.db = helper.getWritableDatabase();
 
-        if (autoPurge) {
-            purgeDB();
-        }
     }
 
     public void close() {
@@ -70,12 +64,11 @@ public abstract class DbHelperTemplate {
     }
 
 
-    public void insert(String key, Object data, long expirationOffset) {
+    public void insert(String key, Object data) {
         try {
             ContentValues cv = new ContentValues();
             cv.put(columnKey, key);
             cv.put(columnData, gson.toJson(data));
-            cv.put(columnDate, System.currentTimeMillis() + (expirationOffset * 1000));
 
             int rows = db.update(tableName, cv, columnKey + "=?", new String[]{key});
             if (rows == 0) {
@@ -83,25 +76,6 @@ public abstract class DbHelperTemplate {
             }
         } catch (Throwable t) {
         }
-    }
-
-    public void insert(String key, Object data) {
-        ContentValues cv = new ContentValues();
-        cv.put(columnKey, key);
-        cv.put(columnData, gson.toJson(data));
-        cv.put(columnDate, System.currentTimeMillis() + (60 * 60 * 24 * 365 * 1000));
-
-        int rows = db.update(tableName, cv, columnKey + "=?", new String[]{key});
-        if (rows == 0) {
-            db.insert(tableName, columnKey, cv);
-        }
-    }
-
-    public void updateExpiration(String keyPattern, long newExpirationOffset) {
-        ContentValues cv = new ContentValues();
-        cv.put(columnDate, System.currentTimeMillis() + (newExpirationOffset * 1000));
-
-        db.update(tableName, cv, columnKey + " LIKE ? ESCAPE ?", new String[]{keyPattern, "\\"});
     }
 
     public void delete(String key) {
@@ -112,36 +86,8 @@ public abstract class DbHelperTemplate {
         db.delete(tableName, columnKey + " LIKE ?", new String[]{key});
     }
 
-    public void clearCache() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                db.delete(tableName, null, null);
-            }
-        }).start();
-    }
-
-    public void invalidate(String cacheKey) {
-        ContentValues cv = new ContentValues();
-        cv.put(columnDate, 0l);
-        db.update(tableName, cv, columnKey + "=?", new String[]{cacheKey});
-    }
-
-    public void purgeDB() {
-        if (autoPurge) {
-            return;
-        }
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                long time = (System.currentTimeMillis() - (1000 * 60 * 60 * 6));
-                db.delete(tableName, columnDate + "<? AND " + columnDate + "!=0", new String[]{String.valueOf(time)});
-            }
-        }).start();
-    }
-
     public Object getAPIResponse(String key, Type type) {
-        Cursor c = db.query(tableName, new String[]{columnKey, columnData, columnDate},
+        Cursor c = db.query(tableName, new String[]{columnKey, columnData},
                 columnKey + "=?", new String[]{key}, null, null, null);
         Object response = null;
         if (c.moveToFirst()) {
@@ -159,19 +105,18 @@ public abstract class DbHelperTemplate {
         return response;
     }
 
-    public <T> DbItem<T> getDbItem(String key, Type type) {
+    public <T> InternalDbItem<T> getInternalDbItem(String key, Type type) {
         if (key == null || type == null) {
             return null;
         }
-        Cursor c = db.query(tableName, new String[]{columnKey, columnData, columnDate},
+        Cursor c = db.query(tableName, new String[]{columnKey, columnData},
                 columnKey + "=?", new String[]{key}, null, null, null);
-        DbItem<T> response = null;
+        InternalDbItem<T> response = null;
         if (c.moveToFirst()) {
             String json = Constants.EMPTY_STRING;
             try {
                 json = c.getString(c.getColumnIndex(columnData));
-                long date = c.getLong(c.getColumnIndex(columnDate));
-                response = new DbItem<>((T) gson.fromJson(json, type), date);
+                response = new InternalDbItem<>((T) gson.fromJson(json, type));
             } catch (JsonSyntaxException jse) {
 //                LogInternal.error(String.format("Unable to parse Json: %s as %s", json, type.toString()));
             } catch (Throwable e) {
@@ -212,10 +157,10 @@ public abstract class DbHelperTemplate {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
-            db.execSQL(String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY, %s TEXT, %s LONG);",
-                    tableName, columnKey, columnData, columnDate));
-            db.execSQL(String.format("CREATE INDEX %s_%s ON %s(%s);",
-                    tableName, columnDate, tableName, columnDate));
+            db.execSQL(String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY, %s TEXT);",
+                    tableName, columnKey, columnData));
+            db.execSQL(String.format("CREATE INDEX %s ON %s;",
+                    tableName, tableName));
         }
 
         @Override
