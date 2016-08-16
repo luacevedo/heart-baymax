@@ -1,8 +1,8 @@
 package com.luacevedo.heartbaymax.api.baseapi;
 
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
-import com.luacevedo.heartbaymax.db.CachingDbHelper;
-import com.luacevedo.heartbaymax.db.DbItem;
+import com.luacevedo.heartbaymax.db.cache.CachingDbHelper;
+import com.luacevedo.heartbaymax.db.cache.CachingDbItem;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
@@ -40,7 +40,7 @@ public class BaseApiCall<T> implements Callback<T> {
 //            LogInternal.logBaseApiCall("requires network call", callId.toString());
             return true;
         }
-        DbItem<T> cachedResponse = cachingDb.getDbItem(cachePolicy.getCacheKey(), responseType);
+        CachingDbItem<T> cachedResponse = cachingDb.getDbItem(cachePolicy.getCacheKey(), responseType);
         if (cachedResponse == null) {
 //            LogInternal.logBaseApiCall("requires network call", callId.toString());
             return true;
@@ -92,7 +92,7 @@ public class BaseApiCall<T> implements Callback<T> {
         if (!isCancelled) {
             if (callback != null) {
                 if (cachePolicy == CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE || cachePolicy == CachePolicy.NETWORK_ELSE_ANY_CACHE) {
-                    DbItem<T> cachedResponse = cachingDb.getDbItem(cachePolicy.getCacheKey(), responseType);
+                    CachingDbItem<T> cachedResponse = cachingDb.getDbItem(cachePolicy.getCacheKey(), responseType);
                     if (cachedResponse == null) {
                         //LogIntternal.logBaseApiCall("failure response", callId.toString());
                         callback.failure(error);

@@ -7,6 +7,11 @@ public class StepInputFields {
     private int step;
     private List<InputField> inputFields;
 
+    public StepInputFields(int step, List<InputField> inputFields) {
+        this.step = step;
+        this.inputFields = inputFields;
+    }
+
     public int getStep() {
         return step;
     }

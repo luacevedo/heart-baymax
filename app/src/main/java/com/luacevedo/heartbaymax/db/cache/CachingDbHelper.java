@@ -1,8 +1,8 @@
-package com.luacevedo.heartbaymax.db;
+package com.luacevedo.heartbaymax.db.cache;
 
 import android.content.Context;
 
-public class CachingDbHelper extends DbHelperTemplate {
+public class CachingDbHelper extends CachingDbTemplate {
     private final static int DB_VERSION = 1;
     private final static String DB_NAME = "heartBaymaxDatabase";
     private final static String TABLE_NAME = "cache";
