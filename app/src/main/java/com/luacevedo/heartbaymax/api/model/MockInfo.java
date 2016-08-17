@@ -101,47 +101,30 @@ public class MockInfo {
         InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "select", "combobox", booleanValues);
         inputFields.add(thirdHeartSound);
 
-        InputField hypertension = new InputField(6, "Hipertension?", "SecondarySymptoms.Hypertension", "select", "combobox", booleanValues);
-        inputFields.add(hypertension);
-        InputField nicturia = new InputField(7, "Nicturia?", "EssentialSymptoms.ThirdHeartSound", "select", "combobox", booleanValues);
-        inputFields.add(nicturia);
-        InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "select", "combobox", booleanValues);
-        inputFields.add(thirdHeartSound);
-        InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "select", "combobox", booleanValues);
-        inputFields.add(thirdHeartSound);
-        InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "select", "combobox", booleanValues);
-        inputFields.add(thirdHeartSound);
-        InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "select", "combobox", booleanValues);
-        inputFields.add(thirdHeartSound);
-
-        map.put("SecondarySymptoms.Hypertension", hypertension);
-        map.put("SecondarySymptoms.Nicturia", nicturia);
-        map.put("SecondarySymptoms.Obesity", obesity);
-        map.put("SecondarySymptoms.Diabetes", diabetes);
-        map.put("SecondarySymptoms.PreviousHeartAttack", previousHeartAttack);
-        map.put("SecondarySymptoms.JugularVeinEngorgement", jugularVeinEngorgement);
-        map.put("SecondarySymptoms.NighttimeCough", nighttimeCough);
-
-
-
         StepInputFields firstStepInputFields = new StepInputFields(1, inputFields);
 
-        firstStepInputFields.setInputFields(inputFields);
+        List<InputField> secondInputFields = new ArrayList<>();
+        InputField hypertension = new InputField(6, "Hipertension?", "SecondarySymptoms.Hypertension", "select", "combobox", booleanValues);
+        secondInputFields.add(hypertension);
+        InputField nicturia = new InputField(7, "Nicturia?", "EssentialSymptoms.v", "select", "combobox", booleanValues);
+        secondInputFields.add(nicturia);
+        InputField obesity = new InputField(8, "Obesidad?", "EssentialSymptoms.Obesity", "select", "combobox", booleanValues);
+        secondInputFields.add(obesity);
+        InputField diabetes = new InputField(9, "Diabetes?", "EssentialSymptoms.Diabetes", "select", "combobox", booleanValues);
+        secondInputFields.add(diabetes);
+        InputField previousHeartAttack = new InputField(10, "Infarto previo?", "EssentialSymptoms.PreviousHeartAttack", "select", "combobox", booleanValues);
+        secondInputFields.add(previousHeartAttack);
+        InputField jugularVeinEngorgement = new InputField(11, "Nicturia?", "EssentialSymptoms.JugularVeinEngorgement", "select", "combobox", booleanValues);
+        secondInputFields.add(jugularVeinEngorgement);
+        InputField nighttimeCough = new InputField(12, "Tos nocturna?", "EssentialSymptoms.NighttimeCough", "select", "combobox", booleanValues);
+        secondInputFields.add(nighttimeCough);
+
+        StepInputFields secondStepInputFields = new StepInputFields(2, secondInputFields);
 
         List<StepInputFields> list = new ArrayList<>();
+
         list.add(firstStepInputFields);
-
-
-
-
-        val pulmonaryEdemaField = InputField(1, "Presenta edema pulmonar?", "EssentialSymptoms.PulmonaryEdema", "boolean", "combobox", booleanValues)
-        val orthopneaField = InputField(2, "Presenta ortopnea?", "EssentialSymptoms.Orthopnoea", "boolean", "combobox", booleanValues)
-        val dyspnoeaField  = InputField(3, "Presenta disnea?", "EssentialSymptoms.Dyspnoea", "boolean", "combobox", booleanValues)
-        val lowerLimbEdemaField = InputField(4, "Presenta edema de miembros inferiores?", "EssentialSymptoms.LowerLimbEdema", "boolean", "combobox", booleanValues)
-
-        val step1 = StepInputFields(1, List(pulmonaryEdemaField, orthopneaField))
-        val step2 = StepInputFields(2, List(dyspnoeaField, lowerLimbEdemaField))
-
+        list.add(secondStepInputFields);
 
         return list;
     }

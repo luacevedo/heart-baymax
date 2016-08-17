@@ -10,6 +10,7 @@ import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
 import com.luacevedo.heartbaymax.api.baseapi.CallId;
 import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
 import com.luacevedo.heartbaymax.api.baseapi.CallType;
+import com.luacevedo.heartbaymax.api.model.MockInfo;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
@@ -76,9 +77,10 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     }
 
     private void getPreliminaryDiagnosisFields() {
-//        preliminaryDiagnosisFields = MockInfo.getPreliminaryDiagnosisFields();
-        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS);
-        heartBaymaxApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
+        preliminaryDiagnosisFields = MockInfo.getPreliminaryDiagnosisFields();
+        createStepFragment();
+//        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS);
+//        heartBaymaxApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
     }
 
     private Callback<List<StepInputFields>> getPatientStepInputFieldsCallback() {
