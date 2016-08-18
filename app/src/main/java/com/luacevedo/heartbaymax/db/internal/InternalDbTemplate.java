@@ -86,25 +86,6 @@ public abstract class InternalDbTemplate {
         db.delete(tableName, columnKey + " LIKE ?", new String[]{key});
     }
 
-    public Object getAPIResponse(String key, Type type) {
-        Cursor c = db.query(tableName, new String[]{columnKey, columnData},
-                columnKey + "=?", new String[]{key}, null, null, null);
-        Object response = null;
-        if (c.moveToFirst()) {
-            String json;
-            try {
-                json = c.getString(c.getColumnIndex(columnData));
-                response = gson.fromJson(json, type);
-            } catch (JsonSyntaxException jse) {
-//                LogInternal.error("Unable to parse Json: " + json);
-            } catch (Throwable e) {
-//                LogInternal.error("Unable to read row");
-            }
-        }
-        c.close();
-        return response;
-    }
-
     public <T> InternalDbItem<T> getInternalDbItem(String key, Type type) {
         if (key == null || type == null) {
             return null;
@@ -127,8 +108,8 @@ public abstract class InternalDbTemplate {
         return response;
     }
 
-    public <T> T loadCache(String key, Type clazz) {
-        Cursor c = db.query(tableName, new String[]{columnKey, columnData}, columnKey + "=?", new String[]{key}, null, null, null);
+    public <T> T getAllDataFromTable(String key, Type clazz) {
+        Cursor c = db.query(tableName, new String[]{columnKey, columnData}, null, new String[]{key}, null, null, null);
         T response = null;
         if (c.moveToFirst()) {
             String json;

@@ -103,6 +103,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         if (patientAttribute != null) {
             if (inputField.getDataType() == Constants.InputField.DataType.BOOLEAN) {
                 patientAttribute.setValue(value.getKey() == Constants.InputField.Value.TRUE);
+            } else if (inputField.getDataType() == Constants.InputField.DataType.STRING) {
+                patientAttribute.setValue(value.getKey());
             }
         }
         inputField.setValue(value);
@@ -122,7 +124,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     }
 
     public void finishDiagnosis() {
-
+        HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
+        finish();
     }
 
     public void getNextStep() {

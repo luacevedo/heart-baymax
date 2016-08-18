@@ -90,33 +90,33 @@ public class MockInfo {
 
         List<InputField> inputFields = new ArrayList<>();
 
-        InputField pulmonaryEdema = new InputField(1, "Edema pulmonar?", "EssentialSymptoms.PulmonaryEdema", "select", "combobox", booleanValues);
+        InputField pulmonaryEdema = new InputField(1, "Edema pulmonar?", "EssentialSymptoms.PulmonaryEdema", "boolean", "combobox", booleanValues);
         inputFields.add(pulmonaryEdema);
         InputField dyspnoea = new InputField(2, "Disnea?", "EssentialSymptoms.Dyspnoea", "select", "combobox", disphoneaValues);
         inputFields.add(dyspnoea);
-        InputField orthopnoea = new InputField(3, "Orthopnoea?", "EssentialSymptoms.Orthopnoea", "select", "combobox", booleanValues);
+        InputField orthopnoea = new InputField(3, "Orthopnoea?", "EssentialSymptoms.Orthopnoea", "boolean", "combobox", booleanValues);
         inputFields.add(orthopnoea);
-        InputField legEdema = new InputField(4, "Edema de miembros inferiores?", "EssentialSymptoms.LegEdema", "select", "combobox", booleanValues);
+        InputField legEdema = new InputField(4, "Edema de miembros inferiores?", "EssentialSymptoms.LegEdema", "boolean", "combobox", booleanValues);
         inputFields.add(legEdema);
-        InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "select", "combobox", booleanValues);
+        InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "boolean", "combobox", booleanValues);
         inputFields.add(thirdHeartSound);
 
         StepInputFields firstStepInputFields = new StepInputFields(1, inputFields);
 
         List<InputField> secondInputFields = new ArrayList<>();
-        InputField hypertension = new InputField(6, "Hipertension?", "SecondarySymptoms.Hypertension", "select", "combobox", booleanValues);
+        InputField hypertension = new InputField(6, "Hipertension?", "SecondarySymptoms.Hypertension", "boolean", "combobox", booleanValues);
         secondInputFields.add(hypertension);
-        InputField nicturia = new InputField(7, "Nicturia?", "EssentialSymptoms.v", "select", "combobox", booleanValues);
+        InputField nicturia = new InputField(7, "Nicturia?", "SecondarySymptoms.v", "boolean", "combobox", booleanValues);
         secondInputFields.add(nicturia);
-        InputField obesity = new InputField(8, "Obesidad?", "EssentialSymptoms.Obesity", "select", "combobox", booleanValues);
+        InputField obesity = new InputField(8, "Obesidad?", "SecondarySymptoms.Obesity", "boolean", "combobox", booleanValues);
         secondInputFields.add(obesity);
-        InputField diabetes = new InputField(9, "Diabetes?", "EssentialSymptoms.Diabetes", "select", "combobox", booleanValues);
+        InputField diabetes = new InputField(9, "Diabetes?", "SecondarySymptoms.Diabetes", "boolean", "combobox", booleanValues);
         secondInputFields.add(diabetes);
-        InputField previousHeartAttack = new InputField(10, "Infarto previo?", "EssentialSymptoms.PreviousHeartAttack", "select", "combobox", booleanValues);
+        InputField previousHeartAttack = new InputField(10, "Infarto previo?", "SecondarySymptoms.PreviousHeartAttack", "boolean", "combobox", booleanValues);
         secondInputFields.add(previousHeartAttack);
-        InputField jugularVeinEngorgement = new InputField(11, "Nicturia?", "EssentialSymptoms.JugularVeinEngorgement", "select", "combobox", booleanValues);
+        InputField jugularVeinEngorgement = new InputField(11, "Ingurgitacion yugular?", "SecondarySymptoms.JugularVeinEngorgement", "boolean", "combobox", booleanValues);
         secondInputFields.add(jugularVeinEngorgement);
-        InputField nighttimeCough = new InputField(12, "Tos nocturna?", "EssentialSymptoms.NighttimeCough", "select", "combobox", booleanValues);
+        InputField nighttimeCough = new InputField(12, "Tos nocturna?", "SecondarySymptoms.NighttimeCough", "boolean", "combobox", booleanValues);
         secondInputFields.add(nighttimeCough);
 
         StepInputFields secondStepInputFields = new StepInputFields(2, secondInputFields);

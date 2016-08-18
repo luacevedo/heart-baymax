@@ -168,7 +168,7 @@ public abstract class CachingDbTemplate {
                 columnKey + "=?", new String[]{key}, null, null, null);
         CachingDbItem<T> response = null;
         if (c.moveToFirst()) {
-            String json = Constants.EMPTY_STRING;
+            String json;
             try {
                 json = c.getString(c.getColumnIndex(columnData));
                 long date = c.getLong(c.getColumnIndex(columnDate));

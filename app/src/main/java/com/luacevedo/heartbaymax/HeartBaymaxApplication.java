@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.view.inputmethod.InputMethodManager;
 
 import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
+import com.luacevedo.heartbaymax.db.InternalDbHelper;
 import com.luacevedo.heartbaymax.db.cache.CachingDbHelper;
 
 public class HeartBaymaxApplication extends Application {
@@ -13,6 +14,7 @@ public class HeartBaymaxApplication extends Application {
     private static HeartBaymaxApplication application;
     private CachingDbHelper cachingDbHelper;
     private HeartBaymaxApi heartBaymaxApi;
+    private InternalDbHelper internalDbHelper;
 
     @Override
     public void onCreate() {
@@ -20,6 +22,7 @@ public class HeartBaymaxApplication extends Application {
         this.application = this;
         this.heartBaymaxApi = new HeartBaymaxApi();
         this.cachingDbHelper = new CachingDbHelper(getApplicationContext());
+        this.internalDbHelper = new InternalDbHelper(getApplicationContext());
     }
 
     public static HeartBaymaxApplication getApplication() {
@@ -28,6 +31,10 @@ public class HeartBaymaxApplication extends Application {
 
     public CachingDbHelper getCachingDbHelper() {
         return cachingDbHelper;
+    }
+
+    public InternalDbHelper getInternalDbHelper() {
+        return internalDbHelper;
     }
 
     public HeartBaymaxApi getHeartBaymaxApi() {

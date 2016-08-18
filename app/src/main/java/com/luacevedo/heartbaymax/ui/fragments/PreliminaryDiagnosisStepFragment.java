@@ -169,7 +169,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
         return new OnInputFieldValueChangedListener() {
             @Override
             public void valueSelectChanged(InputField inputField, Value attributeValue) {
-                if (preliminaryDiagnosisActivity != null) {
+                if (preliminaryDiagnosisActivity != null && attributeValue != null) {
                     preliminaryDiagnosisActivity.setInputFieldSelectValue(inputField, attributeValue);
                     setNextButtonStatus();
                 }
