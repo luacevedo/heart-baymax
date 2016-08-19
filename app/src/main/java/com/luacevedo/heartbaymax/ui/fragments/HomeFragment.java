@@ -2,22 +2,21 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
-import com.luacevedo.heartbaymax.api.baseapi.CallId;
-import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
-import com.luacevedo.heartbaymax.api.baseapi.CallType;
+import com.luacevedo.heartbaymax.adapters.PatientsHomeAdapter;
 import com.luacevedo.heartbaymax.api.model.MockInfo;
-import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.helpers.RulesHelper;
+import com.luacevedo.heartbaymax.interfaces.IOnPatientClicked;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
@@ -28,9 +27,14 @@ import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class HomeFragment extends BaseFragment implements View.OnClickListener {
+public class HomeFragment extends BaseFragment implements View.OnClickListener, IOnPatientClicked {
 
     private View btnNewPatient;
+    private RecyclerView recyclerItemsList;
+    private List<Rule> ruleList = new ArrayList<>();
+    private Patient patient = MockInfo.createPatient();
+    private StaggeredGridLayoutManager layoutManager;
+    private PatientsHomeAdapter adapterItems;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -41,14 +45,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        recyclerItemsList = (RecyclerView) view.findViewById(R.id.recycler_patients);
         btnNewPatient = view.findViewById(R.id.new_patient_btn);
         btnNewPatient.setOnClickListener(this);
         return view;
-
     }
 
-    List<Rule> ruleList = new ArrayList<>();
-    Patient patient = MockInfo.createPatient();
+    @Override
+    public void onResume() {
+        super.onResume();
+        layoutManager = new StaggeredGridLayoutManager(Constants.GridLayout.SINGLE_COLUMN, StaggeredGridLayoutManager.VERTICAL);
+        recyclerItemsList.setLayoutManager(layoutManager);
+        recyclerItemsList.setAdapter(adapterItems);
+    }
 
     @Override
     public void onStart() {
@@ -86,5 +95,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
             }
         };
+    }
+
+    @Override
+    public void patientClicked(Patient patient, int position, View view) {
+        startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
     }
 }

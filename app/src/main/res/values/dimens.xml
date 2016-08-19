@@ -18,4 +18,6 @@
     <dimen name="fab_button_height">52dp</dimen>
     <dimen name="fab_button_elevation">6dp</dimen>
     <dimen name="default_margin">10dp</dimen>
+    <dimen name="extra_big_finger_size">70dp</dimen>
+    <dimen name="card_view_default_corner_radius">3dp</dimen>
 </resources>

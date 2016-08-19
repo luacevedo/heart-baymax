@@ -9,6 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ui.fragments.HomeFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_patients"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/extra_big_finger_size"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/new_patient_btn"
         android:layout_width="wrap_content"

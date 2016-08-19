@@ -63,4 +63,8 @@ public class Constants {
             public static final String FALSE = "0";
         }
     }
+
+    public static class GridLayout {
+        public static final int SINGLE_COLUMN = 1;
+    }
 }
