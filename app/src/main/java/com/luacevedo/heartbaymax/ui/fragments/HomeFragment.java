@@ -2,6 +2,7 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,7 @@ import retrofit.client.Response;
 
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
-    private TextView btnNewPatient;
+    private View btnNewPatient;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -40,7 +41,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        btnNewPatient = (TextView) view.findViewById(R.id.new_patient_btn);
+        btnNewPatient = view.findViewById(R.id.new_patient_btn);
         btnNewPatient.setOnClickListener(this);
         return view;
 
