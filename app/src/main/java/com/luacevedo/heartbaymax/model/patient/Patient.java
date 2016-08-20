@@ -16,10 +16,6 @@ public class Patient implements Serializable {
     private String gender;
     private HashMap<String, PatientAttribute> attributesMap = new HashMap<>();
 
-    public HashMap<String, PatientAttribute> getAttributesMap() {
-        return attributesMap;
-    }
-
     public int getId() {
         return id;
     }
@@ -50,6 +46,10 @@ public class Patient implements Serializable {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public HashMap<String, PatientAttribute> getAttributesMap() {
+        return attributesMap;
     }
 
     public void setAttributesMap(HashMap<String, PatientAttribute> attributesMap) {

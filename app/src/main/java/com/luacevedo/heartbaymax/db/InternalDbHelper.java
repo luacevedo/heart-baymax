@@ -5,6 +5,7 @@ import android.content.Context;
 import com.luacevedo.heartbaymax.db.internal.PatientsDbHelper;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InternalDbHelper {
@@ -16,11 +17,16 @@ public class InternalDbHelper {
     }
 
     public void savePatient(Patient patient) {
-        patientsDb.insert(String.valueOf(patient.getId()), patient);
+        this.patientsDb.insert(String.valueOf(patient.getId()), patient);
     }
 
-//    public List<Patient> getPatients() {
-//
-//    }
+    public List<Patient> getPatients() {
+        List<Patient> list = new ArrayList<>();
+        Patient x = this.patientsDb.getAllDataFromTable("1", Patient.class);
+        if (x != null) {
+            list.add(x);
+        }
+        return list;
+    }
 
 }

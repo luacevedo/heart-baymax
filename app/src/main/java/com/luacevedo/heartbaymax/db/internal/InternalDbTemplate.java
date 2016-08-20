@@ -109,7 +109,7 @@ public abstract class InternalDbTemplate {
     }
 
     public <T> T getAllDataFromTable(String key, Type clazz) {
-        Cursor c = db.query(tableName, new String[]{columnKey, columnData}, null, new String[]{key}, null, null, null);
+        Cursor c = db.query(tableName, new String[]{columnKey, columnData}, columnKey + "=?", new String[]{key}, null, null, null);
         T response = null;
         if (c.moveToFirst()) {
             String json;
@@ -140,8 +140,8 @@ public abstract class InternalDbTemplate {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(String.format("CREATE TABLE %s (%s TEXT PRIMARY KEY, %s TEXT);",
                     tableName, columnKey, columnData));
-            db.execSQL(String.format("CREATE INDEX %s ON %s;",
-                    tableName, tableName));
+            db.execSQL(String.format("CREATE INDEX %s ON %s (%s);",
+                    "patient_key", tableName, columnKey));
         }
 
         @Override

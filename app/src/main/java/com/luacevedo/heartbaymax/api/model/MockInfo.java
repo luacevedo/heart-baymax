@@ -15,6 +15,7 @@ public class MockInfo {
 
     public static Patient createPatient(){
         Patient patient = new Patient();
+        patient.setId(1);
         patient.setAttributesMap(getMockedAttributesMap());
         return patient;
     }

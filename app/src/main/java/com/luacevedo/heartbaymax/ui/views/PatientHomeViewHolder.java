@@ -25,7 +25,7 @@ public class PatientHomeViewHolder extends RecyclerView.ViewHolder implements Vi
     public void setUpData(Patient patient, int position) {
         this.patient = patient;
         this.position = position;
-        this.txtTitle.setText(patient.getId());
+        this.txtTitle.setText(String.valueOf(patient.getId()));
     }
 
     @Override
