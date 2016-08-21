@@ -1,7 +1,10 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.Menu;
+import android.widget.Toolbar;
 
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
@@ -57,6 +60,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        unlockMenu();
         if (!preliminaryDiagnosisFields.isEmpty()) {
             //this will then be in success callback
             createStepFragment();
@@ -136,7 +140,6 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     @Override
     public void onBackPressed() {
-//        super.onBackPressed();
         if (currentStep == 0) {
             finish();
         } else {
@@ -150,7 +153,5 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         fragment = PreliminaryDiagnosisStepFragment.newInstance(preliminaryDiagnosisFields.get(currentStep).getInputFields(), isLastStep());
         slideNextFragmentFromLeft(fragment);
     }
-
-
 
 }

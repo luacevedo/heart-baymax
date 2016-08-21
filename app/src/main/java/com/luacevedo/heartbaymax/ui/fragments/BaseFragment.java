@@ -3,6 +3,7 @@ package com.luacevedo.heartbaymax.ui.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.MenuItem;
 
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
 import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
@@ -27,6 +28,15 @@ public class BaseFragment extends Fragment {
 
     protected void slideNextFragment(Fragment fragment) {
         navigationActivity.slideNextFragmentFromRight(fragment);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            getActivity().finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

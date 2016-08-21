@@ -1,6 +1,8 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
@@ -26,6 +28,12 @@ public class PatientPageActivity extends BaseFragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        unlockMenu();
         setInitialFragment(PatientPageFragment.newInstance(patient));
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }
