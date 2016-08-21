@@ -31,7 +31,6 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     private HeartBaymaxApi heartBaymaxApi = HeartBaymaxApplication.getApplication().getHeartBaymaxApi();
     private List<StepInputFields> preliminaryDiagnosisFields = new ArrayList<>();
     private Patient patient;
-    //    private List<PreliminaryDiagnosisStepFragment> fragmentsStack = new ArrayList<>();
     private int currentStep = 0;
 
     @Override

@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.R;
+import com.luacevedo.heartbaymax.helpers.ResourcesHelper;
 import com.luacevedo.heartbaymax.interfaces.IOnPatientClicked;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 
@@ -25,7 +26,8 @@ public class PatientHomeViewHolder extends RecyclerView.ViewHolder implements Vi
     public void setUpData(Patient patient, int position) {
         this.patient = patient;
         this.position = position;
-        this.txtTitle.setText(String.valueOf(patient.getId()));
+        String patientTitle = ResourcesHelper.getString(R.string.patient_title_home).replace("{id}", String.valueOf(patient.getId()));
+        this.txtTitle.setText(patientTitle);
     }
 
     @Override

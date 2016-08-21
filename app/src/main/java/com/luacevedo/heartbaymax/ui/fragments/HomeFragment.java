@@ -35,7 +35,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     private RecyclerView patientsRecyclerView;
     private List<Rule> ruleList = new ArrayList<>();
     private List<Patient> patientsList = new ArrayList<>();
-    private Patient patient = MockInfo.createPatient();
     private StaggeredGridLayoutManager layoutManager;
     private PatientsHomeAdapter patientsAdapter;
     private InternalDbHelper internalDbHelper = HeartBaymaxApplication.getApplication().getInternalDbHelper();
@@ -83,17 +82,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         super.onStart();
     }
 
-    private void printPatient() {
-        Log.e("LULI", "EL Pacienteeeee: ");
-        for (String key : patient.getAttributesMap().keySet()) {
-            PatientAttribute att = patient.getAttributesMap().get(key);
-            Log.e("LULI", key + " = " + att.getValue());
-        }
-    }
+//    private void printPatient() {
+//        Log.e("LULI", "EL Pacienteeeee: ");
+//
+//    }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.new_patient_btn) {
+            Patient patient = MockInfo.createPatient();
             startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
         }
     }
@@ -104,8 +101,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void success(List<Rule> rules, Response response) {
                 ruleList = rules;
-                RulesHelper.executeRules(ruleList, patient);
-                printPatient();
+//                RulesHelper.executeRules(ruleList, patient);
+//                printPatient();
             }
 
             @Override
@@ -118,6 +115,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     @Override
     public void patientClicked(Patient patient, int position, View view) {
-        startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
+        startActivity(IntentFactory.getPatientPageActivityIntent(patient));
     }
 }

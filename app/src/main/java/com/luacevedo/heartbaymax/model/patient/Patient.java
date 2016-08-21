@@ -81,4 +81,13 @@ public class Patient implements Serializable {
 
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (PatientAttribute p : attributesMap.values()) {
+            builder.append(p.getAttribute().getRoot() + " = " + p.getValue() + "\n");
+        }
+        return builder.toString();
+    }
 }

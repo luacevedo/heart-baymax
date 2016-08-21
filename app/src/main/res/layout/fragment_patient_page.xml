@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/patient_page_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:id="@+id/patient_page_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:elevation="@dimen/default_elevation"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/edit_preliminary_diag_btn"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/accent"
+            android:textColor="@color/white"
+            android:layout_margin="6dp"
+            android:text="@string/edit_preliminary_diagnosis"
+            android:maxWidth="50dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/edit_heart_situation_btn"
+            android:layout_margin="6dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/edit_complementary_tests"
+            android:maxWidth="50dp"
+            android:background="@color/accent"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</RelativeLayout>
