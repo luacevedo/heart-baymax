@@ -17,10 +17,8 @@ import com.luacevedo.heartbaymax.api.model.MockInfo;
 import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.db.InternalDbHelper;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
-import com.luacevedo.heartbaymax.helpers.RulesHelper;
 import com.luacevedo.heartbaymax.interfaces.IOnPatientClicked;
 import com.luacevedo.heartbaymax.model.patient.Patient;
-import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,22 +48,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         patientsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_patients);
         btnNewPatient = view.findViewById(R.id.new_patient_btn);
         btnNewPatient.setOnClickListener(this);
-
-        setUpPatients(view);
-
+        patientsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_patients);
         return view;
     }
 
-    private void setUpPatients(View view) {
-        patientsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_patients);
+    @Override
+    public void onResume() {
+        super.onResume();
+        setUpPatientsList();
+    }
+
+    private void setUpPatientsList() {
         layoutManager = new StaggeredGridLayoutManager(Constants.GridLayout.SINGLE_COLUMN, StaggeredGridLayoutManager.VERTICAL);
         patientsRecyclerView.setLayoutManager(layoutManager);
-        if (!patientsList.isEmpty()) {
-            setPatientsAdapter();
-        } else {
-            patientsList = internalDbHelper.getPatients();
-            setPatientsAdapter();
-        }
+        patientsList = internalDbHelper.getPatients();
+        setPatientsAdapter();
     }
 
     private void setPatientsAdapter() {
@@ -81,11 +78,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public void onStart() {
         super.onStart();
     }
-
-//    private void printPatient() {
-//        Log.e("LULI", "EL Pacienteeeee: ");
-//
-//    }
 
     @Override
     public void onClick(View v) {

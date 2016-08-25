@@ -13,6 +13,7 @@ import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
+import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.fragments.PreliminaryDiagnosisStepFragment;
@@ -146,6 +147,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     public void finishDiagnosis() {
         HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
+        startActivity(IntentFactory.getHomeActivityIntent());
         finish();
     }
 
