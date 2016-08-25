@@ -58,16 +58,16 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         unlockMenu();
         if (!preliminaryDiagnosisFields.isEmpty()) {
             //this will then be in success callback
-            createStepFragment();
+            PreliminaryDiagnosisStepFragment fragment = createStepFragment();
+            setInitialFragment(fragment);
         } else {
             getPreliminaryDiagnosisFields();
         }
     }
 
-    private void createStepFragment() {
+    private PreliminaryDiagnosisStepFragment createStepFragment() {
         List<InputField> inputFields = setCurrentValuesFromPatient();
-        PreliminaryDiagnosisStepFragment fragment = PreliminaryDiagnosisStepFragment.newInstance(inputFields, isLastStep());
-        setInitialFragment(fragment);
+        return PreliminaryDiagnosisStepFragment.newInstance(inputFields, isLastStep());
     }
 
     @NonNull
@@ -97,7 +97,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     private void getPreliminaryDiagnosisFields() {
         preliminaryDiagnosisFields = MockInfo.getPreliminaryDiagnosisFields();
-        createStepFragment();
+        PreliminaryDiagnosisStepFragment fragment = createStepFragment();
+        setInitialFragment(fragment);
 //        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS);
 //        heartBaymaxApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
     }
@@ -107,7 +108,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
             @Override
             public void success(List<StepInputFields> inputFields, Response response) {
                 preliminaryDiagnosisFields = inputFields;
-                createStepFragment();
+                PreliminaryDiagnosisStepFragment fragment = createStepFragment();
+                setInitialFragment(fragment);
             }
 
             @Override
@@ -149,9 +151,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     public void getNextStep() {
         currentStep++;
-        PreliminaryDiagnosisStepFragment fragment;
-        fragment = PreliminaryDiagnosisStepFragment.newInstance(preliminaryDiagnosisFields.get(currentStep).getInputFields(), isLastStep());
-        slideNextFragmentFromRight(fragment);
+        slideNextFragmentFromRight(createStepFragment());
     }
 
     @Override
@@ -165,9 +165,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     private void getBackStep() {
         currentStep--;
-        PreliminaryDiagnosisStepFragment fragment;
-        fragment = PreliminaryDiagnosisStepFragment.newInstance(preliminaryDiagnosisFields.get(currentStep).getInputFields(), isLastStep());
-        slideNextFragmentFromLeft(fragment);
+        slideNextFragmentFromLeft(createStepFragment());
     }
 
 }

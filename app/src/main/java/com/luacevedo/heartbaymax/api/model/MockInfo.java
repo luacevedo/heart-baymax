@@ -107,7 +107,7 @@ public class MockInfo {
         List<InputField> secondInputFields = new ArrayList<>();
         InputField hypertension = new InputField(6, "Hipertension?", "SecondarySymptoms.Hypertension", "boolean", "combobox", booleanValues);
         secondInputFields.add(hypertension);
-        InputField nicturia = new InputField(7, "Nicturia?", "SecondarySymptoms.v", "boolean", "combobox", booleanValues);
+        InputField nicturia = new InputField(7, "Nicturia?", "SecondarySymptoms.Nicturia", "boolean", "combobox", booleanValues);
         secondInputFields.add(nicturia);
         InputField obesity = new InputField(8, "Obesidad?", "SecondarySymptoms.Obesity", "boolean", "combobox", booleanValues);
         secondInputFields.add(obesity);
