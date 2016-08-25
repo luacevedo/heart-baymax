@@ -96,4 +96,14 @@ public class InputField implements Serializable {
     public List<Value> getValues() {
         return values;
     }
+
+    public Value getValue(String key) {
+        for (Value value : values) {
+            if (key.equals(value.getKey())) {
+                return value;
+            }
+        }
+        return null;
+    }
+
 }

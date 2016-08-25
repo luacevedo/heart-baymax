@@ -1,18 +1,13 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
+import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.Menu;
-import android.widget.Toolbar;
 
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
 import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
-import com.luacevedo.heartbaymax.api.baseapi.CallId;
-import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
-import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.MockInfo;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
@@ -70,9 +65,30 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     }
 
     private void createStepFragment() {
-        PreliminaryDiagnosisStepFragment fragment;
-        fragment = PreliminaryDiagnosisStepFragment.newInstance(preliminaryDiagnosisFields.get(currentStep).getInputFields(), isLastStep());
+        List<InputField> inputFields = setCurrentValuesFromPatient();
+        PreliminaryDiagnosisStepFragment fragment = PreliminaryDiagnosisStepFragment.newInstance(inputFields, isLastStep());
         setInitialFragment(fragment);
+    }
+
+    @NonNull
+    private List<InputField> setCurrentValuesFromPatient() {
+        List<InputField> inputFields = preliminaryDiagnosisFields.get(currentStep).getInputFields();
+        for (InputField inputField : inputFields) {
+
+            PatientAttribute attribute = patient.getAttributesMap().get(inputField.getRootToAffect());
+            if (attribute.getValue() != null) {
+                String keyToFind;
+                if (inputField.getDataType() == Constants.InputField.DataType.BOOLEAN) {
+                    keyToFind = (Boolean) attribute.getValue() ? Constants.InputField.Value.TRUE : Constants.InputField.Value.FALSE;
+                } else {
+                    // in this case I know that the key was saved as it is in the patient attribute
+                    keyToFind = attribute.getValue().toString();
+                }
+                Value value = inputField.getValue(keyToFind);
+                inputField.setValue(value);
+            }
+        }
+        return inputFields;
     }
 
     private boolean isLastStep() {
