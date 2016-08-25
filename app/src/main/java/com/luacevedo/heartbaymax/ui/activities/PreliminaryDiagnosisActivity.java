@@ -122,7 +122,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         if (patientAttribute != null) {
             if (inputField.getDataType() == Constants.InputField.DataType.BOOLEAN) {
                 patientAttribute.setValue(value.getKey() == Constants.InputField.Value.TRUE);
-            } else if (inputField.getDataType() == Constants.InputField.DataType.STRING) {
+            } else if (inputField.getDataType() == Constants.InputField.DataType.SELECT) {
                 patientAttribute.setValue(value.getKey());
             }
         }

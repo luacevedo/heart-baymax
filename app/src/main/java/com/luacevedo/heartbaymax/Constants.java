@@ -56,6 +56,7 @@ public class Constants {
             public static final String BOOLEAN = "boolean";
             public static final String STRING = "string";
             public static final String INTEGER = "integer";
+            public static final String SELECT = "select";
         }
 
         public class Value {
