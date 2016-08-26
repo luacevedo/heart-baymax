@@ -34,15 +34,16 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
     private static final float NEXT_BUTTON_SHOW_ALPHA = 1.0f;
     private static final float NEXT_BUTTON_HIDE_ALPHA = 0.0f;
     private static final int NEXT_BUTTON_ANIMATION_DURATION = 70;
+
     private TextView nextBtn;
-    private List<InputField> stepInputFields;
-    private PreliminaryDiagnosisActivity preliminaryDiagnosisActivity;
-    private Map<Long, InputFieldView> inputFieldsControlsById = new HashMap<>();
+    private LinearLayout formContent;
+
     private OnInputFieldValueChangedListener onInputFieldValueChangedListener = getOnInputFieldValueChangedListener();
 
     private boolean isLastStep;
-    private boolean isRotating = false;
-    private LinearLayout formContent;
+    private List<InputField> stepInputFields;
+    private PreliminaryDiagnosisActivity preliminaryDiagnosisActivity;
+    private Map<Long, InputFieldView> inputFieldsControlsById = new HashMap<>();
 
     public static PreliminaryDiagnosisStepFragment newInstance(List<InputField> stepInputFields, boolean isLastStep) {
         PreliminaryDiagnosisStepFragment fragment = new PreliminaryDiagnosisStepFragment();
@@ -117,7 +118,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
         for (InputField inputField : stepInputFields) {
             Long inputFieldId = inputField.getId();
             if (!inputFieldsControlsById.containsKey(inputFieldId)) {
-                InputFieldView inputFieldView = createInputFieldControl(inputField);
+                InputFieldView inputFieldView = InputFieldView.createInputFieldControl(inputField, onInputFieldValueChangedListener, getContext());
                 inputFieldsControlsById.put(inputFieldId, inputFieldView);
             }
         }
@@ -127,23 +128,6 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
                 formContent.addView(inputFieldView);
             }
         }
-    }
-
-    public InputFieldView createInputFieldControl(InputField inputField) {
-        InputFieldView inputFieldView;
-        switch (inputField.getFieldType()) {
-            case Constants.InputField.FieldType.COMBOBOX:
-                inputFieldView = new SelectFieldView(getContext(), inputField);
-                break;
-            case Constants.InputField.FieldType.TEXT:
-                inputFieldView = new TextFieldView(getContext(), inputField);
-                break;
-            default:
-                return null;
-        }
-
-        inputFieldView.setOnInputFieldValueChangedListener(onInputFieldValueChangedListener);
-        return inputFieldView;
     }
 
     public void setStepInputFields(List<InputField> stepInputFields) {

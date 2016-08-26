@@ -23,6 +23,15 @@ public class MockInfo {
     private static HashMap<String, PatientAttribute> getMockedAttributesMap() {
         HashMap<String, PatientAttribute> map = new HashMap<>();
 
+        PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "EssentialSymptoms.Name", "string"));
+        map.put("EssentialSymptoms.Name", name);
+
+        PatientAttribute<Boolean> age = new PatientAttribute<>(new Attribute(23L, "EssentialSymptoms.Age", "string"));
+        map.put("EssentialSymptoms.Age", age);
+
+        PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "EssentialSymptoms.Gender", "string"));
+        map.put("EssentialSymptoms.Gender", gender);
+
         PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(new Attribute(1L, "EssentialSymptoms.PulmonaryEdema", "boolean"));
         map.put("EssentialSymptoms.PulmonaryEdema", edemaPulmonar);
 
@@ -89,43 +98,57 @@ public class MockInfo {
         disphoneaValues.add(new Value("3", "Tipo 3"));
         disphoneaValues.add(new Value("4", "Tipo 4"));
 
-        List<InputField> inputFields = new ArrayList<>();
+        List<Value> genderValues = new ArrayList<>();
+        genderValues.add(new Value("1", "F"));
+        genderValues.add(new Value("2", "M"));
 
-        InputField pulmonaryEdema = new InputField(1, "Edema pulmonar?", "EssentialSymptoms.PulmonaryEdema", "boolean", "combobox", booleanValues);
-        inputFields.add(pulmonaryEdema);
-        InputField dyspnoea = new InputField(2, "Disnea?", "EssentialSymptoms.Dyspnoea", "select", "combobox", disphoneaValues);
-        inputFields.add(dyspnoea);
-        InputField orthopnoea = new InputField(3, "Orthopnoea?", "EssentialSymptoms.Orthopnoea", "boolean", "combobox", booleanValues);
-        inputFields.add(orthopnoea);
-        InputField legEdema = new InputField(4, "Edema de miembros inferiores?", "EssentialSymptoms.LegEdema", "boolean", "combobox", booleanValues);
-        inputFields.add(legEdema);
-        InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "boolean", "combobox", booleanValues);
-        inputFields.add(thirdHeartSound);
+        List<InputField> firstInputFields = new ArrayList<>();
+        InputField name = new InputField(1, "Nombre?", "EssentialSymptoms.Name", "string", "text");
+        firstInputFields.add(name);
+        InputField age = new InputField(2, "Edad?", "EssentialSymptoms.Age", "string", "text");
+        firstInputFields.add(age);
+        InputField gender = new InputField(3, "Genero?", "EssentialSymptoms.Gender", "select", "combobox", genderValues);
+        firstInputFields.add(gender);
 
-        StepInputFields firstStepInputFields = new StepInputFields(1, inputFields);
+        StepInputFields firstStepInputFields = new StepInputFields(1, firstInputFields);
 
         List<InputField> secondInputFields = new ArrayList<>();
-        InputField hypertension = new InputField(6, "Hipertension?", "SecondarySymptoms.Hypertension", "boolean", "combobox", booleanValues);
-        secondInputFields.add(hypertension);
-        InputField nicturia = new InputField(7, "Nicturia?", "SecondarySymptoms.Nicturia", "boolean", "combobox", booleanValues);
-        secondInputFields.add(nicturia);
-        InputField obesity = new InputField(8, "Obesidad?", "SecondarySymptoms.Obesity", "boolean", "combobox", booleanValues);
-        secondInputFields.add(obesity);
-        InputField diabetes = new InputField(9, "Diabetes?", "SecondarySymptoms.Diabetes", "boolean", "combobox", booleanValues);
-        secondInputFields.add(diabetes);
-        InputField previousHeartAttack = new InputField(10, "Infarto previo?", "SecondarySymptoms.PreviousHeartAttack", "boolean", "combobox", booleanValues);
-        secondInputFields.add(previousHeartAttack);
-        InputField jugularVeinEngorgement = new InputField(11, "Ingurgitacion yugular?", "SecondarySymptoms.JugularVeinEngorgement", "boolean", "combobox", booleanValues);
-        secondInputFields.add(jugularVeinEngorgement);
-        InputField nighttimeCough = new InputField(12, "Tos nocturna?", "SecondarySymptoms.NighttimeCough", "boolean", "combobox", booleanValues);
-        secondInputFields.add(nighttimeCough);
+        InputField pulmonaryEdema = new InputField(1, "Edema pulmonar?", "EssentialSymptoms.PulmonaryEdema", "boolean", "combobox", booleanValues);
+        secondInputFields.add(pulmonaryEdema);
+        InputField dyspnoea = new InputField(2, "Disnea?", "EssentialSymptoms.Dyspnoea", "select", "combobox", disphoneaValues);
+        secondInputFields.add(dyspnoea);
+        InputField orthopnoea = new InputField(3, "Orthopnoea?", "EssentialSymptoms.Orthopnoea", "boolean", "combobox", booleanValues);
+        secondInputFields.add(orthopnoea);
+        InputField legEdema = new InputField(4, "Edema de miembros inferiores?", "EssentialSymptoms.LegEdema", "boolean", "combobox", booleanValues);
+        secondInputFields.add(legEdema);
+        InputField thirdHeartSound = new InputField(5, "Tercer ruido?", "EssentialSymptoms.ThirdHeartSound", "boolean", "combobox", booleanValues);
+        secondInputFields.add(thirdHeartSound);
 
-        StepInputFields secondStepInputFields = new StepInputFields(2, secondInputFields);
+        StepInputFields secondStepInputFields = new StepInputFields(1, secondInputFields);
+
+        List<InputField> thirdInputFields = new ArrayList<>();
+        InputField hypertension = new InputField(6, "Hipertension?", "SecondarySymptoms.Hypertension", "boolean", "combobox", booleanValues);
+        thirdInputFields.add(hypertension);
+        InputField nicturia = new InputField(7, "Nicturia?", "SecondarySymptoms.Nicturia", "boolean", "combobox", booleanValues);
+        thirdInputFields.add(nicturia);
+        InputField obesity = new InputField(8, "Obesidad?", "SecondarySymptoms.Obesity", "boolean", "combobox", booleanValues);
+        thirdInputFields.add(obesity);
+        InputField diabetes = new InputField(9, "Diabetes?", "SecondarySymptoms.Diabetes", "boolean", "combobox", booleanValues);
+        thirdInputFields.add(diabetes);
+        InputField previousHeartAttack = new InputField(10, "Infarto previo?", "SecondarySymptoms.PreviousHeartAttack", "boolean", "combobox", booleanValues);
+        thirdInputFields.add(previousHeartAttack);
+        InputField jugularVeinEngorgement = new InputField(11, "Ingurgitacion yugular?", "SecondarySymptoms.JugularVeinEngorgement", "boolean", "combobox", booleanValues);
+        thirdInputFields.add(jugularVeinEngorgement);
+        InputField nighttimeCough = new InputField(12, "Tos nocturna?", "SecondarySymptoms.NighttimeCough", "boolean", "combobox", booleanValues);
+        thirdInputFields.add(nighttimeCough);
+
+        StepInputFields thirdStepInputFields = new StepInputFields(3, thirdInputFields);
 
         List<StepInputFields> list = new ArrayList<>();
 
         list.add(firstStepInputFields);
         list.add(secondStepInputFields);
+        list.add(thirdStepInputFields);
 
         return list;
     }

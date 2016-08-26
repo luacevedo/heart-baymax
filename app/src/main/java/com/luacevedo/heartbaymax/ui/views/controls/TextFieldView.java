@@ -14,14 +14,12 @@ public class TextFieldView extends InputFieldView {
 
     protected MaterialEditText editText;
     protected InputField inputField;
-    private String initialValue;
     private boolean enabled = true;
     private Integer inputType = null;
 
     public TextFieldView(Context context, InputField inputField) {
         super(context);
         this.inputField = inputField;
-        initialize();
     }
 
     @Override
@@ -30,15 +28,13 @@ public class TextFieldView extends InputFieldView {
         setOrientation(LinearLayout.VERTICAL);
         editText = (MaterialEditText) findViewById(R.id.text_field_edit_text);
         editText.setHint(inputField.getLabelMessage());
+        editText.setOnTouchListener(null);
         editText.setFloatingLabel(MaterialEditText.FLOATING_LABEL_NORMAL);
         editText.setFloatingLabelAnimating(true);
         editText.setFloatingLabelText(inputField.getLabelMessage());
         editText.setEnabled(enabled);
         if (inputType != null) {
             editText.setInputType(inputType);
-        }
-        if (initialValue != null) {
-            editText.setText(initialValue);
         }
         setListeners();
     }

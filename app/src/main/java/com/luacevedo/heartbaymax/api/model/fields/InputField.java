@@ -23,6 +23,14 @@ public class InputField implements Serializable {
         this.values = values;
     }
 
+    public InputField(long id, String labelMessage, String rootToAffect, String dataType, String fieldType) {
+        this.id = id;
+        this.labelMessage = labelMessage;
+        this.rootToAffect = rootToAffect;
+        this.dataType = dataType;
+        this.fieldType = fieldType;
+    }
+
     public long getId() {
         return id;
     }
