@@ -15,6 +15,8 @@ import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.db.ExcludedFromDBSerialization;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class InternalDbTemplate {
     protected String tableName;
@@ -47,7 +49,7 @@ public abstract class InternalDbTemplate {
     }
 
     public InternalDbTemplate(Context context, String dbName, int dbVersion,
-                             String tableName, String columnKey, String columnData) {
+                              String tableName, String columnKey, String columnData) {
 
         this.tableName = tableName;
         this.columnKey = columnKey;
@@ -108,7 +110,7 @@ public abstract class InternalDbTemplate {
         return response;
     }
 
-    public <T> T getAllDataFromTable(String key, Type clazz) {
+    public <T> T getPatientFromTable(String key, Type clazz) {
         Cursor c = db.query(tableName, new String[]{columnKey, columnData}, columnKey + "=?", new String[]{key}, null, null, null);
         T response = null;
         if (c.moveToFirst()) {
@@ -117,13 +119,37 @@ public abstract class InternalDbTemplate {
                 json = c.getString(c.getColumnIndex(columnData));
                 response = gson.fromJson(json, clazz);
             } catch (JsonSyntaxException jse) {
-//                LogInternal.error(String.format("Unable to parse Json: %s as %s", json, clazz.toString()));
+//                LogInternal..error(String.format("Unable to parse Json: %s as %s", json, clazz.toString()));
             } catch (Throwable e) {
 //                LogInternal.error("Unable to read row");
             }
         }
         c.close();
         return response;
+    }
+
+    public <T> List<T> getAllDataFromTable(Type clazz) {
+        Cursor c = db.query(tableName, new String[]{columnKey, columnData}, null, null, null, null, null);
+        List<T> responseList = new ArrayList<>();
+        T response;
+        if (c.moveToFirst()) {
+            String json;
+            try {
+                if (c.moveToFirst()) {
+                    do {
+                        json = c.getString(c.getColumnIndex(columnData));
+                        response = gson.fromJson(json, clazz);
+                        responseList.add(response);
+                    } while (c.moveToNext());
+                }
+            } catch (JsonSyntaxException jse) {
+//                LogInternal..error(String.format("Unable to parse Json: %s as %s", json, clazz.toString()));
+            } catch (Throwable e) {
+//                LogInternal.error("Unable to read row");
+            }
+        }
+        c.close();
+        return responseList;
     }
 
     public void clearDb() {

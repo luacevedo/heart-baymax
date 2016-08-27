@@ -76,7 +76,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.new_patient_btn) {
-            Patient patient = MockInfo.createPatient();
+            Patient patient = new Patient();
+            patient.setId(System.currentTimeMillis());
+            //  TODO: add network call for patient attributes
+            patient.setAttributesMap(MockInfo.getMockedAttributesMap());
             startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
         }
     }

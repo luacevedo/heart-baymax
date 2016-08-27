@@ -21,12 +21,17 @@ public class InternalDbHelper {
     }
 
     public List<Patient> getPatients() {
-        List<Patient> list = new ArrayList<>();
-        Patient x = this.patientsDb.getAllDataFromTable("1", Patient.class);
-        if (x != null) {
-            list.add(x);
-        }
-        return list;
+//        List<Patient> list = new ArrayList<>();
+//        Patient x = this.patientsDb.getPatientFromTable("1", Patient.class);
+//        if (x != null) {
+//            list.add(x);
+//        }
+//        return list;
+
+        return this.patientsDb.getAllDataFromTable(Patient.class);
+
     }
+
+
 
 }

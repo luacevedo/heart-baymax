@@ -13,14 +13,7 @@ import java.util.List;
 
 public class MockInfo {
 
-    public static Patient createPatient(){
-        Patient patient = new Patient();
-        patient.setId(1);
-        patient.setAttributesMap(getMockedAttributesMap());
-        return patient;
-    }
-
-    private static HashMap<String, PatientAttribute> getMockedAttributesMap() {
+    public static HashMap<String, PatientAttribute> getMockedAttributesMap() {
         HashMap<String, PatientAttribute> map = new HashMap<>();
 
         PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "PatientData.Name", "string"));
