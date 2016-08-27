@@ -73,12 +73,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
         patientsRecyclerView.setAdapter(patientsAdapter);
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.new_patient_btn) {

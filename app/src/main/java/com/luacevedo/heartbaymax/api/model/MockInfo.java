@@ -23,14 +23,14 @@ public class MockInfo {
     private static HashMap<String, PatientAttribute> getMockedAttributesMap() {
         HashMap<String, PatientAttribute> map = new HashMap<>();
 
-        PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "EssentialSymptoms.Name", "string"));
-        map.put("EssentialSymptoms.Name", name);
+        PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "PatientData.Name", "string"));
+        map.put("PatientData.Name", name);
 
         PatientAttribute<Boolean> age = new PatientAttribute<>(new Attribute(23L, "EssentialSymptoms.Age", "string"));
-        map.put("EssentialSymptoms.Age", age);
+        map.put("PatientData.Age", age);
 
-        PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "EssentialSymptoms.Gender", "string"));
-        map.put("EssentialSymptoms.Gender", gender);
+        PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "PatientData.Gender", "string"));
+        map.put("PatientData.Gender", gender);
 
         PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(new Attribute(1L, "EssentialSymptoms.PulmonaryEdema", "boolean"));
         map.put("EssentialSymptoms.PulmonaryEdema", edemaPulmonar);
@@ -103,11 +103,11 @@ public class MockInfo {
         genderValues.add(new Value("2", "M"));
 
         List<InputField> firstInputFields = new ArrayList<>();
-        InputField name = new InputField(1, "Nombre?", "EssentialSymptoms.Name", "string", "text");
+        InputField name = new InputField(1, "Nombre?", "PatientData.Name", "string", "text");
         firstInputFields.add(name);
-        InputField age = new InputField(2, "Edad?", "EssentialSymptoms.Age", "string", "text");
+        InputField age = new InputField(2, "Edad?", "PatientData.Age", "string", "text");
         firstInputFields.add(age);
-        InputField gender = new InputField(3, "Genero?", "EssentialSymptoms.Gender", "select", "combobox", genderValues);
+        InputField gender = new InputField(3, "Genero?", "PatientData.Gender", "select", "combobox", genderValues);
         firstInputFields.add(gender);
 
         StepInputFields firstStepInputFields = new StepInputFields(1, firstInputFields);

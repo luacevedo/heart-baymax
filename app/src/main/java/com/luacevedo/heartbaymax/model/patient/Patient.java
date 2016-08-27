@@ -11,9 +11,6 @@ import java.util.List;
 public class Patient implements Serializable {
 
     private int id;
-    private String name;
-    private int age;
-    private String gender;
     private HashMap<String, PatientAttribute> attributesMap = new HashMap<>();
 
     public int getId() {
@@ -22,30 +19,6 @@ public class Patient implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public HashMap<String, PatientAttribute> getAttributesMap() {
@@ -82,6 +55,10 @@ public class Patient implements Serializable {
         }
     }
 
+    public String getName() {
+        return attributesMap.get("PatientData.Name").getValue() != null ? attributesMap.get("PatientData.Name").getValue().toString() : "";
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -90,4 +67,5 @@ public class Patient implements Serializable {
         }
         return builder.toString();
     }
+
 }
