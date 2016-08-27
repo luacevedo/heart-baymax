@@ -25,7 +25,7 @@ public class SelectFieldView extends InputFieldView {
     public SelectFieldView(Context context, InputField inputField) {
         super(context);
         this.inputField = inputField;
-        selectedAttributeValue = inputField.getValue();
+        this.selectedAttributeValue = inputField.getValue();
     }
 
     @Override

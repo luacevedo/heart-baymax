@@ -79,13 +79,18 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
             PatientAttribute attribute = patient.getAttributesMap().get(inputField.getRootToAffect());
             if (attribute.getValue() != null) {
                 String keyToFind;
-                if (inputField.getDataType() == Constants.InputField.DataType.BOOLEAN) {
+                if (inputField.getDataType().equals(Constants.InputField.DataType.BOOLEAN)) {
                     keyToFind = (Boolean) attribute.getValue() ? Constants.InputField.Value.TRUE : Constants.InputField.Value.FALSE;
                 } else {
                     // in this case I know that the key was saved as it is in the patient attribute
                     keyToFind = attribute.getValue().toString();
                 }
-                Value value = inputField.getValue(keyToFind);
+                Value value;
+                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
+                    value = new Value(keyToFind);
+                } else {
+                    value = inputField.getValue(keyToFind);
+                }
                 inputField.setValue(value);
             }
         }
@@ -123,9 +128,9 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     public void setInputFieldSelectValue(InputField inputField, Value value) {
         PatientAttribute patientAttribute = patient.getAttributesMap().get(inputField.getRootToAffect());
         if (patientAttribute != null) {
-            if (inputField.getDataType() == Constants.InputField.DataType.BOOLEAN) {
-                patientAttribute.setValue(value.getKey() == Constants.InputField.Value.TRUE);
-            } else if (inputField.getDataType() == Constants.InputField.DataType.SELECT) {
+            if (inputField.getDataType().equals(Constants.InputField.DataType.BOOLEAN)) {
+                patientAttribute.setValue(value.getKey().equals(Constants.InputField.Value.TRUE));
+            } else if (inputField.getDataType().equals(Constants.InputField.DataType.SELECT)) {
                 patientAttribute.setValue(value.getKey());
             }
         }
@@ -135,9 +140,9 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     public void setInputFieldTextValue(InputField inputField, String value) {
         PatientAttribute patientAttribute = patient.getAttributesMap().get(inputField.getRootToAffect());
         if (patientAttribute != null) {
-            if (inputField.getDataType() == Constants.InputField.DataType.INTEGER) {
+            if (inputField.getDataType().equals(Constants.InputField.DataType.INTEGER)) {
                 patientAttribute.setValue(Integer.parseInt(value));
-            } else if (inputField.getDataType() == Constants.InputField.DataType.STRING) {
+            } else if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
                 patientAttribute.setValue(value);
             }
         }
