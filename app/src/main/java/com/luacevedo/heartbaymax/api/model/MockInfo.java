@@ -92,8 +92,8 @@ public class MockInfo {
         disphoneaValues.add(new Value("4", "Tipo 4"));
 
         List<Value> genderValues = new ArrayList<>();
-        genderValues.add(new Value("1", "F"));
-        genderValues.add(new Value("2", "M"));
+        genderValues.add(new Value("F", "Femenino"));
+        genderValues.add(new Value("M", "Masculino"));
 
         List<InputField> firstInputFields = new ArrayList<>();
         InputField name = new InputField(1, "Nombre?", "PatientData.Name", "string", "text");

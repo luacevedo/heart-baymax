@@ -68,4 +68,9 @@ public class Constants {
     public static class GridLayout {
         public static final int SINGLE_COLUMN = 1;
     }
+
+    public class Patient {
+        public static final String FEMALE = "F";
+        public static final String MALE = "M";
+    }
 }

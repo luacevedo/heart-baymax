@@ -2,20 +2,27 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
-    android:padding="@dimen/small_padding"
     card_view:cardCornerRadius="@dimen/card_view_default_corner_radius"
-    card_view:cardElevation="0dp"
+    card_view:cardElevation="@dimen/cardview_default_elevation"
     card_view:cardUseCompatPadding="true">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/listing_item_height"
+        android:layout_marginBottom="2dp"
         android:background="?attr/selectableItemBackground">
+
+        <ImageView
+            android:id="@+id/home_patient_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="14dp"
+            android:src="@drawable/ico_patient_man"/>
 
         <TextView
             android:id="@+id/home_patient_title"
@@ -25,10 +32,12 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:maxLines="2"
-            android:text="Hola soy un pacienteee"
+            android:layout_toRightOf="@+id/home_patient_image"
             android:paddingBottom="@dimen/medium_padding"
             android:paddingLeft="@dimen/medium_padding"
             android:paddingRight="@dimen/medium_padding"
+            android:paddingTop="@dimen/medium_padding"
+            android:textSize="@dimen/material_text_subhead"
             android:textAlignment="center" />
 
     </RelativeLayout>

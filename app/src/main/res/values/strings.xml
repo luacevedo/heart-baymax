@@ -6,7 +6,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="next_step">Siguiente</string>
     <string name="finish_step">Finalizar</string>
-    <string name="patient_title_home">"Paciente: {patient}"</string>
+    <string name="patient_title_home">"Nombre: {patient}"</string>
     <string name="edit_preliminary_diagnosis">Editar diagnostico preliminar</string>
     <string name="edit_complementary_tests">Editar exámenes complementarios</string>
+    <string name="patients">Pacientes:</string>
 </resources>

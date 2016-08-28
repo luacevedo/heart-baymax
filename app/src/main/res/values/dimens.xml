@@ -21,4 +21,5 @@
     <dimen name="extra_big_finger_size">70dp</dimen>
     <dimen name="card_view_default_corner_radius">3dp</dimen>
     <dimen name="default_elevation">4dp</dimen>
+    <dimen name="listing_item_height">90dp</dimen>
 </resources>
