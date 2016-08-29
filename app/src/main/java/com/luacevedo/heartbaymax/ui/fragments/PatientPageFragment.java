@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.R;
@@ -16,7 +17,8 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
     private Patient patient;
     private Button btnEditPreliminaryDiagnosis;
     private Button btnEditHeartSituation;
-    private TextView patientContent;
+    private LinearLayout patientContent;
+    private TextView patientName;
 
     public static PatientPageFragment newInstance(Patient patient) {
         PatientPageFragment fragment = new PatientPageFragment();
@@ -27,8 +29,9 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_patient_page, container, false);
-        patientContent = (TextView) view.findViewById(R.id.patient_page_content);
-        patientContent.setText(patient.toString());
+        patientContent = (LinearLayout) view.findViewById(R.id.patient_page_content);
+        patientName = (TextView) view.findViewById(R.id.patient_page_name);
+        patientName.setText(patient.getName());
         btnEditPreliminaryDiagnosis = (Button) view.findViewById(R.id.edit_preliminary_diag_btn);
         btnEditPreliminaryDiagnosis.setOnClickListener(this);
         btnEditHeartSituation = (Button) view.findViewById(R.id.edit_heart_situation_btn);

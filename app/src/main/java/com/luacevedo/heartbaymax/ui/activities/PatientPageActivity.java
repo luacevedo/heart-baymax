@@ -1,8 +1,6 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
