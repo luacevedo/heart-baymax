@@ -24,9 +24,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.NewPatientActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ui.activities.PreliminaryDiagnosisActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity

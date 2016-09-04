@@ -152,7 +152,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     public void finishDiagnosis() {
         HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
-        startActivity(IntentFactory.getHomeActivityIntent());
+        startActivity(IntentFactory.getPatientPageActivityIntent(patient));
         finish();
     }
 
