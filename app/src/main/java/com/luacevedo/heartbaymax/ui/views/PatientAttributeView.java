@@ -6,6 +6,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.R;
+import com.luacevedo.heartbaymax.helpers.TranslationsHelper;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 public class PatientAttributeView extends LinearLayout {
@@ -29,7 +30,16 @@ public class PatientAttributeView extends LinearLayout {
 
     public void setData(PatientAttribute attribute) {
         label.setText(attribute.getAttribute().getName() + ":");
-        value.setText(attribute.getValue().toString());
+        String translatedValue = getTranslatedValue(attribute);
+        value.setText(translatedValue);
+    }
+
+    private String getTranslatedValue(PatientAttribute attribute) {
+        String translatedValue = attribute.getValue().toString();
+        if (attribute.getValue() instanceof Boolean) {
+            translatedValue = TranslationsHelper.translateBooleanValue((Boolean) attribute.getValue());
+        }
+        return translatedValue;
     }
 
 }

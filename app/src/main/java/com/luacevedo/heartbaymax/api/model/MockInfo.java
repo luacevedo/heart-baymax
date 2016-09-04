@@ -19,7 +19,7 @@ public class MockInfo {
         PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "PatientData.Name", "string", "Nombre"));
         map.put("PatientData.Name", name);
 
-        PatientAttribute<Boolean> age = new PatientAttribute<>(new Attribute(23L, "EssentialSymptoms.Age", "string", "Edad"));
+        PatientAttribute<Boolean> age = new PatientAttribute<>(new Attribute(23L, "PatientData.Age", "string", "Edad"));
         map.put("PatientData.Age", age);
 
         PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "PatientData.Gender", "string", "Sexo"));

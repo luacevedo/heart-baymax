@@ -35,6 +35,12 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_patient_page, container, false);
+        setupViews(view);
+        addPatientAttributes();
+        return view;
+    }
+
+    private void setupViews(View view) {
         patientContentLayout = (LinearLayout) view.findViewById(R.id.patient_page_content);
         patientName = (TextView) view.findViewById(R.id.patient_page_name);
         patientName.setText(patient.getName());
@@ -42,10 +48,6 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
         btnEditPreliminaryDiagnosis.setOnClickListener(this);
         btnEditHeartSituation = (Button) view.findViewById(R.id.edit_heart_situation_btn);
         btnEditHeartSituation.setOnClickListener(this);
-
-        addPatientAttributes();
-
-        return view;
     }
 
     private void addPatientAttributes() {
