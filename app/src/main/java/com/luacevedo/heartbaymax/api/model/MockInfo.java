@@ -16,49 +16,49 @@ public class MockInfo {
     public static HashMap<String, PatientAttribute> getMockedAttributesMap() {
         HashMap<String, PatientAttribute> map = new HashMap<>();
 
-        PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "PatientData.Name", "string"));
+        PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "PatientData.Name", "string", "Nombre"));
         map.put("PatientData.Name", name);
 
-        PatientAttribute<Boolean> age = new PatientAttribute<>(new Attribute(23L, "EssentialSymptoms.Age", "string"));
+        PatientAttribute<Boolean> age = new PatientAttribute<>(new Attribute(23L, "EssentialSymptoms.Age", "string", "Edad"));
         map.put("PatientData.Age", age);
 
-        PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "PatientData.Gender", "string"));
+        PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "PatientData.Gender", "string", "Sexo"));
         map.put("PatientData.Gender", gender);
 
-        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(new Attribute(1L, "EssentialSymptoms.PulmonaryEdema", "boolean"));
+        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(new Attribute(1L, "EssentialSymptoms.PulmonaryEdema", "boolean", "Edema de pulmon"));
         map.put("EssentialSymptoms.PulmonaryEdema", edemaPulmonar);
 
-        PatientAttribute<String> disnea = new PatientAttribute<>(new Attribute(2L, "EssentialSymptoms.Dyspnoea", "string"));
+        PatientAttribute<String> disnea = new PatientAttribute<>(new Attribute(2L, "EssentialSymptoms.Dyspnoea", "string", "Disnea"));
         map.put("EssentialSymptoms.Dyspnoea", disnea);
 
-        PatientAttribute<Boolean> ortopnea = new PatientAttribute<>(new Attribute(3L, "EssentialSymptoms.Orthopnoea", "boolean"));
+        PatientAttribute<Boolean> ortopnea = new PatientAttribute<>(new Attribute(3L, "EssentialSymptoms.Orthopnoea", "boolean", "Ortopnea"));
         map.put("EssentialSymptoms.Orthopnoea", ortopnea);
 
-        PatientAttribute<Boolean> legEdema = new PatientAttribute<>(new Attribute(4L, "EssentialSymptoms.LegEdema", "boolean"));
+        PatientAttribute<Boolean> legEdema = new PatientAttribute<>(new Attribute(4L, "EssentialSymptoms.LegEdema", "boolean", "Edema de miembros inferiores"));
         map.put("EssentialSymptoms.LegEdema", legEdema);
 
-        PatientAttribute<Boolean> thirdHeartSound = new PatientAttribute<>(new Attribute(5L, "EssentialSymptoms.ThirdHeartSound", "boolean"));
+        PatientAttribute<Boolean> thirdHeartSound = new PatientAttribute<>(new Attribute(5L, "EssentialSymptoms.ThirdHeartSound", "boolean", "Tercer ruido"));
         map.put("EssentialSymptoms.ThirdHeartSound", thirdHeartSound);
 
-        PatientAttribute<Boolean> hypertension = new PatientAttribute<>(new Attribute(6L, "SecondarySymptoms.Hypertension", "boolean"));
+        PatientAttribute<Boolean> hypertension = new PatientAttribute<>(new Attribute(6L, "SecondarySymptoms.Hypertension", "boolean", "Hipertension"));
         map.put("SecondarySymptoms.Hypertension", hypertension);
 
-        PatientAttribute<Boolean> nicturia = new PatientAttribute<>(new Attribute(7L, "SecondarySymptoms.Nicturia", "boolean"));
+        PatientAttribute<Boolean> nicturia = new PatientAttribute<>(new Attribute(7L, "SecondarySymptoms.Nicturia", "boolean", "Nicturia"));
         map.put("SecondarySymptoms.Nicturia", nicturia);
 
-        PatientAttribute<Boolean> obesity = new PatientAttribute<>(new Attribute(8L, "SecondarySymptoms.Obesity", "boolean"));
+        PatientAttribute<Boolean> obesity = new PatientAttribute<>(new Attribute(8L, "SecondarySymptoms.Obesity", "boolean", "Obesidad"));
         map.put("SecondarySymptoms.Obesity", obesity);
 
-        PatientAttribute<Boolean> diabetes = new PatientAttribute<>(new Attribute(9L, "SecondarySymptoms.Diabetes", "boolean"));
+        PatientAttribute<Boolean> diabetes = new PatientAttribute<>(new Attribute(9L, "SecondarySymptoms.Diabetes", "boolean", "Diabetes"));
         map.put("SecondarySymptoms.Diabetes", diabetes);
 
-        PatientAttribute<Boolean> previousHeartAttack = new PatientAttribute<>(new Attribute(10L, "SecondarySymptoms.PreviousHeartAttack", "boolean"));
+        PatientAttribute<Boolean> previousHeartAttack = new PatientAttribute<>(new Attribute(10L, "SecondarySymptoms.PreviousHeartAttack", "boolean", "Infarto previo"));
         map.put("SecondarySymptoms.PreviousHeartAttack", previousHeartAttack);
 
-        PatientAttribute<Boolean> jugularVeinEngorgement = new PatientAttribute<>(new Attribute(11L, "SecondarySymptoms.JugularVeinEngorgement", "boolean"));
+        PatientAttribute<Boolean> jugularVeinEngorgement = new PatientAttribute<>(new Attribute(11L, "SecondarySymptoms.JugularVeinEngorgement", "boolean", "Injurgitacion yugular"));
         map.put("SecondarySymptoms.JugularVeinEngorgement", jugularVeinEngorgement);
 
-        PatientAttribute<Boolean> nighttimeCough = new PatientAttribute<>(new Attribute(12L, "SecondarySymptoms.NighttimeCough", "boolean"));
+        PatientAttribute<Boolean> nighttimeCough = new PatientAttribute<>(new Attribute(12L, "SecondarySymptoms.NighttimeCough", "boolean", "Tos nocturna"));
         map.put("SecondarySymptoms.NighttimeCough", nighttimeCough);
 
         PatientAttribute<Integer> essentialSymptomsAssessment = new PatientAttribute<>(new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "integer"), 0);

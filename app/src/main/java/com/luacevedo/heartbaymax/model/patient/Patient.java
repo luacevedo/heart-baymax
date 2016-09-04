@@ -71,4 +71,12 @@ public class Patient implements Serializable {
     public String getGender() {
         return attributesMap.get("PatientData.Gender").getValue() != null ? attributesMap.get("PatientData.Gender").getValue().toString() : "";
     }
+
+    public String print() {
+        StringBuilder builder = new StringBuilder();
+        for (PatientAttribute p : attributesMap.values()) {
+            builder.append(p.getAttribute().getRoot() + " = " + p.getValue() + "\n");
+        }
+        return builder.toString();
+    }
 }

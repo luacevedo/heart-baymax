@@ -5,11 +5,20 @@ public class Attribute {
     private long id;
     private String root;
     private String dataType;
+    private String name;
+
+    public Attribute(long id, String root, String dataType, String name) {
+        this.id = id;
+        this.root = root;
+        this.dataType = dataType;
+        this.name = name;
+    }
 
     public Attribute(long id, String root, String dataType) {
         this.id = id;
         this.root = root;
         this.dataType = dataType;
+        this.name = null;
     }
 
     public long getId() {
@@ -34,5 +43,14 @@ public class Attribute {
 
     public void setDataType(String dataType) {
         this.dataType = dataType;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getRootParent() {
+        String[] x = this.root.split("\\.");
+        return x[0];
     }
 }

@@ -72,5 +72,9 @@ public class Constants {
     public class Patient {
         public static final String FEMALE = "F";
         public static final String MALE = "M";
+
+        public static final String ESSENTIAL_SYMPTOMS = "EssentialSymptoms";
+        public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
+
     }
 }
