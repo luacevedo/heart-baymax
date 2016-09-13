@@ -2,7 +2,9 @@ package com.luacevedo.heartbaymax.model.patient;
 
 import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 
-public class PatientAttribute<T> {
+import java.io.Serializable;
+
+public class PatientAttribute<T> implements Serializable {
     private Attribute attribute;
     private T value;
 

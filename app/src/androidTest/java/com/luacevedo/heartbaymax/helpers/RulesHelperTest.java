@@ -97,7 +97,7 @@ public class RulesHelperTest {
     @Test()
     public void testExecuteActions() {
         List<BaseAction> actions = new ArrayList<>();
-        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         actions.add(addNumberAction);
         AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "Orthopnea");
         actions.add(addToListAction);
@@ -106,7 +106,7 @@ public class RulesHelperTest {
 
         RulesHelper.executeActions(actions, patient);
 
-        assertEquals(patient.getAttributesMap().get("InitialPhysicalState.EssentialSymptomsAssessment").getValue(), 8);
+        assertEquals(patient.getAttributesMap().get("InitialPhysicalState.EssentialSymptomsAssessment").getValue(), 8.0);
         List<String> expectedList = new ArrayList<>();
         expectedList.add("PulmonaryEdema");
         expectedList.add("Orthopnea");
@@ -123,7 +123,7 @@ public class RulesHelperTest {
         conditions.add(affCondition);
 
         List<BaseAction> actions = new ArrayList<>();
-        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         actions.add(addNumberAction);
 
         Rule rule = new Rule();

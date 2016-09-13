@@ -27,7 +27,6 @@ import retrofit.client.Response;
 
 public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
-    private HeartBaymaxApi heartBaymaxApi = HeartBaymaxApplication.getApplication().getHeartBaymaxApi();
     private List<StepInputFields> preliminaryDiagnosisFields = new ArrayList<>();
     private Patient patient;
     private int currentStep = 0;
