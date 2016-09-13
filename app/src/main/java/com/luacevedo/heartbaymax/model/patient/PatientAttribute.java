@@ -1,6 +1,6 @@
 package com.luacevedo.heartbaymax.model.patient;
 
-import com.luacevedo.heartbaymax.api.model.Attribute;
+import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 
 public class PatientAttribute<T> {
     private Attribute attribute;
@@ -30,4 +30,5 @@ public class PatientAttribute<T> {
     public void setValue(T value) {
         this.value = value;
     }
+
 }

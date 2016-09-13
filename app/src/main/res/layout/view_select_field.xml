@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <fr.ganfra.materialspinner.MaterialSpinner
+        android:id="@+id/select_field_option_spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/input_field_left_margin"
+        android:layout_marginRight="@dimen/input_field_right_margin"
+        android:layout_marginTop="@dimen/input_field_top_margin"
+        android:theme="@style/Theme.App.Spinner"
+        app:ms_alignLabels="false"
+        app:ms_baseColor="@color/black"
+        app:ms_errorColor="@color/red"
+        app:ms_floatingLabelColor="@color/material_hint"
+        app:ms_highlightColor="@color/accent"
+        app:ms_hintColor="@color/material_hint"
+        app:ms_multiline="false"/>
+</merge>

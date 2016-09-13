@@ -2,7 +2,7 @@ package com.luacevedo.heartbaymax.helpers;
 
 import android.util.Log;
 
-import com.luacevedo.heartbaymax.api.model.Rule;
+import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.model.rules.actions.BaseAction;

@@ -1,13 +1,13 @@
-package com.luacevedo.heartbaymax.db;
+package com.luacevedo.heartbaymax.db.cache;
 
 import com.luacevedo.heartbaymax.helpers.DateUtils;
 
-public class DbItem<T> {
+public class CachingDbItem<T> {
 
     private T object;
     private long date;
 
-    public DbItem(T object, long date) {
+    public CachingDbItem(T object, long date) {
         this.object = object;
         this.date = date;
     }

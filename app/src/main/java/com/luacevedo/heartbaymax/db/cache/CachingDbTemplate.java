@@ -1,4 +1,4 @@
-package com.luacevedo.heartbaymax.db;
+package com.luacevedo.heartbaymax.db.cache;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,10 +12,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.luacevedo.heartbaymax.Constants;
+import com.luacevedo.heartbaymax.db.ExcludedFromDBSerialization;
 
 import java.lang.reflect.Type;
 
-public abstract class DbHelperTemplate {
+public abstract class CachingDbTemplate {
     protected String tableName;
     protected String columnKey;
     protected String columnData;
@@ -47,8 +48,8 @@ public abstract class DbHelperTemplate {
         return gsonBuilder.create();
     }
 
-    public DbHelperTemplate(Context context, String dbName, int dbVersion,
-                            String tableName, String columnKey, String columnData, String columnDate, boolean autoPurge) {
+    public CachingDbTemplate(Context context, String dbName, int dbVersion,
+                             String tableName, String columnKey, String columnData, String columnDate, boolean autoPurge) {
 
         this.tableName = tableName;
         this.columnKey = columnKey;
@@ -159,19 +160,19 @@ public abstract class DbHelperTemplate {
         return response;
     }
 
-    public <T> DbItem<T> getDbItem(String key, Type type) {
+    public <T> CachingDbItem<T> getDbItem(String key, Type type) {
         if (key == null || type == null) {
             return null;
         }
         Cursor c = db.query(tableName, new String[]{columnKey, columnData, columnDate},
                 columnKey + "=?", new String[]{key}, null, null, null);
-        DbItem<T> response = null;
+        CachingDbItem<T> response = null;
         if (c.moveToFirst()) {
-            String json = Constants.EMPTY_STRING;
+            String json;
             try {
                 json = c.getString(c.getColumnIndex(columnData));
                 long date = c.getLong(c.getColumnIndex(columnDate));
-                response = new DbItem<>((T) gson.fromJson(json, type), date);
+                response = new CachingDbItem<>((T) gson.fromJson(json, type), date);
             } catch (JsonSyntaxException jse) {
 //                LogInternal.error(String.format("Unable to parse Json: %s as %s", json, type.toString()));
             } catch (Throwable e) {

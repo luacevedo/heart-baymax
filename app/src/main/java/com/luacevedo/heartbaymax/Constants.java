@@ -7,7 +7,7 @@ public class Constants {
     public static String CACHE = "Cache";
 
     public static class Rule {
-        
+
         public static class Condition {
             public static final String AFFIRMATIVE = "affirmative";
             public static final String GREATER_THAN = "greaterThan";
@@ -26,5 +26,55 @@ public class Constants {
     public class Time {
         public static final long ONE_MINUTE = 60;
         public static final long TEN_MINUTES = ONE_MINUTE * 10;
+        public static final long ONE_HOUR = ONE_MINUTE * 60;
+        public static final long ONE_DAY = ONE_HOUR * 24;
+        public static final long ONE_WEEK = ONE_DAY * 7;
     }
+
+    public class BundleKey {
+        public static final String INPUT_FIELDS = "inputFields";
+        public static final String STEP_INPUT_ATTRIBUTES = "stepInputAttributes";
+        public static final String PATIENT = "patient";
+    }
+
+    public static class Attribute {
+        public static class Type {
+            public static final String BOOLEAN = "boolean";
+            public static final String INTEGER = "integer";
+            public static final String LIST = "list";
+            public static final String STRING = "string";
+        }
+    }
+
+    public static class InputField {
+        public static class FieldType {
+            public static final String COMBOBOX = "combobox";
+            public static final String TEXT = "text";
+        }
+
+        public static class DataType {
+            public static final String BOOLEAN = "boolean";
+            public static final String STRING = "string";
+            public static final String INTEGER = "integer";
+            public static final String SELECT = "select";
+        }
+
+        public class Value {
+            public static final String TRUE = "1";
+            public static final String FALSE = "0";
+        }
+    }
+
+    public static class GridLayout {
+        public static final int SINGLE_COLUMN = 1;
+    }
+
+    public class Patient {
+        public static final String FEMALE = "F";
+        public static final String MALE = "M";
+
+        public static final String ESSENTIAL_SYMPTOMS = "EssentialSymptoms";
+        public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
+    }
+
 }
