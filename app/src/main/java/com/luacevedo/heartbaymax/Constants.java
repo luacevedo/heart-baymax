@@ -76,6 +76,7 @@ public class Constants {
 
         public static final String ESSENTIAL_SYMPTOMS = "EssentialSymptoms";
         public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
+        public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
     }
 
 }

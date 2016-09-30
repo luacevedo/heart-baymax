@@ -114,6 +114,7 @@ public class RulesExecutionFragment extends BaseFragment {
     private void addPatientAttributes() {
         List<PatientAttribute> essentialSymptomsList = new ArrayList<>();
         List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
+        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
         for (PatientAttribute attribute : patient.getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
             switch (root) {
@@ -123,6 +124,9 @@ public class RulesExecutionFragment extends BaseFragment {
                 case Constants.Patient.SECONDARY_SYMPTOMS:
                     secondarySymptomsList.add(attribute);
                     break;
+                case Constants.Patient.PRELIMINARY_DIAGNOSIS:
+                    preliminaryDiagnosisList.add(attribute);
+                    break;
                 default:
                     break;
             }
@@ -130,6 +134,7 @@ public class RulesExecutionFragment extends BaseFragment {
 
         addValuesToLayout(essentialSymptomsList);
         addValuesToLayout(secondarySymptomsList);
+        addValuesToLayout(preliminaryDiagnosisList);
     }
 
     private void addValuesToLayout(List<PatientAttribute> list) {
