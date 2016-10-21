@@ -1,5 +1,6 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -7,8 +8,10 @@ import android.util.Log;
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
-import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
-import com.luacevedo.heartbaymax.api.model.MockInfo;
+import com.luacevedo.heartbaymax.api.MochiApi;
+import com.luacevedo.heartbaymax.api.baseapi.CallId;
+import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
+import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
@@ -30,6 +33,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     private List<StepInputFields> preliminaryDiagnosisFields = new ArrayList<>();
     private Patient patient;
     private int currentStep = 0;
+    private ProgressDialog progress;
+    private MochiApi mochiApi = HeartBaymaxApplication.getApplication().getMochiApi();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +61,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     protected void onResume() {
         super.onResume();
         unlockMenu();
-        if (!preliminaryDiagnosisFields.isEmpty()) {
-            //this will then be in success callback
-            PreliminaryDiagnosisStepFragment fragment = createStepFragment();
-            setInitialFragment(fragment);
-        } else {
+        if (preliminaryDiagnosisFields.isEmpty()) {
             getPreliminaryDiagnosisFields();
         }
     }
@@ -101,11 +102,10 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     }
 
     private void getPreliminaryDiagnosisFields() {
-        preliminaryDiagnosisFields = MockInfo.getPreliminaryDiagnosisFields();
-        PreliminaryDiagnosisStepFragment fragment = createStepFragment();
-        setInitialFragment(fragment);
-//        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS);
-//        heartBaymaxApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
+//        preliminaryDiagnosisFields = MockInfo.getPreliminaryDiagnosisFields();
+        progress = ProgressDialog.show(this, null, "Cargando", true);
+        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS);
+        mochiApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
     }
 
     private Callback<List<StepInputFields>> getPatientStepInputFieldsCallback() {
@@ -115,6 +115,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
                 preliminaryDiagnosisFields = inputFields;
                 PreliminaryDiagnosisStepFragment fragment = createStepFragment();
                 setInitialFragment(fragment);
+                progress.dismiss();
             }
 
             @Override

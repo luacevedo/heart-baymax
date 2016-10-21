@@ -6,7 +6,7 @@ import com.luacevedo.heartbaymax.api.baseapi.BaseApi;
 import com.luacevedo.heartbaymax.api.baseapi.BaseApiCall;
 import com.luacevedo.heartbaymax.api.baseapi.CachePolicy;
 import com.luacevedo.heartbaymax.api.baseapi.CallId;
-import com.luacevedo.heartbaymax.api.contract.HeartBaymaxApiContract;
+import com.luacevedo.heartbaymax.api.contract.MochiApiContract;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.api.model.rules.Rule;
@@ -15,12 +15,12 @@ import java.util.List;
 
 import retrofit.Callback;
 
-public class HeartBaymaxApi extends BaseApi<HeartBaymaxApiContract> {
+public class MochiApi extends BaseApi<MochiApiContract> {
 
-    private static final String BASE_URL = "https://heart-baymax-api.herokuapp.com";
+    private static final String BASE_URL = "https://mochi-api.herokuapp.com";
 
-    public HeartBaymaxApi() {
-        super(BASE_URL, HeartBaymaxApiContract.class);
+    public MochiApi() {
+        super(BASE_URL, MochiApiContract.class);
     }
 
     public void getRules(CallId callId, Callback<List<Rule>> callback) {
@@ -38,7 +38,7 @@ public class HeartBaymaxApi extends BaseApi<HeartBaymaxApiContract> {
 
     public void getPatientStepInputFields(CallId callId, Callback<List<StepInputFields>> callback) {
         CachePolicy cachePolicy = CachePolicy.CACHE_ELSE_NETWORK_ELSE_ANY_CACHE;
-        cachePolicy.setCacheKey("stepInputFields");
+        cachePolicy.setCacheKey("inputFieldsStep");
         cachePolicy.setCacheTTL(Constants.Time.ONE_WEEK);
 
         BaseApiCall<List<StepInputFields>> apiCall = registerCall(callId, cachePolicy, callback, new TypeToken<List<StepInputFields>>() {

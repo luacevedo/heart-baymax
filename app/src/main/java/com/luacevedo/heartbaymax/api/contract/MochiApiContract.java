@@ -9,12 +9,12 @@ import java.util.List;
 import retrofit.Callback;
 import retrofit.http.GET;
 
-public interface HeartBaymaxApiContract {
+public interface MochiApiContract {
 
     @GET("/rules")
     void getRules(Callback<List<Rule>> callback);
 
-    @GET("/patients/fields")
+    @GET("/inputfields")
     void getStepPatientInputFields(Callback<List<StepInputFields>> callback);
 
     @GET("/patients/attributes")

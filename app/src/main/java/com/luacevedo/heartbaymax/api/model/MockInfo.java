@@ -85,7 +85,7 @@ public class MockInfo {
         PatientAttribute<List<String>> secondarySymptoms = new PatientAttribute<List<String>>(new Attribute(5L, "InitialPhysicalState.SecondarySymptoms", "list"), new ArrayList<String>());
         map.put("InitialPhysicalState.SecondarySymptoms", secondarySymptoms);
 
-        PatientAttribute<String> symptomsType = new PatientAttribute<>(new Attribute(6L, "PreliminaryDiagnosis.SymptomsType", "string"));
+        PatientAttribute<String> symptomsType = new PatientAttribute<>(new Attribute(6L, "PreliminaryDiagnosis.SymptomsType", "string", "Tipos de sintomas"));
         map.put("PreliminaryDiagnosis.SymptomsType", symptomsType);
 
         return map;
@@ -98,6 +98,7 @@ public class MockInfo {
         booleanValues.add(new Value("1", "Si"));
 
         List<Value> disphoneaValues = new ArrayList<>();
+        disphoneaValues.add(new Value("0", "No presenta"));
         disphoneaValues.add(new Value("1", "Tipo 1"));
         disphoneaValues.add(new Value("2", "Tipo 2"));
         disphoneaValues.add(new Value("3", "Tipo 3"));
@@ -154,6 +155,8 @@ public class MockInfo {
         list.add(firstStepInputFields);
         list.add(secondStepInputFields);
         list.add(thirdStepInputFields);
+
+
 
         return list;
     }
