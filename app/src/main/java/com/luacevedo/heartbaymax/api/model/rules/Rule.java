@@ -126,7 +126,7 @@ public class Rule {
             BaseAction<?> parsedAction = null;
             switch (action.getAFunction()) {
                 case Constants.Rule.Action.ADD_NUMBER:
-                    parsedAction = new AddNumberAction(action.getAttribute(), Integer.parseInt(action.getValue()));
+                    parsedAction = new AddNumberAction(action.getAttribute(), Double.parseDouble(action.getValue()));
                     break;
                 case Constants.Rule.Action.ADD_TO_LIST:
                     parsedAction = new AddToListAction(action.getAttribute(), action.getValue());

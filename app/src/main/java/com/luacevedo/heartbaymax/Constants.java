@@ -35,6 +35,7 @@ public class Constants {
         public static final String INPUT_FIELDS = "inputFields";
         public static final String STEP_INPUT_ATTRIBUTES = "stepInputAttributes";
         public static final String PATIENT = "patient";
+        public static final String RULES = "rules";
     }
 
     public static class Attribute {
@@ -75,6 +76,7 @@ public class Constants {
 
         public static final String ESSENTIAL_SYMPTOMS = "EssentialSymptoms";
         public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
+        public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
     }
 
 }

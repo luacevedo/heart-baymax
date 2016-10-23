@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.IBinder;
 import android.view.inputmethod.InputMethodManager;
 
-import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
+import com.luacevedo.heartbaymax.api.MochiApi;
 import com.luacevedo.heartbaymax.db.InternalDbHelper;
 import com.luacevedo.heartbaymax.db.cache.CachingDbHelper;
 
@@ -13,14 +13,14 @@ public class HeartBaymaxApplication extends Application {
 
     private static HeartBaymaxApplication application;
     private CachingDbHelper cachingDbHelper;
-    private HeartBaymaxApi heartBaymaxApi;
+    private MochiApi mochiApi;
     private InternalDbHelper internalDbHelper;
 
     @Override
     public void onCreate() {
         super.onCreate();
         this.application = this;
-        this.heartBaymaxApi = new HeartBaymaxApi();
+        this.mochiApi = new MochiApi();
         this.cachingDbHelper = new CachingDbHelper(getApplicationContext());
         this.internalDbHelper = new InternalDbHelper(getApplicationContext());
     }
@@ -37,8 +37,8 @@ public class HeartBaymaxApplication extends Application {
         return internalDbHelper;
     }
 
-    public HeartBaymaxApi getHeartBaymaxApi() {
-        return heartBaymaxApi;
+    public MochiApi getMochiApi() {
+        return mochiApi;
     }
 
     public static void hideKeyboard(IBinder token) {

@@ -6,18 +6,18 @@ import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
-import com.luacevedo.heartbaymax.api.HeartBaymaxApi;
+import com.luacevedo.heartbaymax.api.MochiApi;
 import com.luacevedo.heartbaymax.ui.activities.BaseFragmentActivity;
 
 public class BaseFragment extends Fragment {
 
-    protected HeartBaymaxApi heartBaymaxApi;
+    protected MochiApi mochiApi;
     private BaseFragmentActivity navigationActivity;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.heartBaymaxApi = HeartBaymaxApplication.getApplication().getHeartBaymaxApi();
+        this.mochiApi = HeartBaymaxApplication.getApplication().getMochiApi();
     }
 
     @Override

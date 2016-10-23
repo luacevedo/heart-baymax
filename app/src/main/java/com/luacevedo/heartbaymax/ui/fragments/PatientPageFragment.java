@@ -23,6 +23,7 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
     private Patient patient;
     private Button btnEditPreliminaryDiagnosis;
     private Button btnEditHeartSituation;
+    private Button btnContinueDiagnosis;
     private LinearLayout patientContentLayout;
     private TextView patientName;
 
@@ -48,6 +49,8 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
         btnEditPreliminaryDiagnosis.setOnClickListener(this);
         btnEditHeartSituation = (Button) view.findViewById(R.id.edit_heart_situation_btn);
         btnEditHeartSituation.setOnClickListener(this);
+        btnContinueDiagnosis = (Button) view.findViewById(R.id.continue_diag_btn);
+        btnContinueDiagnosis.setOnClickListener(this);
     }
 
     private void addPatientAttributes() {
@@ -85,6 +88,8 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
             startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
         } else if (v.getId() == R.id.edit_heart_situation_btn) {
 
+        } else if (v.getId() == R.id.continue_diag_btn) {
+            startActivity(IntentFactory.getRulesExecutionActivityIntent(patient));
         }
     }
 

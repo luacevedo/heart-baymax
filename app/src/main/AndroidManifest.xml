@@ -29,6 +29,9 @@
         <activity
             android:name=".ui.activities.PatientPageActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.activities.RulesExecutionActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
