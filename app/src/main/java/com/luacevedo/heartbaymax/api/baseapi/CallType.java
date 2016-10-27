@@ -1,6 +1,5 @@
 package com.luacevedo.heartbaymax.api.baseapi;
 
 public enum CallType {
-    RULES,
-    INPUT_FIELDS, ATTRIBUTES
+    INPUT_FIELDS_STAGE_1, PATIENT_ATTRIBUTES, RULES_STAGE_1
 }

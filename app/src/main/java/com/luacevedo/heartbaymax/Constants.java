@@ -14,6 +14,7 @@ public class Constants {
             public static final String LESS_THAN = "lessThan";
             public static final String CONTAINS = "contains";
             public static final String NOT_CONTAINS = "notContains";
+            public static final String EQUALS = "equals";
         }
 
         public static class Action {

@@ -8,6 +8,7 @@ import com.luacevedo.heartbaymax.model.rules.actions.BaseAction;
 import com.luacevedo.heartbaymax.model.rules.conditions.AffirmativeCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.BaseCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.ContainsCondition;
+import com.luacevedo.heartbaymax.model.rules.conditions.EqualsCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.GreaterThanCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.LessThanCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.NotContainsCondition;
@@ -17,20 +18,29 @@ import java.util.List;
 
 public class Rule {
 
-    private Long id;
+    private int id;
+    private int stage;
     private List<Condition> conditions;
     private List<Action> actions;
-    private List<Long> rulesToExclude = new ArrayList<>();
+    private List<Integer> rulesToExclude = new ArrayList<>();
 
     private List<BaseCondition> parsedConditions = new ArrayList<>();
     private List<BaseAction> parsedActions = new ArrayList<>();
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getStage() {
+        return stage;
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
     }
 
     public List<Condition> getConditions() {
@@ -49,11 +59,11 @@ public class Rule {
         this.actions = actions;
     }
 
-    public List<Long> getRulesToExclude() {
+    public List<Integer> getRulesToExclude() {
         return rulesToExclude;
     }
 
-    public void setRulesToExclude(List<Long> rulesToExclude) {
+    public void setRulesToExclude(List<Integer> rulesToExclude) {
         this.rulesToExclude = rulesToExclude;
     }
 
@@ -79,22 +89,6 @@ public class Rule {
         this.parsedActions = parsedActions;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Rule rule = (Rule) o;
-
-        return id.equals(rule.id);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
-
     public void populateTransientConditions() {
         for (Condition condition : conditions) {
             BaseCondition<?> parsedCondition = null;
@@ -103,16 +97,19 @@ public class Rule {
                     parsedCondition = new AffirmativeCondition(condition.getAttribute());
                     break;
                 case Constants.Rule.Condition.GREATER_THAN:
-                    parsedCondition = new GreaterThanCondition(condition.getAttribute(), Integer.parseInt(condition.getValue()));
+                    parsedCondition = new GreaterThanCondition(condition.getAttribute(), Double.valueOf(condition.getValue()));
                     break;
                 case Constants.Rule.Condition.LESS_THAN:
-                    parsedCondition = new LessThanCondition(condition.getAttribute(), Integer.parseInt(condition.getValue()));
+                    parsedCondition = new LessThanCondition(condition.getAttribute(), Double.valueOf(condition.getValue()));
                     break;
                 case Constants.Rule.Condition.CONTAINS:
                     parsedCondition = new ContainsCondition(condition.getAttribute(), condition.getValue());
                     break;
                 case Constants.Rule.Condition.NOT_CONTAINS:
                     parsedCondition = new NotContainsCondition(condition.getAttribute(), condition.getValue());
+                    break;
+                case Constants.Rule.Condition.EQUALS:
+                    parsedCondition = new EqualsCondition(condition.getAttribute(), condition.getValue());
                     break;
             }
             if (parsedCondition != null) {

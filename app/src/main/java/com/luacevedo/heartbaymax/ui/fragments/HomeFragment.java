@@ -1,7 +1,7 @@
 package com.luacevedo.heartbaymax.ui.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -13,12 +13,15 @@ import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.adapters.PatientsHomeAdapter;
-import com.luacevedo.heartbaymax.api.model.MockInfo;
-import com.luacevedo.heartbaymax.api.model.rules.Rule;
+import com.luacevedo.heartbaymax.api.baseapi.CallId;
+import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
+import com.luacevedo.heartbaymax.api.baseapi.CallType;
+import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.db.InternalDbHelper;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.interfaces.IOnPatientClicked;
 import com.luacevedo.heartbaymax.model.patient.Patient;
+import com.luacevedo.heartbaymax.utils.PatientAttributesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +34,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
 
     private View btnNewPatient;
     private RecyclerView patientsRecyclerView;
-    private List<Rule> ruleList = new ArrayList<>();
     private List<Patient> patientsList = new ArrayList<>();
     private StaggeredGridLayoutManager layoutManager;
     private PatientsHomeAdapter patientsAdapter;
     private InternalDbHelper internalDbHelper = HeartBaymaxApplication.getApplication().getInternalDbHelper();
+    private ProgressDialog progress;
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -76,28 +79,30 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.new_patient_btn) {
-            Patient patient = new Patient();
-            patient.setId(System.currentTimeMillis());
-            //  TODO: add network call for patient attributes
-            patient.setAttributesMap(MockInfo.getMockedAttributesMap());
-            startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
+            getPatientAttributes();
         }
     }
 
-    @NonNull
-    private Callback<List<Rule>> generateRulesCallback() {
-        return new Callback<List<Rule>>() {
+    private void getPatientAttributes() {
+        progress = ProgressDialog.show(getActivity(), null, "Cargando", true);
+        CallId callId = new CallId(CallOrigin.NEW_PATIENT, CallType.PATIENT_ATTRIBUTES);
+        mochiApi.getPatientAttributes(callId, getPatientAttributesCallback());
+    }
+
+    private Callback<List<Attribute>> getPatientAttributesCallback() {
+        return new Callback<List<Attribute>>() {
             @Override
-            public void success(List<Rule> rules, Response response) {
-                ruleList = rules;
-//                RulesHelper.executeRules(ruleList, patient);
-//                printPatient();
+            public void success(List<Attribute> attributes, Response response) {
+                Patient patient = new Patient();
+                patient.setId(System.currentTimeMillis());
+                patient.setAttributesMap(PatientAttributesUtils.parsePatientAttributes(attributes));
+                startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
+                progress.dismiss();
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Log.e("LULI", error.toString());
-
             }
         };
     }

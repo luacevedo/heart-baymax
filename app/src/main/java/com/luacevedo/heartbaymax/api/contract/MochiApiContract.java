@@ -17,7 +17,7 @@ public interface MochiApiContract {
     @GET("/inputfields")
     void getStepPatientInputFields(Callback<List<StepInputFields>> callback);
 
-    @GET("/patients/attributes")
+    @GET("/attributes")
     void getPatientAttributes(Callback<List<Attribute>> callback);
 }
 

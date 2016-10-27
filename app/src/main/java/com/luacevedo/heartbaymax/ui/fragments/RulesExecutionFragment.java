@@ -68,8 +68,8 @@ public class RulesExecutionFragment extends BaseFragment {
         }
     }
 
-    private void excludeRules(List<Long> rulesToExclude) {
-        for (Long id : rulesToExclude) {
+    private void excludeRules(List<Integer> rulesToExclude) {
+        for (Integer id : rulesToExclude) {
             Log.e("LULI", "Excluyo regla " + id);
             Rule r = new Rule();
             r.setId(id);

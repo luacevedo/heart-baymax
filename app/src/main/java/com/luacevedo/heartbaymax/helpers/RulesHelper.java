@@ -52,8 +52,8 @@ public class RulesHelper {
         }
     }
 
-    public static void excludeRules(List<Rule> rules, List<Long> rulesToExclude) {
-        for (Long id : rulesToExclude) {
+    public static void excludeRules(List<Rule> rules, List<Integer> rulesToExclude) {
+        for (Integer id : rulesToExclude) {
             Log.e("LULI", "Excluyo regla " + id);
             Rule r = new Rule();
             r.setId(id);

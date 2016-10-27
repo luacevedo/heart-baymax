@@ -104,7 +104,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     private void getPreliminaryDiagnosisFields() {
 //        preliminaryDiagnosisFields = MockInfo.getPreliminaryDiagnosisFields();
         progress = ProgressDialog.show(this, null, "Cargando", true);
-        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS);
+        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS_STAGE_1);
         mochiApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
     }
 

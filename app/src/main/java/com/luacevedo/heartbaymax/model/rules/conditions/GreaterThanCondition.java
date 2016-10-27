@@ -4,14 +4,14 @@ import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 public class GreaterThanCondition extends BaseCondition<Double> {
 
-    private int min;
+    private Double min;
 
-    public GreaterThanCondition(String attributeRoot, int min) {
+    public GreaterThanCondition(String attributeRoot, Double min) {
         this.attributeRoot = attributeRoot;
         this.min = min;
     }
 
-    public void setMin(Integer min) {
+    public void setMin(Double min) {
         this.min = min;
     }
 

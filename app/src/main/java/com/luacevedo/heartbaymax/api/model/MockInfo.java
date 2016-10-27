@@ -31,7 +31,7 @@ public class MockInfo {
         PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "PatientData.Name", "string", "Nombre"));
         map.put("PatientData.Name", name);
 
-        PatientAttribute<Boolean> age = new PatientAttribute<>(new Attribute(23L, "PatientData.Age", "string", "Edad"));
+        PatientAttribute<String> age = new PatientAttribute<>(new Attribute(23L, "PatientData.Age", "string", "Edad"));
         map.put("PatientData.Age", age);
 
         PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "PatientData.Gender", "string", "Sexo"));
@@ -163,199 +163,199 @@ public class MockInfo {
 
     public static List<Rule> getMockedRules() {
         List<Rule> rules = new ArrayList<>();
-        addEdemaPulmonarRule(rules);
-        addDisnea(rules);
-        addOrtopnea(rules);
-        addRule4(rules);
-        addRule5(rules);
-        addRule6(rules);
-        addRule7(rules);
-        addRule8(rules);
+//        addEdemaPulmonarRule(rules);
+//        addDisnea(rules);
+//        addOrtopnea(rules);
+//        addRule4(rules);
+//        addRule5(rules);
+//        addRule6(rules);
+//        addRule7(rules);
+//        addRule8(rules);
         return rules;
     }
 
 
-    private static void addEdemaPulmonarRule(List<Rule> rules) {
-        Rule rule = new Rule();
-        rule.setId(1L);
-        List<BaseCondition> conditions1 = new ArrayList<>();
-        AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
-        conditions1.add(affCondition1);
-        rule.setParsedConditions(conditions1);
-
-        List<BaseAction> actions = new ArrayList<>();
-        AddNumberAction addNumberAction1 = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
-        actions.add(addNumberAction1);
-        AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
-        actions.add(addToListAction);
-        rule.setParsedActions(actions);
-
-        rules.add(rule);
-    }
-
-    private static void addDisnea(List<Rule> rules) {
-        Rule rule = new Rule();
-        rule.setId(2L);
-        List<BaseCondition> conditions1 = new ArrayList<>();
-        EqualsCondition affCondition1 = new EqualsCondition("EssentialSymptoms.Dyspnoea", "4");
-        conditions1.add(affCondition1);
-        rule.setParsedConditions(conditions1);
-
-        List<BaseAction> actions = new ArrayList<>();
-        AddNumberAction addNumberAction1 = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
-        actions.add(addNumberAction1);
-        AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "Disnea");
-        actions.add(addToListAction);
-        rule.setParsedActions(actions);
-
-        rules.add(rule);
-    }
-
-    private static void addOrtopnea(List<Rule> rules) {
-        Rule rule = new Rule();
-        rule.setId(3L);
-        List<BaseCondition> conditions1 = new ArrayList<>();
-        AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.Orthopnoea");
-        conditions1.add(affCondition1);
-        rule.setParsedConditions(conditions1);
-
-        List<BaseAction> actions = new ArrayList<>();
-        AddNumberAction addNumberAction1 = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 2.0);
-        actions.add(addNumberAction1);
-        AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "Ortopnea");
-        actions.add(addToListAction);
-        rule.setParsedActions(actions);
-
-        rules.add(rule);
-    }
-
-    private static void addRule4(List<Rule> rules) {
-        Rule rule = new Rule();
-        rule.setId(4L);
-
-        List<BaseCondition> conditions = new ArrayList<>();
-        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
-        conditions.add(greaterThanCondition);
-        ContainsCondition containsCondition = new ContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
-        conditions.add(containsCondition);
-        rule.setParsedConditions(conditions);
-
-        List<BaseAction> actions = new ArrayList<>();
-        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Urgentes");
-        actions.add(assignAction1);
-
-        rule.setParsedConditions(conditions);
-        rule.setParsedActions(actions);
-
-        List<Long> rulesToExclude = new ArrayList<>();
-        rulesToExclude.add(5L);
-        rulesToExclude.add(6L);
-        rulesToExclude.add(7L);
-        rulesToExclude.add(8L);
-        rule.setRulesToExclude(rulesToExclude);
-
-        rules.add(rule);
-    }
-
-    private static void addRule5(List<Rule> rules) {
-        Rule rule = new Rule();
-        rule.setId(5L);
-
-        List<BaseCondition> conditions = new ArrayList<>();
-        GreaterThanCondition greaterThanCondition1 = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
-        conditions.add(greaterThanCondition1);
-        NotContainsCondition notContainsCondition = new NotContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
-        conditions.add(notContainsCondition);
-        rule.setParsedConditions(conditions);
-
-        List<BaseAction> actions1 = new ArrayList<>();
-        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Moderados");
-        actions1.add(assignAction1);
-
-        rule.setParsedConditions(conditions);
-        rule.setParsedActions(actions1);
-
-        List<Long> rulesToExclude = new ArrayList<>();
-        rulesToExclude.add(6L);
-        rulesToExclude.add(7L);
-        rulesToExclude.add(8L);
-        rule.setRulesToExclude(rulesToExclude);
-
-        rules.add(rule);
-    }
-
-    private static void addRule6(List<Rule> rules) {
-        Rule rule = new Rule();
-        rule.setId(6L);
-
-        List<BaseCondition> conditions = new ArrayList<>();
-        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
-        conditions.add(lessThanCondition);
-        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 0);
-        conditions.add(greaterThanCondition);
-        ContainsCondition containsCondition = new ContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
-        conditions.add(containsCondition);
-        rule.setParsedConditions(conditions);
-
-        List<BaseAction> actions1 = new ArrayList<>();
-        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Moderados");
-        actions1.add(assignAction1);
-
-        rule.setParsedConditions(conditions);
-        rule.setParsedActions(actions1);
-
-        List<Long> rulesToExclude = new ArrayList<>();
-        rulesToExclude.add(7L);
-        rulesToExclude.add(8L);
-        rule.setRulesToExclude(rulesToExclude);
-
-        rules.add(rule);
-    }
-
-    private static void addRule7(List<Rule> rules) {
-        Rule rule = new Rule();
-        rule.setId(7L);
-
-        List<BaseCondition> conditions = new ArrayList<>();
-        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
-        conditions.add(lessThanCondition);
-        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 0);
-        conditions.add(greaterThanCondition);
-        NotContainsCondition notContainsCondition = new NotContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
-        conditions.add(notContainsCondition);
-        rule.setParsedConditions(conditions);
-
-        List<BaseAction> actions1 = new ArrayList<>();
-        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Escasos");
-        actions1.add(assignAction1);
-
-        rule.setParsedConditions(conditions);
-        rule.setParsedActions(actions1);
-
-        List<Long> rulesToExclude = new ArrayList<>();
-        rulesToExclude.add(8L);
-        rule.setRulesToExclude(rulesToExclude);
-
-        rules.add(rule);
-    }
-
-    private static void addRule8(List<Rule> rules) {
-        Rule rule = new Rule();
-        rule.setId(8L);
-
-        List<BaseCondition> conditions = new ArrayList<>();
-        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 1);
-        conditions.add(lessThanCondition);
-        rule.setParsedConditions(conditions);
-
-        List<BaseAction> actions1 = new ArrayList<>();
-        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "No presenta");
-        actions1.add(assignAction1);
-
-        rule.setParsedConditions(conditions);
-        rule.setParsedActions(actions1);
-        rules.add(rule);
-    }
+//    private static void addEdemaPulmonarRule(List<Rule> rules) {
+//        Rule rule = new Rule();
+//        rule.setId(1L);
+//        List<BaseCondition> conditions1 = new ArrayList<>();
+//        AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
+//        conditions1.add(affCondition1);
+//        rule.setParsedConditions(conditions1);
+//
+//        List<BaseAction> actions = new ArrayList<>();
+//        AddNumberAction addNumberAction1 = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
+//        actions.add(addNumberAction1);
+//        AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
+//        actions.add(addToListAction);
+//        rule.setParsedActions(actions);
+//
+//        rules.add(rule);
+//    }
+//
+//    private static void addDisnea(List<Rule> rules) {
+//        Rule rule = new Rule();
+//        rule.setId(2L);
+//        List<BaseCondition> conditions1 = new ArrayList<>();
+//        EqualsCondition affCondition1 = new EqualsCondition("EssentialSymptoms.Dyspnoea", "4");
+//        conditions1.add(affCondition1);
+//        rule.setParsedConditions(conditions1);
+//
+//        List<BaseAction> actions = new ArrayList<>();
+//        AddNumberAction addNumberAction1 = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
+//        actions.add(addNumberAction1);
+//        AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "Disnea");
+//        actions.add(addToListAction);
+//        rule.setParsedActions(actions);
+//
+//        rules.add(rule);
+//    }
+//
+//    private static void addOrtopnea(List<Rule> rules) {
+//        Rule rule = new Rule();
+//        rule.setId(3L);
+//        List<BaseCondition> conditions1 = new ArrayList<>();
+//        AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.Orthopnoea");
+//        conditions1.add(affCondition1);
+//        rule.setParsedConditions(conditions1);
+//
+//        List<BaseAction> actions = new ArrayList<>();
+//        AddNumberAction addNumberAction1 = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 2.0);
+//        actions.add(addNumberAction1);
+//        AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "Ortopnea");
+//        actions.add(addToListAction);
+//        rule.setParsedActions(actions);
+//
+//        rules.add(rule);
+//    }
+//
+//    private static void addRule4(List<Rule> rules) {
+//        Rule rule = new Rule();
+//        rule.setId(4L);
+//
+//        List<BaseCondition> conditions = new ArrayList<>();
+//        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
+//        conditions.add(greaterThanCondition);
+//        ContainsCondition containsCondition = new ContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
+//        conditions.add(containsCondition);
+//        rule.setParsedConditions(conditions);
+//
+//        List<BaseAction> actions = new ArrayList<>();
+//        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Urgentes");
+//        actions.add(assignAction1);
+//
+//        rule.setParsedConditions(conditions);
+//        rule.setParsedActions(actions);
+//
+//        List<Long> rulesToExclude = new ArrayList<>();
+//        rulesToExclude.add(5L);
+//        rulesToExclude.add(6L);
+//        rulesToExclude.add(7L);
+//        rulesToExclude.add(8L);
+//        rule.setRulesToExclude(rulesToExclude);
+//
+//        rules.add(rule);
+//    }
+//
+//    private static void addRule5(List<Rule> rules) {
+//        Rule rule = new Rule();
+//        rule.setId(5L);
+//
+//        List<BaseCondition> conditions = new ArrayList<>();
+//        GreaterThanCondition greaterThanCondition1 = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
+//        conditions.add(greaterThanCondition1);
+//        NotContainsCondition notContainsCondition = new NotContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
+//        conditions.add(notContainsCondition);
+//        rule.setParsedConditions(conditions);
+//
+//        List<BaseAction> actions1 = new ArrayList<>();
+//        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Moderados");
+//        actions1.add(assignAction1);
+//
+//        rule.setParsedConditions(conditions);
+//        rule.setParsedActions(actions1);
+//
+//        List<Long> rulesToExclude = new ArrayList<>();
+//        rulesToExclude.add(6L);
+//        rulesToExclude.add(7L);
+//        rulesToExclude.add(8L);
+//        rule.setRulesToExclude(rulesToExclude);
+//
+//        rules.add(rule);
+//    }
+//
+//    private static void addRule6(List<Rule> rules) {
+//        Rule rule = new Rule();
+//        rule.setId(6L);
+//
+//        List<BaseCondition> conditions = new ArrayList<>();
+//        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
+//        conditions.add(lessThanCondition);
+//        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 0);
+//        conditions.add(greaterThanCondition);
+//        ContainsCondition containsCondition = new ContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
+//        conditions.add(containsCondition);
+//        rule.setParsedConditions(conditions);
+//
+//        List<BaseAction> actions1 = new ArrayList<>();
+//        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Moderados");
+//        actions1.add(assignAction1);
+//
+//        rule.setParsedConditions(conditions);
+//        rule.setParsedActions(actions1);
+//
+//        List<Long> rulesToExclude = new ArrayList<>();
+//        rulesToExclude.add(7L);
+//        rulesToExclude.add(8L);
+//        rule.setRulesToExclude(rulesToExclude);
+//
+//        rules.add(rule);
+//    }
+//
+//    private static void addRule7(List<Rule> rules) {
+//        Rule rule = new Rule();
+//        rule.setId(7L);
+//
+//        List<BaseCondition> conditions = new ArrayList<>();
+//        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
+//        conditions.add(lessThanCondition);
+//        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 0);
+//        conditions.add(greaterThanCondition);
+//        NotContainsCondition notContainsCondition = new NotContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
+//        conditions.add(notContainsCondition);
+//        rule.setParsedConditions(conditions);
+//
+//        List<BaseAction> actions1 = new ArrayList<>();
+//        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "Escasos");
+//        actions1.add(assignAction1);
+//
+//        rule.setParsedConditions(conditions);
+//        rule.setParsedActions(actions1);
+//
+//        List<Long> rulesToExclude = new ArrayList<>();
+//        rulesToExclude.add(8L);
+//        rule.setRulesToExclude(rulesToExclude);
+//
+//        rules.add(rule);
+//    }
+//
+//    private static void addRule8(List<Rule> rules) {
+//        Rule rule = new Rule();
+//        rule.setId(8L);
+//
+//        List<BaseCondition> conditions = new ArrayList<>();
+//        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 1);
+//        conditions.add(lessThanCondition);
+//        rule.setParsedConditions(conditions);
+//
+//        List<BaseAction> actions1 = new ArrayList<>();
+//        AssignAction assignAction1 = new AssignAction("PreliminaryDiagnosis.SymptomsType", "No presenta");
+//        actions1.add(assignAction1);
+//
+//        rule.setParsedConditions(conditions);
+//        rule.setParsedActions(actions1);
+//        rules.add(rule);
+//    }
 
 
 }
