@@ -1,74 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_vertical_margin"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ScrollView
-        android:id="@+id/patient_page_scroll"
-        android:layout_width="match_parent"
+    <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_vertical_margin">
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/patient_page_name"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_padding"
+            android:layout_width="match_parent"
+            android:paddingBottom="@dimen/large_padding"
+            android:text="Luciana"
+            android:textSize="@dimen/material_text_title" />
 
         <LinearLayout
+            android:id="@+id/patient_page_content"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/large_padding"
+            android:paddingLeft="@dimen/large_padding"
+            android:paddingRight="@dimen/large_padding"
+            android:paddingTop="@dimen/small_padding" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:layout_marginLeft="@dimen/small_padding"
+            android:layout_marginRight="@dimen/small_padding"
+            android:layout_marginTop="8dp"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
+        <LinearLayout
+            android:id="@+id/add_heart_situation_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:paddingTop="16dp"
+            android:paddingBottom="10dp"
+            android:clickable="true"
+            android:background="?attr/selectableItemBackground"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:paddingLeft="4dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_plus_red" />
 
             <TextView
-                android:id="@+id/patient_page_name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/material_text_title"
-                android:layout_marginLeft="@dimen/medium_padding"
-                android:text="Luciana"
-                android:paddingBottom="@dimen/large_padding"/>
-
-            <LinearLayout
-                android:id="@+id/patient_page_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="@dimen/large_padding"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
-                android:paddingTop="@dimen/small_padding" />
-
-            <Button
-                android:id="@+id/edit_preliminary_diag_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:layout_weight="1"
-                android:background="@color/accent"
-                android:maxWidth="50dp"
-                android:text="@string/edit_preliminary_diagnosis"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/edit_heart_situation_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:layout_weight="1"
-                android:background="@color/accent"
-                android:maxWidth="50dp"
-                android:text="@string/edit_complementary_tests"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/continue_diag_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:layout_weight="1"
-                android:background="@color/accent"
-                android:maxWidth="50dp"
-                android:text="@string/continue_diagnosis"
-                android:textColor="@color/white" />
+                android:paddingLeft="22dp"
+                android:textSize="16sp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/update_heart_situation"/>
 
         </LinearLayout>
 
-    </ScrollView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/one_dp"
+            android:layout_marginLeft="@dimen/small_padding"
+            android:layout_marginRight="@dimen/small_padding"
+            android:layout_marginTop="8dp"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+        
 
-</RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>
+

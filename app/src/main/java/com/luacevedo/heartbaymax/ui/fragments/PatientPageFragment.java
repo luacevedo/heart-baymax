@@ -21,9 +21,8 @@ import java.util.List;
 public class PatientPageFragment extends BaseFragment implements View.OnClickListener {
 
     private Patient patient;
-    private Button btnEditPreliminaryDiagnosis;
-    private Button btnEditHeartSituation;
-    private Button btnContinueDiagnosis;
+    private LinearLayout addHeartSituationLayout;
+    private LinearLayout continueDiagnosisLayout;
     private LinearLayout patientContentLayout;
     private TextView patientName;
 
@@ -45,12 +44,10 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
         patientContentLayout = (LinearLayout) view.findViewById(R.id.patient_page_content);
         patientName = (TextView) view.findViewById(R.id.patient_page_name);
         patientName.setText(patient.getName());
-        btnEditPreliminaryDiagnosis = (Button) view.findViewById(R.id.edit_preliminary_diag_btn);
-        btnEditPreliminaryDiagnosis.setOnClickListener(this);
-        btnEditHeartSituation = (Button) view.findViewById(R.id.edit_heart_situation_btn);
-        btnEditHeartSituation.setOnClickListener(this);
-        btnContinueDiagnosis = (Button) view.findViewById(R.id.continue_diag_btn);
-        btnContinueDiagnosis.setOnClickListener(this);
+        addHeartSituationLayout = (LinearLayout) view.findViewById(R.id.add_heart_situation_layout);
+        addHeartSituationLayout.setOnClickListener(this);
+        continueDiagnosisLayout = (LinearLayout) view.findViewById(R.id.continue_diagnosis_layout);
+        continueDiagnosisLayout.setOnClickListener(this);
     }
 
     private void addPatientAttributes() {
@@ -84,11 +81,9 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.edit_preliminary_diag_btn) {
-            startActivity(IntentFactory.getPreliminaryDiagnosisActivityIntent(patient));
-        } else if (v.getId() == R.id.edit_heart_situation_btn) {
+        if (v.getId() == R.id.add_heart_situation_layout) {
 
-        } else if (v.getId() == R.id.continue_diag_btn) {
+        } else if (v.getId() == R.id.continue_diagnosis_layout) {
             startActivity(IntentFactory.getRulesExecutionActivityIntent(patient));
         }
     }

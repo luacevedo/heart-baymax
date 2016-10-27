@@ -11,4 +11,5 @@
     <string name="edit_complementary_tests">Editar exámenes complementarios</string>
     <string name="patients">Pacientes:</string>
     <string name="continue_diagnosis">Continuar diagnostico</string>
+    <string name="update_heart_situation">Actualizar situación cardíaca</string>
 </resources>

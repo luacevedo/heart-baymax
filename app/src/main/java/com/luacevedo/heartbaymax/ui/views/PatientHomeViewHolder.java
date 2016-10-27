@@ -32,7 +32,7 @@ public class PatientHomeViewHolder extends RecyclerView.ViewHolder implements Vi
         this.position = position;
         String name = ResourcesHelper.getString(R.string.patient_title_home).replace("{patient}", patient.getName());
         this.txtTitle.setText(name);
-        this.image.setImageResource(patient.getGender().equals(Constants.Patient.FEMALE) ? R.drawable.ico_patient_woman : R.drawable.ico_patient_man);
+        this.image.setImageResource(patient.getGender().equals(Constants.Patient.FEMALE) ? R.drawable.ic_patient_woman : R.drawable.ic_patient_man);
     }
 
     @Override

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:layout_marginLeft="14dp"
-            android:src="@drawable/ico_patient_man"/>
+            android:src="@drawable/ic_patient_man"/>
 
         <TextView
             android:id="@+id/home_patient_title"
