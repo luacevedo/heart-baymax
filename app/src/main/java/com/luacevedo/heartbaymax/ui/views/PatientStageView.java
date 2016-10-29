@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
+import com.luacevedo.heartbaymax.helpers.ResourcesHelper;
 import com.luacevedo.heartbaymax.interfaces.OnPatientStageClick;
 
 public class PatientStageView extends LinearLayout implements View.OnClickListener {
@@ -40,10 +41,11 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
         this.isEnabled = isEnabled;
         this.onClickListener = onClickListener;
         textView = (TextView) findViewById(R.id.patient_stage_text);
+        textView.setTextColor(isEnabled ? ResourcesHelper.getColor(R.color.black) : ResourcesHelper.getColor(R.color.disabled));
         LinearLayout layout = (LinearLayout) findViewById(R.id.patient_stage_layout);
         layout.setOnClickListener(this);
         ImageView image = (ImageView) findViewById(R.id.patient_stage_img);
-        image.setImageResource(isCompleted ? R.drawable.ic_tick : R.drawable.ic_plus_red);
+        image.setImageResource(isCompleted ? R.drawable.ic_tick : isEnabled ? R.drawable.ic_plus_red : R.drawable.ic_plus_gray);
 
         setTextViewText(stage, isCompleted);
     }
