@@ -39,7 +39,6 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     private int currentStep = 0;
     private ProgressDialog progress;
     private MochiApi mochiApi = HeartBaymaxApplication.getApplication().getMochiApi();
-    private List<Rule> ruleList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

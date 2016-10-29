@@ -2,21 +2,17 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
-import com.luacevedo.heartbaymax.interfaces.OnPatientStageClick;
-import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
 import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
-import com.luacevedo.heartbaymax.ui.views.PatientStageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +54,6 @@ public class PatientPageDataFragment extends BaseFragment {
                 case Constants.Patient.SECONDARY_SYMPTOMS:
                     secondarySymptomsList.add(attribute);
                     break;
-                case Constants.Patient.PRELIMINARY_DIAGNOSIS:
-                    preliminaryDiagnosisList.add(attribute);
-                    break;
                 default:
                     break;
             }
@@ -77,6 +70,17 @@ public class PatientPageDataFragment extends BaseFragment {
             viewAttribute.setData(attribute);
             patientContentLayout.addView(viewAttribute);
         }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            slidePreviousFragment();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
 }

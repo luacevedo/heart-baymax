@@ -1,7 +1,6 @@
 package com.luacevedo.heartbaymax.ui.views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,10 +14,9 @@ import com.luacevedo.heartbaymax.interfaces.OnPatientStageClick;
 public class PatientStageView extends LinearLayout implements View.OnClickListener {
 
     private TextView textView;
-    private ImageView image;
-    private LinearLayout layout;
     private Constants.PatientStage stage;
     private boolean isCompleted;
+    private boolean isEnabled;
     private OnPatientStageClick onClickListener;
 
     public PatientStageView(Context context) {
@@ -36,14 +34,15 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
         inflate(getContext(), R.layout.view_patient_stage, this);
     }
 
-    public void setupView(Constants.PatientStage stage, boolean isCompleted, OnPatientStageClick onClickListener) {
+    public void setupView(Constants.PatientStage stage, boolean isCompleted, boolean isEnabled, OnPatientStageClick onClickListener) {
         this.stage = stage;
         this.isCompleted = isCompleted;
+        this.isEnabled = isEnabled;
         this.onClickListener = onClickListener;
         textView = (TextView) findViewById(R.id.patient_stage_text);
-        layout = (LinearLayout) findViewById(R.id.patient_stage_layout);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.patient_stage_layout);
         layout.setOnClickListener(this);
-        image = (ImageView) findViewById(R.id.patient_stage_img);
+        ImageView image = (ImageView) findViewById(R.id.patient_stage_img);
         image.setImageResource(isCompleted ? R.drawable.ic_tick : R.drawable.ic_plus_red);
 
         setTextViewText(stage, isCompleted);
@@ -54,8 +53,20 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
             case INITIAL_STATE:
                 textView.setText(isCompleted ? R.string.initial_situation : R.string.enter_initial_situation);
                 break;
-            case HEART_SITUATION:
-                textView.setText(isCompleted ? R.string.heart_situation : R.string.enter_heart_situation);
+            case PRELIMINARY_DIAGNOSIS:
+                textView.setText(isCompleted ? R.string.prelinary_diagnosis : R.string.enter_prelinary_diagnosis);
+                break;
+            case ECG:
+                textView.setText(isCompleted ? R.string.ecg : R.string.enter_ecg);
+                break;
+            case RX:
+                textView.setText(isCompleted ? R.string.rx : R.string.enter_rx);
+                break;
+            case LAB_ANALYSIS:
+                textView.setText(isCompleted ? R.string.lab_analysis : R.string.enter_lab_analysis);
+                break;
+            case FINAL_DIAGNOSIS:
+                textView.setText(isCompleted ? R.string.final_diagnosis : R.string.enter_final_diagnosis);
                 break;
         }
     }

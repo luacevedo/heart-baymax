@@ -81,7 +81,7 @@ public class Constants {
     }
 
     public enum PatientStage {
-        INITIAL_STATE, HEART_SITUATION
+        INITIAL_STATE, PRELIMINARY_DIAGNOSIS, RX, LAB_ANALYSIS, FINAL_DIAGNOSIS, ECG
     }
 
 }

@@ -30,6 +30,10 @@ public class BaseFragment extends Fragment {
         navigationActivity.slideNextFragmentFromRight(fragment);
     }
 
+    protected void slidePreviousFragment() {
+        navigationActivity.slidePreviousFragment();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

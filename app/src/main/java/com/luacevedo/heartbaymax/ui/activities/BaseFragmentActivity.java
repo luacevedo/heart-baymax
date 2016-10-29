@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -49,6 +48,16 @@ public class BaseFragmentActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        final FragmentManager manager = getSupportFragmentManager();
+        if (manager.getBackStackEntryCount() == 1) {
+            finish();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     public void setInitialFragment(Fragment fragment) {
         removeAllFragments();
         setFragment(fragment, Direction.NONE);
@@ -67,6 +76,10 @@ public class BaseFragmentActivity extends AppCompatActivity {
 
     public void slideNextFragmentFromLeft(Fragment fragment) {
         setFragment(fragment, Direction.LEFT);
+    }
+
+    public void slidePreviousFragment() {
+        getSupportFragmentManager().popBackStackImmediate();
     }
 
     private void setFragment(Fragment fragment, Direction direction) {

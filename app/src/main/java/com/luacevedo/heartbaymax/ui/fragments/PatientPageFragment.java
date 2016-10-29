@@ -6,29 +6,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
-import com.luacevedo.heartbaymax.helpers.IntentFactory;
-import com.luacevedo.heartbaymax.helpers.LogInternal;
 import com.luacevedo.heartbaymax.interfaces.OnPatientStageClick;
-import com.luacevedo.heartbaymax.model.patient.Patient;
-import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
-import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
 import com.luacevedo.heartbaymax.ui.views.PatientStageView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PatientPageFragment extends BaseFragment implements OnPatientStageClick {
 
-    private PatientStageView heartSituationView;
-    private PatientStageView initialSituationView;
-    private TextView patientName;
     private PatientPageActivity activity;
 
     @Override
@@ -46,12 +33,26 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
     }
 
     private void setupViews(View view) {
-        patientName = (TextView) view.findViewById(R.id.patient_page_name);
+        TextView patientName = (TextView) view.findViewById(R.id.patient_page_name);
         patientName.setText(activity.getPatient().getName());
-        initialSituationView = (PatientStageView) view.findViewById(R.id.initial_state_stage);
-        initialSituationView.setupView(Constants.PatientStage.INITIAL_STATE, true, this);
-        heartSituationView = (PatientStageView) view.findViewById(R.id.heart_situation_stage);
-        heartSituationView.setupView(Constants.PatientStage.HEART_SITUATION, true, this);
+
+        PatientStageView initialSituationView = (PatientStageView) view.findViewById(R.id.initial_state_stage);
+        initialSituationView.setupView(Constants.PatientStage.INITIAL_STATE, true, true, this);
+
+        PatientStageView preliminaryDiagnosisView = (PatientStageView) view.findViewById(R.id.preliminary_diagnosis_stage);
+        preliminaryDiagnosisView.setupView(Constants.PatientStage.PRELIMINARY_DIAGNOSIS, true, true, this);
+
+        PatientStageView ecgView = (PatientStageView) view.findViewById(R.id.ecg_stage);
+        ecgView.setupView(Constants.PatientStage.ECG, activity.getPatient().isECGCompleted(), true, this);
+
+        PatientStageView rxView = (PatientStageView) view.findViewById(R.id.rx_stage);
+        rxView.setupView(Constants.PatientStage.RX, activity.getPatient().isRXCompleted(), true, this);
+
+        PatientStageView labAnalysisView = (PatientStageView) view.findViewById(R.id.lab_analysis_stage);
+        labAnalysisView.setupView(Constants.PatientStage.LAB_ANALYSIS, activity.getPatient().isLabAnalysisCompleted(), true, this);
+
+        PatientStageView finalDiagnosisView = (PatientStageView) view.findViewById(R.id.final_diagnosis_stage);
+        finalDiagnosisView.setupView(Constants.PatientStage.FINAL_DIAGNOSIS, activity.getPatient().isFinalDiagnosisCompleted(), activity.getPatient().isFinalDiagnosisEnabled(), this);
     }
 
     @Override
@@ -60,7 +61,7 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
             case INITIAL_STATE:
                 slideNextFragment(new PatientPageDataFragment());
                 break;
-            case HEART_SITUATION:
+            case ECG:
                 Log.e("LULI","HEART SITUATION");
                 break;
         }

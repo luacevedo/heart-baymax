@@ -79,4 +79,24 @@ public class Patient implements Serializable {
         }
         return builder.toString();
     }
+
+    public boolean isECGCompleted() {
+        return false;
+    }
+
+    public boolean isRXCompleted() {
+        return false;
+    }
+
+    public boolean isLabAnalysisCompleted() {
+        return false;
+    }
+
+    public boolean isFinalDiagnosisCompleted() {
+        return false;
+    }
+
+    public boolean isFinalDiagnosisEnabled() {
+        return isECGCompleted() && isLabAnalysisCompleted() && isRXCompleted();
+    }
 }
