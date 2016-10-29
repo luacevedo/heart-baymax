@@ -1,6 +1,7 @@
 package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,18 +12,21 @@ import android.widget.TextView;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
+import com.luacevedo.heartbaymax.helpers.LogInternal;
+import com.luacevedo.heartbaymax.interfaces.OnPatientStageClick;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
+import com.luacevedo.heartbaymax.ui.views.PatientStageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientPageFragment extends BaseFragment implements View.OnClickListener {
+public class PatientPageFragment extends BaseFragment implements OnPatientStageClick {
 
     private Patient patient;
-    private LinearLayout addHeartSituationLayout;
-    private LinearLayout continueDiagnosisLayout;
+    private PatientStageView heartSituationView;
+    private PatientStageView initialSituationView;
     private LinearLayout patientContentLayout;
     private TextView patientName;
 
@@ -44,15 +48,16 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
         patientContentLayout = (LinearLayout) view.findViewById(R.id.patient_page_content);
         patientName = (TextView) view.findViewById(R.id.patient_page_name);
         patientName.setText(patient.getName());
-        addHeartSituationLayout = (LinearLayout) view.findViewById(R.id.add_heart_situation_layout);
-        addHeartSituationLayout.setOnClickListener(this);
-        continueDiagnosisLayout = (LinearLayout) view.findViewById(R.id.continue_diagnosis_layout);
-        continueDiagnosisLayout.setOnClickListener(this);
+        initialSituationView = (PatientStageView) view.findViewById(R.id.initial_state_stage);
+        initialSituationView.setupView(Constants.PatientStage.INITIAL_STATE, true, this);
+        heartSituationView = (PatientStageView) view.findViewById(R.id.heart_situation_stage);
+        heartSituationView.setupView(Constants.PatientStage.HEART_SITUATION, true, this);
     }
 
     private void addPatientAttributes() {
         List<PatientAttribute> essentialSymptomsList = new ArrayList<>();
         List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
+        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
         for (PatientAttribute attribute : patient.getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
             switch (root) {
@@ -62,6 +67,9 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
                 case Constants.Patient.SECONDARY_SYMPTOMS:
                     secondarySymptomsList.add(attribute);
                     break;
+                case Constants.Patient.PRELIMINARY_DIAGNOSIS:
+                    preliminaryDiagnosisList.add(attribute);
+                    break;
                 default:
                     break;
             }
@@ -69,6 +77,7 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
 
         addValuesToLayout(essentialSymptomsList);
         addValuesToLayout(secondarySymptomsList);
+        addValuesToLayout(preliminaryDiagnosisList);
     }
 
     private void addValuesToLayout(List<PatientAttribute> list) {
@@ -79,16 +88,19 @@ public class PatientPageFragment extends BaseFragment implements View.OnClickLis
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.add_heart_situation_layout) {
-
-        } else if (v.getId() == R.id.continue_diagnosis_layout) {
-            startActivity(IntentFactory.getRulesExecutionActivityIntent(patient));
-        }
-    }
-
     public void setPatient(Patient patient) {
         this.patient = patient;
+    }
+
+    @Override
+    public void onPageStageClick(Constants.PatientStage stage, boolean isCompleted) {
+        switch (stage) {
+            case INITIAL_STATE:
+                Log.e("LULI","INITIAL STATE");
+                break;
+            case HEART_SITUATION:
+                Log.e("LULI","HEART SITUATION");
+                break;
+        }
     }
 }

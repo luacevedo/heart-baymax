@@ -84,7 +84,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     private void getPatientAttributes() {
-        progress = ProgressDialog.show(getActivity(), null, "Cargando", true);
+        progress = ProgressDialog.show(getActivity(), null, getString(R.string.loading), true);
         CallId callId = new CallId(CallOrigin.NEW_PATIENT, CallType.PATIENT_ATTRIBUTES);
         mochiApi.getPatientAttributes(callId, getPatientAttributesCallback());
     }

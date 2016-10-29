@@ -7,6 +7,7 @@ import android.util.Log;
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
+import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.MochiApi;
 import com.luacevedo.heartbaymax.api.baseapi.CallId;
 import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
@@ -59,29 +60,6 @@ public class RulesExecutionActivity extends BaseFragmentActivity {
     protected void onResume() {
         super.onResume();
         unlockMenu();
-        getRules();
-    }
-
-    private void getRules() {
-        progress = ProgressDialog.show(this, null, "Cargando", true);
-        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_1, CallType.RULES_STAGE_1);
-        mochiApi.getRules(callId, getRulesCallback());
-    }
-
-    private Callback<List<Rule>> getRulesCallback() {
-        return new Callback<List<Rule>>() {
-            @Override
-            public void success(List<Rule> rules, Response response) {
-                ruleList = rules;
-                setInitialFragment(RulesExecutionFragment.newInstance(patient, ruleList));
-                progress.dismiss();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("LULI", error.toString());
-            }
-        };
     }
 
     @Override

@@ -87,14 +87,6 @@ public class RulesExecutionFragment extends BaseFragment {
         }
     }
 
-    private void printPatient() {
-        Log.e("LULI", "EL Pacienteeeee: ");
-        for (String key : patient.getAttributesMap().keySet()) {
-            PatientAttribute att = patient.getAttributesMap().get(key);
-            Log.e("LULI", key + " = " + att.getValue());
-        }
-    }
-
     private boolean checkConditions(Rule rule) {
         boolean conditionsFulfilled = true;
         for (BaseCondition condition : rule.getParsedConditions()) {

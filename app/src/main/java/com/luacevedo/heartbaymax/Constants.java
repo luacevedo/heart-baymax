@@ -80,4 +80,8 @@ public class Constants {
         public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
     }
 
+    public enum PatientStage {
+        INITIAL_STATE, HEART_SITUATION
+    }
+
 }

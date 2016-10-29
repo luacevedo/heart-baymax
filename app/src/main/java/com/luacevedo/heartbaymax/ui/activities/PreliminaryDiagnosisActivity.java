@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
+import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.MochiApi;
 import com.luacevedo.heartbaymax.api.baseapi.CallId;
 import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
@@ -15,11 +16,14 @@ import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
+import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.fragments.PreliminaryDiagnosisStepFragment;
+import com.luacevedo.heartbaymax.ui.fragments.RulesExecutionFragment;
+import com.luacevedo.heartbaymax.utils.RulesExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +39,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     private int currentStep = 0;
     private ProgressDialog progress;
     private MochiApi mochiApi = HeartBaymaxApplication.getApplication().getMochiApi();
+    private List<Rule> ruleList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +107,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     }
 
     private void getPreliminaryDiagnosisFields() {
-//        preliminaryDiagnosisFields = MockInfo.getPreliminaryDiagnosisFields();
-        progress = ProgressDialog.show(this, null, "Cargando", true);
+        progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
         CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS_STAGE_1);
         mochiApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
     }
@@ -151,9 +155,31 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     }
 
     public void finishDiagnosis() {
-        HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
-        startActivity(IntentFactory.getPatientPageActivityIntent(patient));
-        finish();
+        getRules();
+    }
+
+    private void getRules() {
+        progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
+        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_1, CallType.RULES_STAGE_1);
+        mochiApi.getRules(callId, getRulesCallback());
+    }
+
+    private Callback<List<Rule>> getRulesCallback() {
+        return new Callback<List<Rule>>() {
+            @Override
+            public void success(List<Rule> rules, Response response) {
+                RulesExecutor.executeRules(rules, patient);
+                HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
+                startActivity(IntentFactory.getPatientPageActivityIntent(patient));
+                finish();
+                progress.dismiss();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e("LULI", error.toString());
+            }
+        };
     }
 
     public void getNextStep() {
