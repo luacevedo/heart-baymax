@@ -17,7 +17,6 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
     private TextView textView;
     private Constants.PatientStage stage;
     private boolean isCompleted;
-    private boolean isEnabled;
     private OnPatientStageClick onClickListener;
 
     public PatientStageView(Context context) {
@@ -38,7 +37,6 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
     public void setupView(Constants.PatientStage stage, boolean isCompleted, boolean isEnabled, OnPatientStageClick onClickListener) {
         this.stage = stage;
         this.isCompleted = isCompleted;
-        this.isEnabled = isEnabled;
         this.onClickListener = onClickListener;
         textView = (TextView) findViewById(R.id.patient_stage_text);
         textView.setTextColor(isEnabled ? ResourcesHelper.getColor(R.color.black) : ResourcesHelper.getColor(R.color.disabled));
@@ -46,7 +44,6 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
         layout.setOnClickListener(this);
         ImageView image = (ImageView) findViewById(R.id.patient_stage_img);
         image.setImageResource(isCompleted ? R.drawable.ic_tick : isEnabled ? R.drawable.ic_plus_red : R.drawable.ic_plus_gray);
-
         setTextViewText(stage, isCompleted);
     }
 
