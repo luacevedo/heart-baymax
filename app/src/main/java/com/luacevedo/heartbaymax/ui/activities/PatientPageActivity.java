@@ -27,11 +27,15 @@ public class PatientPageActivity extends BaseFragmentActivity {
     protected void onResume() {
         super.onResume();
         unlockMenu();
-        setInitialFragment(PatientPageFragment.newInstance(patient));
+        setInitialFragment(new PatientPageFragment());
     }
 
     @Override
     public void onBackPressed() {
         finish();
+    }
+
+    public Patient getPatient() {
+        return patient;
     }
 }
