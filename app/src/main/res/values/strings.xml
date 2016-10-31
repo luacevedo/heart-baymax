@@ -26,4 +26,5 @@
     <string name="lab_analysis">Análisis de laboratorio</string>
     <string name="enter_final_diagnosis">Ingresar diagnóstico final</string>
     <string name="final_diagnosis">Diagnóstico final</string>
+    <string name="enter_valid_value">Ingrese un valor válido</string>
 </resources>

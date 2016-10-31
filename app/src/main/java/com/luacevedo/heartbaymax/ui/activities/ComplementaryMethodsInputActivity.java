@@ -1,11 +1,14 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
+import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
@@ -116,7 +119,12 @@ public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
         PatientAttribute patientAttribute = patient.getAttributesMap().get(inputField.getRootToAffect());
         if (patientAttribute != null) {
             if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
-                patientAttribute.setValue(Double.valueOf(value));
+                try {
+                    Double numberValue = Double.valueOf(value);
+                    patientAttribute.setValue(numberValue);
+                } catch (Throwable t) {
+                    Toast.makeText(this, R.string.enter_valid_value, Toast.LENGTH_LONG).show();
+                }
             } else if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
                 patientAttribute.setValue(value);
             }
@@ -127,6 +135,9 @@ public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
 
     public void finishDiagnosis() {
         HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
+        Intent intent = this.getIntent();
+        BundleHelper.putJsonBundle(intent, Constants.BundleKey.PATIENT, patient);
+        this.setResult(RESULT_OK, intent);
         finish();
     }
 
