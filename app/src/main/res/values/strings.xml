@@ -18,7 +18,7 @@
     <string name="enter_initial_situation">Ingresar situación inicial</string>
     <string name="enter_prelinary_diagnosis">Ingresar diagnóstico preliminar</string>
     <string name="prelinary_diagnosis">Diagnóstico preliminar</string>
-    <string name="enter_ecg">Ingresar electrocardiograma</string>
+    <string name="enter_ecg">Ingresar datos de electrocardiograma</string>
     <string name="ecg">Electrocardiograma</string>
     <string name="enter_rx">Ingresar datos de radriografía de tórax</string>
     <string name="rx">Radiografía de tórax</string>

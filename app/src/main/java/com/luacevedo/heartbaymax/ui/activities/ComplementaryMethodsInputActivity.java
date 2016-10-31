@@ -126,6 +126,7 @@ public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
     }
 
     public void finishDiagnosis() {
+        HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
         finish();
     }
 
