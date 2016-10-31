@@ -38,7 +38,7 @@ public class Patient implements Serializable {
                 case Constants.Attribute.Type.BOOLEAN:
                     patientAttribute = new PatientAttribute<Boolean>(attribute, true);
                     break;
-                case Constants.Attribute.Type.INTEGER:
+                case Constants.Attribute.Type.NUMBER:
                     patientAttribute = new PatientAttribute<Integer>(attribute, 0);
                     break;
                 case Constants.Attribute.Type.LIST:

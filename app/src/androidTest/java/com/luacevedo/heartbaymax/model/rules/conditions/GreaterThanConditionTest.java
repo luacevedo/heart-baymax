@@ -12,18 +12,18 @@ public class GreaterThanConditionTest {
 
     @Test()
     public void testGreaterThanTrue() {
-        GreaterThanCondition condition = new GreaterThanCondition("root", 2);
-        Attribute attribute = new Attribute(1, "root", "integer");
-        PatientAttribute<Integer> patientAttribute = new PatientAttribute<>(attribute, 4);
+        GreaterThanCondition condition = new GreaterThanCondition("root", 2.0);
+        Attribute attribute = new Attribute(1, "root", "number");
+        PatientAttribute<Double> patientAttribute = new PatientAttribute<>(attribute, 4.0);
 
         assertTrue(condition.validate(patientAttribute));
     }
 
     @Test
     public void testGreaterThanFalse() {
-        GreaterThanCondition condition = new GreaterThanCondition("root", 2);
-        Attribute attribute = new Attribute(1, "root", "integer");
-        PatientAttribute<Integer> patientAttribute = new PatientAttribute<>(attribute, 2);
+        GreaterThanCondition condition = new GreaterThanCondition("root", 2.0);
+        Attribute attribute = new Attribute(1, "root", "number");
+        PatientAttribute<Double> patientAttribute = new PatientAttribute<>(attribute, 2.0);
 
         assertFalse(condition.validate(patientAttribute));
     }

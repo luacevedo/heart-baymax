@@ -1,38 +1,23 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
-import com.luacevedo.heartbaymax.R;
-import com.luacevedo.heartbaymax.api.MochiApi;
-import com.luacevedo.heartbaymax.api.baseapi.CallId;
-import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
-import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
-import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.db.InternalDbHelper;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
-import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.fragments.ComplementaryMethodsStepFragment;
-import com.luacevedo.heartbaymax.ui.fragments.PreliminaryDiagnosisStepFragment;
 import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
-import com.luacevedo.heartbaymax.utils.RulesExecutor;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
 
@@ -100,7 +85,7 @@ public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
                     keyToFind = attribute.getValue().toString();
                 }
                 Value value;
-                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING) || inputField.getDataType().equals(Constants.InputField.DataType.INTEGER)) {
+                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING) || inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
                     value = new Value(keyToFind);
                 } else {
                     value = inputField.getValue(keyToFind);
@@ -130,8 +115,8 @@ public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
     public void setInputFieldTextValue(InputField inputField, String value) {
         PatientAttribute patientAttribute = patient.getAttributesMap().get(inputField.getRootToAffect());
         if (patientAttribute != null) {
-            if (inputField.getDataType().equals(Constants.InputField.DataType.INTEGER)) {
-                patientAttribute.setValue(Integer.parseInt(value));
+            if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
+                patientAttribute.setValue(Double.valueOf(value));
             } else if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
                 patientAttribute.setValue(value);
             }

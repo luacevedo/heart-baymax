@@ -73,10 +73,10 @@ public class MockInfo {
         PatientAttribute<Boolean> nighttimeCough = new PatientAttribute<>(new Attribute(12L, "SecondarySymptoms.NighttimeCough", "boolean", "Tos nocturna"));
         map.put("SecondarySymptoms.NighttimeCough", nighttimeCough);
 
-        PatientAttribute<Double> essentialSymptomsAssessment = new PatientAttribute<>(new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "integer"), 0.0);
+        PatientAttribute<Double> essentialSymptomsAssessment = new PatientAttribute<>(new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "number"), 0.0);
         map.put("InitialPhysicalState.EssentialSymptomsAssessment", essentialSymptomsAssessment);
 
-        PatientAttribute<Double> secondarySymptomsAssessment = new PatientAttribute<>(new Attribute(3L, "InitialPhysicalState.SecondarySymptomsAssessment", "integer"), 0.0);
+        PatientAttribute<Double> secondarySymptomsAssessment = new PatientAttribute<>(new Attribute(3L, "InitialPhysicalState.SecondarySymptomsAssessment", "number"), 0.0);
         map.put("InitialPhysicalState.SecondarySymptomsAssessment", secondarySymptomsAssessment);
 
         PatientAttribute<List<String>> essentialSymptoms = new PatientAttribute<List<String>>(new Attribute(4L, "InitialPhysicalState.EssentialSymptoms", "list"), new ArrayList<String>());

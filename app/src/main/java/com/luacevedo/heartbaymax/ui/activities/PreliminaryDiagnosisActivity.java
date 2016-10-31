@@ -147,8 +147,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     public void setInputFieldTextValue(InputField inputField, String value) {
         PatientAttribute patientAttribute = patient.getAttributesMap().get(inputField.getRootToAffect());
         if (patientAttribute != null) {
-            if (inputField.getDataType().equals(Constants.InputField.DataType.INTEGER)) {
-                patientAttribute.setValue(Integer.parseInt(value));
+            if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
+                patientAttribute.setValue(Double.valueOf(value));
             } else if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
                 patientAttribute.setValue(value);
             }

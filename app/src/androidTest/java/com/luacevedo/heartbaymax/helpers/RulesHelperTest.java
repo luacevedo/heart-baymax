@@ -47,8 +47,8 @@ public class RulesHelperTest {
         PatientAttribute<Boolean> orthopnoea = new PatientAttribute<>(orthop, false);
         map.put(orthop.getRoot(), orthopnoea);
 
-        Attribute valSE = new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "integer");
-        PatientAttribute<Integer> assessmentES = new PatientAttribute<>(valSE, 5);
+        Attribute valSE = new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "number");
+        PatientAttribute<Double> assessmentES = new PatientAttribute<>(valSE, 5.0);
         map.put(valSE.getRoot(), assessmentES);
 
         Attribute essentialSymp = new Attribute(3L, "InitialPhysicalState.EssentialSymptoms", "list");
@@ -69,9 +69,9 @@ public class RulesHelperTest {
         List<BaseCondition> conditionsToFulFill = new ArrayList<>();
         AffirmativeCondition affCondition = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
         conditionsToFulFill.add(affCondition);
-        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         conditionsToFulFill.add(greaterThanCondition);
-        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 7);
+        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 7.0);
         conditionsToFulFill.add(lessThanCondition);
         ContainsCondition containsCondition = new ContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
         conditionsToFulFill.add(containsCondition);
@@ -86,9 +86,9 @@ public class RulesHelperTest {
         List<BaseCondition> conditionsNotToFulFill = new ArrayList<>();
         AffirmativeCondition affCondition = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
         conditionsNotToFulFill.add(affCondition);
-        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         conditionsNotToFulFill.add(greaterThanCondition);
-        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         conditionsNotToFulFill.add(lessThanCondition);
 
         assertFalse(RulesHelper.checkConditions(conditionsNotToFulFill, patient));

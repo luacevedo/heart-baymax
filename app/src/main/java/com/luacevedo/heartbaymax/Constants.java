@@ -43,7 +43,7 @@ public class Constants {
     public static class Attribute {
         public static class Type {
             public static final String BOOLEAN = "boolean";
-            public static final String INTEGER = "integer";
+            public static final String NUMBER = "number";
             public static final String LIST = "list";
             public static final String STRING = "string";
         }
@@ -58,7 +58,7 @@ public class Constants {
         public static class DataType {
             public static final String BOOLEAN = "boolean";
             public static final String STRING = "string";
-            public static final String INTEGER = "integer";
+            public static final String NUMBER = "number";
             public static final String SELECT = "select";
         }
 

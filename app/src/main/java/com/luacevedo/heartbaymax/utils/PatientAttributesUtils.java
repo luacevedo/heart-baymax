@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.luacevedo.heartbaymax.Constants.Attribute.Type.BOOLEAN;
-import static com.luacevedo.heartbaymax.Constants.Attribute.Type.INTEGER;
+import static com.luacevedo.heartbaymax.Constants.Attribute.Type.NUMBER;
 import static com.luacevedo.heartbaymax.Constants.Attribute.Type.LIST;
 import static com.luacevedo.heartbaymax.Constants.Attribute.Type.STRING;
 
@@ -28,8 +28,8 @@ public class PatientAttributesUtils {
                 case LIST:
                     patientAttribute = new PatientAttribute<>(attribute, new ArrayList<>());
                     break;
-                case INTEGER:
-                    patientAttribute = new PatientAttribute<>(attribute, 0.0);
+                case NUMBER:
+                    patientAttribute = new PatientAttribute<>(attribute, 0);
                     break;
             }
             if (patientAttribute != null) {
