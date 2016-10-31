@@ -37,6 +37,7 @@ public class Constants {
         public static final String STEP_INPUT_ATTRIBUTES = "stepInputAttributes";
         public static final String PATIENT = "patient";
         public static final String RULES = "rules";
+        public static final String STAGE = "stage";
     }
 
     public static class Attribute {

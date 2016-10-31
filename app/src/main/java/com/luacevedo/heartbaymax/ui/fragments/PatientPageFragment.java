@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
+import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.interfaces.OnPatientStageClick;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
 import com.luacevedo.heartbaymax.ui.views.PatientStageView;
+import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 
 import static com.luacevedo.heartbaymax.Constants.PatientStage.INITIAL_STATE;
 
@@ -66,10 +68,25 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
             case PRELIMINARY_DIAGNOSIS:
                 break;
             case ECG:
+                if (activity.getPatient().isECGCompleted()) {
+                    //mostrar los datos
+                } else {
+                    startActivity(IntentFactory.getComplementaryMethodsActivityIntent(activity.getPatient(), InputFieldsUtils.STAGE_2));
+                }
                 break;
             case RX:
+                if (activity.getPatient().isRXCompleted()) {
+                    //mostrar los datos
+                } else {
+                    startActivity(IntentFactory.getComplementaryMethodsActivityIntent(activity.getPatient(), InputFieldsUtils.STAGE_3));
+                }
                 break;
             case LAB_ANALYSIS:
+                if (activity.getPatient().isLabAnalysisCompleted()) {
+                    //mostrar los datos
+                } else {
+                    startActivity(IntentFactory.getComplementaryMethodsActivityIntent(activity.getPatient(), InputFieldsUtils.STAGE_4));
+                }
                 break;
             case FINAL_DIAGNOSIS:
                 break;

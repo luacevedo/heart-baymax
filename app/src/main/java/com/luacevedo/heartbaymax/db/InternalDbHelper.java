@@ -43,7 +43,7 @@ public class InternalDbHelper {
         }
     }
 
-    public List<Patient> getStepInputFields() {
+    public List<StepInputFields> getStepInputFields() {
         return this.stepInputFieldsDb.getAllDataFromTable(StepInputFields.class);
 
     }
