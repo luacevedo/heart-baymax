@@ -2,18 +2,22 @@ package com.luacevedo.heartbaymax.db;
 
 import android.content.Context;
 
+import com.luacevedo.heartbaymax.api.model.fields.InputField;
+import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
+import com.luacevedo.heartbaymax.db.internal.StepInputFieldsDbHelper;
 import com.luacevedo.heartbaymax.db.internal.PatientsDbHelper;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InternalDbHelper {
 
     private PatientsDbHelper patientsDb;
+    private StepInputFieldsDbHelper stepInputFieldsDb;
 
     public InternalDbHelper(Context context) {
         this.patientsDb = new PatientsDbHelper(context);
+        this.stepInputFieldsDb = new StepInputFieldsDbHelper(context);
     }
 
     public void savePatient(Patient patient) {
@@ -32,6 +36,17 @@ public class InternalDbHelper {
 
     }
 
+    public void saveStepInputFields(List<StepInputFields> inputFields) {
+        this.stepInputFieldsDb.clearDb();
+        for (StepInputFields field : inputFields) {
+            this.stepInputFieldsDb.insert(String.format("%s-%s", field.getStage(), field.getStep()), field);
+        }
+    }
+
+    public List<Patient> getStepInputFields() {
+        return this.stepInputFieldsDb.getAllDataFromTable(StepInputFields.class);
+
+    }
 
 
 }

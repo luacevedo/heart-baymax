@@ -17,12 +17,13 @@ import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
 import com.luacevedo.heartbaymax.api.model.rules.Rule;
+import com.luacevedo.heartbaymax.db.InternalDbHelper;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.fragments.PreliminaryDiagnosisStepFragment;
-import com.luacevedo.heartbaymax.ui.fragments.RulesExecutionFragment;
+import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 import com.luacevedo.heartbaymax.utils.RulesExecutor;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     private int currentStep = 0;
     private ProgressDialog progress;
     private MochiApi mochiApi = HeartBaymaxApplication.getApplication().getMochiApi();
+    private InternalDbHelper internalDbHelper = HeartBaymaxApplication.getApplication().getInternalDbHelper();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +117,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         return new Callback<List<StepInputFields>>() {
             @Override
             public void success(List<StepInputFields> inputFields, Response response) {
-                preliminaryDiagnosisFields = inputFields;
+                internalDbHelper.saveStepInputFields(inputFields);
+                preliminaryDiagnosisFields = InputFieldsUtils.filterStageInputFields(inputFields, InputFieldsUtils.STAGE_1);
                 PreliminaryDiagnosisStepFragment fragment = createStepFragment();
                 setInitialFragment(fragment);
                 progress.dismiss();
@@ -124,6 +127,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.e("LULI", error.toString());
+                progress.dismiss();
             }
         };
     }

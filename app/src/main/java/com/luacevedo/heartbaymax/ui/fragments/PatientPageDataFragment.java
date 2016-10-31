@@ -2,6 +2,7 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,17 @@ public class PatientPageDataFragment extends BaseFragment {
 
     private LinearLayout patientContentLayout;
     private PatientPageActivity activity;
+    private Constants.PatientStage patientStage;
+
+    public static PatientPageDataFragment newInstance(Constants.PatientStage patientStage) {
+        PatientPageDataFragment fragment = new PatientPageDataFragment();
+        fragment.setPatientStage(patientStage);
+        return fragment;
+    }
+
+    public void setPatientStage(Constants.PatientStage patientStage) {
+        this.patientStage = patientStage;
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -82,5 +94,4 @@ public class PatientPageDataFragment extends BaseFragment {
         return super.onOptionsItemSelected(item);
 
     }
-
 }

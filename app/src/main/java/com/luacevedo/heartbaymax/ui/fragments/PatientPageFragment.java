@@ -14,6 +14,8 @@ import com.luacevedo.heartbaymax.interfaces.OnPatientStageClick;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
 import com.luacevedo.heartbaymax.ui.views.PatientStageView;
 
+import static com.luacevedo.heartbaymax.Constants.PatientStage.INITIAL_STATE;
+
 public class PatientPageFragment extends BaseFragment implements OnPatientStageClick {
 
     private PatientPageActivity activity;
@@ -37,7 +39,7 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
         patientName.setText(activity.getPatient().getName());
 
         PatientStageView initialSituationView = (PatientStageView) view.findViewById(R.id.initial_state_stage);
-        initialSituationView.setupView(Constants.PatientStage.INITIAL_STATE, true, true, this);
+        initialSituationView.setupView(INITIAL_STATE, true, true, this);
 
         PatientStageView preliminaryDiagnosisView = (PatientStageView) view.findViewById(R.id.preliminary_diagnosis_stage);
         preliminaryDiagnosisView.setupView(Constants.PatientStage.PRELIMINARY_DIAGNOSIS, true, true, this);
@@ -59,10 +61,17 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
     public void onPageStageClick(Constants.PatientStage stage, boolean isCompleted) {
         switch (stage) {
             case INITIAL_STATE:
-                slideNextFragment(new PatientPageDataFragment());
+                slideNextFragment(PatientPageDataFragment.newInstance(INITIAL_STATE));
+                break;
+            case PRELIMINARY_DIAGNOSIS:
                 break;
             case ECG:
-                Log.e("LULI","HEART SITUATION");
+                break;
+            case RX:
+                break;
+            case LAB_ANALYSIS:
+                break;
+            case FINAL_DIAGNOSIS:
                 break;
         }
     }
