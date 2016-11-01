@@ -81,15 +81,25 @@ public class Patient implements Serializable {
     }
 
     public boolean isECGCompleted() {
-        return false;
+        return attributesMap.get(Constants.Attribute.ECG.HEART_RATE).getValue() != null
+                && attributesMap.get(Constants.Attribute.ECG.ISCHEMIA).getValue() != null
+                && attributesMap.get(Constants.Attribute.ECG.ARRHYTHMIA).getValue() != null
+                && attributesMap.get(Constants.Attribute.ECG.STROKE_SYMPTOMS).getValue() != null;
     }
 
     public boolean isRXCompleted() {
-        return false;
+        return attributesMap.get(Constants.Attribute.RX.KERLEY_LINES).getValue() != null
+                && attributesMap.get(Constants.Attribute.RX.PLEURAL_EFFUSION).getValue() != null
+                && attributesMap.get(Constants.Attribute.RX.FLOW_REDISTRIBUTION).getValue() != null;
     }
 
     public boolean isLabAnalysisCompleted() {
-        return false;
+        return attributesMap.get(Constants.Attribute.LAB_ANALYSIS.SODIUM).getValue() != null
+                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.POTASSIUM).getValue() != null
+                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.UREMIA).getValue() != null
+                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.CREATININE).getValue() != null
+                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.RED_BLOOD_CELLS).getValue() != null
+                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.WHITE_BLOOD_CELLS).getValue() != null;
     }
 
     public boolean isFinalDiagnosisCompleted() {

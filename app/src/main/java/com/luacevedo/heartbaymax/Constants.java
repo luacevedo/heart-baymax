@@ -47,6 +47,28 @@ public class Constants {
             public static final String LIST = "list";
             public static final String STRING = "string";
         }
+
+        public class ECG {
+            public static final String HEART_RATE = "ECG.HeartRate";
+            public static final String ISCHEMIA = "ECG.Ischemia";
+            public static final String ARRHYTHMIA = "ECG.Arrhythmia";
+            public static final String STROKE_SYMPTOMS = "ECG.StrokeSymptoms";
+        }
+
+        public class RX {
+            public static final String KERLEY_LINES = "Rx.KerleyLines";
+            public static final String FLOW_REDISTRIBUTION = "Rx.FlowRedistribution";
+            public static final String PLEURAL_EFFUSION = "Rx.PleuralEffusion";
+        }
+
+        public class LAB_ANALYSIS {
+            public static final String SODIUM = "LabAnalysis.Sodium";
+            public static final String POTASSIUM = "LabAnalysis.Potassium";
+            public static final String UREMIA = "LabAnalysis.Uremia";
+            public static final String CREATININE = "LabAnalysis.Creatinine";
+            public static final String RED_BLOOD_CELLS = "LabAnalysis.RedBloodCells";
+            public static final String WHITE_BLOOD_CELLS = "LabAnalysis.WhiteBloodCells";
+        }
     }
 
     public static class InputField {
@@ -79,6 +101,7 @@ public class Constants {
         public static final String ESSENTIAL_SYMPTOMS = "EssentialSymptoms";
         public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
         public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
+
     }
 
     public enum PatientStage {
