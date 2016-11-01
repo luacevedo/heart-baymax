@@ -49,7 +49,7 @@ public class TextFieldView extends InputFieldView {
     private void setupEditTExt() {
         editText.setHint(inputField.getLabelMessage());
         if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
-            editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
         }
 
         editText.setOnTouchListener(null);
