@@ -2,6 +2,7 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,7 @@ public class PreliminaryDiagnosisDataFragment extends BaseFragment implements Vi
         List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
-            if (root.equals(Constants.Patient.Root.PRELIMINARY_DIAGNOSIS)) {
+            if (root.equals(Constants.Patient.Root.PRELIMINARY_DIAGNOSIS) && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
                 preliminaryDiagnosisList.add(attribute);
             }
         }

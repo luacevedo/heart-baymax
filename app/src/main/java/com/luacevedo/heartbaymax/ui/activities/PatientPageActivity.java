@@ -40,10 +40,10 @@ public class PatientPageActivity extends BaseFragmentActivity {
         unlockMenu();
         setInitialFragment(new PatientPageFragment());
 
-        if (isFromInitialState) {
+//        if (isFromInitialState) {
             isFromInitialState = false;
             showOverlayFragment(new PreliminaryDiagnosisDataFragment());
-        }
+//        }
 
     }
 

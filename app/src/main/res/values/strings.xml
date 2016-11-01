@@ -7,17 +7,17 @@
     <string name="next_step">Siguiente</string>
     <string name="finish_step">Finalizar</string>
     <string name="patient_title_home">"Nombre: {patient}"</string>
-    <string name="edit_preliminary_diagnosis">Editar diagnostico preliminar</string>
+    <string name="edit_preliminary_diagnosis">Editar diagnóstico preliminar</string>
     <string name="edit_complementary_tests">Editar exámenes complementarios</string>
     <string name="patients">Pacientes:</string>
-    <string name="continue_diagnosis">Continuar diagnostico</string>
+    <string name="continue_diagnosis">Continuar diagnóstico</string>
     <string name="enter_heart_situation">Ingresar situación cardíaca</string>
     <string name="loading">Cargando</string>
     <string name="heart_situation">Situación cardíaca</string>
     <string name="initial_situation">Situación inicial</string>
     <string name="enter_initial_situation">Ingresar situación inicial</string>
     <string name="enter_prelinary_diagnosis">Ingresar diagnóstico preliminar</string>
-    <string name="prelinary_diagnosis">Diagnóstico preliminar</string>
+    <string name="preliminary_diagnosis">Diagnóstico preliminar</string>
     <string name="enter_ecg">Ingresar datos de electrocardiograma</string>
     <string name="ecg">Electrocardiograma</string>
     <string name="enter_rx">Ingresar datos de radriografía de tórax</string>
@@ -27,4 +27,5 @@
     <string name="enter_final_diagnosis">Ingresar diagnóstico final</string>
     <string name="final_diagnosis">Diagnóstico final</string>
     <string name="enter_valid_value">Ingrese un valor válido</string>
+    <string name="accept">Aceptar</string>
 </resources>

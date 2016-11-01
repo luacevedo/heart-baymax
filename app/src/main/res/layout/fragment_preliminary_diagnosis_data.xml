@@ -21,14 +21,22 @@
             android:orientation="vertical"
             android:paddingTop="@dimen/overlay_margin">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="24dp"
+                android:paddingBottom="@dimen/large_padding"
+                android:textSize="@dimen/subtitle"
+                android:text="@string/preliminary_diagnosis"/>
+
             <LinearLayout
                 android:id="@+id/preliminary_diagnosis_data_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="@dimen/large_padding"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
                 android:paddingTop="@dimen/small_padding" />
 
             <TextView
@@ -46,7 +54,7 @@
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingRight="@dimen/large_padding"
                 android:paddingStart="@dimen/large_padding"
-                android:text="Aceptar"
+                android:text="@string/accept"
                 android:textAllCaps="true"
                 android:textColor="@color/accent"
                 android:textSize="@dimen/material_text_body" />
