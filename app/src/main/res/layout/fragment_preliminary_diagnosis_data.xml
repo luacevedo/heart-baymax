@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_overlay"
+    android:clickable="true"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="@dimen/overlay_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/overlay_margin"
+            android:background="@drawable/white_rounded_corner"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/overlay_margin">
+
+            <LinearLayout
+                android:id="@+id/preliminary_diagnosis_data_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/large_padding"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingTop="@dimen/small_padding" />
+
+            <TextView
+                android:id="@+id/preliminary_diagnosis_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/finger_size"
+                android:layout_gravity="right|end"
+                android:layout_marginBottom="@dimen/medium_padding"
+                android:layout_marginEnd="@dimen/medium_padding"
+                android:layout_marginRight="@dimen/medium_padding"
+                android:layout_marginTop="@dimen/extra_large_padding"
+                android:background="@drawable/material_white_flat_button"
+                android:gravity="center"
+                android:paddingEnd="@dimen/large_padding"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingStart="@dimen/large_padding"
+                android:text="Aceptar"
+                android:textAllCaps="true"
+                android:textColor="@color/accent"
+                android:textSize="@dimen/material_text_body" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

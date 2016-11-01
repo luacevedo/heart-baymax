@@ -173,7 +173,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
             public void success(List<Rule> rules, Response response) {
                 RulesExecutor.executeRules(rules, patient);
                 HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
-                startActivity(IntentFactory.getPatientPageActivityIntent(patient));
+                startActivity(IntentFactory.getPatientPageActivityIntent(patient, true));
                 finish();
                 progress.dismiss();
             }

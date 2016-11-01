@@ -51,7 +51,6 @@ public class RulesExecutionFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         executeRules();
-        addPatientAttributes();
     }
 
     private void executeRules() {
@@ -102,41 +101,6 @@ public class RulesExecutionFragment extends BaseFragment {
         }
         return conditionsFulfilled;
     }
-
-    private void addPatientAttributes() {
-        List<PatientAttribute> essentialSymptomsList = new ArrayList<>();
-        List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
-        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
-        for (PatientAttribute attribute : patient.getAttributesMap().values()) {
-            String root = attribute.getAttribute().getRootParent();
-            switch (root) {
-                case Constants.Patient.Root.ESSENTIAL_SYMPTOMS:
-                    essentialSymptomsList.add(attribute);
-                    break;
-                case Constants.Patient.Root.SECONDARY_SYMPTOMS:
-                    secondarySymptomsList.add(attribute);
-                    break;
-                case Constants.Patient.Root.PRELIMINARY_DIAGNOSIS:
-                    preliminaryDiagnosisList.add(attribute);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        addValuesToLayout(essentialSymptomsList);
-        addValuesToLayout(secondarySymptomsList);
-        addValuesToLayout(preliminaryDiagnosisList);
-    }
-
-    private void addValuesToLayout(List<PatientAttribute> list) {
-        for (PatientAttribute attribute : list) {
-            PatientAttributeView viewAttribute = new PatientAttributeView(getActivity());
-            viewAttribute.setData(attribute);
-            patientContentLayout.addView(viewAttribute);
-        }
-    }
-
 
     public void setPatient(Patient patient) {
         this.patient = patient;

@@ -43,5 +43,9 @@ public class BaseFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    protected void removeCurrentFragment() {
+        navigationActivity.removeCurrentFragment();
+    }
+
 
 }

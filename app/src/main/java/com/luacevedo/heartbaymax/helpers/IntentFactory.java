@@ -22,10 +22,11 @@ public class IntentFactory {
         return intent;
     }
 
-    public static Intent getPatientPageActivityIntent(Patient patient) {
+    public static Intent getPatientPageActivityIntent(Patient patient, boolean isFromInitialState) {
         Intent intent = new Intent(HeartBaymaxApplication.getApplication(), PatientPageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         BundleHelper.putJsonBundle(intent, Constants.BundleKey.PATIENT, patient);
+        intent.putExtra(Constants.BundleKey.IS_FROM_INITIAL_STATE, isFromInitialState);
         return intent;
     }
 

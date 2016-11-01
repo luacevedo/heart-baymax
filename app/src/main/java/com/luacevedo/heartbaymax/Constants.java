@@ -38,6 +38,7 @@ public class Constants {
         public static final String PATIENT = "patient";
         public static final String RULES = "rules";
         public static final String STAGE = "stage";
+        public static final String IS_FROM_INITIAL_STATE = "isFromInitialState";
     }
 
     public static class Attribute {
