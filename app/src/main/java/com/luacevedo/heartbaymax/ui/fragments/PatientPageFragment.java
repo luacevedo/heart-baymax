@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +23,7 @@ import static com.luacevedo.heartbaymax.Constants.PatientStage.INITIAL_STATE;
 
 public class PatientPageFragment extends BaseFragment implements OnPatientStageClick {
 
-    private static final int REQUEST_COMPLETE_ECG = 34256;
+    private static final int REQUEST_CODE = 34256;
     private PatientPageActivity activity;
     private Patient patient;
 
@@ -82,21 +81,21 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
                 if (activity.getPatient().isECGCompleted()) {
                     //mostrar los datos
                 } else {
-                    startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_2), REQUEST_COMPLETE_ECG);
+                    startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_2), REQUEST_CODE);
                 }
                 break;
             case RX:
                 if (activity.getPatient().isRXCompleted()) {
                     //mostrar los datos
                 } else {
-                    startActivity(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_3));
+                    startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_3), REQUEST_CODE);
                 }
                 break;
             case LAB_ANALYSIS:
                 if (activity.getPatient().isLabAnalysisCompleted()) {
                     //mostrar los datos
                 } else {
-                    startActivity(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_4));
+                    startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_4), REQUEST_CODE);
                 }
                 break;
             case FINAL_DIAGNOSIS:
@@ -108,7 +107,7 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQUEST_COMPLETE_ECG) {
+            if (requestCode == REQUEST_CODE) {
                 activity.setPatient(BundleHelper.fromBundleJson(data, Constants.BundleKey.PATIENT, Patient.class, activity.getPatient() != null ? activity.getPatient() : null));
             }
         }
