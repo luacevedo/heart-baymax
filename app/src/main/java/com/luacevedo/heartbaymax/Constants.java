@@ -98,9 +98,14 @@ public class Constants {
         public static final String FEMALE = "F";
         public static final String MALE = "M";
 
-        public static final String ESSENTIAL_SYMPTOMS = "EssentialSymptoms";
-        public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
-        public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
+        public class Root {
+            public static final String ESSENTIAL_SYMPTOMS = "EssentialSymptoms";
+            public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
+            public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
+            public static final String ECG = "ECG";
+            public static final String RX = "RX";
+            public static final String LAB_ANALYSIS = "LabAnalysis";
+        }
 
     }
 

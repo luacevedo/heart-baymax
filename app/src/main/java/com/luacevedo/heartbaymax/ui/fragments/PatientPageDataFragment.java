@@ -2,7 +2,6 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,26 +53,76 @@ public class PatientPageDataFragment extends BaseFragment {
     }
 
     private void addPatientAttributes() {
-        List<PatientAttribute> essentialSymptomsList = new ArrayList<>();
-        List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
+        switch (patientStage) {
+            case INITIAL_STATE:
+                showInitialState();
+                break;
+            case PRELIMINARY_DIAGNOSIS:
+                showPreliminaryDiagnosis();
+                break;
+            case ECG:
+                showComplementaryMethod(Constants.Patient.Root.ECG);
+                break;
+            case RX:
+                showComplementaryMethod(Constants.Patient.Root.RX);
+                break;
+            case LAB_ANALYSIS:
+                showComplementaryMethod(Constants.Patient.Root.LAB_ANALYSIS);
+                break;
+
+        }
+    }
+
+    private void showComplementaryMethod(String root) {
+        List<PatientAttribute> attributesList = new ArrayList<>();
+        for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
+            String attributeRoot = attribute.getAttribute().getRootParent();
+            if (attributeRoot.equals(root)) {
+                attributesList.add(attribute);
+            }
+        }
+        addValuesToLayout(attributesList);
+    }
+
+
+    private void showPreliminaryDiagnosis() {
         List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
+        List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
             switch (root) {
-                case Constants.Patient.ESSENTIAL_SYMPTOMS:
+                case Constants.Patient.Root.PRELIMINARY_DIAGNOSIS:
+                    preliminaryDiagnosisList.add(attribute);
+                    break;
+//                case Constants.Patient.SECONDARY_SYMPTOMS:
+//                    secondarySymptomsList.add(attribute);
+//                    break;
+                default:
+                    break;
+            }
+        }
+        addValuesToLayout(preliminaryDiagnosisList);
+        addValuesToLayout(secondarySymptomsList);
+    }
+
+    private void showInitialState() {
+        List<PatientAttribute> essentialSymptomsList = new ArrayList<>();
+        List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
+        for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
+            String root = attribute.getAttribute().getRootParent();
+            switch (root) {
+                case Constants.Patient.Root.ESSENTIAL_SYMPTOMS:
                     essentialSymptomsList.add(attribute);
                     break;
-                case Constants.Patient.SECONDARY_SYMPTOMS:
+                case Constants.Patient.Root.SECONDARY_SYMPTOMS:
                     secondarySymptomsList.add(attribute);
                     break;
                 default:
                     break;
             }
         }
-
         addValuesToLayout(essentialSymptomsList);
         addValuesToLayout(secondarySymptomsList);
-        addValuesToLayout(preliminaryDiagnosisList);
     }
 
     private void addValuesToLayout(List<PatientAttribute> list) {

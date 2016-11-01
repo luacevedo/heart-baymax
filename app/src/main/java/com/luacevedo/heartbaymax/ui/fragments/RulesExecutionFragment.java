@@ -110,13 +110,13 @@ public class RulesExecutionFragment extends BaseFragment {
         for (PatientAttribute attribute : patient.getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
             switch (root) {
-                case Constants.Patient.ESSENTIAL_SYMPTOMS:
+                case Constants.Patient.Root.ESSENTIAL_SYMPTOMS:
                     essentialSymptomsList.add(attribute);
                     break;
-                case Constants.Patient.SECONDARY_SYMPTOMS:
+                case Constants.Patient.Root.SECONDARY_SYMPTOMS:
                     secondarySymptomsList.add(attribute);
                     break;
-                case Constants.Patient.PRELIMINARY_DIAGNOSIS:
+                case Constants.Patient.Root.PRELIMINARY_DIAGNOSIS:
                     preliminaryDiagnosisList.add(attribute);
                     break;
                 default:

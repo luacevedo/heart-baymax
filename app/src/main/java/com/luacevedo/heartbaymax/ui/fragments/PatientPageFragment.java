@@ -19,7 +19,11 @@ import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
 import com.luacevedo.heartbaymax.ui.views.PatientStageView;
 import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 
+import static com.luacevedo.heartbaymax.Constants.PatientStage.ECG;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.INITIAL_STATE;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.LAB_ANALYSIS;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.PRELIMINARY_DIAGNOSIS;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.RX;
 
 public class PatientPageFragment extends BaseFragment implements OnPatientStageClick {
 
@@ -76,24 +80,25 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
                 slideNextFragment(PatientPageDataFragment.newInstance(INITIAL_STATE));
                 break;
             case PRELIMINARY_DIAGNOSIS:
+                slideNextFragment(PatientPageDataFragment.newInstance(PRELIMINARY_DIAGNOSIS));
                 break;
             case ECG:
                 if (activity.getPatient().isECGCompleted()) {
-                    //mostrar los datos
+                    slideNextFragment(PatientPageDataFragment.newInstance(ECG));
                 } else {
                     startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_2), REQUEST_CODE);
                 }
                 break;
             case RX:
                 if (activity.getPatient().isRXCompleted()) {
-                    //mostrar los datos
+                    slideNextFragment(PatientPageDataFragment.newInstance(RX));
                 } else {
                     startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_3), REQUEST_CODE);
                 }
                 break;
             case LAB_ANALYSIS:
                 if (activity.getPatient().isLabAnalysisCompleted()) {
-                    //mostrar los datos
+                    slideNextFragment(PatientPageDataFragment.newInstance(LAB_ANALYSIS));
                 } else {
                     startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_4), REQUEST_CODE);
                 }
