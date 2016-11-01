@@ -31,6 +31,7 @@ public class PatientPageActivity extends BaseFragmentActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         BundleHelper.putJsonBundle(outState, Constants.BundleKey.PATIENT, patient);
+        outState.putBoolean(Constants.BundleKey.IS_FROM_INITIAL_STATE, isFromInitialState);
     }
 
     @Override
@@ -40,6 +41,7 @@ public class PatientPageActivity extends BaseFragmentActivity {
         setInitialFragment(new PatientPageFragment());
 
         if (isFromInitialState) {
+            isFromInitialState = false;
             showOverlayFragment(new PreliminaryDiagnosisDataFragment());
         }
 
