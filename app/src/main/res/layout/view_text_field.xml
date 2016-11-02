@@ -16,6 +16,7 @@
             android:layout_marginLeft="@dimen/input_field_left_margin"
             android:layout_marginRight="@dimen/input_field_right_margin"
             android:layout_marginTop="@dimen/input_field_top_margin"
+            android:textSize="16sp"
             android:imeOptions="actionDone"
             android:saveEnabled="false"
             app:met_floatingLabel="normal" />

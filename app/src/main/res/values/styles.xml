@@ -28,5 +28,5 @@
     </style>
 
 
-    <dimen name="text_normal">18sp</dimen>
+    <dimen name="text_normal">16sp</dimen>
 </resources>
