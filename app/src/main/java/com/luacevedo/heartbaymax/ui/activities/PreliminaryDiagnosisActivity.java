@@ -117,8 +117,9 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         return new Callback<List<StepInputFields>>() {
             @Override
             public void success(List<StepInputFields> inputFields, Response response) {
-                internalDbHelper.saveStepInputFields(inputFields);
-                preliminaryDiagnosisFields = InputFieldsUtils.filterStageInputFields(inputFields, InputFieldsUtils.STAGE_1);
+                List<StepInputFields> orderedFields = InputFieldsUtils.orderInputFields(inputFields);
+                internalDbHelper.saveStepInputFields(orderedFields);
+                preliminaryDiagnosisFields = InputFieldsUtils.filterStageInputFields(orderedFields, InputFieldsUtils.STAGE_1);
                 PreliminaryDiagnosisStepFragment fragment = createStepFragment();
                 setInitialFragment(fragment);
                 progress.dismiss();

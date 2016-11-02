@@ -23,4 +23,34 @@ public class InputFieldsUtils {
     }
 
 
+    public static List<StepInputFields> orderInputFields(List<StepInputFields> inputFields) {
+
+        List<StepInputFields> orderedFields = new ArrayList<>();
+        int stage = 1;
+        int step = 1;
+
+        while (!inputFields.isEmpty()) {
+            StepInputFields stepInputFields = findInputFieldForStageAndStep(inputFields, stage, step);
+            if (stepInputFields != null) {
+                inputFields.remove(stepInputFields);
+                orderedFields.add(stepInputFields);
+                step++;
+            } else {
+                stage++;
+                step = 1;
+            }
+        }
+        return orderedFields;
+
+    }
+
+    private static StepInputFields findInputFieldForStageAndStep(List<StepInputFields> inputFields, int stage, int step) {
+        for (StepInputFields stepInputField : inputFields) {
+            if (stepInputField.getStage() == stage && stepInputField.getStep() == step) {
+                return stepInputField;
+            }
+        }
+        return null;
+    }
 }
+
