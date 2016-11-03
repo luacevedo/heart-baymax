@@ -177,7 +177,7 @@ public class MockInfo {
 
 //    private static void addEdemaPulmonarRule(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(1L);
+//        rule.setRuleId(1L);
 //        List<BaseCondition> conditions1 = new ArrayList<>();
 //        AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
 //        conditions1.add(affCondition1);
@@ -195,7 +195,7 @@ public class MockInfo {
 //
 //    private static void addDisnea(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(2L);
+//        rule.setRuleId(2L);
 //        List<BaseCondition> conditions1 = new ArrayList<>();
 //        EqualsCondition affCondition1 = new EqualsCondition("EssentialSymptoms.Dyspnoea", "4");
 //        conditions1.add(affCondition1);
@@ -213,7 +213,7 @@ public class MockInfo {
 //
 //    private static void addOrtopnea(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(3L);
+//        rule.setRuleId(3L);
 //        List<BaseCondition> conditions1 = new ArrayList<>();
 //        AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.Orthopnoea");
 //        conditions1.add(affCondition1);
@@ -231,7 +231,7 @@ public class MockInfo {
 //
 //    private static void addRule4(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(4L);
+//        rule.setRuleId(4L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
@@ -259,7 +259,7 @@ public class MockInfo {
 //
 //    private static void addRule5(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(5L);
+//        rule.setRuleId(5L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        GreaterThanCondition greaterThanCondition1 = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
@@ -286,7 +286,7 @@ public class MockInfo {
 //
 //    private static void addRule6(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(6L);
+//        rule.setRuleId(6L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
@@ -314,7 +314,7 @@ public class MockInfo {
 //
 //    private static void addRule7(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(7L);
+//        rule.setRuleId(7L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
@@ -341,7 +341,7 @@ public class MockInfo {
 //
 //    private static void addRule8(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(8L);
+//        rule.setRuleId(8L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 1);

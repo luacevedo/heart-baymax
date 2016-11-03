@@ -25,6 +25,7 @@ import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.fragments.PreliminaryDiagnosisStepFragment;
 import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 import com.luacevedo.heartbaymax.utils.RulesExecutor;
+import com.luacevedo.heartbaymax.utils.RulesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,6 +173,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         return new Callback<List<Rule>>() {
             @Override
             public void success(List<Rule> rules, Response response) {
+                RulesUtils.orderRules(rules);
                 RulesExecutor.executeRules(rules, patient);
                 HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
                 startActivity(IntentFactory.getPatientPageActivityIntent(patient, true));

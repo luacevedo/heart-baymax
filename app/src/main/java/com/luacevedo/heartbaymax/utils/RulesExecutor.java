@@ -16,7 +16,7 @@ public class RulesExecutor {
         int i = 0;
         Log.e("LULI", "ejecuto las reglas");
         while (i < rules.size()) {
-            Log.e("LULI", "Rule " + rules.get(i).getId());
+            Log.e("LULI", "Rule " + rules.get(i).getRuleId());
             boolean conditionsFulfilled = checkConditions(rules.get(i), patient);
             if (conditionsFulfilled) {
                 executeActions(rules.get(i), patient);
@@ -46,7 +46,7 @@ public class RulesExecutor {
         for (Integer id : rulesToExclude) {
             Log.e("LULI", "Excluyo regla " + id);
             Rule r = new Rule();
-            r.setId(id);
+            r.setRuleId(id);
             rules.remove(r);
         }
     }

@@ -2,6 +2,7 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.*;
 
 public class PatientPageDataFragment extends BaseFragment {
 
@@ -90,15 +93,10 @@ public class PatientPageDataFragment extends BaseFragment {
         List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
-            switch (root) {
-                case Constants.Patient.Root.PRELIMINARY_DIAGNOSIS:
-                    preliminaryDiagnosisList.add(attribute);
-                    break;
-//                case Constants.Patient.SECONDARY_SYMPTOMS:
-//                    secondarySymptomsList.add(attribute);
-//                    break;
-                default:
-                    break;
+            if ((root.equals(PRELIMINARY_DIAGNOSIS) || root.equals(IMMEDIATE_TREATMENT)
+                    || root.equals(DIURETIC_TREATMENT) || root.equals(VASODILATOR_TREATMENT))
+                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+                preliminaryDiagnosisList.add(attribute);
             }
         }
         addValuesToLayout(preliminaryDiagnosisList);

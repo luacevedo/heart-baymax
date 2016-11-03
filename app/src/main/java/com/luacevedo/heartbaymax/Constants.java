@@ -11,7 +11,9 @@ public class Constants {
         public static class Condition {
             public static final String AFFIRMATIVE = "affirmative";
             public static final String GREATER_THAN = "greaterThan";
+            public static final String GREATER_OR_EQUAL_THAN = "greaterOrEqualThan";
             public static final String LESS_THAN = "lessThan";
+            public static final String LESS_OR_EQUAL_THAN = "lessOrEqualThan";
             public static final String CONTAINS = "contains";
             public static final String NOT_CONTAINS = "notContains";
             public static final String EQUALS = "equals";
@@ -103,6 +105,9 @@ public class Constants {
             public static final String ESSENTIAL_SYMPTOMS = "EssentialSymptoms";
             public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
             public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
+            public static final String IMMEDIATE_TREATMENT = "ImmediateTreatment";
+            public static final String DIURETIC_TREATMENT = "DiureticTreatment";
+            public static final String VASODILATOR_TREATMENT = "VasodilatorTreatment";
             public static final String ECG = "ECG";
             public static final String RX = "RX";
             public static final String LAB_ANALYSIS = "LabAnalysis";

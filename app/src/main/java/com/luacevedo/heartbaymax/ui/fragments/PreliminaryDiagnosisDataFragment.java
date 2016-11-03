@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
@@ -18,6 +17,7 @@ import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.*;
 
 public class PreliminaryDiagnosisDataFragment extends BaseFragment implements View.OnClickListener {
 
@@ -56,7 +56,9 @@ public class PreliminaryDiagnosisDataFragment extends BaseFragment implements Vi
         List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
-            if (root.equals(Constants.Patient.Root.PRELIMINARY_DIAGNOSIS) && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+            if ((root.equals(PRELIMINARY_DIAGNOSIS) || root.equals(IMMEDIATE_TREATMENT)
+                    || root.equals(DIURETIC_TREATMENT) || root.equals(VASODILATOR_TREATMENT))
+                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
                 preliminaryDiagnosisList.add(attribute);
             }
         }

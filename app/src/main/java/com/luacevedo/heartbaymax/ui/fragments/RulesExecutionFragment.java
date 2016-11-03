@@ -8,14 +8,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.model.rules.actions.BaseAction;
 import com.luacevedo.heartbaymax.model.rules.conditions.BaseCondition;
-import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +55,7 @@ public class RulesExecutionFragment extends BaseFragment {
         int i = 0;
         Log.e("LULI", "ejecuto las reglas");
         while (i < ruleList.size()) {
-            Log.e("LULI", "Rule " + ruleList.get(i).getId());
+            Log.e("LULI", "Rule " + ruleList.get(i).getRuleId());
             boolean conditionsFulfilled = checkConditions(ruleList.get(i));
             if (conditionsFulfilled) {
                 executeActions(ruleList.get(i));
@@ -71,7 +69,7 @@ public class RulesExecutionFragment extends BaseFragment {
         for (Integer id : rulesToExclude) {
             Log.e("LULI", "Excluyo regla " + id);
             Rule r = new Rule();
-            r.setId(id);
+            r.setRuleId(id);
             ruleList.remove(r);
         }
     }
