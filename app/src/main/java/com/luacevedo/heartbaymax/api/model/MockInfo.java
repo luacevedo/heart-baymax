@@ -28,64 +28,64 @@ public class MockInfo {
     public static HashMap<String, PatientAttribute> getMockedAttributesMap() {
         HashMap<String, PatientAttribute> map = new HashMap<>();
 
-        PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "PatientData.Name", "string", "Nombre"));
+        PatientAttribute<Boolean> name = new PatientAttribute<>(new Attribute(22L, "PatientData.Name", "string", "Nombre", true));
         map.put("PatientData.Name", name);
 
-        PatientAttribute<String> age = new PatientAttribute<>(new Attribute(23L, "PatientData.Age", "string", "Edad"));
+        PatientAttribute<String> age = new PatientAttribute<>(new Attribute(23L, "PatientData.Age", "string", "Edad", true));
         map.put("PatientData.Age", age);
 
-        PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "PatientData.Gender", "string", "Sexo"));
+        PatientAttribute<Boolean> gender = new PatientAttribute<>(new Attribute(24L, "PatientData.Gender", "string", "Sexo", true));
         map.put("PatientData.Gender", gender);
 
-        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(new Attribute(1L, "EssentialSymptoms.PulmonaryEdema", "boolean", "Edema de pulmon"));
+        PatientAttribute<Boolean> edemaPulmonar = new PatientAttribute<>(new Attribute(1L, "EssentialSymptoms.PulmonaryEdema", "boolean", "Edema de pulmon", true));
         map.put("EssentialSymptoms.PulmonaryEdema", edemaPulmonar);
 
-        PatientAttribute<String> disnea = new PatientAttribute<>(new Attribute(2L, "EssentialSymptoms.Dyspnoea", "string", "Disnea"));
+        PatientAttribute<String> disnea = new PatientAttribute<>(new Attribute(2L, "EssentialSymptoms.Dyspnoea", "string", "Disnea", true));
         map.put("EssentialSymptoms.Dyspnoea", disnea);
 
-        PatientAttribute<Boolean> ortopnea = new PatientAttribute<>(new Attribute(3L, "EssentialSymptoms.Orthopnoea", "boolean", "Ortopnea"));
+        PatientAttribute<Boolean> ortopnea = new PatientAttribute<>(new Attribute(3L, "EssentialSymptoms.Orthopnoea", "boolean", "Ortopnea", true));
         map.put("EssentialSymptoms.Orthopnoea", ortopnea);
 
-        PatientAttribute<Boolean> legEdema = new PatientAttribute<>(new Attribute(4L, "EssentialSymptoms.LegEdema", "boolean", "Edema de miembros inferiores"));
+        PatientAttribute<Boolean> legEdema = new PatientAttribute<>(new Attribute(4L, "EssentialSymptoms.LegEdema", "boolean", "Edema de miembros inferiores", true));
         map.put("EssentialSymptoms.LegEdema", legEdema);
 
-        PatientAttribute<Boolean> thirdHeartSound = new PatientAttribute<>(new Attribute(5L, "EssentialSymptoms.ThirdHeartSound", "boolean", "Tercer ruido"));
+        PatientAttribute<Boolean> thirdHeartSound = new PatientAttribute<>(new Attribute(5L, "EssentialSymptoms.ThirdHeartSound", "boolean", "Tercer ruido", true));
         map.put("EssentialSymptoms.ThirdHeartSound", thirdHeartSound);
 
-        PatientAttribute<Boolean> hypertension = new PatientAttribute<>(new Attribute(6L, "SecondarySymptoms.Hypertension", "boolean", "Hipertension"));
+        PatientAttribute<Boolean> hypertension = new PatientAttribute<>(new Attribute(6L, "SecondarySymptoms.Hypertension", "boolean", "Hipertension", true));
         map.put("SecondarySymptoms.Hypertension", hypertension);
 
-        PatientAttribute<Boolean> nicturia = new PatientAttribute<>(new Attribute(7L, "SecondarySymptoms.Nicturia", "boolean", "Nicturia"));
+        PatientAttribute<Boolean> nicturia = new PatientAttribute<>(new Attribute(7L, "SecondarySymptoms.Nicturia", "boolean", "Nicturia", true));
         map.put("SecondarySymptoms.Nicturia", nicturia);
 
-        PatientAttribute<Boolean> obesity = new PatientAttribute<>(new Attribute(8L, "SecondarySymptoms.Obesity", "boolean", "Obesidad"));
+        PatientAttribute<Boolean> obesity = new PatientAttribute<>(new Attribute(8L, "SecondarySymptoms.Obesity", "boolean", "Obesidad", true));
         map.put("SecondarySymptoms.Obesity", obesity);
 
-        PatientAttribute<Boolean> diabetes = new PatientAttribute<>(new Attribute(9L, "SecondarySymptoms.Diabetes", "boolean", "Diabetes"));
+        PatientAttribute<Boolean> diabetes = new PatientAttribute<>(new Attribute(9L, "SecondarySymptoms.Diabetes", "boolean", "Diabetes", true));
         map.put("SecondarySymptoms.Diabetes", diabetes);
 
-        PatientAttribute<Boolean> previousHeartAttack = new PatientAttribute<>(new Attribute(10L, "SecondarySymptoms.PreviousHeartAttack", "boolean", "Infarto previo"));
+        PatientAttribute<Boolean> previousHeartAttack = new PatientAttribute<>(new Attribute(10L, "SecondarySymptoms.PreviousHeartAttack", "boolean", "Infarto previo", true));
         map.put("SecondarySymptoms.PreviousHeartAttack", previousHeartAttack);
 
-        PatientAttribute<Boolean> jugularVeinEngorgement = new PatientAttribute<>(new Attribute(11L, "SecondarySymptoms.JugularVeinEngorgement", "boolean", "Injurgitacion yugular"));
+        PatientAttribute<Boolean> jugularVeinEngorgement = new PatientAttribute<>(new Attribute(11L, "SecondarySymptoms.JugularVeinEngorgement", "boolean", "Injurgitacion yugular", true));
         map.put("SecondarySymptoms.JugularVeinEngorgement", jugularVeinEngorgement);
 
-        PatientAttribute<Boolean> nighttimeCough = new PatientAttribute<>(new Attribute(12L, "SecondarySymptoms.NighttimeCough", "boolean", "Tos nocturna"));
+        PatientAttribute<Boolean> nighttimeCough = new PatientAttribute<>(new Attribute(12L, "SecondarySymptoms.NighttimeCough", "boolean", "Tos nocturna", true));
         map.put("SecondarySymptoms.NighttimeCough", nighttimeCough);
 
-        PatientAttribute<Double> essentialSymptomsAssessment = new PatientAttribute<>(new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "integer"), 0.0);
+        PatientAttribute<Double> essentialSymptomsAssessment = new PatientAttribute<>(new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "number", false), 0.0);
         map.put("InitialPhysicalState.EssentialSymptomsAssessment", essentialSymptomsAssessment);
 
-        PatientAttribute<Double> secondarySymptomsAssessment = new PatientAttribute<>(new Attribute(3L, "InitialPhysicalState.SecondarySymptomsAssessment", "integer"), 0.0);
+        PatientAttribute<Double> secondarySymptomsAssessment = new PatientAttribute<>(new Attribute(3L, "InitialPhysicalState.SecondarySymptomsAssessment", "number", false), 0.0);
         map.put("InitialPhysicalState.SecondarySymptomsAssessment", secondarySymptomsAssessment);
 
-        PatientAttribute<List<String>> essentialSymptoms = new PatientAttribute<List<String>>(new Attribute(4L, "InitialPhysicalState.EssentialSymptoms", "list"), new ArrayList<String>());
+        PatientAttribute<List<String>> essentialSymptoms = new PatientAttribute<List<String>>(new Attribute(4L, "InitialPhysicalState.EssentialSymptoms", "list", false), new ArrayList<String>());
         map.put("InitialPhysicalState.EssentialSymptoms", essentialSymptoms);
 
-        PatientAttribute<List<String>> secondarySymptoms = new PatientAttribute<List<String>>(new Attribute(5L, "InitialPhysicalState.SecondarySymptoms", "list"), new ArrayList<String>());
+        PatientAttribute<List<String>> secondarySymptoms = new PatientAttribute<List<String>>(new Attribute(5L, "InitialPhysicalState.SecondarySymptoms", "list", false), new ArrayList<String>());
         map.put("InitialPhysicalState.SecondarySymptoms", secondarySymptoms);
 
-        PatientAttribute<String> symptomsType = new PatientAttribute<>(new Attribute(6L, "PreliminaryDiagnosis.SymptomsType", "string", "Tipos de sintomas"));
+        PatientAttribute<String> symptomsType = new PatientAttribute<>(new Attribute(6L, "PreliminaryDiagnosis.SymptomsType", "string", "Tipos de sintomas", false));
         map.put("PreliminaryDiagnosis.SymptomsType", symptomsType);
 
         return map;
@@ -177,7 +177,7 @@ public class MockInfo {
 
 //    private static void addEdemaPulmonarRule(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(1L);
+//        rule.setRuleId(1L);
 //        List<BaseCondition> conditions1 = new ArrayList<>();
 //        AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
 //        conditions1.add(affCondition1);
@@ -195,7 +195,7 @@ public class MockInfo {
 //
 //    private static void addDisnea(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(2L);
+//        rule.setRuleId(2L);
 //        List<BaseCondition> conditions1 = new ArrayList<>();
 //        EqualsCondition affCondition1 = new EqualsCondition("EssentialSymptoms.Dyspnoea", "4");
 //        conditions1.add(affCondition1);
@@ -213,7 +213,7 @@ public class MockInfo {
 //
 //    private static void addOrtopnea(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(3L);
+//        rule.setRuleId(3L);
 //        List<BaseCondition> conditions1 = new ArrayList<>();
 //        AffirmativeCondition affCondition1 = new AffirmativeCondition("EssentialSymptoms.Orthopnoea");
 //        conditions1.add(affCondition1);
@@ -231,7 +231,7 @@ public class MockInfo {
 //
 //    private static void addRule4(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(4L);
+//        rule.setRuleId(4L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
@@ -259,7 +259,7 @@ public class MockInfo {
 //
 //    private static void addRule5(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(5L);
+//        rule.setRuleId(5L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        GreaterThanCondition greaterThanCondition1 = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
@@ -286,7 +286,7 @@ public class MockInfo {
 //
 //    private static void addRule6(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(6L);
+//        rule.setRuleId(6L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
@@ -314,7 +314,7 @@ public class MockInfo {
 //
 //    private static void addRule7(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(7L);
+//        rule.setRuleId(7L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 4);
@@ -341,7 +341,7 @@ public class MockInfo {
 //
 //    private static void addRule8(List<Rule> rules) {
 //        Rule rule = new Rule();
-//        rule.setId(8L);
+//        rule.setRuleId(8L);
 //
 //        List<BaseCondition> conditions = new ArrayList<>();
 //        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 1);

@@ -9,7 +9,9 @@ import com.luacevedo.heartbaymax.model.rules.conditions.AffirmativeCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.BaseCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.ContainsCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.EqualsCondition;
+import com.luacevedo.heartbaymax.model.rules.conditions.GreaterOrEqualThanCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.GreaterThanCondition;
+import com.luacevedo.heartbaymax.model.rules.conditions.LessOrEqualThanCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.LessThanCondition;
 import com.luacevedo.heartbaymax.model.rules.conditions.NotContainsCondition;
 
@@ -18,7 +20,7 @@ import java.util.List;
 
 public class Rule {
 
-    private int id;
+    private int ruleId;
     private int stage;
     private List<Condition> conditions;
     private List<Action> actions;
@@ -27,12 +29,12 @@ public class Rule {
     private List<BaseCondition> parsedConditions = new ArrayList<>();
     private List<BaseAction> parsedActions = new ArrayList<>();
 
-    public int getId() {
-        return id;
+    public int getRuleId() {
+        return ruleId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRuleId(int ruleId) {
+        this.ruleId = ruleId;
     }
 
     public int getStage() {
@@ -99,8 +101,14 @@ public class Rule {
                 case Constants.Rule.Condition.GREATER_THAN:
                     parsedCondition = new GreaterThanCondition(condition.getAttribute(), Double.valueOf(condition.getValue()));
                     break;
+                case Constants.Rule.Condition.GREATER_OR_EQUAL_THAN:
+                    parsedCondition = new GreaterOrEqualThanCondition(condition.getAttribute(), Double.valueOf(condition.getValue()));
+                    break;
                 case Constants.Rule.Condition.LESS_THAN:
                     parsedCondition = new LessThanCondition(condition.getAttribute(), Double.valueOf(condition.getValue()));
+                    break;
+                case Constants.Rule.Condition.LESS_OR_EQUAL_THAN:
+                    parsedCondition = new LessOrEqualThanCondition(condition.getAttribute(), Double.valueOf(condition.getValue()));
                     break;
                 case Constants.Rule.Condition.CONTAINS:
                     parsedCondition = new ContainsCondition(condition.getAttribute(), condition.getValue());

@@ -1,94 +1,120 @@
 package com.luacevedo.heartbaymax.ui.fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
+import com.luacevedo.heartbaymax.helpers.BundleHelper;
 import com.luacevedo.heartbaymax.helpers.IntentFactory;
+import com.luacevedo.heartbaymax.interfaces.OnPatientStageClick;
 import com.luacevedo.heartbaymax.model.patient.Patient;
-import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
-import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
+import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
+import com.luacevedo.heartbaymax.ui.views.PatientStageView;
+import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.ECG;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.INITIAL_STATE;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.LAB_ANALYSIS;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.PRELIMINARY_DIAGNOSIS;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.RX;
 
-public class PatientPageFragment extends BaseFragment implements View.OnClickListener {
+public class PatientPageFragment extends BaseFragment implements OnPatientStageClick {
 
+    private static final int REQUEST_CODE = 34256;
+    private PatientPageActivity activity;
     private Patient patient;
-    private LinearLayout addHeartSituationLayout;
-    private LinearLayout continueDiagnosisLayout;
-    private LinearLayout patientContentLayout;
-    private TextView patientName;
 
-    public static PatientPageFragment newInstance(Patient patient) {
-        PatientPageFragment fragment = new PatientPageFragment();
-        fragment.setPatient(patient);
-        return fragment;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        activity = (PatientPageActivity) getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_patient_page, container, false);
+        activity = (PatientPageActivity) getActivity();
+        if (patient == null) {
+            patient = activity.getPatient();
+        } else {
+            activity.setPatient(patient);
+        }
         setupViews(view);
-        addPatientAttributes();
         return view;
     }
 
     private void setupViews(View view) {
-        patientContentLayout = (LinearLayout) view.findViewById(R.id.patient_page_content);
-        patientName = (TextView) view.findViewById(R.id.patient_page_name);
+        TextView patientName = (TextView) view.findViewById(R.id.patient_page_name);
         patientName.setText(patient.getName());
-        addHeartSituationLayout = (LinearLayout) view.findViewById(R.id.add_heart_situation_layout);
-        addHeartSituationLayout.setOnClickListener(this);
-        continueDiagnosisLayout = (LinearLayout) view.findViewById(R.id.continue_diagnosis_layout);
-        continueDiagnosisLayout.setOnClickListener(this);
+
+        PatientStageView initialSituationView = (PatientStageView) view.findViewById(R.id.initial_state_stage);
+        initialSituationView.setupView(INITIAL_STATE, true, true, this);
+
+        PatientStageView preliminaryDiagnosisView = (PatientStageView) view.findViewById(R.id.preliminary_diagnosis_stage);
+        preliminaryDiagnosisView.setupView(Constants.PatientStage.PRELIMINARY_DIAGNOSIS, true, true, this);
+
+        PatientStageView ecgView = (PatientStageView) view.findViewById(R.id.ecg_stage);
+        ecgView.setupView(Constants.PatientStage.ECG, patient.isECGCompleted(), true, this);
+
+        PatientStageView rxView = (PatientStageView) view.findViewById(R.id.rx_stage);
+        rxView.setupView(Constants.PatientStage.RX, patient.isRXCompleted(), true, this);
+
+        PatientStageView labAnalysisView = (PatientStageView) view.findViewById(R.id.lab_analysis_stage);
+        labAnalysisView.setupView(Constants.PatientStage.LAB_ANALYSIS, patient.isLabAnalysisCompleted(), true, this);
+
+        PatientStageView finalDiagnosisView = (PatientStageView) view.findViewById(R.id.final_diagnosis_stage);
+        finalDiagnosisView.setupView(Constants.PatientStage.FINAL_DIAGNOSIS, patient.isFinalDiagnosisCompleted(), patient.isFinalDiagnosisEnabled(), this);
     }
 
-    private void addPatientAttributes() {
-        List<PatientAttribute> essentialSymptomsList = new ArrayList<>();
-        List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
-        for (PatientAttribute attribute : patient.getAttributesMap().values()) {
-            String root = attribute.getAttribute().getRootParent();
-            switch (root) {
-                case Constants.Patient.ESSENTIAL_SYMPTOMS:
-                    essentialSymptomsList.add(attribute);
-                    break;
-                case Constants.Patient.SECONDARY_SYMPTOMS:
-                    secondarySymptomsList.add(attribute);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        addValuesToLayout(essentialSymptomsList);
-        addValuesToLayout(secondarySymptomsList);
-    }
-
-    private void addValuesToLayout(List<PatientAttribute> list) {
-        for (PatientAttribute attribute : list) {
-            PatientAttributeView viewAttribute = new PatientAttributeView(getActivity());
-            viewAttribute.setData(attribute);
-            patientContentLayout.addView(viewAttribute);
+    @Override
+    public void onPageStageClick(Constants.PatientStage stage, boolean isCompleted) {
+        switch (stage) {
+            case INITIAL_STATE:
+                slideNextFragment(PatientPageDataFragment.newInstance(INITIAL_STATE));
+                break;
+            case PRELIMINARY_DIAGNOSIS:
+                slideNextFragment(PatientPageDataFragment.newInstance(PRELIMINARY_DIAGNOSIS));
+                break;
+            case ECG:
+                if (activity.getPatient().isECGCompleted()) {
+                    slideNextFragment(PatientPageDataFragment.newInstance(ECG));
+                } else {
+                    startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_2), REQUEST_CODE);
+                }
+                break;
+            case RX:
+                if (activity.getPatient().isRXCompleted()) {
+                    slideNextFragment(PatientPageDataFragment.newInstance(RX));
+                } else {
+                    startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_3), REQUEST_CODE);
+                }
+                break;
+            case LAB_ANALYSIS:
+                if (activity.getPatient().isLabAnalysisCompleted()) {
+                    slideNextFragment(PatientPageDataFragment.newInstance(LAB_ANALYSIS));
+                } else {
+                    startActivityForResult(IntentFactory.getComplementaryMethodsActivityIntent(patient, InputFieldsUtils.STAGE_4), REQUEST_CODE);
+                }
+                break;
+            case FINAL_DIAGNOSIS:
+                break;
         }
     }
 
     @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.add_heart_situation_layout) {
-
-        } else if (v.getId() == R.id.continue_diagnosis_layout) {
-            startActivity(IntentFactory.getRulesExecutionActivityIntent(patient));
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE) {
+                activity.setPatient(BundleHelper.fromBundleJson(data, Constants.BundleKey.PATIENT, Patient.class, activity.getPatient() != null ? activity.getPatient() : null));
+            }
         }
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
     }
 }

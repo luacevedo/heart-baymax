@@ -4,14 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/text_field_edit_text"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/input_field_left_margin"
-        android:layout_marginRight="@dimen/input_field_right_margin"
-        android:layout_marginTop="@dimen/input_field_top_margin"
-        android:imeOptions="actionDone"
-        android:saveEnabled="false"
-        app:met_floatingLabel="normal"/>
+        android:orientation="vertical">
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/text_field_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/input_field_left_margin"
+            android:layout_marginRight="@dimen/input_field_right_margin"
+            android:layout_marginTop="@dimen/input_field_top_margin"
+            android:textSize="16sp"
+            android:imeOptions="actionDone"
+            android:saveEnabled="false"
+            app:met_floatingLabel="normal" />
+
+        <TextView
+            android:id="@+id/text_field_tooltip_help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/small_padding"
+            android:layout_gravity="right"
+            android:padding="@dimen/small_padding"
+            android:textSize="@dimen/material_text_caption"
+            android:visibility="gone" />
+    </LinearLayout>
 </merge>

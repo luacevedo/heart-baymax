@@ -6,6 +6,7 @@
     <dimen name="large_padding">16dp</dimen>
     <dimen name="default_corner_radius">5dp</dimen>
     <dimen name="material_text_title">20sp</dimen>
+    <dimen name="subtitle">20sp</dimen>
     <dimen name="small_padding">4dp</dimen>
     <dimen name="medium_padding">8dp</dimen>
     <dimen name="list_padding">10dp</dimen>
@@ -26,4 +27,8 @@
     <dimen name="material_text_body">14sp</dimen>
     <dimen name="patient_attribute_height">30dp</dimen>
     <dimen name="one_dp">1dp</dimen>
+    <dimen name="overlay_margin">20dp</dimen>
+    <dimen name="extra_large_padding">20dp</dimen>
+    <dimen name="control_corner_material">2dp</dimen>
+    <dimen name="rounded_corner">2dp</dimen>
 </resources>

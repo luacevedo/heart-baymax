@@ -1,56 +1,45 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
-import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
 import com.luacevedo.heartbaymax.R;
-import com.luacevedo.heartbaymax.api.MochiApi;
-import com.luacevedo.heartbaymax.api.baseapi.CallId;
-import com.luacevedo.heartbaymax.api.baseapi.CallOrigin;
-import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
-import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.db.InternalDbHelper;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
-import com.luacevedo.heartbaymax.helpers.IntentFactory;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
-import com.luacevedo.heartbaymax.ui.fragments.PreliminaryDiagnosisStepFragment;
+import com.luacevedo.heartbaymax.ui.fragments.ComplementaryMethodsStepFragment;
 import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
-import com.luacevedo.heartbaymax.utils.RulesExecutor;
-import com.luacevedo.heartbaymax.utils.RulesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
 
-public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
-
-    private List<StepInputFields> preliminaryDiagnosisFields = new ArrayList<>();
+    private List<StepInputFields> diagnosisFields = new ArrayList<>();
     private Patient patient;
     private int currentStep = 0;
-    private ProgressDialog progress;
-    private MochiApi mochiApi = HeartBaymaxApplication.getApplication().getMochiApi();
     private InternalDbHelper internalDbHelper = HeartBaymaxApplication.getApplication().getInternalDbHelper();
+    private int stage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
-            preliminaryDiagnosisFields = BundleHelper.fromBundleJson(savedInstanceState, Constants.BundleKey.INPUT_FIELDS, new TypeToken<List<StepInputFields>>() {
+            diagnosisFields = BundleHelper.fromBundleJson(savedInstanceState, Constants.BundleKey.INPUT_FIELDS, new TypeToken<List<StepInputFields>>() {
             }.getType(), new ArrayList<StepInputFields>());
             patient = BundleHelper.fromBundleJson(savedInstanceState, Constants.BundleKey.PATIENT, Patient.class, null);
+            stage = BundleHelper.fromBundle(savedInstanceState, Constants.BundleKey.STAGE, 0);
         } else {
+            stage = BundleHelper.fromBundle(getIntent().getExtras(), Constants.BundleKey.STAGE, 0);
             patient = BundleHelper.fromBundleJson(getIntent().getExtras(), Constants.BundleKey.PATIENT, Patient.class, null);
         }
 
@@ -59,28 +48,34 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        BundleHelper.putJsonBundle(outState, Constants.BundleKey.INPUT_FIELDS, preliminaryDiagnosisFields, new TypeToken<List<StepInputFields>>() {
+        BundleHelper.putJsonBundle(outState, Constants.BundleKey.INPUT_FIELDS, diagnosisFields, new TypeToken<List<StepInputFields>>() {
         }.getType());
         BundleHelper.putJsonBundle(outState, Constants.BundleKey.PATIENT, patient);
+        outState.putSerializable(Constants.BundleKey.STAGE, stage);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         unlockMenu();
-        if (preliminaryDiagnosisFields.isEmpty()) {
-            getPreliminaryDiagnosisFields();
+        if (diagnosisFields.isEmpty()) {
+            List<StepInputFields> inputFields = internalDbHelper.getStepInputFields();
+            diagnosisFields = InputFieldsUtils.filterStageInputFields(inputFields, stage);
         }
+
+        ComplementaryMethodsStepFragment fragment = createStepFragment();
+        setInitialFragment(fragment);
+
     }
 
-    private PreliminaryDiagnosisStepFragment createStepFragment() {
+    private ComplementaryMethodsStepFragment createStepFragment() {
         List<InputField> inputFields = setCurrentValuesFromPatient();
-        return PreliminaryDiagnosisStepFragment.newInstance(inputFields, isLastStep());
+        return ComplementaryMethodsStepFragment.newInstance(inputFields, isLastStep());
     }
 
     @NonNull
     private List<InputField> setCurrentValuesFromPatient() {
-        List<InputField> inputFields = preliminaryDiagnosisFields.get(currentStep).getInputFields();
+        List<InputField> inputFields = diagnosisFields.get(currentStep).getInputFields();
         for (InputField inputField : inputFields) {
 
             PatientAttribute attribute = patient.getAttributesMap().get(inputField.getRootToAffect());
@@ -93,7 +88,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
                     keyToFind = attribute.getValue().toString();
                 }
                 Value value;
-                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
+                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING) || inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
                     value = new Value(keyToFind);
                 } else {
                     value = inputField.getValue(keyToFind);
@@ -105,33 +100,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     }
 
     private boolean isLastStep() {
-        return !preliminaryDiagnosisFields.isEmpty() && currentStep == preliminaryDiagnosisFields.size() - 1;
-    }
-
-    private void getPreliminaryDiagnosisFields() {
-        progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
-        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS_STAGE_1);
-        mochiApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
-    }
-
-    private Callback<List<StepInputFields>> getPatientStepInputFieldsCallback() {
-        return new Callback<List<StepInputFields>>() {
-            @Override
-            public void success(List<StepInputFields> inputFields, Response response) {
-                List<StepInputFields> orderedFields = InputFieldsUtils.orderInputFields(inputFields);
-                internalDbHelper.saveStepInputFields(orderedFields);
-                preliminaryDiagnosisFields = InputFieldsUtils.filterStageInputFields(orderedFields, InputFieldsUtils.STAGE_1);
-                PreliminaryDiagnosisStepFragment fragment = createStepFragment();
-                setInitialFragment(fragment);
-                progress.dismiss();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("LULI", error.toString());
-                progress.dismiss();
-            }
-        };
+        return !diagnosisFields.isEmpty() && currentStep == diagnosisFields.size() - 1;
     }
 
     public void setInputFieldSelectValue(InputField inputField, Value value) {
@@ -150,7 +119,12 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         PatientAttribute patientAttribute = patient.getAttributesMap().get(inputField.getRootToAffect());
         if (patientAttribute != null) {
             if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
-                patientAttribute.setValue(Double.valueOf(value));
+                try {
+                    Double numberValue = Double.valueOf(value);
+                    patientAttribute.setValue(numberValue);
+                } catch (Throwable t) {
+                    Toast.makeText(this, R.string.enter_valid_value, Toast.LENGTH_LONG).show();
+                }
             } else if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
                 patientAttribute.setValue(value);
             }
@@ -160,32 +134,11 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
     }
 
     public void finishDiagnosis() {
-        getRules();
-    }
-
-    private void getRules() {
-        progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
-        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_1, CallType.RULES_STAGE_1);
-        mochiApi.getRules(callId, getRulesCallback());
-    }
-
-    private Callback<List<Rule>> getRulesCallback() {
-        return new Callback<List<Rule>>() {
-            @Override
-            public void success(List<Rule> rules, Response response) {
-                RulesUtils.orderRules(rules);
-                RulesExecutor.executeRules(rules, patient);
-                HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
-                startActivity(IntentFactory.getPatientPageActivityIntent(patient, true));
-                finish();
-                progress.dismiss();
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                Log.e("LULI", error.toString());
-            }
-        };
+        HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
+        Intent intent = this.getIntent();
+        BundleHelper.putJsonBundle(intent, Constants.BundleKey.PATIENT, patient);
+        this.setResult(RESULT_OK, intent);
+        finish();
     }
 
     public void getNextStep() {

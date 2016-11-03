@@ -6,19 +6,22 @@ public class Attribute {
     private String root;
     private String dataType;
     private String name;
+    private boolean needsInputValue;
 
-    public Attribute(long id, String root, String dataType, String name) {
+    public Attribute(long id, String root, String dataType, String name, boolean needsInputValue) {
         this.id = id;
         this.root = root;
         this.dataType = dataType;
         this.name = name;
+        this.needsInputValue = needsInputValue;
     }
 
-    public Attribute(long id, String root, String dataType) {
+    public Attribute(long id, String root, String dataType, boolean needsInputValue) {
         this.id = id;
         this.root = root;
         this.dataType = dataType;
         this.name = null;
+        this.needsInputValue = needsInputValue;
     }
 
     public long getId() {
@@ -52,5 +55,13 @@ public class Attribute {
     public String getRootParent() {
         String[] x = this.root.split("\\.");
         return x[0];
+    }
+
+    public boolean needsInputValue() {
+        return needsInputValue;
+    }
+
+    public void setNeedsInputValue(boolean needsInputValue) {
+        this.needsInputValue = needsInputValue;
     }
 }

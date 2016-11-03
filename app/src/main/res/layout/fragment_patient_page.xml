@@ -16,64 +16,92 @@
             android:layout_marginLeft="@dimen/medium_padding"
             android:layout_width="match_parent"
             android:paddingBottom="@dimen/large_padding"
-            android:text="Luciana"
             android:textSize="@dimen/material_text_title" />
 
-        <LinearLayout
-            android:id="@+id/patient_page_content"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/large_padding"
-            android:paddingLeft="@dimen/large_padding"
-            android:paddingRight="@dimen/large_padding"
-            android:paddingTop="@dimen/small_padding" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/one_dp"
-            android:layout_marginLeft="@dimen/small_padding"
-            android:layout_marginRight="@dimen/small_padding"
-            android:layout_marginTop="8dp"
             android:background="@color/divider"
             android:paddingBottom="@dimen/large_padding"/>
 
-        <LinearLayout
-            android:id="@+id/add_heart_situation_layout"
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/initial_state_stage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingBottom="10dp"
-            android:clickable="true"
-            android:background="?attr/selectableItemBackground"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:paddingLeft="4dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_plus_red" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="22dp"
-                android:textSize="16sp"
-                android:layout_gravity="center_vertical"
-                android:text="@string/update_heart_situation"/>
-
-        </LinearLayout>
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
 
         <View
-            android:layout_width="match_parent"
             android:layout_height="@dimen/one_dp"
-            android:layout_marginLeft="@dimen/small_padding"
-            android:layout_marginRight="@dimen/small_padding"
-            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
             android:background="@color/divider"
             android:paddingBottom="@dimen/large_padding"/>
-        
+
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/preliminary_diagnosis_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
+
+        <View
+            android:layout_height="@dimen/one_dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/ecg_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
+
+        <View
+            android:layout_height="@dimen/one_dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/rx_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
+
+        <View
+            android:layout_height="@dimen/one_dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/lab_analysis_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
+
+        <View
+            android:layout_height="@dimen/one_dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/final_diagnosis_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
+
+        <View
+            android:layout_height="@dimen/one_dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
 
     </LinearLayout>
 

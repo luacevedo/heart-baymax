@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import static com.luacevedo.heartbaymax.Constants.Attribute.Type.BOOLEAN;
-import static com.luacevedo.heartbaymax.Constants.Attribute.Type.INTEGER;
 import static com.luacevedo.heartbaymax.Constants.Attribute.Type.LIST;
+import static com.luacevedo.heartbaymax.Constants.Attribute.Type.NUMBER;
 import static com.luacevedo.heartbaymax.Constants.Attribute.Type.STRING;
 
 public class PatientAttributesUtils {
@@ -18,23 +18,24 @@ public class PatientAttributesUtils {
         HashMap<String, PatientAttribute> map = new HashMap<>();
         PatientAttribute patientAttribute = null;
         for (Attribute attribute : attributesList) {
-            switch (attribute.getDataType()) {
-                case BOOLEAN:
-                    patientAttribute = new PatientAttribute<>(attribute, false);
-                    break;
-                case STRING:
-                    patientAttribute = new PatientAttribute<>(attribute, "");
-                    break;
-                case LIST:
-                    patientAttribute = new PatientAttribute<>(attribute, new ArrayList<>());
-                    break;
-                case INTEGER:
-                    patientAttribute = new PatientAttribute<>(attribute, 0.0);
-                    break;
+            patientAttribute = new PatientAttribute<>(attribute);
+            if (!attribute.needsInputValue()) {
+                switch (attribute.getDataType()) {
+                    case BOOLEAN:
+                        patientAttribute.setValue(false);
+                        break;
+                    case STRING:
+                        patientAttribute.setValue("");
+                        break;
+                    case LIST:
+                        patientAttribute.setValue(new ArrayList<>());
+                        break;
+                    case NUMBER:
+                        patientAttribute.setValue(0);
+                        break;
+                }
             }
-            if (patientAttribute != null) {
-                map.put(attribute.getRoot(), patientAttribute);
-            }
+            map.put(attribute.getRoot(), patientAttribute);
         }
 
         return map;

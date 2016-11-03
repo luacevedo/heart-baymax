@@ -2,10 +2,13 @@ package com.luacevedo.heartbaymax.ui.views.controls;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
@@ -16,6 +19,7 @@ public class TextFieldView extends InputFieldView {
     protected MaterialEditText editText;
     protected InputField inputField;
     protected Value currentValue;
+    protected TextView txtViewTooltip;
 
     public TextFieldView(Context context, InputField inputField) {
         super(context);
@@ -28,7 +32,26 @@ public class TextFieldView extends InputFieldView {
         inflate(getContext(), R.layout.view_text_field, this);
         setOrientation(LinearLayout.VERTICAL);
         editText = (MaterialEditText) findViewById(R.id.text_field_edit_text);
+        txtViewTooltip = (TextView) findViewById(R.id.text_field_tooltip_help);
+
+        setupTooltip();
+        setupEditTExt();
+        setListeners();
+    }
+
+    private void setupTooltip() {
+        if (inputField.getTooltip() != null) {
+            txtViewTooltip.setText(inputField.getTooltip());
+            txtViewTooltip.setVisibility(VISIBLE);
+        }
+    }
+
+    private void setupEditTExt() {
         editText.setHint(inputField.getLabelMessage());
+        if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
+            editText.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
+        }
+
         editText.setOnTouchListener(null);
         editText.setFloatingLabel(MaterialEditText.FLOATING_LABEL_NORMAL);
         editText.setFloatingLabelAnimating(true);
@@ -36,7 +59,6 @@ public class TextFieldView extends InputFieldView {
         if (currentValue != null) {
             editText.setText(currentValue.getValue());
         }
-        setListeners();
     }
 
     @Override
