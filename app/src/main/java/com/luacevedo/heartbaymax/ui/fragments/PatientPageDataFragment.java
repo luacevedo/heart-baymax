@@ -13,7 +13,9 @@ import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
+import com.luacevedo.heartbaymax.ui.views.PatientAttributeExtendedView;
 import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
+import com.luacevedo.heartbaymax.utils.PatientAttributesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,9 +140,18 @@ public class PatientPageDataFragment extends BaseFragment {
 
     private void addValuesToLayout(List<PatientAttribute> list) {
         for (PatientAttribute attribute : list) {
-            PatientAttributeView viewAttribute = new PatientAttributeView(getActivity());
-            viewAttribute.setData(attribute);
+
+            View viewAttribute;
+            if (PatientAttributesUtils.isExtended(attribute)) {
+                viewAttribute = new PatientAttributeExtendedView(getActivity());
+                ((PatientAttributeExtendedView) viewAttribute).setData(attribute);
+            } else {
+                viewAttribute = new PatientAttributeView(getActivity());
+                ((PatientAttributeView) viewAttribute).setData(attribute);
+            }
+
             patientContentLayout.addView(viewAttribute);
+
         }
     }
 
