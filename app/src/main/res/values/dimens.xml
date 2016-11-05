@@ -27,7 +27,7 @@
     <dimen name="material_text_body">14sp</dimen>
     <dimen name="patient_attribute_height">30dp</dimen>
     <dimen name="one_dp">1dp</dimen>
-    <dimen name="overlay_margin">20dp</dimen>
+    <dimen name="overlay_margin">15dp</dimen>
     <dimen name="extra_large_padding">20dp</dimen>
     <dimen name="control_corner_material">2dp</dimen>
     <dimen name="rounded_corner">2dp</dimen>

@@ -140,7 +140,6 @@ public class PatientPageDataFragment extends BaseFragment {
 
     private void addValuesToLayout(List<PatientAttribute> list) {
         for (PatientAttribute attribute : list) {
-
             View viewAttribute;
             if (PatientAttributesUtils.isExtended(attribute)) {
                 viewAttribute = new PatientAttributeExtendedView(getActivity());
@@ -149,9 +148,7 @@ public class PatientPageDataFragment extends BaseFragment {
                 viewAttribute = new PatientAttributeView(getActivity());
                 ((PatientAttributeView) viewAttribute).setData(attribute);
             }
-
             patientContentLayout.addView(viewAttribute);
-
         }
     }
 

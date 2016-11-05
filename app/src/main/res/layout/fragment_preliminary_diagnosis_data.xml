@@ -3,15 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_overlay"
-    android:clickable="true"
     android:fillViewport="true">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_margin="@dimen/overlay_margin">
+        android:layout_marginLeft="@dimen/overlay_margin"
+        android:layout_marginRight="@dimen/overlay_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,15 +19,17 @@
             android:layout_marginTop="@dimen/overlay_margin"
             android:background="@drawable/white_rounded_corner"
             android:orientation="vertical"
-            android:paddingTop="@dimen/overlay_margin">
+            android:paddingBottom="@dimen/extra_large_padding"
+            android:paddingTop="30dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="24dp"
                 android:paddingBottom="@dimen/large_padding"
-                android:textSize="@dimen/subtitle"
-                android:text="@string/preliminary_diagnosis"/>
+                android:paddingLeft="24dp"
+                android:paddingTop="@dimen/extra_large_padding"
+                android:text="@string/preliminary_diagnosis"
+                android:textSize="@dimen/subtitle" />
 
             <LinearLayout
                 android:id="@+id/preliminary_diagnosis_data_container"
@@ -39,26 +41,17 @@
                 android:paddingRight="24dp"
                 android:paddingTop="@dimen/small_padding" />
 
-            <TextView
-                android:id="@+id/preliminary_diagnosis_accept"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/finger_size"
-                android:layout_gravity="right|end"
-                android:layout_marginBottom="@dimen/medium_padding"
-                android:layout_marginEnd="@dimen/medium_padding"
-                android:layout_marginRight="@dimen/medium_padding"
-                android:layout_marginTop="@dimen/extra_large_padding"
-                android:background="@drawable/material_white_flat_button"
-                android:gravity="center"
-                android:paddingEnd="@dimen/large_padding"
-                android:paddingLeft="@dimen/large_padding"
-                android:paddingRight="@dimen/large_padding"
-                android:paddingStart="@dimen/large_padding"
+            <Button
+                android:id="@+id/preliminary_diagnosis_accept_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/large_padding"
+                android:background="@drawable/material_custom_button"
                 android:text="@string/accept"
                 android:textAllCaps="true"
-                android:textColor="@color/accent"
-                android:textSize="@dimen/material_text_body" />
-        </LinearLayout>
+                android:textColor="@color/white" />
 
-    </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

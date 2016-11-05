@@ -6,13 +6,16 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
+import com.luacevedo.heartbaymax.ui.views.PatientAttributeExtendedView;
 import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
+import com.luacevedo.heartbaymax.utils.PatientAttributesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +26,7 @@ public class PreliminaryDiagnosisDataFragment extends BaseFragment implements Vi
 
     private LinearLayout diagnosisContentLayout;
     private PatientPageActivity activity;
-    private TextView acceptBtn;
+    private Button acceptBtn;
 
 
     @Override
@@ -44,9 +47,8 @@ public class PreliminaryDiagnosisDataFragment extends BaseFragment implements Vi
 
         activity = (PatientPageActivity) getActivity();
         diagnosisContentLayout = (LinearLayout) view.findViewById(R.id.preliminary_diagnosis_data_container);
-        acceptBtn = (TextView) view.findViewById(R.id.preliminary_diagnosis_accept);
+        acceptBtn = (Button) view.findViewById(R.id.preliminary_diagnosis_accept_btn);
         acceptBtn.setOnClickListener(this);
-        diagnosisContentLayout.setOnClickListener(this);
         showPreliminaryDiagnosis();
 
         return view;
@@ -68,8 +70,14 @@ public class PreliminaryDiagnosisDataFragment extends BaseFragment implements Vi
 
     private void addValuesToLayout(List<PatientAttribute> list) {
         for (PatientAttribute attribute : list) {
-            PatientAttributeView viewAttribute = new PatientAttributeView(getActivity());
-            viewAttribute.setData(attribute);
+            View viewAttribute;
+            if (PatientAttributesUtils.isExtended(attribute)) {
+                viewAttribute = new PatientAttributeExtendedView(getActivity());
+                ((PatientAttributeExtendedView) viewAttribute).setData(attribute);
+            } else {
+                viewAttribute = new PatientAttributeView(getActivity());
+                ((PatientAttributeView) viewAttribute).setData(attribute);
+            }
             diagnosisContentLayout.addView(viewAttribute);
         }
     }
@@ -77,7 +85,9 @@ public class PreliminaryDiagnosisDataFragment extends BaseFragment implements Vi
 
     @Override
     public void onClick(View v) {
-        removeCurrentFragment();
+        if (v.getId() == R.id.preliminary_diagnosis_accept_btn) {
+            removeCurrentFragment();
+        }
     }
 
 
