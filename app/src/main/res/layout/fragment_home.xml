@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/extra_big_finger_size"
-            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarStyle="outsideInset"
             android:scrollbars="vertical" />
 
     </LinearLayout>
