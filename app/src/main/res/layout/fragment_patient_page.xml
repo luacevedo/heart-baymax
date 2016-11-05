@@ -51,6 +51,19 @@
             android:paddingBottom="@dimen/large_padding"/>
 
         <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/immediate_treatment_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
+
+        <View
+            android:layout_height="@dimen/one_dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
             android:id="@+id/ecg_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

@@ -93,7 +93,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
                     keyToFind = attribute.getValue().toString();
                 }
                 Value value;
-                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
+                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)
+                        || inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
                     value = new Value(keyToFind);
                 } else {
                     value = inputField.getValue(keyToFind);

@@ -20,6 +20,7 @@ import com.luacevedo.heartbaymax.ui.views.PatientStageView;
 import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 
 import static com.luacevedo.heartbaymax.Constants.PatientStage.ECG;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.IMMEDIATE_TREATMENT;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.INITIAL_STATE;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.LAB_ANALYSIS;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.PRELIMINARY_DIAGNOSIS;
@@ -60,6 +61,9 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
         PatientStageView preliminaryDiagnosisView = (PatientStageView) view.findViewById(R.id.preliminary_diagnosis_stage);
         preliminaryDiagnosisView.setupView(Constants.PatientStage.PRELIMINARY_DIAGNOSIS, true, true, this);
 
+        PatientStageView immediateTreatmentView = (PatientStageView) view.findViewById(R.id.immediate_treatment_stage);
+        immediateTreatmentView.setupView(Constants.PatientStage.IMMEDIATE_TREATMENT, true, true, this);
+
         PatientStageView ecgView = (PatientStageView) view.findViewById(R.id.ecg_stage);
         ecgView.setupView(Constants.PatientStage.ECG, patient.isECGCompleted(), true, this);
 
@@ -81,6 +85,9 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
                 break;
             case PRELIMINARY_DIAGNOSIS:
                 slideNextFragment(PatientPageDataFragment.newInstance(PRELIMINARY_DIAGNOSIS));
+                break;
+            case IMMEDIATE_TREATMENT:
+                slideNextFragment(PatientPageDataFragment.newInstance(IMMEDIATE_TREATMENT));
                 break;
             case ECG:
                 if (activity.getPatient().isECGCompleted()) {

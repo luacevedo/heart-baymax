@@ -106,8 +106,8 @@ public class Constants {
             public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
             public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
             public static final String IMMEDIATE_TREATMENT = "ImmediateTreatment";
-            public static final String DIURETIC_TREATMENT = "DiureticTreatment";
-            public static final String VASODILATOR_TREATMENT = "VasodilatorTreatment";
+            public static final String IMMEDIATE_DIURETIC_TREATMENT = "ImmediateDiureticTreatment";
+            public static final String IMMEDIATE_VASODILATOR_TREATMENT = "ImmediateVasodilatorTreatment";
             public static final String ECG = "ECG";
             public static final String RX = "RX";
             public static final String LAB_ANALYSIS = "LabAnalysis";
@@ -116,7 +116,7 @@ public class Constants {
     }
 
     public enum PatientStage {
-        INITIAL_STATE, PRELIMINARY_DIAGNOSIS, RX, LAB_ANALYSIS, FINAL_DIAGNOSIS, ECG
+        INITIAL_STATE, PRELIMINARY_DIAGNOSIS, IMMEDIATE_TREATMENT, RX, LAB_ANALYSIS, FINAL_DIAGNOSIS, ECG
     }
 
 }

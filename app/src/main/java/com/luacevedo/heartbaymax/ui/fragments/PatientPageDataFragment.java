@@ -63,6 +63,9 @@ public class PatientPageDataFragment extends BaseFragment {
             case PRELIMINARY_DIAGNOSIS:
                 showPreliminaryDiagnosis();
                 break;
+            case IMMEDIATE_TREATMENT:
+                showImmediateTreatment();
+                break;
             case ECG:
                 showComplementaryMethod(Constants.Patient.Root.ECG);
                 break;
@@ -74,6 +77,19 @@ public class PatientPageDataFragment extends BaseFragment {
                 break;
 
         }
+    }
+
+    private void showImmediateTreatment() {
+        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
+        for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
+            String root = attribute.getAttribute().getRootParent();
+            if ((root.equals(IMMEDIATE_TREATMENT) || root.equals(IMMEDIATE_DIURETIC_TREATMENT)
+                    || root.equals(IMMEDIATE_VASODILATOR_TREATMENT))
+                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+                preliminaryDiagnosisList.add(attribute);
+            }
+        }
+        addValuesToLayout(preliminaryDiagnosisList);
     }
 
     private void showComplementaryMethod(String root) {
@@ -90,17 +106,14 @@ public class PatientPageDataFragment extends BaseFragment {
 
     private void showPreliminaryDiagnosis() {
         List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
-        List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
-            if ((root.equals(PRELIMINARY_DIAGNOSIS) || root.equals(IMMEDIATE_TREATMENT)
-                    || root.equals(DIURETIC_TREATMENT) || root.equals(VASODILATOR_TREATMENT))
-                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+            if (root.equals(PRELIMINARY_DIAGNOSIS) && attribute.getValue() != null
+                    && !TextUtils.isEmpty(attribute.getValue().toString())) {
                 preliminaryDiagnosisList.add(attribute);
             }
         }
         addValuesToLayout(preliminaryDiagnosisList);
-        addValuesToLayout(secondarySymptomsList);
     }
 
     private void showInitialState() {

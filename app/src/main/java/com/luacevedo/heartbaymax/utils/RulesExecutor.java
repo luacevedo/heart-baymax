@@ -53,6 +53,9 @@ public class RulesExecutor {
 
     private static void executeActions(Rule rule, Patient patient) {
         Log.e("LULI", "SI conditionsFulfilled... ejecuto las acciones");
+        if (rule.getRuleId() == 54) {
+            Log.e(":jhdhs", "jhdkdsk");
+        }
         for (BaseAction action : rule.getParsedActions()) {
             Log.e("LULI", "Attribute: " + action.getAttributeRoot());
             Log.e("LULI", "Action: " + action);

@@ -28,4 +28,5 @@
     <string name="final_diagnosis">Diagnóstico final</string>
     <string name="enter_valid_value">Ingrese un valor válido</string>
     <string name="accept">Aceptar</string>
+    <string name="immediate_treatment">Tratamiento inmediato</string>
 </resources>

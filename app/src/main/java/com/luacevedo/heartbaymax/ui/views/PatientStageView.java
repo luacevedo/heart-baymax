@@ -50,10 +50,13 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
     private void setTextViewText(Constants.PatientStage stage, boolean isCompleted) {
         switch (stage) {
             case INITIAL_STATE:
-                textView.setText(isCompleted ? R.string.initial_situation : R.string.enter_initial_situation);
+                textView.setText(R.string.initial_situation);
                 break;
             case PRELIMINARY_DIAGNOSIS:
-                textView.setText(isCompleted ? R.string.preliminary_diagnosis : R.string.enter_prelinary_diagnosis);
+                textView.setText(R.string.preliminary_diagnosis);
+                break;
+            case IMMEDIATE_TREATMENT:
+                textView.setText(R.string.immediate_treatment);
                 break;
             case ECG:
                 textView.setText(isCompleted ? R.string.ecg : R.string.enter_ecg);

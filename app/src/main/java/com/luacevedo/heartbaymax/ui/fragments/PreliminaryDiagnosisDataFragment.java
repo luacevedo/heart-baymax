@@ -57,7 +57,7 @@ public class PreliminaryDiagnosisDataFragment extends BaseFragment implements Vi
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
             if ((root.equals(PRELIMINARY_DIAGNOSIS) || root.equals(IMMEDIATE_TREATMENT)
-                    || root.equals(DIURETIC_TREATMENT) || root.equals(VASODILATOR_TREATMENT))
+                    || root.equals(IMMEDIATE_DIURETIC_TREATMENT) || root.equals(IMMEDIATE_VASODILATOR_TREATMENT))
                     && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
                 preliminaryDiagnosisList.add(attribute);
             }
