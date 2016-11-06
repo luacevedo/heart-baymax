@@ -8,9 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
+import com.luacevedo.heartbaymax.helpers.ResourcesHelper;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
 import com.luacevedo.heartbaymax.ui.views.PatientAttributeExtendedView;
@@ -155,6 +157,13 @@ public class PatientPageDataFragment extends BaseFragment {
     }
 
     private void addValuesToLayout(List<PatientAttribute> list) {
+        if (list.isEmpty()) {
+            TextView viewAttribute = new TextView(getActivity());
+            viewAttribute.setTextSize(ResourcesHelper.getDimensionPixelSize(R.dimen.no_treatment_size));
+            viewAttribute.setText(R.string.no_treatment);
+            patientContentLayout.addView(viewAttribute);
+            return;
+        }
         for (PatientAttribute attribute : list) {
             View viewAttribute;
             if (PatientAttributesUtils.isExtended(attribute)) {

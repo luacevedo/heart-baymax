@@ -98,7 +98,7 @@ public class PatientPageActivity extends BaseFragmentActivity {
 
     private void getRules() {
         progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
-        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_1, CallType.RULES);
+        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_2, CallType.RULES);
         mochiApi.getRules(callId, getRulesCallback());
     }
 

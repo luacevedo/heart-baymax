@@ -31,4 +31,5 @@
     <dimen name="extra_large_padding">20dp</dimen>
     <dimen name="control_corner_material">2dp</dimen>
     <dimen name="rounded_corner">2dp</dimen>
+    <dimen name="no_treatment_size">6sp</dimen>
 </resources>

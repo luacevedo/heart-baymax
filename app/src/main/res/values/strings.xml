@@ -29,4 +29,5 @@
     <string name="enter_valid_value">Ingrese un valor válido</string>
     <string name="accept">Aceptar</string>
     <string name="immediate_treatment">Tratamiento inmediato</string>
+    <string name="no_treatment">No requiere tratamiento inmediato</string>
 </resources>
