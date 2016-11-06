@@ -5,9 +5,12 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.helpers.TranslationsHelper;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
+
+import java.text.DecimalFormat;
 
 public class PatientAttributeView extends LinearLayout {
     private TextView label;
@@ -35,9 +38,17 @@ public class PatientAttributeView extends LinearLayout {
     }
 
     private String getTranslatedValue(PatientAttribute attribute) {
+        Object attributeValue = attribute.getValue();
         String translatedValue = attribute.getValue().toString();
         if (attribute.getValue() instanceof Boolean) {
             translatedValue = TranslationsHelper.translateBooleanValue((Boolean) attribute.getValue());
+        } else if (attributeValue instanceof Double) {
+            if ((Double) attributeValue % 1 == 0) {
+                DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                translatedValue = decimalFormat.format(attributeValue);
+            }
+        } else if (attribute.getValue() instanceof String && attribute.getAttribute().getRoot().equals(Constants.Attribute.EssentialSymptoms.DYSPNOEA)) {
+            translatedValue = TranslationsHelper.translateDyspnoeaValue(attribute.getValue().toString());
         }
         return translatedValue;
     }

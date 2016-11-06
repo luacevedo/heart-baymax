@@ -29,15 +29,16 @@ public class PatientAttributeExtendedView extends LinearLayout {
     }
 
     public void setData(PatientAttribute attribute) {
-        label.setText(attribute.getAttribute().getName() + ":");
+        label.setText(String.format("%s:", attribute.getAttribute().getName()));
         String translatedValue = getTranslatedValue(attribute);
         value.setText(translatedValue);
     }
 
     private String getTranslatedValue(PatientAttribute attribute) {
-        String translatedValue = attribute.getValue().toString();
-        if (attribute.getValue() instanceof Boolean) {
-            translatedValue = TranslationsHelper.translateBooleanValue((Boolean) attribute.getValue());
+        Object attributeValue = attribute.getValue();
+        String translatedValue = attributeValue.toString();
+        if (attributeValue instanceof Boolean) {
+            translatedValue = TranslationsHelper.translateBooleanValue((Boolean) attributeValue);
         }
         return translatedValue;
     }

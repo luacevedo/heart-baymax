@@ -51,6 +51,10 @@ public class Constants {
             public static final String STRING = "string";
         }
 
+        public class EssentialSymptoms {
+            public static final String DYSPNOEA = "EssentialSymptoms.Dyspnoea";
+        }
+
         public class ECG {
             public static final String HEART_RATE = "ECG.HeartRate";
             public static final String ISCHEMIA = "ECG.Ischemia";

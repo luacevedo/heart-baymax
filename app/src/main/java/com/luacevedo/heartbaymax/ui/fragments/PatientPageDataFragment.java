@@ -78,6 +78,7 @@ public class PatientPageDataFragment extends BaseFragment {
                 break;
             case LAB_ANALYSIS:
                 showComplementaryMethod(Constants.Patient.Root.LAB_ANALYSIS);
+                break;
             case FINAL_DIAGNOSIS:
                 showFinalDiagnosis();
                 break;
