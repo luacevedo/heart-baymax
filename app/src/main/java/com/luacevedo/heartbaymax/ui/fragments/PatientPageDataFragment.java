@@ -2,6 +2,7 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,7 +23,15 @@ import com.luacevedo.heartbaymax.utils.PatientAttributesUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.luacevedo.heartbaymax.Constants.Patient.Root.*;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.FINAL_DIAGNOSIS;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.FINAL_DIURETIC_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.FINAL_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.FINAL_VASODILATOR_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.HEART_SITUATION;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.IMMEDIATE_DIURETIC_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.IMMEDIATE_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.IMMEDIATE_VASODILATOR_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.PRELIMINARY_DIAGNOSIS;
 
 public class PatientPageDataFragment extends BaseFragment {
 
@@ -51,7 +60,7 @@ public class PatientPageDataFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_patient_page_data, container, false);
         activity = (PatientPageActivity) getActivity();
         setupViews(view);
-        addPatientAttributes();
+        setupAttributesByStage();
         return view;
     }
 
@@ -59,27 +68,36 @@ public class PatientPageDataFragment extends BaseFragment {
         patientContentLayout = (LinearLayout) view.findViewById(R.id.patient_page_data_content);
     }
 
-    private void addPatientAttributes() {
+    private void setupAttributesByStage() {
+        ActionBar bar = activity.getSupportActionBar();
+        bar.setTitle(null);
         switch (patientStage) {
             case INITIAL_STATE:
+                bar.setTitle(R.string.initial_situation);
                 showInitialState();
                 break;
             case PRELIMINARY_DIAGNOSIS:
+                bar.setTitle(R.string.preliminary_diagnosis);
                 showPreliminaryDiagnosis();
                 break;
             case IMMEDIATE_TREATMENT:
+                bar.setTitle(R.string.immediate_treatment);
                 showImmediateTreatment();
                 break;
             case ECG:
+                bar.setTitle(R.string.ecg);
                 showComplementaryMethod(Constants.Patient.Root.ECG);
                 break;
             case RX:
+                bar.setTitle(R.string.rx);
                 showComplementaryMethod(Constants.Patient.Root.RX);
                 break;
             case LAB_ANALYSIS:
+                bar.setTitle(R.string.lab_analysis);
                 showComplementaryMethod(Constants.Patient.Root.LAB_ANALYSIS);
                 break;
             case FINAL_DIAGNOSIS:
+                bar.setTitle(R.string.final_diagnosis);
                 showFinalDiagnosis();
                 break;
 
