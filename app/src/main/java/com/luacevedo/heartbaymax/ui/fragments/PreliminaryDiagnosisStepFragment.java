@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class PreliminaryDiagnosisStepFragment extends BaseFragment implements View.OnClickListener {
 
@@ -43,7 +44,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
     private boolean isLastStep;
     private List<InputField> stepInputFields;
     private PreliminaryDiagnosisActivity preliminaryDiagnosisActivity;
-    private Map<Long, InputFieldView> inputFieldsControlsById = new HashMap<>();
+    private Map<Integer, InputFieldView> inputFieldsControlsById = new TreeMap<>();
 
     public static PreliminaryDiagnosisStepFragment newInstance(List<InputField> stepInputFields, boolean isLastStep) {
         PreliminaryDiagnosisStepFragment fragment = new PreliminaryDiagnosisStepFragment();
@@ -116,7 +117,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
 
     public void createStepControls() {
         for (InputField inputField : stepInputFields) {
-            Long inputFieldId = inputField.getId();
+            int inputFieldId = inputField.getId();
             if (!inputFieldsControlsById.containsKey(inputFieldId)) {
                 InputFieldView inputFieldView = InputFieldView.createInputFieldControl(inputField, onInputFieldValueChangedListener, getContext());
                 inputFieldsControlsById.put(inputFieldId, inputFieldView);

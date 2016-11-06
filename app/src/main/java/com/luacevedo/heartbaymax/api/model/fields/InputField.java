@@ -5,7 +5,7 @@ import java.util.List;
 
 public class InputField implements Serializable {
 
-    private long id;
+    private int id;
     private String labelMessage;
     private String rootToAffect;
     private String dataType;
@@ -14,7 +14,7 @@ public class InputField implements Serializable {
     private List<Value> values;
     private String tooltip;
 
-    public InputField(long id, String labelMessage, String rootToAffect, String dataType, String fieldType, List<Value> values) {
+    public InputField(int id, String labelMessage, String rootToAffect, String dataType, String fieldType, List<Value> values) {
         this.id = id;
         this.labelMessage = labelMessage;
         this.rootToAffect = rootToAffect;
@@ -23,7 +23,7 @@ public class InputField implements Serializable {
         this.values = values;
     }
 
-    public InputField(long id, String labelMessage, String rootToAffect, String dataType, String fieldType) {
+    public InputField(int id, String labelMessage, String rootToAffect, String dataType, String fieldType) {
         this.id = id;
         this.labelMessage = labelMessage;
         this.rootToAffect = rootToAffect;
@@ -31,11 +31,11 @@ public class InputField implements Serializable {
         this.fieldType = fieldType;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

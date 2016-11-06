@@ -1,8 +1,12 @@
 package com.luacevedo.heartbaymax.utils;
 
+import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
+import com.luacevedo.heartbaymax.api.model.rules.Rule;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class InputFieldsUtils {
@@ -33,6 +37,7 @@ public class InputFieldsUtils {
             StepInputFields stepInputFields = findInputFieldForStageAndStep(inputFields, stage, step);
             if (stepInputFields != null) {
                 inputFields.remove(stepInputFields);
+                orderInputFieldsById(stepInputFields.getInputFields());
                 orderedFields.add(stepInputFields);
                 step++;
             } else {
@@ -42,6 +47,17 @@ public class InputFieldsUtils {
         }
         return orderedFields;
 
+    }
+
+    public static void orderInputFieldsById(List<InputField> list) {
+        Comparator<InputField> comparator = new Comparator<InputField>() {
+            @Override
+            public int compare(InputField c1, InputField c2) {
+                return c1.getId() - c2.getId();
+            }
+        };
+
+        Collections.sort(list, comparator);
     }
 
     private static StepInputFields findInputFieldForStageAndStep(List<StepInputFields> inputFields, int stage, int step) {

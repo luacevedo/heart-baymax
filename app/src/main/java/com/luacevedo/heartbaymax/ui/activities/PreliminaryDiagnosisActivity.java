@@ -75,6 +75,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     private PreliminaryDiagnosisStepFragment createStepFragment() {
         List<InputField> inputFields = setCurrentValuesFromPatient();
+
         return PreliminaryDiagnosisStepFragment.newInstance(inputFields, isLastStep());
     }
 
@@ -174,8 +175,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         return new Callback<List<Rule>>() {
             @Override
             public void success(List<Rule> rules, Response response) {
-                RulesUtils.orderRules(rules);
-                RulesExecutor.executeRules(rules, patient);
+                List<Rule> firstStageRules = RulesUtils.getRulesForStage(rules, RulesUtils.STAGE_1);
+                RulesExecutor.executeRules(firstStageRules, patient);
                 HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
                 startActivity(IntentFactory.getPatientPageActivityIntent(patient, true));
                 finish();

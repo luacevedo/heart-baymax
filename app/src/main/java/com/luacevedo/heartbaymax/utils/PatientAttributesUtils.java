@@ -28,6 +28,8 @@ public class PatientAttributesUtils {
         add("FinalDiureticTreatment.Enalapril");
         add("FinalVasodilatorTreatment.SodiumNitroprusside");
         add("FinalVasodilatorTreatment.Nitroglycerine");
+        add("ImmediateTreatment.Oxygen");
+        add("FinalTreatment.Oxygen");
     }};
 
     static {
