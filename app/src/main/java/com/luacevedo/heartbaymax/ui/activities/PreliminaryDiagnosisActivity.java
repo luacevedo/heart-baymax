@@ -112,7 +112,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     private void getPreliminaryDiagnosisFields() {
         progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
-        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS_STAGE_1);
+        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS);
         mochiApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
     }
 
@@ -167,7 +167,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     private void getRules() {
         progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
-        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_1, CallType.RULES_STAGE_1);
+        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_1, CallType.RULES);
         mochiApi.getRules(callId, getRulesCallback());
     }
 
@@ -208,5 +208,4 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         currentStep--;
         slideNextFragmentFromLeft(createStepFragment());
     }
-
 }

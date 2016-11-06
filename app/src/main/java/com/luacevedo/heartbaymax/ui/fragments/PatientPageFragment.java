@@ -20,6 +20,7 @@ import com.luacevedo.heartbaymax.ui.views.PatientStageView;
 import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 
 import static com.luacevedo.heartbaymax.Constants.PatientStage.ECG;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.FINAL_DIAGNOSIS;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.IMMEDIATE_TREATMENT;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.INITIAL_STATE;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.LAB_ANALYSIS;
@@ -31,6 +32,14 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
     private static final int REQUEST_CODE = 34256;
     private PatientPageActivity activity;
     private Patient patient;
+    private TextView patientName;
+    private PatientStageView initialSituationView;
+    private PatientStageView preliminaryDiagnosisView;
+    private PatientStageView immediateTreatmentView;
+    private PatientStageView ecgView;
+    private PatientStageView rxView;
+    private PatientStageView labAnalysisView;
+    private PatientStageView finalDiagnosisView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -47,34 +56,31 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
         } else {
             activity.setPatient(patient);
         }
-        setupViews(view);
+        findViews(view);
+        setupViews();
         return view;
     }
 
-    private void setupViews(View view) {
-        TextView patientName = (TextView) view.findViewById(R.id.patient_page_name);
+    private void setupViews() {
         patientName.setText(patient.getName());
-
-        PatientStageView initialSituationView = (PatientStageView) view.findViewById(R.id.initial_state_stage);
         initialSituationView.setupView(INITIAL_STATE, true, true, this);
-
-        PatientStageView preliminaryDiagnosisView = (PatientStageView) view.findViewById(R.id.preliminary_diagnosis_stage);
         preliminaryDiagnosisView.setupView(Constants.PatientStage.PRELIMINARY_DIAGNOSIS, true, true, this);
-
-        PatientStageView immediateTreatmentView = (PatientStageView) view.findViewById(R.id.immediate_treatment_stage);
         immediateTreatmentView.setupView(Constants.PatientStage.IMMEDIATE_TREATMENT, true, true, this);
-
-        PatientStageView ecgView = (PatientStageView) view.findViewById(R.id.ecg_stage);
         ecgView.setupView(Constants.PatientStage.ECG, patient.isECGCompleted(), true, this);
-
-        PatientStageView rxView = (PatientStageView) view.findViewById(R.id.rx_stage);
         rxView.setupView(Constants.PatientStage.RX, patient.isRXCompleted(), true, this);
-
-        PatientStageView labAnalysisView = (PatientStageView) view.findViewById(R.id.lab_analysis_stage);
         labAnalysisView.setupView(Constants.PatientStage.LAB_ANALYSIS, patient.isLabAnalysisCompleted(), true, this);
-
-        PatientStageView finalDiagnosisView = (PatientStageView) view.findViewById(R.id.final_diagnosis_stage);
         finalDiagnosisView.setupView(Constants.PatientStage.FINAL_DIAGNOSIS, patient.isFinalDiagnosisCompleted(), patient.isFinalDiagnosisEnabled(), this);
+    }
+
+    private void findViews(View view) {
+        patientName = (TextView) view.findViewById(R.id.patient_page_name);
+        initialSituationView = (PatientStageView) view.findViewById(R.id.initial_state_stage);
+        preliminaryDiagnosisView = (PatientStageView) view.findViewById(R.id.preliminary_diagnosis_stage);
+        immediateTreatmentView = (PatientStageView) view.findViewById(R.id.immediate_treatment_stage);
+        ecgView = (PatientStageView) view.findViewById(R.id.ecg_stage);
+        rxView = (PatientStageView) view.findViewById(R.id.rx_stage);
+        labAnalysisView = (PatientStageView) view.findViewById(R.id.lab_analysis_stage);
+        finalDiagnosisView = (PatientStageView) view.findViewById(R.id.final_diagnosis_stage);
     }
 
     @Override
@@ -111,6 +117,11 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
                 }
                 break;
             case FINAL_DIAGNOSIS:
+                if (activity.getPatient().isFinalDiagnosisCompleted()) {
+                    slideNextFragment(PatientPageDataFragment.newInstance(FINAL_DIAGNOSIS));
+                } else {
+                    activity.executeSecondStageRules();
+                }
                 break;
         }
     }
@@ -123,5 +134,9 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
                 activity.setPatient(BundleHelper.fromBundleJson(data, Constants.BundleKey.PATIENT, Patient.class, activity.getPatient() != null ? activity.getPatient() : null));
             }
         }
+    }
+
+    public void refreshStages() {
+        setupViews();
     }
 }

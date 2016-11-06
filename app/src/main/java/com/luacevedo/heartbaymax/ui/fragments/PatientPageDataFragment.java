@@ -76,9 +76,25 @@ public class PatientPageDataFragment extends BaseFragment {
                 break;
             case LAB_ANALYSIS:
                 showComplementaryMethod(Constants.Patient.Root.LAB_ANALYSIS);
+            case FINAL_DIAGNOSIS:
+                showFinalDiagnosis();
                 break;
 
         }
+    }
+
+    private void showFinalDiagnosis() {
+        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
+        for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
+            String root = attribute.getAttribute().getRootParent();
+            if ((root.equals(HEART_SITUATION) || root.equals(FINAL_DIAGNOSIS)
+                    || root.equals(FINAL_TREATMENT) || root.equals(FINAL_DIURETIC_TREATMENT)
+                    || root.equals(FINAL_VASODILATOR_TREATMENT))
+                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+                preliminaryDiagnosisList.add(attribute);
+            }
+        }
+        addValuesToLayout(preliminaryDiagnosisList);
     }
 
     private void showImmediateTreatment() {

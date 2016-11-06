@@ -1,5 +1,7 @@
 package com.luacevedo.heartbaymax.model.patient;
 
+import android.text.TextUtils;
+
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 
@@ -88,23 +90,23 @@ public class Patient implements Serializable {
     }
 
     public boolean isRXCompleted() {
-        return attributesMap.get(Constants.Attribute.RX.KERLEY_LINES).getValue() != null
-                && attributesMap.get(Constants.Attribute.RX.PLEURAL_EFFUSION).getValue() != null
-                && attributesMap.get(Constants.Attribute.RX.CARDIOMEGALY).getValue() != null
-                && attributesMap.get(Constants.Attribute.RX.FLOW_REDISTRIBUTION).getValue() != null;
+        return attributesMap.get(Constants.Attribute.Rx.KERLEY_LINES).getValue() != null
+                && attributesMap.get(Constants.Attribute.Rx.PLEURAL_EFFUSION).getValue() != null
+                && attributesMap.get(Constants.Attribute.Rx.CARDIOMEGALY).getValue() != null
+                && attributesMap.get(Constants.Attribute.Rx.FLOW_REDISTRIBUTION).getValue() != null;
     }
 
     public boolean isLabAnalysisCompleted() {
-        return attributesMap.get(Constants.Attribute.LAB_ANALYSIS.SODIUM).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.POTASSIUM).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.UREMIA).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.CREATININE).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.RED_BLOOD_CELLS).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.WHITE_BLOOD_CELLS).getValue() != null;
+        return attributesMap.get(Constants.Attribute.LabAnalysis.SODIUM).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.POTASSIUM).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.UREMIA).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.CREATININE).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.RED_BLOOD_CELLS).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.WHITE_BLOOD_CELLS).getValue() != null;
     }
 
     public boolean isFinalDiagnosisCompleted() {
-        return false;
+        return !TextUtils.isEmpty((String) attributesMap.get(Constants.Attribute.FinalDiagnosis.IC_CLASS).getValue());
     }
 
     public boolean isFinalDiagnosisEnabled() {
