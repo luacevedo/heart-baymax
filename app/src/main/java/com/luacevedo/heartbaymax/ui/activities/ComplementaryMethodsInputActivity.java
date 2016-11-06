@@ -1,9 +1,13 @@
 package com.luacevedo.heartbaymax.ui.activities;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
@@ -14,6 +18,7 @@ import com.luacevedo.heartbaymax.api.model.fields.StepInputFields;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
 import com.luacevedo.heartbaymax.db.InternalDbHelper;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
+import com.luacevedo.heartbaymax.helpers.ResourcesHelper;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.fragments.ComplementaryMethodsStepFragment;
@@ -21,6 +26,8 @@ import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.luacevedo.heartbaymax.utils.InputFieldsUtils.*;
 
 public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
 
@@ -42,7 +49,26 @@ public class ComplementaryMethodsInputActivity extends BaseFragmentActivity {
             stage = BundleHelper.fromBundle(getIntent().getExtras(), Constants.BundleKey.STAGE, 0);
             patient = BundleHelper.fromBundleJson(getIntent().getExtras(), Constants.BundleKey.PATIENT, Patient.class, null);
         }
+        setActionBar();
+    }
 
+    public void setActionBar() {
+        ActionBar bar = getSupportActionBar();
+        bar.setTitle(null);
+        String title = ResourcesHelper.getString(R.string.patient);
+        switch (stage) {
+            case STAGE_2:
+                title = ResourcesHelper.getString(R.string.ecg);
+                break;
+            case STAGE_3:
+                title = ResourcesHelper.getString(R.string.rx);
+                break;
+            case STAGE_4:
+                title = ResourcesHelper.getString(R.string.lab_analysis);
+                break;
+        }
+        bar.setTitle(title);
+        bar.show();
     }
 
     @Override

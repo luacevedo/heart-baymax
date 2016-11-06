@@ -55,7 +55,7 @@ public class Constants {
             public static final String HEART_RATE = "ECG.HeartRate";
             public static final String ISCHEMIA = "ECG.Ischemia";
             public static final String ARRHYTHMIA = "ECG.Arrhythmia";
-            public static final String ATRIAIL_FIBRILLATION = "ECG.AtrialFibrillation";
+            public static final String ATRIAL_FIBRILLATION = "ECG.AtrialFibrillation";
         }
 
         public class Rx {

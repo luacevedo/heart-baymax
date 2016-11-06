@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
@@ -116,6 +117,8 @@ public class PatientPageActivity extends BaseFragmentActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.e("LULI", error.toString());
+                Toast.makeText(getApplicationContext(), R.string.networ_error, Toast.LENGTH_SHORT).show();
+                progress.dismiss();
             }
         };
     }

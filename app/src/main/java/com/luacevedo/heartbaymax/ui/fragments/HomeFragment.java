@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.HeartBaymaxApplication;
@@ -103,6 +104,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
             @Override
             public void failure(RetrofitError error) {
                 Log.e("LULI", error.toString());
+                Toast.makeText(getActivity(), R.string.networ_error, Toast.LENGTH_SHORT).show();
+                progress.dismiss();
             }
         };
     }

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
@@ -131,6 +132,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.e("LULI", error.toString());
+                Toast.makeText(getApplicationContext(), R.string.networ_error, Toast.LENGTH_SHORT).show();
                 progress.dismiss();
             }
         };
@@ -186,6 +188,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.e("LULI", error.toString());
+                Toast.makeText(getApplicationContext(), R.string.networ_error, Toast.LENGTH_SHORT).show();
+                progress.dismiss();
             }
         };
     }

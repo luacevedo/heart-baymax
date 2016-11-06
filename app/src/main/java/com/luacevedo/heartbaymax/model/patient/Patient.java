@@ -86,7 +86,7 @@ public class Patient implements Serializable {
         return attributesMap.get(Constants.Attribute.ECG.HEART_RATE).getValue() != null
                 && attributesMap.get(Constants.Attribute.ECG.ISCHEMIA).getValue() != null
                 && attributesMap.get(Constants.Attribute.ECG.ARRHYTHMIA).getValue() != null
-                && attributesMap.get(Constants.Attribute.ECG.ATRIAIL_FIBRILLATION).getValue() != null;
+                && attributesMap.get(Constants.Attribute.ECG.ATRIAL_FIBRILLATION).getValue() != null;
     }
 
     public boolean isRXCompleted() {
