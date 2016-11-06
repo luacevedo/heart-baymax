@@ -55,13 +55,14 @@ public class Constants {
             public static final String HEART_RATE = "ECG.HeartRate";
             public static final String ISCHEMIA = "ECG.Ischemia";
             public static final String ARRHYTHMIA = "ECG.Arrhythmia";
-            public static final String STROKE_SYMPTOMS = "ECG.StrokeSymptoms";
+            public static final String ATRIAIL_FIBRILLATION = "ECG.AtrialFibrillation";
         }
 
         public class RX {
             public static final String KERLEY_LINES = "Rx.KerleyLines";
             public static final String FLOW_REDISTRIBUTION = "Rx.FlowRedistribution";
             public static final String PLEURAL_EFFUSION = "Rx.PleuralEffusion";
+            public static final String CARDIOMEGALY = "Rx.Cardiomegaly";
         }
 
         public class LAB_ANALYSIS {
