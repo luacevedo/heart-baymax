@@ -62,7 +62,7 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
     }
 
     private void setupViews() {
-        patientName.setText(patient.getName());
+        patientName.setText(String.format("%s - %s años", patient.getName(), patient.getAge()));
         initialSituationView.setupView(INITIAL_STATE, true, true, this);
         preliminaryDiagnosisView.setupView(Constants.PatientStage.PRELIMINARY_DIAGNOSIS, true, true, this);
         immediateTreatmentView.setupView(Constants.PatientStage.IMMEDIATE_TREATMENT, true, true, this);
