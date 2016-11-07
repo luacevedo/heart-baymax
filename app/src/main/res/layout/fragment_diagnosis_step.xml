@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:id="@+id/diagnosis_step_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/diagnosis_form_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/large_padding"
+            android:orientation="vertical" />
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/diagnosis_next_step"
+        android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/diagnosis_step_scroll"
+        android:background="@drawable/material_custom_button"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:padding="@dimen/large_padding"
+        android:clickable="true"
+        android:text="next"
+        android:textColor="@color/white"
+        android:textSize="@dimen/material_text_title" />
+
+</LinearLayout>

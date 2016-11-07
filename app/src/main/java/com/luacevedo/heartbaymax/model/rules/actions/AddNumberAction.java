@@ -2,28 +2,28 @@ package com.luacevedo.heartbaymax.model.rules.actions;
 
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
-public class AddNumberAction extends BaseAction<Integer> {
+public class AddNumberAction extends BaseAction<Double> {
 
-    private int valueToAdd;
+    private Double valueToAdd;
 
-    public int getValue() {
+    public Double getValue() {
         return valueToAdd;
     }
 
-    public AddNumberAction(String attributeRoot, int valueToAdd) {
+    public AddNumberAction(String attributeRoot, Double valueToAdd) {
         this.attributeRoot = attributeRoot;
         this.valueToAdd = valueToAdd;
     }
 
-    public void setValueToAdd(int value) {
+    public void setValueToAdd(Double value) {
         this.valueToAdd = value;
     }
 
     @Override
-    public void execute(PatientAttribute<Integer> intAttribute) {
-        int currentValue;
+    public void execute(PatientAttribute<Double> intAttribute) {
+        Double currentValue;
         if (intAttribute.getValue() == null) {
-            currentValue = 0;
+            currentValue = 0.0;
         } else {
             currentValue = intAttribute.getValue();
         }

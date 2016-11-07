@@ -1,4 +1,35 @@
 <resources>
-    <string name="app_name">HeartBaymax</string>
+    <string name="app_name">Heart Baymax</string>
     <string name="action_settings">Settings</string>
+    <string name="new_patient">Ingresar nuevo paciente</string>
+    <string name="title_activity_new_patient">Nuevo paciente</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="next_step">Siguiente</string>
+    <string name="finish_step">Finalizar</string>
+    <string name="patient_title_home">"Nombre: {patient}"</string>
+    <string name="edit_preliminary_diagnosis">Editar diagnóstico preliminar</string>
+    <string name="edit_complementary_tests">Editar exámenes complementarios</string>
+    <string name="patients">Pacientes:</string>
+    <string name="continue_diagnosis">Continuar diagnóstico</string>
+    <string name="enter_heart_situation">Ingresar situación cardíaca</string>
+    <string name="loading">Cargando</string>
+    <string name="heart_situation">Situación cardíaca</string>
+    <string name="initial_situation">Situación inicial</string>
+    <string name="enter_initial_situation">Ingresar situación inicial</string>
+    <string name="enter_prelinary_diagnosis">Ingresar diagnóstico preliminar</string>
+    <string name="preliminary_diagnosis">Diagnóstico preliminar</string>
+    <string name="enter_ecg">Ingresar datos de electrocardiograma</string>
+    <string name="ecg">Electrocardiograma</string>
+    <string name="enter_rx">Ingresar datos de radriografía de tórax</string>
+    <string name="rx">Radiografía de tórax</string>
+    <string name="enter_lab_analysis">Ingresar análisis de laboratorio</string>
+    <string name="lab_analysis">Análisis de laboratorio</string>
+    <string name="enter_final_diagnosis">Ingresar diagnóstico final</string>
+    <string name="final_diagnosis">Diagnóstico final</string>
+    <string name="enter_valid_value">Ingrese un valor válido</string>
+    <string name="accept">Aceptar</string>
+    <string name="immediate_treatment">Tratamiento inmediato</string>
+    <string name="no_treatment">No requiere tratamiento inmediato</string>
+    <string name="networ_error">Error de red</string>
+    <string name="patient">Paciente</string>
 </resources>
