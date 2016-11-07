@@ -70,11 +70,6 @@ public class PatientPageActivity extends BaseFragmentActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
-
     public Patient getPatient() {
         return patient;
     }
@@ -126,4 +121,5 @@ public class PatientPageActivity extends BaseFragmentActivity {
     public void refreshStages() {
         initialFragment.refreshStages();
     }
+
 }
