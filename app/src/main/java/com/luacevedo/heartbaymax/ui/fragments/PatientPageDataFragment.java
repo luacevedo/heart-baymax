@@ -2,23 +2,36 @@ package com.luacevedo.heartbaymax.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
+import com.luacevedo.heartbaymax.helpers.ResourcesHelper;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.ui.activities.PatientPageActivity;
+import com.luacevedo.heartbaymax.ui.views.PatientAttributeExtendedView;
 import com.luacevedo.heartbaymax.ui.views.PatientAttributeView;
+import com.luacevedo.heartbaymax.utils.PatientAttributesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.luacevedo.heartbaymax.Constants.Patient.Root.*;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.FINAL_DIAGNOSIS;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.FINAL_DIURETIC_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.FINAL_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.FINAL_VASODILATOR_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.HEART_SITUATION;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.IMMEDIATE_DIURETIC_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.IMMEDIATE_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.IMMEDIATE_VASODILATOR_TREATMENT;
+import static com.luacevedo.heartbaymax.Constants.Patient.Root.PRELIMINARY_DIAGNOSIS;
 
 public class PatientPageDataFragment extends BaseFragment {
 
@@ -47,7 +60,7 @@ public class PatientPageDataFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_patient_page_data, container, false);
         activity = (PatientPageActivity) getActivity();
         setupViews(view);
-        addPatientAttributes();
+        setupAttributesByStage();
         return view;
     }
 
@@ -55,25 +68,67 @@ public class PatientPageDataFragment extends BaseFragment {
         patientContentLayout = (LinearLayout) view.findViewById(R.id.patient_page_data_content);
     }
 
-    private void addPatientAttributes() {
+    private void setupAttributesByStage() {
+        ActionBar bar = activity.getSupportActionBar();
+        bar.setTitle(null);
         switch (patientStage) {
             case INITIAL_STATE:
+                bar.setTitle(R.string.initial_situation);
                 showInitialState();
                 break;
             case PRELIMINARY_DIAGNOSIS:
+                bar.setTitle(R.string.preliminary_diagnosis);
                 showPreliminaryDiagnosis();
                 break;
+            case IMMEDIATE_TREATMENT:
+                bar.setTitle(R.string.immediate_treatment);
+                showImmediateTreatment();
+                break;
             case ECG:
+                bar.setTitle(R.string.ecg);
                 showComplementaryMethod(Constants.Patient.Root.ECG);
                 break;
             case RX:
+                bar.setTitle(R.string.rx);
                 showComplementaryMethod(Constants.Patient.Root.RX);
                 break;
             case LAB_ANALYSIS:
+                bar.setTitle(R.string.lab_analysis);
                 showComplementaryMethod(Constants.Patient.Root.LAB_ANALYSIS);
+                break;
+            case FINAL_DIAGNOSIS:
+                bar.setTitle(R.string.final_diagnosis);
+                showFinalDiagnosis();
                 break;
 
         }
+    }
+
+    private void showFinalDiagnosis() {
+        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
+        for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
+            String root = attribute.getAttribute().getRootParent();
+            if ((root.equals(HEART_SITUATION) || root.equals(FINAL_DIAGNOSIS)
+                    || root.equals(FINAL_TREATMENT) || root.equals(FINAL_DIURETIC_TREATMENT)
+                    || root.equals(FINAL_VASODILATOR_TREATMENT))
+                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+                preliminaryDiagnosisList.add(attribute);
+            }
+        }
+        addValuesToLayout(preliminaryDiagnosisList);
+    }
+
+    private void showImmediateTreatment() {
+        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
+        for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
+            String root = attribute.getAttribute().getRootParent();
+            if ((root.equals(IMMEDIATE_TREATMENT) || root.equals(IMMEDIATE_DIURETIC_TREATMENT)
+                    || root.equals(IMMEDIATE_VASODILATOR_TREATMENT))
+                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+                preliminaryDiagnosisList.add(attribute);
+            }
+        }
+        addValuesToLayout(preliminaryDiagnosisList);
     }
 
     private void showComplementaryMethod(String root) {
@@ -90,17 +145,14 @@ public class PatientPageDataFragment extends BaseFragment {
 
     private void showPreliminaryDiagnosis() {
         List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
-        List<PatientAttribute> secondarySymptomsList = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
-            if ((root.equals(PRELIMINARY_DIAGNOSIS) || root.equals(IMMEDIATE_TREATMENT)
-                    || root.equals(DIURETIC_TREATMENT) || root.equals(VASODILATOR_TREATMENT))
-                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+            if (root.equals(PRELIMINARY_DIAGNOSIS) && attribute.getValue() != null
+                    && !TextUtils.isEmpty(attribute.getValue().toString())) {
                 preliminaryDiagnosisList.add(attribute);
             }
         }
         addValuesToLayout(preliminaryDiagnosisList);
-        addValuesToLayout(secondarySymptomsList);
     }
 
     private void showInitialState() {
@@ -124,9 +176,22 @@ public class PatientPageDataFragment extends BaseFragment {
     }
 
     private void addValuesToLayout(List<PatientAttribute> list) {
+        if (list.isEmpty()) {
+            TextView viewAttribute = new TextView(getActivity());
+            viewAttribute.setTextSize(ResourcesHelper.getDimensionPixelSize(R.dimen.no_treatment_size));
+            viewAttribute.setText(R.string.no_treatment);
+            patientContentLayout.addView(viewAttribute);
+            return;
+        }
         for (PatientAttribute attribute : list) {
-            PatientAttributeView viewAttribute = new PatientAttributeView(getActivity());
-            viewAttribute.setData(attribute);
+            View viewAttribute;
+            if (PatientAttributesUtils.isExtended(attribute)) {
+                viewAttribute = new PatientAttributeExtendedView(getActivity());
+                ((PatientAttributeExtendedView) viewAttribute).setData(attribute);
+            } else {
+                viewAttribute = new PatientAttributeView(getActivity());
+                ((PatientAttributeView) viewAttribute).setData(attribute);
+            }
             patientContentLayout.addView(viewAttribute);
         }
     }

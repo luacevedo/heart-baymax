@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
 import com.luacevedo.heartbaymax.Constants;
@@ -75,6 +76,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     private PreliminaryDiagnosisStepFragment createStepFragment() {
         List<InputField> inputFields = setCurrentValuesFromPatient();
+
         return PreliminaryDiagnosisStepFragment.newInstance(inputFields, isLastStep());
     }
 
@@ -93,7 +95,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
                     keyToFind = attribute.getValue().toString();
                 }
                 Value value;
-                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)) {
+                if (inputField.getDataType().equals(Constants.InputField.DataType.STRING)
+                        || inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
                     value = new Value(keyToFind);
                 } else {
                     value = inputField.getValue(keyToFind);
@@ -110,7 +113,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     private void getPreliminaryDiagnosisFields() {
         progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
-        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS_STAGE_1);
+        CallId callId = new CallId(CallOrigin.PRELIMINARY_DIAGNOSIS, CallType.INPUT_FIELDS);
         mochiApi.getPatientStepInputFields(callId, getPatientStepInputFieldsCallback());
     }
 
@@ -129,6 +132,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.e("LULI", error.toString());
+                Toast.makeText(getApplicationContext(), R.string.networ_error, Toast.LENGTH_SHORT).show();
                 progress.dismiss();
             }
         };
@@ -165,7 +169,7 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
 
     private void getRules() {
         progress = ProgressDialog.show(this, null, getString(R.string.loading), true);
-        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_1, CallType.RULES_STAGE_1);
+        CallId callId = new CallId(CallOrigin.RULES_EXECUTION_STAGE_1, CallType.RULES);
         mochiApi.getRules(callId, getRulesCallback());
     }
 
@@ -173,8 +177,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         return new Callback<List<Rule>>() {
             @Override
             public void success(List<Rule> rules, Response response) {
-                RulesUtils.orderRules(rules);
-                RulesExecutor.executeRules(rules, patient);
+                List<Rule> firstStageRules = RulesUtils.getRulesForStage(rules, RulesUtils.STAGE_1);
+                RulesExecutor.executeRules(firstStageRules, patient);
                 HeartBaymaxApplication.getApplication().getInternalDbHelper().savePatient(patient);
                 startActivity(IntentFactory.getPatientPageActivityIntent(patient, true));
                 finish();
@@ -184,6 +188,8 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
             @Override
             public void failure(RetrofitError error) {
                 Log.e("LULI", error.toString());
+                Toast.makeText(getApplicationContext(), R.string.networ_error, Toast.LENGTH_SHORT).show();
+                progress.dismiss();
             }
         };
     }
@@ -206,5 +212,4 @@ public class PreliminaryDiagnosisActivity extends BaseFragmentActivity {
         currentStep--;
         slideNextFragmentFromLeft(createStepFragment());
     }
-
 }

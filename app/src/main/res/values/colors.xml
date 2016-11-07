@@ -2,7 +2,7 @@
 <resources>
     <color name="action_bar_primary">#FF0101</color>
     <color name="action_bar_primary_dark">#B70303</color>
-    <color name="accent">#FF4081</color>
+    <color name="accent">#FF655F</color>
     <color name="white">#FFFFFFFF</color>
     <color name="forms_text_color">#DD000000</color>
     <color name="background_overlay">#d9000000</color>

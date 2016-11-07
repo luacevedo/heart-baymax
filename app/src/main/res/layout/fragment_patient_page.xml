@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_vertical_margin"
     android:layout_width="match_parent"
+    android:scrollbarStyle="outsideInset"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
         android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/patient_page_name"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/medium_padding"
             android:layout_width="match_parent"
@@ -39,6 +42,19 @@
 
         <com.luacevedo.heartbaymax.ui.views.PatientStageView
             android:id="@+id/preliminary_diagnosis_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
+
+        <View
+            android:layout_height="@dimen/one_dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/immediate_treatment_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

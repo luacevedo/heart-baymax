@@ -45,7 +45,7 @@ public class ComplementaryMethodsStepFragment extends BaseFragment implements Vi
     private boolean isLastStep;
     private List<InputField> stepInputFields;
     private ComplementaryMethodsInputActivity activity;
-    private Map<Long, InputFieldView> inputFieldsControlsById = new HashMap<>();
+    private Map<Integer, InputFieldView> inputFieldsControlsById = new HashMap<>();
 
     public static ComplementaryMethodsStepFragment newInstance(List<InputField> stepInputFields, boolean isLastStep) {
         ComplementaryMethodsStepFragment fragment = new ComplementaryMethodsStepFragment();
@@ -124,7 +124,7 @@ public class ComplementaryMethodsStepFragment extends BaseFragment implements Vi
 
     public void createStepControls() {
         for (InputField inputField : stepInputFields) {
-            Long inputFieldId = inputField.getId();
+            int inputFieldId = inputField.getId();
             if (!inputFieldsControlsById.containsKey(inputFieldId)) {
                 InputFieldView inputFieldView = InputFieldView.createInputFieldControl(inputField, onInputFieldValueChangedListener, getContext());
                 inputFieldsControlsById.put(inputFieldId, inputFieldView);

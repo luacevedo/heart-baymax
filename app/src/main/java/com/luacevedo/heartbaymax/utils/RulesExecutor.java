@@ -33,6 +33,12 @@ public class RulesExecutor {
             PatientAttribute attributeToCheck = patient.getAttributesMap().get(condition.getAttributeRoot());
             Log.e("LULI", "Attribute: " + condition.getAttributeRoot());
             Log.e("LULI", "Condition: " + condition);
+            if (rule.getRuleId() == 23) {
+                Log.e("sjs", "djkdfjd");
+            }
+            if (rule.getRuleId() == 57) {
+                Log.e("sjs", "djkdfjd");
+            }
             if (!condition.validate(attributeToCheck)) {
                 Log.e("LULI", "no cumplio con la condicion el attributo...");
                 conditionsFulfilled = false;

@@ -1,9 +1,12 @@
 package com.luacevedo.heartbaymax.model.patient;
 
+import android.text.TextUtils;
+
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,32 +30,6 @@ public class Patient implements Serializable {
 
     public void setAttributesMap(HashMap<String, PatientAttribute> attributesMap) {
         this.attributesMap = attributesMap;
-    }
-
-    public void setAttributesMap(List<Attribute> attributes) {
-        attributesMap = new HashMap<>();
-        for (Attribute attribute : attributes) {
-            PatientAttribute<?> patientAttribute = null;
-
-            switch (attribute.getDataType()) {
-                case Constants.Attribute.Type.BOOLEAN:
-                    patientAttribute = new PatientAttribute<Boolean>(attribute, true);
-                    break;
-                case Constants.Attribute.Type.NUMBER:
-                    patientAttribute = new PatientAttribute<Integer>(attribute, 0);
-                    break;
-                case Constants.Attribute.Type.LIST:
-                    patientAttribute = new PatientAttribute<List<String>>(attribute, new ArrayList<String>());
-                    break;
-                case Constants.Attribute.Type.STRING:
-                    patientAttribute = new PatientAttribute<String>(attribute, "");
-                    break;
-            }
-            if (patientAttribute != null) {
-                attributesMap.put(attribute.getRoot(), patientAttribute);
-            }
-
-        }
     }
 
     public String getName() {
@@ -84,29 +61,36 @@ public class Patient implements Serializable {
         return attributesMap.get(Constants.Attribute.ECG.HEART_RATE).getValue() != null
                 && attributesMap.get(Constants.Attribute.ECG.ISCHEMIA).getValue() != null
                 && attributesMap.get(Constants.Attribute.ECG.ARRHYTHMIA).getValue() != null
-                && attributesMap.get(Constants.Attribute.ECG.STROKE_SYMPTOMS).getValue() != null;
+                && attributesMap.get(Constants.Attribute.ECG.ATRIAL_FIBRILLATION).getValue() != null;
     }
 
     public boolean isRXCompleted() {
-        return attributesMap.get(Constants.Attribute.RX.KERLEY_LINES).getValue() != null
-                && attributesMap.get(Constants.Attribute.RX.PLEURAL_EFFUSION).getValue() != null
-                && attributesMap.get(Constants.Attribute.RX.FLOW_REDISTRIBUTION).getValue() != null;
+        return attributesMap.get(Constants.Attribute.Rx.KERLEY_LINES).getValue() != null
+                && attributesMap.get(Constants.Attribute.Rx.PLEURAL_EFFUSION).getValue() != null
+                && attributesMap.get(Constants.Attribute.Rx.CARDIOMEGALY).getValue() != null
+                && attributesMap.get(Constants.Attribute.Rx.FLOW_REDISTRIBUTION).getValue() != null;
     }
 
     public boolean isLabAnalysisCompleted() {
-        return attributesMap.get(Constants.Attribute.LAB_ANALYSIS.SODIUM).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.POTASSIUM).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.UREMIA).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.CREATININE).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.RED_BLOOD_CELLS).getValue() != null
-                && attributesMap.get(Constants.Attribute.LAB_ANALYSIS.WHITE_BLOOD_CELLS).getValue() != null;
+        return attributesMap.get(Constants.Attribute.LabAnalysis.SODIUM).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.POTASSIUM).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.UREMIA).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.CREATININE).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.RED_BLOOD_CELLS).getValue() != null
+                && attributesMap.get(Constants.Attribute.LabAnalysis.WHITE_BLOOD_CELLS).getValue() != null;
     }
 
     public boolean isFinalDiagnosisCompleted() {
-        return false;
+        return !TextUtils.isEmpty((String) attributesMap.get(Constants.Attribute.FinalDiagnosis.IC_CLASS).getValue());
     }
 
     public boolean isFinalDiagnosisEnabled() {
         return isECGCompleted() && isLabAnalysisCompleted() && isRXCompleted();
+    }
+
+    public String getAge() {
+        Object age = attributesMap.get("PatientData.Age").getValue();
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        return age != null ? decimalFormat.format(age) : "";
     }
 }

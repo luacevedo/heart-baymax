@@ -51,26 +51,35 @@ public class Constants {
             public static final String STRING = "string";
         }
 
+        public class EssentialSymptoms {
+            public static final String DYSPNOEA = "EssentialSymptoms.Dyspnoea";
+        }
+
         public class ECG {
             public static final String HEART_RATE = "ECG.HeartRate";
             public static final String ISCHEMIA = "ECG.Ischemia";
             public static final String ARRHYTHMIA = "ECG.Arrhythmia";
-            public static final String STROKE_SYMPTOMS = "ECG.StrokeSymptoms";
+            public static final String ATRIAL_FIBRILLATION = "ECG.AtrialFibrillation";
         }
 
-        public class RX {
+        public class Rx {
             public static final String KERLEY_LINES = "Rx.KerleyLines";
             public static final String FLOW_REDISTRIBUTION = "Rx.FlowRedistribution";
             public static final String PLEURAL_EFFUSION = "Rx.PleuralEffusion";
+            public static final String CARDIOMEGALY = "Rx.Cardiomegaly";
         }
 
-        public class LAB_ANALYSIS {
+        public class LabAnalysis {
             public static final String SODIUM = "LabAnalysis.Sodium";
             public static final String POTASSIUM = "LabAnalysis.Potassium";
             public static final String UREMIA = "LabAnalysis.Uremia";
             public static final String CREATININE = "LabAnalysis.Creatinine";
             public static final String RED_BLOOD_CELLS = "LabAnalysis.RedBloodCells";
             public static final String WHITE_BLOOD_CELLS = "LabAnalysis.WhiteBloodCells";
+        }
+
+        public class FinalDiagnosis {
+            public static final String IC_CLASS = "FinalDiagnosis.ICClass";
         }
     }
 
@@ -106,17 +115,22 @@ public class Constants {
             public static final String SECONDARY_SYMPTOMS = "SecondarySymptoms";
             public static final String PRELIMINARY_DIAGNOSIS = "PreliminaryDiagnosis";
             public static final String IMMEDIATE_TREATMENT = "ImmediateTreatment";
-            public static final String DIURETIC_TREATMENT = "DiureticTreatment";
-            public static final String VASODILATOR_TREATMENT = "VasodilatorTreatment";
+            public static final String IMMEDIATE_DIURETIC_TREATMENT = "ImmediateDiureticTreatment";
+            public static final String IMMEDIATE_VASODILATOR_TREATMENT = "ImmediateVasodilatorTreatment";
             public static final String ECG = "ECG";
             public static final String RX = "RX";
             public static final String LAB_ANALYSIS = "LabAnalysis";
+            public static final String HEART_SITUATION = "HeartSituation";
+            public static final String FINAL_DIAGNOSIS = "FinalDiagnosis";
+            public static final String FINAL_TREATMENT = "FinalTreatment";
+            public static final String FINAL_DIURETIC_TREATMENT = "FinalDiureticTreatment";
+            public static final String FINAL_VASODILATOR_TREATMENT = "FinalVasodilatorTreatment";
         }
 
     }
 
     public enum PatientStage {
-        INITIAL_STATE, PRELIMINARY_DIAGNOSIS, RX, LAB_ANALYSIS, FINAL_DIAGNOSIS, ECG
+        INITIAL_STATE, PRELIMINARY_DIAGNOSIS, IMMEDIATE_TREATMENT, RX, LAB_ANALYSIS, FINAL_DIAGNOSIS, ECG
     }
 
 }

@@ -40,8 +40,8 @@ public class TextFieldView extends InputFieldView {
     }
 
     private void setupTooltip() {
-        if (inputField.getTooltip() != null) {
-            txtViewTooltip.setText(inputField.getTooltip());
+        if (inputField.getToolTip() != null) {
+            txtViewTooltip.setText(inputField.getToolTip());
             txtViewTooltip.setVisibility(VISIBLE);
         }
     }

@@ -14,6 +14,32 @@ import static com.luacevedo.heartbaymax.Constants.Attribute.Type.STRING;
 
 public class PatientAttributesUtils {
 
+    private static List<String> extendedAttributes = new ArrayList<String>() {{
+        add("PreliminaryDiagnosis.PreliminaryICClassExplanation");
+        add("ImmediateDiureticTreatment.Furosemide");
+        add("ImmediateDiureticTreatment.Epleronone");
+        add("ImmediateDiureticTreatment.Spironolactone");
+        add("ImmediateVasodilatorTreatment.SodiumNitroprusside");
+        add("FinalDiagnosis.ICClassExplanation");
+        add("FinalTreatment.Antiarrhythmic");
+        add("FinalDiureticTreatment.Furosemide");
+        add("FinalDiureticTreatment.Epleronone");
+        add("FinalDiureticTreatment.Spironolactone");
+        add("FinalDiureticTreatment.Enalapril");
+        add("FinalVasodilatorTreatment.SodiumNitroprusside");
+        add("FinalVasodilatorTreatment.Nitroglycerine");
+        add("ImmediateTreatment.Oxygen");
+        add("FinalTreatment.Oxygen");
+    }};
+
+    static {
+        addExtendedAttributes();
+    }
+
+    private static void addExtendedAttributes() {
+
+    }
+
     public static HashMap<String, PatientAttribute> parsePatientAttributes(List<Attribute> attributesList) {
         HashMap<String, PatientAttribute> map = new HashMap<>();
         PatientAttribute patientAttribute = null;
@@ -41,4 +67,7 @@ public class PatientAttributesUtils {
         return map;
     }
 
+    public static boolean isExtended(PatientAttribute attribute) {
+        return extendedAttributes.contains(attribute.getAttribute().getRoot());
+    }
 }

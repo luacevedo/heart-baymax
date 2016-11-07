@@ -42,6 +42,7 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
         textView.setTextColor(isEnabled ? ResourcesHelper.getColor(R.color.black) : ResourcesHelper.getColor(R.color.disabled));
         LinearLayout layout = (LinearLayout) findViewById(R.id.patient_stage_layout);
         layout.setOnClickListener(this);
+        layout.setClickable(isEnabled);
         ImageView image = (ImageView) findViewById(R.id.patient_stage_img);
         image.setImageResource(isCompleted ? R.drawable.ic_tick : isEnabled ? R.drawable.ic_plus_red : R.drawable.ic_plus_gray);
         setTextViewText(stage, isCompleted);
@@ -50,10 +51,13 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
     private void setTextViewText(Constants.PatientStage stage, boolean isCompleted) {
         switch (stage) {
             case INITIAL_STATE:
-                textView.setText(isCompleted ? R.string.initial_situation : R.string.enter_initial_situation);
+                textView.setText(R.string.initial_situation);
                 break;
             case PRELIMINARY_DIAGNOSIS:
-                textView.setText(isCompleted ? R.string.preliminary_diagnosis : R.string.enter_prelinary_diagnosis);
+                textView.setText(R.string.preliminary_diagnosis);
+                break;
+            case IMMEDIATE_TREATMENT:
+                textView.setText(R.string.immediate_treatment);
                 break;
             case ECG:
                 textView.setText(isCompleted ? R.string.ecg : R.string.enter_ecg);
