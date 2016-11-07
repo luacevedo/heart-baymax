@@ -42,6 +42,7 @@ public class PatientStageView extends LinearLayout implements View.OnClickListen
         textView.setTextColor(isEnabled ? ResourcesHelper.getColor(R.color.black) : ResourcesHelper.getColor(R.color.disabled));
         LinearLayout layout = (LinearLayout) findViewById(R.id.patient_stage_layout);
         layout.setOnClickListener(this);
+        layout.setClickable(isEnabled);
         ImageView image = (ImageView) findViewById(R.id.patient_stage_img);
         image.setImageResource(isCompleted ? R.drawable.ic_tick : isEnabled ? R.drawable.ic_plus_red : R.drawable.ic_plus_gray);
         setTextViewText(stage, isCompleted);

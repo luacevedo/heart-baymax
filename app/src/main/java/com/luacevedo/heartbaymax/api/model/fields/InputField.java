@@ -12,7 +12,7 @@ public class InputField implements Serializable {
     private String fieldType;
     private Value value;
     private List<Value> values;
-    private String tooltip;
+    private String toolTip;
 
     public InputField(int id, String labelMessage, String rootToAffect, String dataType, String fieldType, List<Value> values) {
         this.id = id;
@@ -106,11 +106,11 @@ public class InputField implements Serializable {
         return null;
     }
 
-    public String getTooltip() {
-        return tooltip;
+    public String getToolTip() {
+        return toolTip;
     }
 
-    public void setTooltip(String tooltip) {
-        this.tooltip = tooltip;
+    public void setToolTip(String toolTip) {
+        this.toolTip = toolTip;
     }
 }
