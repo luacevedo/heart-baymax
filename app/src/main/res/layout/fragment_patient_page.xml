@@ -17,6 +17,7 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/medium_padding"
+            android:textColor="@color/black"
             android:layout_width="match_parent"
             android:paddingBottom="@dimen/large_padding"
             android:textSize="@dimen/material_text_title" />
@@ -107,6 +108,19 @@
 
         <com.luacevedo.heartbaymax.ui.views.PatientStageView
             android:id="@+id/final_diagnosis_stage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.luacevedo.heartbaymax.ui.views.PatientStageView>
+
+        <View
+            android:layout_height="@dimen/one_dp"
+            android:layout_width="match_parent"
+            android:background="@color/divider"
+            android:paddingBottom="@dimen/large_padding"/>
+
+        <com.luacevedo.heartbaymax.ui.views.PatientStageView
+            android:id="@+id/final_treatment_stage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

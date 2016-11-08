@@ -69,6 +69,8 @@ public class DiagnosisDataFragment extends BaseFragment implements View.OnClickL
 
         showDiagnosis();
 
+        activity.getSupportActionBar().hide();
+
         return view;
     }
 
@@ -127,6 +129,7 @@ public class DiagnosisDataFragment extends BaseFragment implements View.OnClickL
         if (v.getId() == R.id.diagnosis_accept_btn) {
             activity.refreshStages();
             removeCurrentFragment();
+            activity.getSupportActionBar().show();
         }
     }
 

@@ -73,7 +73,7 @@ public class PatientPageDataFragment extends BaseFragment {
         bar.setTitle(null);
         switch (patientStage) {
             case INITIAL_STATE:
-                bar.setTitle(R.string.initial_situation);
+                bar.setTitle(R.string.see_initial_situation);
                 showInitialState();
                 break;
             case PRELIMINARY_DIAGNOSIS:

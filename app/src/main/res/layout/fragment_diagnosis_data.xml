@@ -28,7 +28,6 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/large_padding"
                 android:paddingLeft="24dp"
-                android:paddingTop="@dimen/extra_large_padding"
                 android:text="@string/preliminary_diagnosis"
                 android:textSize="@dimen/subtitle" />
 

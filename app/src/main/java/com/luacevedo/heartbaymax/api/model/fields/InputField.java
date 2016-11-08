@@ -13,6 +13,7 @@ public class InputField implements Serializable {
     private Value value;
     private List<Value> values;
     private String toolTip;
+    private Integer maxLength;
 
     public InputField(int id, String labelMessage, String rootToAffect, String dataType, String fieldType, List<Value> values) {
         this.id = id;
@@ -112,5 +113,13 @@ public class InputField implements Serializable {
 
     public void setToolTip(String toolTip) {
         this.toolTip = toolTip;
+    }
+
+    public Integer getMaxLength() {
+        return maxLength;
+    }
+
+    public void setMaxLength(Integer maxLength) {
+        this.maxLength = maxLength;
     }
 }

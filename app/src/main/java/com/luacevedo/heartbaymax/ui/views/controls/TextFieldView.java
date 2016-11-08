@@ -2,6 +2,7 @@ package com.luacevedo.heartbaymax.ui.views.controls;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
@@ -35,7 +36,7 @@ public class TextFieldView extends InputFieldView {
         txtViewTooltip = (TextView) findViewById(R.id.text_field_tooltip_help);
 
         setupTooltip();
-        setupEditTExt();
+        setupEditText();
         setListeners();
     }
 
@@ -46,7 +47,7 @@ public class TextFieldView extends InputFieldView {
         }
     }
 
-    private void setupEditTExt() {
+    private void setupEditText() {
         editText.setHint(inputField.getLabelMessage());
         if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
@@ -58,6 +59,11 @@ public class TextFieldView extends InputFieldView {
         editText.setFloatingLabelText(inputField.getLabelMessage());
         if (currentValue != null) {
             editText.setText(currentValue.getValue());
+        }
+        if (inputField.getMaxLength() != null) {
+            InputFilter[] filters = new InputFilter[1];
+            filters[0] = new InputFilter.LengthFilter(inputField.getMaxLength());
+            editText.setFilters(filters);
         }
     }
 
