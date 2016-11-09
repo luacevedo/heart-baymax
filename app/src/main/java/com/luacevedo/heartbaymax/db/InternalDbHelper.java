@@ -24,16 +24,12 @@ public class InternalDbHelper {
         this.patientsDb.insert(String.valueOf(patient.getId()), patient);
     }
 
+    public void deletePatient(String patientId) {
+        this.patientsDb.delete(patientId);
+    }
+
     public List<Patient> getPatients() {
-//        List<Patient> list = new ArrayList<>();
-//        Patient x = this.patientsDb.getPatientFromTable("1", Patient.class);
-//        if (x != null) {
-//            list.add(x);
-//        }
-//        return list;
-
         return this.patientsDb.getAllDataFromTable(Patient.class);
-
     }
 
     public void saveStepInputFields(List<StepInputFields> inputFields) {

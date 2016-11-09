@@ -34,4 +34,7 @@
     <string name="patient">Paciente</string>
     <string name="final_treatment">Tratamiento final</string>
     <string name="final_diagnosis_disabled">Por favor complete los analisis complementarios para ver el diagnóstico final</string>
+    <string name="delete">Eliminar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete_patient_msg">¿Está seguro de que quiere eliminar el paciente?</string>
 </resources>
