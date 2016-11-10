@@ -109,8 +109,9 @@ public class DiagnosisDataFragment extends BaseFragment implements View.OnClickL
     }
 
 
-    private void addValuesToLayout(List<PatientAttribute> list) {
-        for (PatientAttribute attribute : list) {
+    private void addValuesToLayout(List<PatientAttribute> attributes) {
+        PatientAttributesUtils.orderDiagnosisAttributes(attributes);
+        for (PatientAttribute attribute : attributes) {
             View viewAttribute;
             if (PatientAttributesUtils.isExtended(attribute)) {
                 viewAttribute = new PatientAttributeExtendedView(getActivity());
