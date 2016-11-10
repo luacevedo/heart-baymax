@@ -116,8 +116,8 @@ public class TextFieldView extends InputFieldView {
                 clearError();
                 if (inputField.getMatches() != null) {
                     Pattern p = Pattern.compile(inputField.getMatches());
-                    if (!p.matcher(editText.getText().toString()).matches()) {
-                        setError("Ingrese un valor validoooo");
+                    if (!p.matcher(editText.getText().toString()).matches() || !inputField.isInRange(editText.getText().toString())) {
+                        setError(getContext().getString(R.string.invalid_value_msg));
                         onValueChangedListener.updateValueError(true);
                         return;
                     }

@@ -37,4 +37,5 @@
     <string name="delete">Eliminar</string>
     <string name="cancel">Cancelar</string>
     <string name="delete_patient_msg">¿Está seguro de que quiere eliminar el paciente?</string>
+    <string name="invalid_value_msg">Ingrese un valor valido</string>
 </resources>
