@@ -8,7 +8,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
@@ -16,7 +15,7 @@ import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.util.regex.Matcher;
+import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 
 public class TextFieldView extends InputFieldView {
@@ -61,13 +60,26 @@ public class TextFieldView extends InputFieldView {
         editText.setFloatingLabel(MaterialEditText.FLOATING_LABEL_NORMAL);
         editText.setFloatingLabelAnimating(true);
         editText.setFloatingLabelText(inputField.getLabelMessage());
-        if (currentValue != null) {
-            editText.setText(currentValue.getValue());
-        }
+
+        setCurrentValue();
+
         if (inputField.getMaxLength() != null) {
             InputFilter[] filters = new InputFilter[1];
             filters[0] = new InputFilter.LengthFilter(inputField.getMaxLength());
             editText.setFilters(filters);
+        }
+    }
+
+    private void setCurrentValue() {
+        if (currentValue != null) {
+            String value = currentValue.getValue();
+            if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
+                if (Double.valueOf(value) % 1 == 0) {
+                    DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                    value = decimalFormat.format(Double.valueOf(value));
+                }
+            }
+            editText.setText(value);
         }
     }
 
