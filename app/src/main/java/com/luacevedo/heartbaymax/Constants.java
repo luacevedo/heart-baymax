@@ -118,7 +118,7 @@ public class Constants {
             public static final String IMMEDIATE_DIURETIC_TREATMENT = "ImmediateDiureticTreatment";
             public static final String IMMEDIATE_VASODILATOR_TREATMENT = "ImmediateVasodilatorTreatment";
             public static final String ECG = "ECG";
-            public static final String RX = "RX";
+            public static final String RX = "Rx";
             public static final String LAB_ANALYSIS = "LabAnalysis";
             public static final String HEART_SITUATION = "HeartSituation";
             public static final String FINAL_DIAGNOSIS = "FinalDiagnosis";
@@ -130,7 +130,8 @@ public class Constants {
     }
 
     public enum PatientStage {
-        INITIAL_STATE, PRELIMINARY_DIAGNOSIS, IMMEDIATE_TREATMENT, RX, LAB_ANALYSIS, FINAL_DIAGNOSIS, ECG
+        INITIAL_STATE, PRELIMINARY_DIAGNOSIS, IMMEDIATE_TREATMENT, RX, LAB_ANALYSIS,
+        FINAL_DIAGNOSIS, ECG, FINAL_TREATMENT
     }
 
 }

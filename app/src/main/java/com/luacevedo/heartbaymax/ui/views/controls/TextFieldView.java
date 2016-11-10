@@ -2,6 +2,7 @@ package com.luacevedo.heartbaymax.ui.views.controls;
 
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
@@ -13,6 +14,9 @@ import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
 import com.rengwuxian.materialedittext.MaterialEditText;
+
+import java.text.DecimalFormat;
+import java.util.regex.Pattern;
 
 public class TextFieldView extends InputFieldView {
 
@@ -35,7 +39,7 @@ public class TextFieldView extends InputFieldView {
         txtViewTooltip = (TextView) findViewById(R.id.text_field_tooltip_help);
 
         setupTooltip();
-        setupEditTExt();
+        setupEditText();
         setListeners();
     }
 
@@ -46,7 +50,7 @@ public class TextFieldView extends InputFieldView {
         }
     }
 
-    private void setupEditTExt() {
+    private void setupEditText() {
         editText.setHint(inputField.getLabelMessage());
         if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
             editText.setInputType(InputType.TYPE_CLASS_NUMBER|InputType.TYPE_NUMBER_FLAG_DECIMAL|InputType.TYPE_NUMBER_FLAG_SIGNED);
@@ -56,8 +60,26 @@ public class TextFieldView extends InputFieldView {
         editText.setFloatingLabel(MaterialEditText.FLOATING_LABEL_NORMAL);
         editText.setFloatingLabelAnimating(true);
         editText.setFloatingLabelText(inputField.getLabelMessage());
+
+        setCurrentValue();
+
+        if (inputField.getMaxLength() != null) {
+            InputFilter[] filters = new InputFilter[1];
+            filters[0] = new InputFilter.LengthFilter(inputField.getMaxLength());
+            editText.setFilters(filters);
+        }
+    }
+
+    private void setCurrentValue() {
         if (currentValue != null) {
-            editText.setText(currentValue.getValue());
+            String value = currentValue.getValue();
+            if (inputField.getDataType().equals(Constants.InputField.DataType.NUMBER)) {
+                if (Double.valueOf(value) % 1 == 0) {
+                    DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                    value = decimalFormat.format(Double.valueOf(value));
+                }
+            }
+            editText.setText(value);
         }
     }
 
@@ -74,6 +96,7 @@ public class TextFieldView extends InputFieldView {
     @Override
     public void clearError() {
         editText.setError(null);
+        onValueChangedListener.updateValueError(false);
     }
 
     private void setListeners() {
@@ -103,6 +126,14 @@ public class TextFieldView extends InputFieldView {
             @Override
             public void afterTextChanged(Editable s) {
                 clearError();
+                if (inputField.getMatches() != null) {
+                    Pattern p = Pattern.compile(inputField.getMatches());
+                    if (!p.matcher(editText.getText().toString()).matches() || !inputField.isInRange(editText.getText().toString())) {
+                        setError(getContext().getString(R.string.invalid_value_msg));
+                        onValueChangedListener.updateValueError(true);
+                        return;
+                    }
+                }
                 onValueChangedListener.valueTextChanged(inputField, editText.getText().toString());
             }
         };

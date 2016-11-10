@@ -2,34 +2,34 @@ package com.luacevedo.heartbaymax.api.model.patients;
 
 public class Attribute {
 
-    private long id;
+    private int attributeId;
     private String root;
     private String dataType;
     private String name;
     private boolean needsInputValue;
 
-    public Attribute(long id, String root, String dataType, String name, boolean needsInputValue) {
-        this.id = id;
+    public Attribute(int attributeId, String root, String dataType, String name, boolean needsInputValue) {
+        this.attributeId = attributeId;
         this.root = root;
         this.dataType = dataType;
         this.name = name;
         this.needsInputValue = needsInputValue;
     }
 
-    public Attribute(long id, String root, String dataType, boolean needsInputValue) {
-        this.id = id;
+    public Attribute(int id, String root, String dataType, boolean needsInputValue) {
+        this.attributeId = attributeId;
         this.root = root;
         this.dataType = dataType;
         this.name = null;
         this.needsInputValue = needsInputValue;
     }
 
-    public long getId() {
-        return id;
+    public int getAttributeId() {
+        return attributeId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setAttributeId(int attributeId) {
+        this.attributeId = attributeId;
     }
 
     public String getRoot() {

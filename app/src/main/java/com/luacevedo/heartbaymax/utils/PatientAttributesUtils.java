@@ -4,6 +4,8 @@ import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class PatientAttributesUtils {
         add("FinalDiureticTreatment.Epleronone");
         add("FinalDiureticTreatment.Spironolactone");
         add("FinalDiureticTreatment.Enalapril");
+        add("FinalDiureticTreatment.FurosemideForRenalFailure");
         add("FinalVasodilatorTreatment.SodiumNitroprusside");
         add("FinalVasodilatorTreatment.Nitroglycerine");
         add("ImmediateTreatment.Oxygen");
@@ -70,4 +73,16 @@ public class PatientAttributesUtils {
     public static boolean isExtended(PatientAttribute attribute) {
         return extendedAttributes.contains(attribute.getAttribute().getRoot());
     }
+
+    public static void orderDiagnosisAttributes(List<PatientAttribute> attributes) {
+        Comparator<PatientAttribute> comparator = new Comparator<PatientAttribute>() {
+            @Override
+            public int compare(PatientAttribute c1, PatientAttribute c2) {
+                return c1.getAttribute().getAttributeId() - c2.getAttribute().getAttributeId();
+            }
+        };
+
+        Collections.sort(attributes, comparator);
+    }
+
 }

@@ -9,4 +9,6 @@ public interface OnInputFieldValueChangedListener {
     void valueTextChanged(InputField inputField, String fieldValueText);
 
     void valueSelectionStart();
+
+    void updateValueError(boolean isValid);
 }

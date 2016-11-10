@@ -114,4 +114,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener, 
     public void patientClicked(Patient patient, int position, View view) {
         startActivity(IntentFactory.getPatientPageActivityIntent(patient, false));
     }
+
+
 }

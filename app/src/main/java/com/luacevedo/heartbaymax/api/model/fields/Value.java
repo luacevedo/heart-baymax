@@ -1,5 +1,7 @@
 package com.luacevedo.heartbaymax.api.model.fields;
 
+import java.text.DecimalFormat;
+
 public class Value {
     private String key;
     private String value;

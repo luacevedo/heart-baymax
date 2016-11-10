@@ -23,7 +23,7 @@
     <dimen name="default_elevation">4dp</dimen>
     <dimen name="listing_item_height">90dp</dimen>
     <dimen name="finger_size">48dp</dimen>
-    <dimen name="patient_attribute_label_width">160dp</dimen>
+    <dimen name="patient_attribute_label_width">180dp</dimen>
     <dimen name="material_text_body">14sp</dimen>
     <dimen name="patient_attribute_height">30dp</dimen>
     <dimen name="one_dp">1dp</dimen>

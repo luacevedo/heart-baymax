@@ -1,5 +1,9 @@
 package com.luacevedo.heartbaymax.api.model.fields;
 
+import android.text.TextUtils;
+
+import com.luacevedo.heartbaymax.Constants;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,6 +17,10 @@ public class InputField implements Serializable {
     private Value value;
     private List<Value> values;
     private String toolTip;
+    private Integer maxLength;
+    private String matches;
+    private Integer min;
+    private Integer max;
 
     public InputField(int id, String labelMessage, String rootToAffect, String dataType, String fieldType, List<Value> values) {
         this.id = id;
@@ -112,5 +120,45 @@ public class InputField implements Serializable {
 
     public void setToolTip(String toolTip) {
         this.toolTip = toolTip;
+    }
+
+    public Integer getMaxLength() {
+        return maxLength;
+    }
+
+    public void setMaxLength(Integer maxLength) {
+        this.maxLength = maxLength;
+    }
+
+    public String getMatches() {
+        return matches;
+    }
+
+    public void setMatches(String matches) {
+        this.matches = matches;
+    }
+
+    public Integer getMin() {
+        return min;
+    }
+
+    public void setMin(Integer min) {
+        this.min = min;
+    }
+
+    public Integer getMax() {
+        return max;
+    }
+
+    public void setMax(Integer max) {
+        this.max = max;
+    }
+
+    public boolean isInRange(String value) {
+        if (dataType.equals(Constants.InputField.DataType.NUMBER) && !TextUtils.isEmpty(value) && min != null && max != null) {
+            Double number = Double.valueOf(value);
+            return number >= min && number <= max;
+        }
+        return true;
     }
 }

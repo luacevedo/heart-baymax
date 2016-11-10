@@ -73,7 +73,7 @@ public class PatientPageDataFragment extends BaseFragment {
         bar.setTitle(null);
         switch (patientStage) {
             case INITIAL_STATE:
-                bar.setTitle(R.string.initial_situation);
+                bar.setTitle(R.string.see_initial_situation);
                 showInitialState();
                 break;
             case PRELIMINARY_DIAGNOSIS:
@@ -105,54 +105,58 @@ public class PatientPageDataFragment extends BaseFragment {
     }
 
     private void showFinalDiagnosis() {
-        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
+        List<PatientAttribute> attributes = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
             if ((root.equals(HEART_SITUATION) || root.equals(FINAL_DIAGNOSIS)
                     || root.equals(FINAL_TREATMENT) || root.equals(FINAL_DIURETIC_TREATMENT)
                     || root.equals(FINAL_VASODILATOR_TREATMENT))
                     && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
-                preliminaryDiagnosisList.add(attribute);
+                attributes.add(attribute);
             }
         }
-        addValuesToLayout(preliminaryDiagnosisList);
+        PatientAttributesUtils.orderDiagnosisAttributes(attributes);
+        addValuesToLayout(attributes);
     }
 
     private void showImmediateTreatment() {
-        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
+        List<PatientAttribute> attributes = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
             if ((root.equals(IMMEDIATE_TREATMENT) || root.equals(IMMEDIATE_DIURETIC_TREATMENT)
                     || root.equals(IMMEDIATE_VASODILATOR_TREATMENT))
                     && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
-                preliminaryDiagnosisList.add(attribute);
+                attributes.add(attribute);
             }
         }
-        addValuesToLayout(preliminaryDiagnosisList);
+        PatientAttributesUtils.orderDiagnosisAttributes(attributes);
+        addValuesToLayout(attributes);
     }
 
     private void showComplementaryMethod(String root) {
-        List<PatientAttribute> attributesList = new ArrayList<>();
+        List<PatientAttribute> attributes = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String attributeRoot = attribute.getAttribute().getRootParent();
             if (attributeRoot.equals(root)) {
-                attributesList.add(attribute);
+                attributes.add(attribute);
             }
         }
-        addValuesToLayout(attributesList);
+        PatientAttributesUtils.orderDiagnosisAttributes(attributes);
+        addValuesToLayout(attributes);
     }
 
 
     private void showPreliminaryDiagnosis() {
-        List<PatientAttribute> preliminaryDiagnosisList = new ArrayList<>();
+        List<PatientAttribute> attributes = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
             if (root.equals(PRELIMINARY_DIAGNOSIS) && attribute.getValue() != null
                     && !TextUtils.isEmpty(attribute.getValue().toString())) {
-                preliminaryDiagnosisList.add(attribute);
+                attributes.add(attribute);
             }
         }
-        addValuesToLayout(preliminaryDiagnosisList);
+        PatientAttributesUtils.orderDiagnosisAttributes(attributes);
+        addValuesToLayout(attributes);
     }
 
     private void showInitialState() {
@@ -171,6 +175,8 @@ public class PatientPageDataFragment extends BaseFragment {
                     break;
             }
         }
+        PatientAttributesUtils.orderDiagnosisAttributes(essentialSymptomsList);
+        PatientAttributesUtils.orderDiagnosisAttributes(secondarySymptomsList);
         addValuesToLayout(essentialSymptomsList);
         addValuesToLayout(secondarySymptomsList);
     }

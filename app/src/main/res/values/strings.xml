@@ -14,7 +14,7 @@
     <string name="enter_heart_situation">Ingresar situación cardíaca</string>
     <string name="loading">Cargando</string>
     <string name="heart_situation">Situación cardíaca</string>
-    <string name="initial_situation">Situación inicial</string>
+    <string name="see_initial_situation">Ver situación inicial</string>
     <string name="enter_initial_situation">Ingresar situación inicial</string>
     <string name="enter_prelinary_diagnosis">Ingresar diagnóstico preliminar</string>
     <string name="preliminary_diagnosis">Diagnóstico preliminar</string>
@@ -24,7 +24,7 @@
     <string name="rx">Radiografía de tórax</string>
     <string name="enter_lab_analysis">Ingresar análisis de laboratorio</string>
     <string name="lab_analysis">Análisis de laboratorio</string>
-    <string name="enter_final_diagnosis">Ingresar diagnóstico final</string>
+    <string name="get_final_diagnosis">Dar diagnóstico final</string>
     <string name="final_diagnosis">Diagnóstico final</string>
     <string name="enter_valid_value">Ingrese un valor válido</string>
     <string name="accept">Aceptar</string>
@@ -32,4 +32,10 @@
     <string name="no_treatment">No requiere tratamiento inmediato</string>
     <string name="networ_error">Error de red</string>
     <string name="patient">Paciente</string>
+    <string name="final_treatment">Tratamiento final</string>
+    <string name="final_diagnosis_disabled">Por favor complete los analisis complementarios para ver el diagnóstico final</string>
+    <string name="delete">Eliminar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete_patient_msg">¿Está seguro de que quiere eliminar el paciente?</string>
+    <string name="invalid_value_msg">Ingrese un valor valido</string>
 </resources>

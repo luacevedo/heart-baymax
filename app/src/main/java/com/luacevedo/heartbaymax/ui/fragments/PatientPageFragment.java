@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.luacevedo.heartbaymax.utils.InputFieldsUtils;
 
 import static com.luacevedo.heartbaymax.Constants.PatientStage.ECG;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.FINAL_DIAGNOSIS;
+import static com.luacevedo.heartbaymax.Constants.PatientStage.FINAL_TREATMENT;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.IMMEDIATE_TREATMENT;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.INITIAL_STATE;
 import static com.luacevedo.heartbaymax.Constants.PatientStage.LAB_ANALYSIS;
@@ -40,6 +42,7 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
     private PatientStageView rxView;
     private PatientStageView labAnalysisView;
     private PatientStageView finalDiagnosisView;
+    private PatientStageView finalTreatmentView;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -61,6 +64,14 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        ActionBar bar = activity.getSupportActionBar();
+        bar.setTitle(null);
+        bar.setTitle(R.string.patient);
+    }
+
     private void setupViews() {
         patientName.setText(String.format("%s - %s años", patient.getName(), patient.getAge()));
         initialSituationView.setupView(INITIAL_STATE, true, true, this);
@@ -70,6 +81,7 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
         rxView.setupView(Constants.PatientStage.RX, patient.isRXCompleted(), true, this);
         labAnalysisView.setupView(Constants.PatientStage.LAB_ANALYSIS, patient.isLabAnalysisCompleted(), true, this);
         finalDiagnosisView.setupView(Constants.PatientStage.FINAL_DIAGNOSIS, patient.isFinalDiagnosisCompleted(), patient.isFinalDiagnosisEnabled(), this);
+        finalTreatmentView.setupView(Constants.PatientStage.FINAL_TREATMENT, patient.isFinalDiagnosisCompleted(), patient.isFinalDiagnosisEnabled(), this);
     }
 
     private void findViews(View view) {
@@ -81,6 +93,7 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
         rxView = (PatientStageView) view.findViewById(R.id.rx_stage);
         labAnalysisView = (PatientStageView) view.findViewById(R.id.lab_analysis_stage);
         finalDiagnosisView = (PatientStageView) view.findViewById(R.id.final_diagnosis_stage);
+        finalTreatmentView = (PatientStageView) view.findViewById(R.id.final_treatment_stage);
     }
 
     @Override
@@ -122,6 +135,9 @@ public class PatientPageFragment extends BaseFragment implements OnPatientStageC
                 } else {
                     activity.executeSecondStageRules();
                 }
+                break;
+            case FINAL_TREATMENT:
+                slideNextFragment(PatientPageDataFragment.newInstance(FINAL_TREATMENT));
                 break;
         }
     }

@@ -69,6 +69,8 @@ public class DiagnosisDataFragment extends BaseFragment implements View.OnClickL
 
         showDiagnosis();
 
+        activity.getSupportActionBar().hide();
+
         return view;
     }
 
@@ -107,8 +109,9 @@ public class DiagnosisDataFragment extends BaseFragment implements View.OnClickL
     }
 
 
-    private void addValuesToLayout(List<PatientAttribute> list) {
-        for (PatientAttribute attribute : list) {
+    private void addValuesToLayout(List<PatientAttribute> attributes) {
+        PatientAttributesUtils.orderDiagnosisAttributes(attributes);
+        for (PatientAttribute attribute : attributes) {
             View viewAttribute;
             if (PatientAttributesUtils.isExtended(attribute)) {
                 viewAttribute = new PatientAttributeExtendedView(getActivity());
@@ -127,6 +130,7 @@ public class DiagnosisDataFragment extends BaseFragment implements View.OnClickL
         if (v.getId() == R.id.diagnosis_accept_btn) {
             activity.refreshStages();
             removeCurrentFragment();
+            activity.getSupportActionBar().show();
         }
     }
 

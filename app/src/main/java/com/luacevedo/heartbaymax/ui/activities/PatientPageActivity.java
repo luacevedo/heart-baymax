@@ -2,10 +2,15 @@ package com.luacevedo.heartbaymax.ui.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.luacevedo.heartbaymax.Constants;
@@ -57,6 +62,13 @@ public class PatientPageActivity extends BaseFragmentActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_patient, menu);
+        return true;
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         unlockMenu();
@@ -86,6 +98,30 @@ public class PatientPageActivity extends BaseFragmentActivity {
                 patient = BundleHelper.fromBundleJson(data, Constants.BundleKey.PATIENT, Patient.class, patient);
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_delete) {
+            createConfirmDeletePatientDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void createConfirmDeletePatientDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.delete_patient_msg));
+        builder.setNegativeButton(getString(R.string.cancel), null);
+        builder.setPositiveButton(getString(R.string.accept),
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        HeartBaymaxApplication.getApplication().getInternalDbHelper().deletePatient(patient.getId().toString());
+                        finish();
+                    }
+                });
+        builder.create().show();
     }
 
     public void executeSecondStageRules() {
