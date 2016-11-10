@@ -154,7 +154,7 @@ public abstract class BaseApi<T> {
 
     public synchronized void cancelCalls(CallOrigin callOrigin) {
         Set<CallId> ongoingCallIds = ongoingCalls.keySet();
-        if (ongoingCallIds != null && ongoingCallIds.size() > 0) {
+        if (ongoingCallIds.size() > 0) {
             LogInternal.logBaseApiCall("cancel-calls", callOrigin.name());
             for (CallId callId : ongoingCallIds) {
                 if (callId.getOrigin() == callOrigin) {

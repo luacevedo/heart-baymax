@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_overlay"
+    android:fillViewport="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/overlay_margin"
+        android:layout_marginRight="@dimen/overlay_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/overlay_margin"
+            android:background="@drawable/white_rounded_corner"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/extra_large_padding"
+            android:paddingTop="30dp">
+
+            <TextView
+                android:id="@+id/diagnosis_data_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/large_padding"
+                android:paddingLeft="24dp"
+                android:text="@string/preliminary_diagnosis"
+                android:textSize="@dimen/subtitle" />
+
+            <LinearLayout
+                android:id="@+id/diagnosis_data_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/large_padding"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:paddingTop="@dimen/small_padding" />
+
+            <Button
+                android:id="@+id/diagnosis_accept_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/large_padding"
+                android:background="@drawable/material_custom_button"
+                android:text="@string/accept"
+                android:textAllCaps="true"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

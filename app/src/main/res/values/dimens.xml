@@ -1,6 +1,35 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="big_finger_size">60dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
+    <dimen name="default_corner_radius">5dp</dimen>
+    <dimen name="material_text_title">20sp</dimen>
+    <dimen name="subtitle">20sp</dimen>
+    <dimen name="small_padding">4dp</dimen>
+    <dimen name="medium_padding">8dp</dimen>
+    <dimen name="list_padding">10dp</dimen>
+    <dimen name="input_field_left_margin">9dp</dimen>
+    <dimen name="input_field_top_margin">10dp</dimen>
+    <dimen name="input_field_right_margin">8dp</dimen>
+    <dimen name="material_text_subhead">16sp</dimen>
+    <dimen name="material_text_caption">12sp</dimen>
+    <dimen name="fab_button_height">52dp</dimen>
+    <dimen name="fab_button_elevation">6dp</dimen>
+    <dimen name="default_margin">10dp</dimen>
+    <dimen name="extra_big_finger_size">70dp</dimen>
+    <dimen name="card_view_default_corner_radius">3dp</dimen>
+    <dimen name="default_elevation">4dp</dimen>
+    <dimen name="listing_item_height">90dp</dimen>
+    <dimen name="finger_size">48dp</dimen>
+    <dimen name="patient_attribute_label_width">180dp</dimen>
+    <dimen name="material_text_body">14sp</dimen>
+    <dimen name="patient_attribute_height">30dp</dimen>
+    <dimen name="one_dp">1dp</dimen>
+    <dimen name="overlay_margin">15dp</dimen>
+    <dimen name="extra_large_padding">20dp</dimen>
+    <dimen name="control_corner_material">2dp</dimen>
+    <dimen name="rounded_corner">2dp</dimen>
+    <dimen name="no_treatment_size">6sp</dimen>
 </resources>

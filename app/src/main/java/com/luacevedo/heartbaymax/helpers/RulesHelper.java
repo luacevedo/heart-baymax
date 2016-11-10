@@ -2,7 +2,7 @@ package com.luacevedo.heartbaymax.helpers;
 
 import android.util.Log;
 
-import com.luacevedo.heartbaymax.api.model.Rule;
+import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.model.rules.actions.BaseAction;
@@ -16,7 +16,7 @@ public class RulesHelper {
         int i = 0;
         Log.e("LULI", "ejecuto las reglas");
         while (i < rules.size()) {
-            Log.e("LULI", "Rule " + rules.get(i).getId());
+            Log.e("LULI", "Rule " + rules.get(i).getRuleId());
             boolean conditionsFulfilled = checkConditions(rules.get(i).getParsedConditions(), patient);
             if (conditionsFulfilled) {
                 executeActions(rules.get(i).getParsedActions(), patient);
@@ -52,11 +52,11 @@ public class RulesHelper {
         }
     }
 
-    public static void excludeRules(List<Rule> rules, List<Long> rulesToExclude) {
-        for (Long id : rulesToExclude) {
+    public static void excludeRules(List<Rule> rules, List<Integer> rulesToExclude) {
+        for (Integer id : rulesToExclude) {
             Log.e("LULI", "Excluyo regla " + id);
             Rule r = new Rule();
-            r.setId(id);
+            r.setRuleId(id);
             rules.remove(r);
         }
     }

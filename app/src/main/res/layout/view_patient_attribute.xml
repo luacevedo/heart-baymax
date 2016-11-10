@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/medium_padding"
+    android:minHeight="@dimen/patient_attribute_height">
+
+    <TextView
+        android:id="@+id/patient_attribute_label"
+        android:layout_width="@dimen/patient_attribute_label_width"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/medium_padding"
+        android:gravity="left"
+        android:maxLines="2"
+        android:textSize="@dimen/material_text_subhead"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/patient_attribute_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/patient_attribute_label"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:lineSpacingExtra="@dimen/small_padding"
+        android:maxLines="2"
+        android:paddingLeft="@dimen/medium_padding"
+        android:textSize="@dimen/material_text_subhead" />
+
+</RelativeLayout>

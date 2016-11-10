@@ -1,7 +1,7 @@
 package com.luacevedo.heartbaymax.helpers;
 
-import com.luacevedo.heartbaymax.api.model.Attribute;
-import com.luacevedo.heartbaymax.api.model.Rule;
+import com.luacevedo.heartbaymax.api.model.patients.Attribute;
+import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.model.patient.Patient;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 import com.luacevedo.heartbaymax.model.rules.actions.AddNumberAction;
@@ -47,8 +47,8 @@ public class RulesHelperTest {
         PatientAttribute<Boolean> orthopnoea = new PatientAttribute<>(orthop, false);
         map.put(orthop.getRoot(), orthopnoea);
 
-        Attribute valSE = new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "integer");
-        PatientAttribute<Integer> assessmentES = new PatientAttribute<>(valSE, 5);
+        Attribute valSE = new Attribute(2L, "InitialPhysicalState.EssentialSymptomsAssessment", "number");
+        PatientAttribute<Double> assessmentES = new PatientAttribute<>(valSE, 5.0);
         map.put(valSE.getRoot(), assessmentES);
 
         Attribute essentialSymp = new Attribute(3L, "InitialPhysicalState.EssentialSymptoms", "list");
@@ -69,9 +69,9 @@ public class RulesHelperTest {
         List<BaseCondition> conditionsToFulFill = new ArrayList<>();
         AffirmativeCondition affCondition = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
         conditionsToFulFill.add(affCondition);
-        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         conditionsToFulFill.add(greaterThanCondition);
-        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 7);
+        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 7.0);
         conditionsToFulFill.add(lessThanCondition);
         ContainsCondition containsCondition = new ContainsCondition("InitialPhysicalState.EssentialSymptoms", "PulmonaryEdema");
         conditionsToFulFill.add(containsCondition);
@@ -86,9 +86,9 @@ public class RulesHelperTest {
         List<BaseCondition> conditionsNotToFulFill = new ArrayList<>();
         AffirmativeCondition affCondition = new AffirmativeCondition("EssentialSymptoms.PulmonaryEdema");
         conditionsNotToFulFill.add(affCondition);
-        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        GreaterThanCondition greaterThanCondition = new GreaterThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         conditionsNotToFulFill.add(greaterThanCondition);
-        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        LessThanCondition lessThanCondition = new LessThanCondition("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         conditionsNotToFulFill.add(lessThanCondition);
 
         assertFalse(RulesHelper.checkConditions(conditionsNotToFulFill, patient));
@@ -97,7 +97,7 @@ public class RulesHelperTest {
     @Test()
     public void testExecuteActions() {
         List<BaseAction> actions = new ArrayList<>();
-        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         actions.add(addNumberAction);
         AddToListAction addToListAction = new AddToListAction("InitialPhysicalState.EssentialSymptoms", "Orthopnea");
         actions.add(addToListAction);
@@ -106,7 +106,7 @@ public class RulesHelperTest {
 
         RulesHelper.executeActions(actions, patient);
 
-        assertEquals(patient.getAttributesMap().get("InitialPhysicalState.EssentialSymptomsAssessment").getValue(), 8);
+        assertEquals(patient.getAttributesMap().get("InitialPhysicalState.EssentialSymptomsAssessment").getValue(), 8.0);
         List<String> expectedList = new ArrayList<>();
         expectedList.add("PulmonaryEdema");
         expectedList.add("Orthopnea");
@@ -123,7 +123,7 @@ public class RulesHelperTest {
         conditions.add(affCondition);
 
         List<BaseAction> actions = new ArrayList<>();
-        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3);
+        AddNumberAction addNumberAction = new AddNumberAction("InitialPhysicalState.EssentialSymptomsAssessment", 3.0);
         actions.add(addNumberAction);
 
         Rule rule = new Rule();

@@ -1,6 +1,6 @@
 package com.luacevedo.heartbaymax.model.rules.actions;
 
-import com.luacevedo.heartbaymax.api.model.Attribute;
+import com.luacevedo.heartbaymax.api.model.patients.Attribute;
 import com.luacevedo.heartbaymax.model.patient.PatientAttribute;
 
 import org.junit.Before;
