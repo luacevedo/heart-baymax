@@ -8,12 +8,16 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.luacevedo.heartbaymax.Constants;
 import com.luacevedo.heartbaymax.R;
 import com.luacevedo.heartbaymax.api.model.fields.InputField;
 import com.luacevedo.heartbaymax.api.model.fields.Value;
 import com.rengwuxian.materialedittext.MaterialEditText;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TextFieldView extends InputFieldView {
 
@@ -80,6 +84,7 @@ public class TextFieldView extends InputFieldView {
     @Override
     public void clearError() {
         editText.setError(null);
+        onValueChangedListener.updateValueError(false);
     }
 
     private void setListeners() {
@@ -109,6 +114,14 @@ public class TextFieldView extends InputFieldView {
             @Override
             public void afterTextChanged(Editable s) {
                 clearError();
+                if (inputField.getMatches() != null) {
+                    Pattern p = Pattern.compile(inputField.getMatches());
+                    if (!p.matcher(editText.getText().toString()).matches()) {
+                        setError("Ingrese un valor validoooo");
+                        onValueChangedListener.updateValueError(true);
+                        return;
+                    }
+                }
                 onValueChangedListener.valueTextChanged(inputField, editText.getText().toString());
             }
         };

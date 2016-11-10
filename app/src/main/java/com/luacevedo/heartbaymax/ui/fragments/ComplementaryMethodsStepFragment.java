@@ -181,6 +181,12 @@ public class ComplementaryMethodsStepFragment extends BaseFragment implements Vi
                     HeartBaymaxApplication.hideKeyboard(getActivity().getCurrentFocus().getWindowToken());
                 }
             }
+
+            @Override
+            public void updateValueError(boolean isValid) {
+
+            }
+
         };
     }
 

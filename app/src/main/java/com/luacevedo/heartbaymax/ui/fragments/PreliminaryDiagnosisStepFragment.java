@@ -45,6 +45,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
     private List<InputField> stepInputFields;
     private PreliminaryDiagnosisActivity preliminaryDiagnosisActivity;
     private Map<Integer, InputFieldView> inputFieldsControlsById = new TreeMap<>();
+    private boolean anyInvalidValue = false;
 
     public static PreliminaryDiagnosisStepFragment newInstance(List<InputField> stepInputFields, boolean isLastStep) {
         PreliminaryDiagnosisStepFragment fragment = new PreliminaryDiagnosisStepFragment();
@@ -89,7 +90,7 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
 
     private void setNextButtonStatus() {
         if (nextBtn != null) {
-            if (isStepFinished()) {
+            if (isStepFinished() && !anyInvalidValue) {
                 nextBtn.setVisibility(View.VISIBLE);
                 nextBtn.animate().alpha(NEXT_BUTTON_SHOW_ALPHA).setDuration(NEXT_BUTTON_ANIMATION_DURATION);
             } else {
@@ -162,10 +163,12 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
 
             @Override
             public void valueTextChanged(InputField inputField, String attributeValueText) {
-                if (!TextUtils.isEmpty(attributeValueText) && preliminaryDiagnosisActivity != null) {
+                if (TextUtils.isEmpty(attributeValueText)) {
+                    preliminaryDiagnosisActivity.setInputFieldTextValue(inputField, null);
+                } else if (preliminaryDiagnosisActivity != null) {
                     preliminaryDiagnosisActivity.setInputFieldTextValue(inputField, attributeValueText);
-                    setNextButtonStatus();
                 }
+                setNextButtonStatus();
             }
 
             @Override
@@ -173,6 +176,12 @@ public class PreliminaryDiagnosisStepFragment extends BaseFragment implements Vi
                 if (getActivity().getCurrentFocus() != null) {
                     HeartBaymaxApplication.hideKeyboard(getActivity().getCurrentFocus().getWindowToken());
                 }
+            }
+
+            @Override
+            public void updateValueError(boolean isValid) {
+                anyInvalidValue = isValid;
+                setNextButtonStatus();
             }
         };
     }

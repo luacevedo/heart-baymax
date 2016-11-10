@@ -14,6 +14,7 @@ public class InputField implements Serializable {
     private List<Value> values;
     private String toolTip;
     private Integer maxLength;
+    private String matches;
 
     public InputField(int id, String labelMessage, String rootToAffect, String dataType, String fieldType, List<Value> values) {
         this.id = id;
@@ -121,5 +122,13 @@ public class InputField implements Serializable {
 
     public void setMaxLength(Integer maxLength) {
         this.maxLength = maxLength;
+    }
+
+    public String getMatches() {
+        return matches;
+    }
+
+    public void setMatches(String matches) {
+        this.matches = matches;
     }
 }
