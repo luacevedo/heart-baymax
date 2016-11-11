@@ -35,17 +35,9 @@ public class PatientAttributesUtils {
         add("FinalTreatment.Oxygen");
     }};
 
-    static {
-        addExtendedAttributes();
-    }
-
-    private static void addExtendedAttributes() {
-
-    }
-
     public static HashMap<String, PatientAttribute> parsePatientAttributes(List<Attribute> attributesList) {
         HashMap<String, PatientAttribute> map = new HashMap<>();
-        PatientAttribute patientAttribute = null;
+        PatientAttribute patientAttribute;
         for (Attribute attribute : attributesList) {
             patientAttribute = new PatientAttribute<>(attribute);
             if (!attribute.needsInputValue()) {
