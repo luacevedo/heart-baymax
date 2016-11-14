@@ -135,22 +135,11 @@ public class BaseFragmentActivity extends AppCompatActivity {
         }
     }
 
-    public void lockMenu() {
-//        leftDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setHomeButtonEnabled(false);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        }
-//        leftDrawerToggle.setDrawerIndicatorEnabled(false);
-    }
-
     public void unlockMenu() {
-//        leftDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-//        leftDrawerToggle.setDrawerIndicatorEnabled(true);
     }
 
     public void removeCurrentFragment() {
