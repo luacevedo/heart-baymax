@@ -34,6 +34,9 @@ public class PatientAttributeView extends LinearLayout {
     public void setData(PatientAttribute attribute) {
         label.setText(attribute.getAttribute().getName() + ":");
         String translatedValue = getTranslatedValue(attribute);
+        if (attribute.getAttribute().getUnit() != null) {
+            translatedValue += " " + attribute.getAttribute().getUnit();
+        }
         value.setText(translatedValue);
     }
 
