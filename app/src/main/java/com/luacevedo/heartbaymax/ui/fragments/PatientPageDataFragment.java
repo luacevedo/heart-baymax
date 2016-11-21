@@ -100,6 +100,10 @@ public class PatientPageDataFragment extends BaseFragment {
                 bar.setTitle(R.string.final_diagnosis);
                 showFinalDiagnosis();
                 break;
+            case FINAL_TREATMENT:
+                bar.setTitle(R.string.final_treatment);
+                showFinalTreatment();
+                break;
 
         }
     }
@@ -108,8 +112,20 @@ public class PatientPageDataFragment extends BaseFragment {
         List<PatientAttribute> attributes = new ArrayList<>();
         for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
             String root = attribute.getAttribute().getRootParent();
-            if ((root.equals(HEART_SITUATION) || root.equals(FINAL_DIAGNOSIS)
-                    || root.equals(FINAL_TREATMENT) || root.equals(FINAL_DIURETIC_TREATMENT)
+            if ((root.equals(HEART_SITUATION) || root.equals(FINAL_DIAGNOSIS))
+                    && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
+                attributes.add(attribute);
+            }
+        }
+        PatientAttributesUtils.orderDiagnosisAttributes(attributes);
+        addValuesToLayout(attributes);
+    }
+
+    private void showFinalTreatment() {
+        List<PatientAttribute> attributes = new ArrayList<>();
+        for (PatientAttribute attribute : activity.getPatient().getAttributesMap().values()) {
+            String root = attribute.getAttribute().getRootParent();
+            if ((root.equals(FINAL_TREATMENT) || root.equals(FINAL_DIURETIC_TREATMENT)
                     || root.equals(FINAL_VASODILATOR_TREATMENT))
                     && attribute.getValue() != null && !TextUtils.isEmpty(attribute.getValue().toString())) {
                 attributes.add(attribute);

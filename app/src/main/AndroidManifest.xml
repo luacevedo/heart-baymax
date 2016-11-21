@@ -26,13 +26,16 @@
         <activity
             android:name=".ui.activities.PreliminaryDiagnosisActivity"
             android:label="@string/preliminary_diagnosis"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.activities.PatientPageActivity"
             android:label="@string/patient"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".ui.activities.ComplementaryMethodsInputActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
@@ -23,8 +22,8 @@ import com.luacevedo.heartbaymax.api.baseapi.CallType;
 import com.luacevedo.heartbaymax.api.model.rules.Rule;
 import com.luacevedo.heartbaymax.helpers.BundleHelper;
 import com.luacevedo.heartbaymax.model.patient.Patient;
-import com.luacevedo.heartbaymax.ui.fragments.PatientPageFragment;
 import com.luacevedo.heartbaymax.ui.fragments.DiagnosisDataFragment;
+import com.luacevedo.heartbaymax.ui.fragments.PatientPageFragment;
 import com.luacevedo.heartbaymax.utils.RulesExecutor;
 import com.luacevedo.heartbaymax.utils.RulesUtils;
 
@@ -152,6 +151,14 @@ public class PatientPageActivity extends BaseFragmentActivity {
                 progress.dismiss();
             }
         };
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().show();
+        }
     }
 
     public void refreshStages() {

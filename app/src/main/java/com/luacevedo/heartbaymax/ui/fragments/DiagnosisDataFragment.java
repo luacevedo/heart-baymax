@@ -124,7 +124,6 @@ public class DiagnosisDataFragment extends BaseFragment implements View.OnClickL
         }
     }
 
-
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.diagnosis_accept_btn) {
