@@ -7,6 +7,7 @@ public class Attribute {
     private String dataType;
     private String name;
     private boolean needsInputValue;
+    private String unit;
 
     public Attribute(int attributeId, String root, String dataType, String name, boolean needsInputValue) {
         this.attributeId = attributeId;
@@ -63,5 +64,13 @@ public class Attribute {
 
     public void setNeedsInputValue(boolean needsInputValue) {
         this.needsInputValue = needsInputValue;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

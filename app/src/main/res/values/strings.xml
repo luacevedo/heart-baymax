@@ -7,6 +7,7 @@
     <string name="next_step">Siguiente</string>
     <string name="finish_step">Finalizar</string>
     <string name="patient_title_home">"Nombre: {patient}"</string>
+    <string name="patient_age_home">"Edad: {age} años"</string>
     <string name="edit_preliminary_diagnosis">Editar diagnóstico preliminar</string>
     <string name="edit_complementary_tests">Editar exámenes complementarios</string>
     <string name="patients">Pacientes:</string>
@@ -37,5 +38,5 @@
     <string name="delete">Eliminar</string>
     <string name="cancel">Cancelar</string>
     <string name="delete_patient_msg">¿Está seguro de que quiere eliminar el paciente?</string>
-    <string name="invalid_value_msg">Ingrese un valor valido</string>
+    <string name="invalid_value_msg">Ingrese un valor váxlido</string>
 </resources>
