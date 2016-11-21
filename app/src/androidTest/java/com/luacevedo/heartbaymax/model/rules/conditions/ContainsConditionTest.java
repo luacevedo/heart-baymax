@@ -23,18 +23,18 @@ public class ContainsConditionTest {
     }
 
     @Test()
-    public void testContainsTrue() {
+    public void testContains_whenContainsValue_returnTrue() {
         ContainsCondition condition = new ContainsCondition("root", "PulmonaryEdema");
-        Attribute attribute = new Attribute(1, "root", "list");
+        Attribute attribute = new Attribute(1, "root", "list", false);
         PatientAttribute<List<String>> patientAttribute = new PatientAttribute<>(attribute, valuesList);
 
         assertTrue(condition.validate(patientAttribute));
     }
 
     @Test
-    public void testContainsFalse() {
+    public void testContains_whenNotContainsValue_returnFalse() {
         ContainsCondition condition = new ContainsCondition("root", "Orthopnoea");
-        Attribute attribute = new Attribute(1, "root", "list");
+        Attribute attribute = new Attribute(1, "root", "list", false);
         PatientAttribute<List<String>> patientAttribute = new PatientAttribute<>(attribute, valuesList);
 
         assertFalse(condition.validate(patientAttribute));

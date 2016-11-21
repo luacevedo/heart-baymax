@@ -8,10 +8,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class AddNumberActionTest {
+
     @Test()
-    public void testAddNumberAction() {
+    public void testAddNumber_whenAddingAValidNumber_returnTheAddedValue() {
         AddNumberAction action = new AddNumberAction("root", 3.0);
-        Attribute attribute = new Attribute(1, "root", "number");
+        Attribute attribute = new Attribute(1, "root", "number", false);
         PatientAttribute<Double> patientAttribute = new PatientAttribute<>(attribute, 2.0);
 
         action.execute(patientAttribute);
@@ -19,9 +20,9 @@ public class AddNumberActionTest {
     }
 
     @Test()
-    public void testAddNumberActionWhenNull() {
+    public void testAddNumber_whenAddingNull_returnTheAlreadyGivenValue() {
         AddNumberAction action = new AddNumberAction("root", 3.0);
-        Attribute attribute = new Attribute(1, "root", "number");
+        Attribute attribute = new Attribute(1, "root", "number", false);
         PatientAttribute<Double> patientAttribute = new PatientAttribute<>(attribute, null);
 
         action.execute(patientAttribute);
