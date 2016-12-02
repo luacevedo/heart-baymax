@@ -26,7 +26,7 @@ public class RulesExecutor {
         }
     }
 
-    private static boolean checkConditions(Rule rule, Patient patient) {
+    public static boolean checkConditions(Rule rule, Patient patient) {
         boolean conditionsFulfilled = true;
         for (BaseCondition condition : rule.getParsedConditions()) {
             Log.e("LULI", "Por cada condicion:");
@@ -57,7 +57,7 @@ public class RulesExecutor {
         }
     }
 
-    private static void executeActions(Rule rule, Patient patient) {
+    public static void executeActions(Rule rule, Patient patient) {
         Log.e("LULI", "SI conditionsFulfilled... ejecuto las acciones");
         for (BaseAction action : rule.getParsedActions()) {
             Log.e("LULI", "Attribute: " + action.getAttributeRoot());

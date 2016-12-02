@@ -23,18 +23,18 @@ public class NotContainsConditionTest {
     }
 
     @Test()
-    public void testNotContainsTrue() {
+    public void testNotContains_whenNotContains_returnTrue() {
         NotContainsCondition condition = new NotContainsCondition("root", "Orthopnoea");
-        Attribute attribute = new Attribute(1, "root", "list");
+        Attribute attribute = new Attribute(1, "root", "list", false);
         PatientAttribute<List<String>> patientAttribute = new PatientAttribute<>(attribute, valuesList);
 
         assertTrue(condition.validate(patientAttribute));
     }
 
     @Test
-    public void testNotContainsFalse() {
+    public void testNotContains_whenContains_returnFalse() {
         NotContainsCondition condition = new NotContainsCondition("root", "PulmonaryEdema");
-        Attribute attribute = new Attribute(1, "root", "list");
+        Attribute attribute = new Attribute(1, "root", "list", false);
         PatientAttribute<List<String>> patientAttribute = new PatientAttribute<>(attribute, valuesList);
 
         assertFalse(condition.validate(patientAttribute));

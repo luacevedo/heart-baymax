@@ -8,11 +8,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class GreaterThanConditionTest {
+public class GreaterThanOrEqualConditionTest {
 
     @Test()
-    public void testGreaterThan_whenGreater_returnTrue() {
-        GreaterThanCondition condition = new GreaterThanCondition("root", 2.0);
+    public void testGreaterOrEqualThan_whenGreater_returnTrue() {
+        GreaterOrEqualThanCondition condition = new GreaterOrEqualThanCondition("root", 2.0);
         Attribute attribute = new Attribute(1, "root", "number", false);
         PatientAttribute<Double> patientAttribute = new PatientAttribute<>(attribute, 4.0);
 
@@ -20,10 +20,19 @@ public class GreaterThanConditionTest {
     }
 
     @Test
-    public void testGreaterThan_whenLess_returnFalse() {
-        GreaterThanCondition condition = new GreaterThanCondition("root", 2.0);
+    public void testGreaterOrEqualThan_whenEqual_returnTrue() {
+        GreaterOrEqualThanCondition condition = new GreaterOrEqualThanCondition("root", 2.0);
         Attribute attribute = new Attribute(1, "root", "number", false);
         PatientAttribute<Double> patientAttribute = new PatientAttribute<>(attribute, 2.0);
+
+        assertTrue(condition.validate(patientAttribute));
+    }
+
+    @Test
+    public void testGreaterOrEqualThan_whenLess_returnFalse() {
+        GreaterOrEqualThanCondition condition = new GreaterOrEqualThanCondition("root", 2.0);
+        Attribute attribute = new Attribute(1, "root", "number", false);
+        PatientAttribute<Double> patientAttribute = new PatientAttribute<>(attribute, 1.0);
 
         assertFalse(condition.validate(patientAttribute));
     }

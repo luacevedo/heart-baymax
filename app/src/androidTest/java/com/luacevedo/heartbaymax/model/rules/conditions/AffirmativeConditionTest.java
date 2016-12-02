@@ -10,20 +10,20 @@ import static org.junit.Assert.assertTrue;
 
 public class AffirmativeConditionTest {
     @Test()
-    public void testAffirmativeTrue() {
+    public void testAffirmative_whenAffirmative_returnTrue() {
         AffirmativeCondition test = new AffirmativeCondition("root");
 
-        Attribute attribute = new Attribute(1, "root", "boolean");
+        Attribute attribute = new Attribute(1, "root", "boolean", false);
         PatientAttribute<Boolean> patientAttribute = new PatientAttribute<>(attribute, true);
 
         assertTrue(test.validate(patientAttribute));
     }
 
     @Test
-    public void testAffirmativeFalse() {
+    public void testAffirmative_whenNegative_returnFalse() {
         AffirmativeCondition test = new AffirmativeCondition("root");
 
-        Attribute attribute = new Attribute(1, "root", "boolean");
+        Attribute attribute = new Attribute(1, "root", "boolean", false);
         PatientAttribute<Boolean> patientAttribute = new PatientAttribute<>(attribute, false);
 
         assertFalse(test.validate(patientAttribute));

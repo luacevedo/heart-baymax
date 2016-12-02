@@ -20,9 +20,9 @@ public class AddToListActionTest {
     }
 
     @Test()
-    public void testAddToListAction() {
+    public void testAddToList_whenAddingValiedValue_returnListWithTheAddedValue() {
         AddToListAction action = new AddToListAction("root", "PulmonaryEdema");
-        Attribute attribute = new Attribute(1, "root", "list");
+        Attribute attribute = new Attribute(1, "root", "list", false);
         PatientAttribute<List<String>> patientAttribute = new PatientAttribute<>(attribute, valuesList);
 
         action.execute(patientAttribute);
