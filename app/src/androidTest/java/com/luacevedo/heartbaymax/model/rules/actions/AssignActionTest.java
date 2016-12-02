@@ -10,9 +10,9 @@ import static org.junit.Assert.assertEquals;
 public class AssignActionTest {
 
     @Test()
-    public void testAddToListAction() {
+    public void testAddToList_whenAddingAValidValue_returnAListWithTheGivenValue() {
         AssignAction action = new AssignAction("root", "PulmonaryEdema");
-        Attribute attribute = new Attribute(1, "root", "string");
+        Attribute attribute = new Attribute(1, "root", "string", false);
         PatientAttribute<String> patientAttribute = new PatientAttribute<>(attribute, null);
 
         action.execute(patientAttribute);
